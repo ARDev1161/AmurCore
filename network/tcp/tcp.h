@@ -8,13 +8,13 @@ class TCP: public QObject
 {
     Q_OBJECT
 
-    AmurControls *amurControls;
-    AmurSensors *amurSensors;
+    AMUR::AmurControls *controls;
+    AMUR::AmurSensors *sensors;
 
     QString *hostName;
 
 public:
-    TCP(AmurControls *controls, AmurSensors *sensors, QString *hostname);
+    TCP(AMUR::AmurControls *controls, AMUR::AmurSensors *sensors, QString *hostname);
     ~TCP();
 
     void addThread();

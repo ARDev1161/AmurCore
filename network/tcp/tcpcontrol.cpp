@@ -1,10 +1,8 @@
 #include "tcpcontrol.h"
 // TCP client
-TCPControl::TCPControl(AmurControls *controls, QString *hostname)
+TCPControl::TCPControl(AMUR::AmurControls *controls, QString *hostname):
+    controls(controls), hostName(hostname)
 {
-    hostName = hostname;
-    amurControls = controls;
-
     protoInit();
     initNetwork();
 }
@@ -28,7 +26,7 @@ void TCPControl::protoInit()
 
 void TCPControl::protoSerialize()
 {
-    amurControls->SerializeToString(serializedControls);
+    controls->SerializeToString(serializedControls);
 }
 
 void TCPControl::initNetwork()

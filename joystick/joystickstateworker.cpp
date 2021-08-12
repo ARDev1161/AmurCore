@@ -1,11 +1,9 @@
 #include "joystickstateworker.h"
 
-JoystickStateWorker::JoystickStateWorker(int id, AmurControls * const controls, JoyState * const state):
+JoystickStateWorker::JoystickStateWorker(int id, JoyState * const state):
     joyId(id),
-    joyState(state),
-    amurControl(controls)
+    joyState(state)
 {
-
 }
 
 JoystickStateWorker::~JoystickStateWorker()
@@ -16,7 +14,7 @@ JoystickStateWorker::~JoystickStateWorker()
 
 void JoystickStateWorker::process()
 {
-    joyStateController = new GetStateByJoystick(joyId, amurControl, joyState);
+    joyStateController = new GetStateByJoystick(joyId, joyState);
 }
 
 void JoystickStateWorker::stop()

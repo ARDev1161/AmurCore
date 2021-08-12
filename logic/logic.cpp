@@ -1,7 +1,10 @@
 #include "logic.h"
 
 
-Logic::Logic()
+Logic::Logic(JoyState *joyState, AMUR::AmurControls *controls, AMUR::AmurSensors *sensors):
+    joyState(joyState),
+    controls(controls),
+    sensors(sensors)
 {
     initLogic();
 }

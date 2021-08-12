@@ -12,13 +12,13 @@ class TCPWorker: public QObject
     TCPControl *tcpControl;
     TCPSensors *tcpSensors;
 
-    AmurControls *amurControls;
-    AmurSensors *amurSensors;
+    AMUR::AmurControls *controls;
+    AMUR::AmurSensors *sensors;
 
     QString *hostName;
 
 public:
-    TCPWorker(AmurControls *control, AmurSensors *sensors, QString *hostname);
+    TCPWorker(AMUR::AmurControls *control, AMUR::AmurSensors *sensors, QString *hostname);
     ~TCPWorker();
 
 public slots:

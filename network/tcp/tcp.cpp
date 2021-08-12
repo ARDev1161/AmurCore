@@ -1,9 +1,8 @@
 #include "tcp.h"
 
-TCP::TCP(AmurControls *controls, AmurSensors *sensors, QString *hostname)
+TCP::TCP(AMUR::AmurControls *controls, AMUR::AmurSensors *sensors, QString *hostname):
+    controls(controls), sensors(sensors)
 {
-    amurControls = controls;
-    amurSensors = sensors;
     hostName = hostname;
 }
 
@@ -14,7 +13,7 @@ TCP::~TCP()
 
 void TCP::addThread()
 {
-    TCPWorker* tcpWorker = new TCPWorker(amurControls, amurSensors, hostName);
+    TCPWorker* tcpWorker = new TCPWorker(controls, sensors, hostName);
     QThread* tcpThread = new QThread;
     tcpWorker->moveToThread(tcpThread);
 

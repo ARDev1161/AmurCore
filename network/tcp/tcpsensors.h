@@ -5,13 +5,13 @@
 #include <QObject>
 
 #include "sensors/sensors.h"
-#include "network/protobuf/sensors.pb.h"
+#include "network/protobuf/amur.grpc.pb.h"
 
 class TCPSensors: public QObject
 {
     Q_OBJECT
 
-    AmurSensors *amurSensors;
+    AMUR::AmurSensors *sensors;
 
     QNetworkSession *networkSession = nullptr;
     QDataStream in;
@@ -22,7 +22,7 @@ class TCPSensors: public QObject
     int port = 7777;
 
 public:
-    TCPSensors(AmurSensors *sensors, QString *hostname);
+    TCPSensors(AMUR::AmurSensors *sensors, QString *hostname);
     ~TCPSensors();
 
     void stop();

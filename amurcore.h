@@ -43,8 +43,8 @@ class AmurCore : public QMainWindow
     ConnectDialog *connectDialog;
     JoystickDialog *joystickDialog;
 
-    AmurControls *amurControl;
-    AmurSensors *zanyaSensors;
+    AMUR::AmurControls *controls;
+    AMUR::AmurSensors *sensors;
 
     TCP *tcpThread;
     Joystick *joyThread;

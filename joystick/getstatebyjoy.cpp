@@ -1,8 +1,7 @@
 #include "getstatebyjoy.h"
 
-GetStateByJoystick::GetStateByJoystick(int id, AmurControls * const controls, JoyState * const state, QObject *parent) :
+GetStateByJoystick::GetStateByJoystick(int id, JoyState * const state, QObject *parent) :
     QObject(parent),
-    amurControls(controls),
     loopFlag(true),
     joyState(state)
 {

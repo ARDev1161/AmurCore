@@ -1,10 +1,8 @@
 #include "tcpworker.h"
 
-TCPWorker::TCPWorker(AmurControls *controls, AmurSensors *sensors, QString *hostname)
+TCPWorker::TCPWorker(AMUR::AmurControls *controls, AMUR::AmurSensors *sensors, QString *hostname):
+    controls(controls), sensors(sensors), hostName(hostname)
 {
-    amurControls = controls;
-    amurSensors = sensors;
-    hostName = hostname;
 }
 
 TCPWorker::~TCPWorker()
@@ -18,9 +16,9 @@ TCPWorker::~TCPWorker()
 
 void TCPWorker::process()
 {
-    tcpControl = new TCPControl(amurControls, hostName);
+    tcpControl = new TCPControl(controls, hostName);
 
-    //tcpSensors = new TCPSensors(amurSensors, hostName);
+    //tcpSensors = new TCPSensors(sensors, hostName);
 }
 
 void TCPWorker::stop()

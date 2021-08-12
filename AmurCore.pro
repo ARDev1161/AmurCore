@@ -33,9 +33,11 @@ LIBS += -lSDL
 
 # LIBS += -lpocketsphinx
 # LIBS += -lsphinxbase
+# LIBS += -L/usr/local/include/grpc++ -lgrpc++
 
 LIBS += -L$$LIBS_PATH /
 LIBS += -lprotobuf \
+        -lgrpc++ \
         -lopencv_core \
         -lopencv_calib3d \
         -lopencv_ml \
@@ -71,27 +73,26 @@ SOURCES += \
         joystick/joystickstateworker.cpp \
 #Network sources
         network/connectdialog.cpp \
-    network/protobuf/controls.pb.cc \
         network/tcp/tcp.cpp \
         network/tcp/tcpcontrol.cpp \
         network/tcp/tcpsensors.cpp \
         network/tcp/tcpworker.cpp \
-        network/protobuf/sensors.pb.cc \
+        network/protobuf/amur.pb.cc \
+        network/protobuf/amur.grpc.pb.cc \
 #Threads sources
         threads/session.cpp \
         threads/worker.cpp \
 #Logic sources
         logic/logic.cpp \
-        logic/speech/sphinxrecognizer.cpp \
-        logic/speech/speechdialog.cpp
+        logic/speech/speechdialog.cpp \
+        logic/speech/sphinxrecognizer.cpp
 
 CONFIG += precompile_header
 PRECOMPILED_HEADER = pch.h
 
 HEADERS += \
         amurcore.h \
-    joystick/joystickstate.h \
-    network/protobuf/controls.pb.h \
+        joystick/joystickstate.h \
         pch.h \
 #Cameras headers
         camera/camcalibrate.h \
@@ -111,7 +112,8 @@ HEADERS += \
         network/tcp/tcpsensors.h \
         network/tcp/tcpworker.h \
         network/tcp/tcp.h \
-        network/protobuf/sensors.pb.h \
+        network/protobuf/amur.pb.h \
+        network/protobuf/amur.grpc.pb.h \
 #Threads headers
         threads/session.h \
         threads/worker.h \
@@ -130,8 +132,7 @@ FORMS += \
 
 DISTFILES += \
         README.md \
-        network/protobuf/controls.proto \
-        network/protobuf/sensors.proto \
+        network/protobuf/amur.proto \
         network/protobuf/rebuild.sh \
         data/images/no_picture.jpeg
 

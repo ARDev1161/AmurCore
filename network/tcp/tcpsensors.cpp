@@ -1,10 +1,9 @@
 #include "tcpsensors.h"
 // TCP server
-TCPSensors::TCPSensors(AmurSensors *sensors, QString *hostname): tcpSocket(new QTcpSocket(this))
+TCPSensors::TCPSensors(AMUR::AmurSensors *sensors, QString *hostname): tcpSocket(new QTcpSocket(this))
 {
-    hostName = hostname;
-    amurSensors = sensors;
-
+    this->sensors = sensors;
+    this->hostName = hostname;
     initNetwork();
 }
 

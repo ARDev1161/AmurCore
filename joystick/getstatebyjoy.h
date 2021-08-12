@@ -6,14 +6,12 @@
 #include <QObject>
 #include <QDebug>
 #include "v_joystick_adapter.h"
-#include "network/protobuf/controls.pb.h"
+#include "network/protobuf/amur.pb.h"
 #include "joystickstate.h"
 
 class GetStateByJoystick : public QObject
 {
     Q_OBJECT
-
-    AmurControls *amurControls;
 
     VJoystickAdapter* joyAdapter;
 
@@ -25,7 +23,7 @@ class GetStateByJoystick : public QObject
 
     JoyState *joyState;
 public:
-    GetStateByJoystick(int id, AmurControls * const controls, JoyState * const state, QObject *parent = nullptr);
+    GetStateByJoystick(int id, JoyState * const state, QObject *parent = nullptr);
     ~GetStateByJoystick();
     void stop();
 

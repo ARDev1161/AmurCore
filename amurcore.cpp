@@ -24,7 +24,8 @@ AmurCore::AmurCore(QWidget *parent) :
 
 void AmurCore::initFields()
 {
-    amurControl = new AmurControls();
+    controls = new AMUR::AmurControls();
+    sensors = new AMUR::AmurSensors();
 
     camHolder = new CamSettingsHolder();
     idHolder = new JoystickIdHolder();
@@ -33,7 +34,7 @@ void AmurCore::initFields()
     speechDialog = new SpeechDialog(this);
     connectDialog = new ConnectDialog(this);
 
-    amurLogic = new Logic();
+    amurLogic = new Logic(joyState, controls, sensors);
 }
 
 void AmurCore::connMenu()
@@ -62,7 +63,7 @@ void AmurCore::joystickDialogOpen()
 void AmurCore::connectDialogOpen()
 {
     if(tcpThread == nullptr){
-       tcpThread = new TCP(amurControl, zanyaSensors, hostName);
+       tcpThread = new TCP(controls, sensors, hostName);
        tcpThread->addThread();
     }
 
@@ -100,12 +101,12 @@ void AmurCore::speechDialogOpen()
 
 void AmurCore::amurHalt()
 {
-    amurControl->mutable_system()->set_haltflag(true);
+    controls->mutable_system()->set_haltflag(true);
 }
 
 void AmurCore::amurReboot()
 {
-    amurControl->mutable_system()->set_restartflag(true);
+    controls->mutable_system()->set_restartflag(true);
 }
 
 void AmurCore::fetchJoystickId()
@@ -117,7 +118,7 @@ void AmurCore::fetchJoystickId()
     int id = idHolder->getJoyId();
 
     joyState = new JoyState();
-    joyThread = new Joystick(id, amurControl, joyState);
+    joyThread = new Joystick(id, controls, joyState);
     joyThread->addThread();
 
 }

@@ -12,12 +12,10 @@ class JoystickStateWorker : public QObject
     JoyState *joyState;
     GetStateByJoystick *joyStateController;
 
-    AmurControls *amurControl;
-
     void changeJoystickId(int id);
 
 public:
-    JoystickStateWorker(int id, AmurControls * const controls, JoyState * const state);
+    JoystickStateWorker(int id, JoyState * const state);
     ~JoystickStateWorker();
 
 public slots:

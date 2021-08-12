@@ -1,9 +1,9 @@
 #include "joystick.h"
 
-Joystick::Joystick(int id, AmurControls * const controls, JoyState * const state):
+Joystick::Joystick(int id, AMUR::AmurControls * const controls, JoyState * const state):
     joyId(id),
     joyState(state),
-    amurControl(controls)
+    controls(controls)
 {
 
 }
@@ -15,7 +15,7 @@ Joystick::~Joystick()
 
 void Joystick::addThread()
 {
-    JoystickStateWorker* joyWorker = new JoystickStateWorker(joyId, amurControl, joyState);
+    JoystickStateWorker* joyWorker = new JoystickStateWorker(joyId, joyState);
     QThread* joyThread = new QThread;
     joyWorker->moveToThread(joyThread);
 

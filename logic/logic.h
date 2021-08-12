@@ -9,11 +9,15 @@ class Logic
 {
     Mat *srcMat;
     Mat *outMat;
+    JoyState *joyState;
+
+    AMUR::AmurControls *controls;
+    AMUR::AmurSensors *sensors;
 
     void initLogic();
     void logicProcess();
 public:
-    Logic();
+    Logic(JoyState *joyState, AMUR::AmurControls *controls, AMUR::AmurSensors *sensors);
 
     Mat getOutMat() const;
     void setOutMat(Mat &value);

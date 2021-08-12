@@ -6,13 +6,13 @@
 #include <QMessageBox>
 #include "stdlib.h"
 
-#include "network/protobuf/controls.pb.h"
+#include "network/protobuf/amur.grpc.pb.h"
 
 class TCPControl: public QObject
 {
     Q_OBJECT
 
-    AmurControls *amurControls;
+    AMUR::AmurControls *controls;
 
     std::string *serializedControls;
 
@@ -22,7 +22,7 @@ class TCPControl: public QObject
     QNetworkSession *networkSession = nullptr;
 
 public:
-    TCPControl(AmurControls *controls, QString *hostname);
+    TCPControl(AMUR::AmurControls *controls, QString *hostname);
     ~TCPControl();
 
     void stop();
