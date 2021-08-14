@@ -11,7 +11,8 @@
 #include <opencv4/opencv2/opencv.hpp>
 
 #include "network/protobuf/amur.grpc.pb.h"
-#include "network/tcp/tcp.h"
+#include "network/networkcontroller.h"
+
 #include "network/connectdialog.h"
 
 #include "joystick/joystick.h"

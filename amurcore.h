@@ -43,10 +43,13 @@ class AmurCore : public QMainWindow
     ConnectDialog *connectDialog;
     JoystickDialog *joystickDialog;
 
+    NetworkController *network;
+
     AMUR::AmurControls *controls;
     AMUR::AmurSensors *sensors;
 
-    TCP *tcpThread;
+//    TCP *tcpThread;
+
     Joystick *joyThread;
     JoyState *joyState;
     Logic *amurLogic;

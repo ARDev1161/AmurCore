@@ -34,6 +34,8 @@ void AmurCore::initFields()
     speechDialog = new SpeechDialog(this);
     connectDialog = new ConnectDialog(this);
 
+    network = new NetworkController(controls, sensors);
+
     amurLogic = new Logic(joyState, controls, sensors);
 }
 
@@ -62,10 +64,10 @@ void AmurCore::joystickDialogOpen()
 
 void AmurCore::connectDialogOpen()
 {
-    if(tcpThread == nullptr){
-       tcpThread = new TCP(controls, sensors, hostName);
-       tcpThread->addThread();
-    }
+//    if(tcpThread == nullptr){
+//       tcpThread = new TCP(controls, sensors, hostName);
+//       tcpThread->addThread();
+//    }
 
     connectDialog->exec();
 }

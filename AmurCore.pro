@@ -29,16 +29,19 @@ INCLUDEPATH += /usr/include/SDL/
 # INCLUDEPATH += /usr/include/pocketsphinx/
 # INCLUDEPATH += /usr/include/sphinxbase/
 
-LIBS += -lSDL
-
 # LIBS += -lpocketsphinx
 # LIBS += -lsphinxbase
-# LIBS += -L/usr/local/include/grpc++ -lgrpc++
 
 LIBS += -L$$LIBS_PATH /
-LIBS += -lprotobuf \
+
+LIBS += -lSDL
+
+LIBS += -L/usr/local/include/grpc++ \
+        -lprotobuf \
         -lgrpc++ \
-        -lopencv_core \
+        -lgrpc++_reflection
+
+LIBS += -lopencv_core \
         -lopencv_calib3d \
         -lopencv_ml \
         -lopencv_dnn \
@@ -73,10 +76,9 @@ SOURCES += \
         joystick/joystickstateworker.cpp \
 #Network sources
         network/connectdialog.cpp \
-        network/tcp/tcp.cpp \
-        network/tcp/tcpcontrol.cpp \
-        network/tcp/tcpsensors.cpp \
-        network/tcp/tcpworker.cpp \
+        network/networkcontroller.cpp \
+        network/client.cpp \
+        network/server.cpp \
         network/protobuf/amur.pb.cc \
         network/protobuf/amur.grpc.pb.cc \
 #Threads sources
@@ -92,7 +94,6 @@ PRECOMPILED_HEADER = pch.h
 
 HEADERS += \
         amurcore.h \
-        joystick/joystickstate.h \
         pch.h \
 #Cameras headers
         camera/camcalibrate.h \
@@ -105,13 +106,13 @@ HEADERS += \
         joystick/getstatebyjoy.h \
         joystick/joystickidholder.h \
         joystick/joystickstateworker.h \
+        joystick/joystickstate.h \
         joystick/joystick.h \
 #Network headers
         network/connectdialog.h \
-        network/tcp/tcpcontrol.h \
-        network/tcp/tcpsensors.h \
-        network/tcp/tcpworker.h \
-        network/tcp/tcp.h \
+        network/networkcontroller.h \
+        network/client.h \
+        network/server.h \
         network/protobuf/amur.pb.h \
         network/protobuf/amur.grpc.pb.h \
 #Threads headers
