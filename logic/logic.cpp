@@ -13,18 +13,21 @@ void Logic::initLogic()
 {
     srcMat = new Mat();
     outMat = new Mat();
+
+    move = new Movements(joyState, controls);
 }
 
 void Logic::setSrcMat(Mat *const value)
 {
     srcMat = value;
-    logicProcess();
 }
 
-void Logic::logicProcess()
+void Logic::process()
 {
 //    srcMat->copyTo(outMat);
     outMat = srcMat;
+
+    move->joyTranslate();
 }
 
 Mat Logic::getOutMat() const

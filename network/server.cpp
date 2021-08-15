@@ -7,44 +7,30 @@ void grpcServer::setProtosPointers(AMUR::AmurControls *const controls, AMUR::Amu
 }
 
 grpc::Status grpcServer::DataExchange ([[maybe_unused]] grpc::ServerContext* context,
-                          const AMUR::AmurControls* request, AMUR::AmurSensors* reply)
+                          const AMUR::AmurSensors* request, AMUR::AmurControls* reply)
 {
   std::unique_lock<std::mutex> ul(muServer);
-
-  *controls = *request;
-
+  *sensors = *request;
   ul.unlock();
 
-  // Test code
-  controls->mutable_wheelmotors()->set_leftpower( sensors->temperature().tempcpu() );
-
-  std::cout << "Sensors: " << sensors->DebugString() << std::endl;
-  //
-
-  *reply = *sensors;
+  *reply = *controls;
 
   return grpc::Status::OK;
 }
 
 grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContext* context,
-                                grpc::ServerReaderWriter<AMUR::AmurSensors, AMUR::AmurControls >* stream)
+                                grpc::ServerReaderWriter<AMUR::AmurControls, AMUR::AmurSensors >* stream)
 {
     std::unique_lock<std::mutex> ul(muServer, std::defer_lock);
 
     while(true)
     {
       ul.lock();
-      if(!(stream->Read(controls)))
+      if(!(stream->Read(sensors)))
           return grpc::Status::OK;
       ul.unlock();
 
-      // Test code
-      controls->mutable_wheelmotors()->set_leftpower( sensors->temperature().tempcpu() );
-
-      std::cout << "Sensors: " << sensors->DebugString() << std::endl;
-      //
-
       // Write controls
-      stream->Write(*sensors);
+      stream->Write(*controls);
     }
 }

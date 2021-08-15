@@ -16,7 +16,6 @@
 #include "network/connectdialog.h"
 
 #include "joystick/joystick.h"
-#include "joystick/joystickstate.h"
 
 #include "camera/camcalibrate.h"
 #include "camera/camsettingsholder.h"

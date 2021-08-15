@@ -86,6 +86,7 @@ SOURCES += \
         threads/worker.cpp \
 #Logic sources
         logic/logic.cpp \
+        logic/movements.cpp \
         logic/speech/speechdialog.cpp \
         logic/speech/sphinxrecognizer.cpp
 
@@ -106,7 +107,6 @@ HEADERS += \
         joystick/getstatebyjoy.h \
         joystick/joystickidholder.h \
         joystick/joystickstateworker.h \
-        joystick/joystickstate.h \
         joystick/joystick.h \
 #Network headers
         network/connectdialog.h \
@@ -120,6 +120,7 @@ HEADERS += \
         threads/worker.h \
 #Logic headers
         logic/logic.h \
+        logic/movements.h \
         logic/speech/prim_type.h \
         logic/speech/speechdialog.h \
         logic/speech/sphinxrecognizer.h

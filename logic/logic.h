@@ -3,21 +3,25 @@
 
 #include "opencv2/opencv.hpp"
 #include "logic/speech/speechdialog.h"
+#include "logic/movements.h"
 
 using namespace cv;
 class Logic
 {
     Mat *srcMat;
     Mat *outMat;
+
     JoyState *joyState;
+    Movements *move;
 
     AMUR::AmurControls *controls;
     AMUR::AmurSensors *sensors;
 
     void initLogic();
-    void logicProcess();
 public:
     Logic(JoyState *joyState, AMUR::AmurControls *controls, AMUR::AmurSensors *sensors);
+
+    void process();
 
     Mat getOutMat() const;
     void setOutMat(Mat &value);

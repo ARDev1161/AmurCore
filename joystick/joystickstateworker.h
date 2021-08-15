@@ -3,7 +3,6 @@
 
 #include "getstatebyjoy.h"
 
-
 class JoystickStateWorker : public QObject
 {
     Q_OBJECT

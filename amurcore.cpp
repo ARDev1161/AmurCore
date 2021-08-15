@@ -9,11 +9,7 @@ AmurCore::AmurCore(QWidget *parent) :
 
     outputMat = imread("../AmurCore/data/images/no_picture.jpeg");
 
-    initFields();
-    connMenu();
-
-    startTimer();
-    startCap();
+    this->initialize();
 }
 
  AmurCore::~AmurCore()
@@ -22,7 +18,7 @@ AmurCore::AmurCore(QWidget *parent) :
     delete ui;
 }
 
-void AmurCore::initFields()
+void AmurCore::initialize()
 {
     controls = new AMUR::AmurControls();
     sensors = new AMUR::AmurSensors();
@@ -30,13 +26,20 @@ void AmurCore::initFields()
     camHolder = new CamSettingsHolder();
     idHolder = new JoystickIdHolder();
 
+    joyState = new JoyState();
+
     joystickDialog = new JoystickDialog(idHolder, this);
     speechDialog = new SpeechDialog(this);
     connectDialog = new ConnectDialog(this);
 
     network = new NetworkController(controls, sensors);
-
     amurLogic = new Logic(joyState, controls, sensors);
+
+    connMenu();
+    startTimer();
+    startCap();
+
+    network->runServer(address_mask);
 }
 
 void AmurCore::connMenu()
@@ -119,10 +122,8 @@ void AmurCore::fetchJoystickId()
     //implement here
     int id = idHolder->getJoyId();
 
-    joyState = new JoyState();
     joyThread = new Joystick(id, controls, joyState);
     joyThread->addThread();
-
 }
 
 void AmurCore::startTimer()
@@ -148,6 +149,8 @@ void AmurCore::frameUpdate()
     if(capture.read(sourceMat)){
         worker();
     }
+
+    ui->statusbar->showMessage(statusMessage);
 }
 
 void AmurCore::outMat(Mat &toOut)
@@ -179,4 +182,6 @@ void AmurCore::worker()
     outputMat = amurLogic->getOutMat();
 
     outMat(sourceMat);
+
+    amurLogic->process();
 }

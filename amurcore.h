@@ -34,10 +34,14 @@ class AmurCore : public QMainWindow
 {
     Q_OBJECT
 
+
     Ui::AmurCore *ui;
 
     QTimer *tmrTimer;
     QString *hostName;
+    QString statusMessage = "No robot connected";
+
+    std::string address_mask = "0.0.0.0:7777";
 
     SpeechDialog *speechDialog;
     ConnectDialog *connectDialog;
@@ -64,7 +68,6 @@ class AmurCore : public QMainWindow
     Mat outputMat;
 
     int loopTime = 50;
-
 public:
     explicit AmurCore(QWidget *parent = nullptr);
     ~AmurCore();
@@ -86,7 +89,7 @@ private slots:
 private:
     void startCap();
     void startTimer();
-    void initFields();
+    void initialize();
     void connMenu();
     void worker();
     void outMat(Mat &toOut);

@@ -10,7 +10,7 @@
 
 class grpcClient
 {
-    std::unique_ptr<AMUR::ClientOnRobot::Stub> stub_;
+    std::unique_ptr<AMUR::ServerOnRobot::Stub> stub_;
     std::shared_ptr<grpc::Channel> clientChannel;
 
     AMUR::AmurSensors *sensors;
@@ -21,7 +21,7 @@ class grpcClient
     std::mutex muClient;
 
  public:
-    grpcClient(std::shared_ptr<grpc::Channel> channel, AMUR::AmurControls* controls, AMUR::AmurSensors* const sensors);
+    grpcClient(std::shared_ptr<grpc::Channel> channel, AMUR::AmurSensors* sensors, AMUR::AmurControls* const controls);
     grpc::Status DataExchange();
     grpc::Status DataStreamExchange();
     void stopStream();
