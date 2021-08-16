@@ -24,11 +24,9 @@ void AmurCore::initialize()
     sensors = new AMUR::AmurSensors();
 
     camHolder = new CamSettingsHolder();
-    idHolder = new JoystickIdHolder();
-
     joyState = new JoyState();
 
-    joystickDialog = new JoystickDialog(idHolder, this);
+    joystickDialog = new JoystickDialog(joyState, this);
     speechDialog = new SpeechDialog(this);
     connectDialog = new ConnectDialog(this);
 
@@ -116,11 +114,8 @@ void AmurCore::amurReboot()
 
 void AmurCore::fetchJoystickId()
 {
-    if (idHolder == nullptr)
-        return;
-
     //implement here
-    int id = idHolder->getJoyId();
+    int id = joyState->joyId;
 
     joyThread = new Joystick(id, controls, joyState);
     joyThread->addThread();

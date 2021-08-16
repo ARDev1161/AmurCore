@@ -48,8 +48,6 @@ grpc::Status grpcClient::DataStreamExchange()
     std::shared_ptr<grpc::ClientReaderWriter<AMUR::AmurControls, AMUR::AmurSensors> > stream(
         stub_->DataStreamExchange(&context));
 
-    int i = 0;
-
     while(!stoppedStream && (clientChannel->GetState(true) == 2) )
     {
         // Write controls

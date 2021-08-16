@@ -1,19 +1,18 @@
 #include "joystickdialog.h"
 #include "ui_joystickdialog.h"
 
-JoystickDialog::JoystickDialog(JoystickIdHolder *idHolder, QWidget *parent) :
+JoystickDialog::JoystickDialog(JoyState * const state, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::JoystickDialog)
+    ui(new Ui::JoystickDialog),
+    joyState(state)
 {
     ui->setupUi(this);
 
-    this->idHolder = idHolder;
-
     initFields();
     connMenu();
+    scanJoystickDevice();
+    setDialog();
 
-    setAvaliableJoystick();
-    setDefaultText();
     setFixedSize(590, 365);
 }
 
@@ -28,7 +27,6 @@ void JoystickDialog::initFields()
 {
     joyAdapter = new VJoystickAdapter(nullptr);
     buttonVector = QVector<bool>(MAX_JOYSTICK_BUTTONS);
-
     buttonVector.fill(false);
 
     ui->joystickStateBox->setDisabled(true);
@@ -40,7 +38,44 @@ void JoystickDialog::connMenu()
 {
     connect(ui->connectPushButton, SIGNAL(clicked()), this, SLOT(connectToJoystick()));
     connect(ui->disconnectPushButton, SIGNAL(clicked()), this, SLOT(disconnectFromJoystick()));
-    connect(ui->rescanPushButton, SIGNAL(clicked()), this, SLOT(rescanJoystickDevice()));
+    connect(ui->rescanPushButton, SIGNAL(clicked()), this, SLOT(scanJoystickDevice()));
+}
+
+void JoystickDialog::scanJoystickDevice()
+{
+    ui->joystickComboBox->clear();
+    ui->joystickComboBox->addItems(VJoystickAdapter::getAvailableJoystickName());
+}
+
+void JoystickDialog::setDialog()
+{
+    if( (joyAdapter->getJoystickId() < 0) && (joyState->joyId >= 0))
+        loadJoy(joyState->joyId);
+
+    if( joyAdapter->getJoystickId() < 0 )
+    {
+        setDefaultText();
+    }
+    else
+    {
+        QString joyName = joyAdapter->getJoystickName();
+        if(joyName == "")
+            joyName = "Not connected";
+
+        ui->joystickNameLabel->setText(joyName);
+        ui->joystickIdLabel->setText(tr("%1").arg(joyAdapter->getJoystickId()));
+        ui->joystickAxisLabel->setText(tr("%1").arg(joyAdapter->getJoystickNumAxes()));
+        ui->joystickHatsLabel->setText(tr("%1").arg(joyAdapter->getJoystickNumHats()));
+        ui->joystickBallsLabel->setText(tr("%1").arg(joyAdapter->getJoystickNumBalls()));
+        ui->joystickButtonsLabel->setText(tr("%1").arg(joyAdapter->getJoystickNumButtons()));
+
+        ui->joystickStateBox->setEnabled(true);
+        ui->joystickInformationBox->setEnabled(true);
+        ui->connectPushButton->setDisabled(true);
+        ui->disconnectPushButton->setEnabled(true);
+        ui->joystickComboBox->setDisabled(true);
+        ui->rescanPushButton->setDisabled(true);
+    }
 }
 
 void JoystickDialog::setDefaultText()
@@ -62,50 +97,37 @@ void JoystickDialog::setDefaultText()
     ui->joystickPOV0Label->setText(tr("0"));
 }
 
-void JoystickDialog::setAvaliableJoystick()
+int JoystickDialog::loadJoy(int joyId)
 {
-    ui->joystickComboBox->clear();
-    ui->joystickComboBox->addItems(VJoystickAdapter::getAvailableJoystickName());
+    if(joyAdapter->open(joyId))
+    {
+        connect(joyAdapter, SIGNAL(sigButtonChanged(int, bool)), this, SLOT(buttonSetup(int,bool)));
+        connect(joyAdapter, SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
+        connect(joyAdapter, SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
+        connect(joyAdapter, SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
+    }
+    else
+        return -1;
+
+    return 0;
 }
 
-void JoystickDialog::rescanJoystickDevice()
+int JoystickDialog::connectToJoystick()
 {
-    setAvaliableJoystick();
-}
-
-void JoystickDialog::connectToJoystick()
-{
+    int code = 0;
     int joyComboBox = ui->joystickComboBox->currentIndex();
 
     if(joyComboBox != -1)
     {
         joyId = joyComboBox;
 
-        if(joyAdapter->open(joyId))
-        {
-            connect(joyAdapter, SIGNAL(sigButtonChanged(int, bool)), this, SLOT(buttonSetup(int,bool)));
-            connect(joyAdapter, SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
-            connect(joyAdapter, SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
-            connect(joyAdapter, SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
-        }
-
-        QString joyName = joyAdapter->getJoystickName();
-        if(joyName == "")
-            joyName = "Not connected";
-        ui->joystickNameLabel->setText(joyName);
-        ui->joystickIdLabel->setText(tr("%1").arg(joyAdapter->getJoystickId()));
-        ui->joystickAxisLabel->setText(tr("%1").arg(joyAdapter->getJoystickNumAxes()));
-        ui->joystickHatsLabel->setText(tr("%1").arg(joyAdapter->getJoystickNumHats()));
-        ui->joystickBallsLabel->setText(tr("%1").arg(joyAdapter->getJoystickNumBalls()));
-        ui->joystickButtonsLabel->setText(tr("%1").arg(joyAdapter->getJoystickNumButtons()));
-
-        ui->joystickStateBox->setEnabled(true);
-        ui->joystickInformationBox->setEnabled(true);
-        ui->connectPushButton->setDisabled(true);
-        ui->disconnectPushButton->setEnabled(true);
-        ui->joystickComboBox->setDisabled(true);
-        ui->rescanPushButton->setDisabled(true);
+        if((code = loadJoy(joyId)) != 0)
+            return code;
     }
+
+    setDialog();
+
+    return code;
 }
 
 void JoystickDialog::disconnectFromJoystick()
@@ -128,7 +150,18 @@ void JoystickDialog::disconnectFromJoystick()
     ui->rescanPushButton->setEnabled(true);
 
     setDefaultText();
-    setAvaliableJoystick();
+    scanJoystickDevice();
+}
+
+void JoystickDialog::on_JoystickDialog_accepted()
+{
+    scanJoystickDevice();
+    joyState->joyId = this->joyId;
+}
+
+void JoystickDialog::on_JoystickDialog_rejected()
+{
+    disconnectFromJoystick();
 }
 
 void JoystickDialog::axisSetup(int id, int state)
@@ -186,15 +219,4 @@ void JoystickDialog::ballSetup(int id, int stateX, int stateY)
     Q_UNUSED(id)
     Q_UNUSED(stateX)
     Q_UNUSED(stateY)
-}
-
-void JoystickDialog::on_JoystickDialog_accepted()
-{
-    disconnectFromJoystick();
-    idHolder->setJoyId(joyId);
-}
-
-void JoystickDialog::on_JoystickDialog_rejected()
-{
-    disconnectFromJoystick();
 }

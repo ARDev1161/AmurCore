@@ -72,7 +72,6 @@ SOURCES += \
         joystick/v_joystick_adapter.cpp \
         joystick/joystickdialog.cpp \
         joystick/getstatebyjoy.cpp \
-        joystick/joystickidholder.cpp \
         joystick/joystickstateworker.cpp \
 #Network sources
         network/connectdialog.cpp \
@@ -105,7 +104,6 @@ HEADERS += \
         joystick/v_joystick_adapter.h \
         joystick/joystickdialog.h \
         joystick/getstatebyjoy.h \
-        joystick/joystickidholder.h \
         joystick/joystickstateworker.h \
         joystick/joystick.h \
 #Network headers
@@ -133,6 +131,7 @@ FORMS += \
         logic/speech/speechdialog.ui
 
 DISTFILES += \
+        Doxyfile \
         README.md \
         network/protobuf/amur.proto \
         network/protobuf/rebuild.sh \

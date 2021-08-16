@@ -59,8 +59,6 @@ class AmurCore : public QMainWindow
     Logic *amurLogic;
 
     CamSettingsHolder *camHolder;
-    JoystickIdHolder *idHolder;
-
     VideoCapture capture;
 
     Mat sourceMat;
