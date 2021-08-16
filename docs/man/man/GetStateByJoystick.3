@@ -1,0 +1,124 @@
+.TH "GetStateByJoystick" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+GetStateByJoystick
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <getstatebyjoy\&.h>\fP
+.PP
+Inherits QObject\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBGetStateByJoystick\fP (int id, \fBJoyState\fP *const state, QObject *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~GetStateByJoystick\fP ()"
+.br
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.in -1c
+.SS "Private Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBMAX_JOYSTICK_BUTTONS\fP = 30 }"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBconnectToJoystick\fP ()"
+.br
+.ti -1c
+.RI "void \fBdisconnectFromJoystick\fP ()"
+.br
+.ti -1c
+.RI "void \fBaxisSetup\fP (int id, int state)"
+.br
+.ti -1c
+.RI "void \fBhatSetup\fP (int id, int state)"
+.br
+.ti -1c
+.RI "void \fBbuttonSetup\fP (int id, bool state)"
+.br
+.ti -1c
+.RI "void \fBballSetup\fP (int id, int stateX, int stateY)"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetAvaliableJoystick\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBVJoystickAdapter\fP * \fBjoyAdapter\fP"
+.br
+.ti -1c
+.RI "int \fBLoopTime\fP =50"
+.br
+.ti -1c
+.RI "bool \fBloopFlag\fP"
+.br
+.ti -1c
+.RI "\fBJoyState\fP * \fBjoyState\fP"
+.br
+.in -1c
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "anonymous enum\fC [private]\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIMAX_JOYSTICK_BUTTONS \fP\fP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "GetStateByJoystick::GetStateByJoystick (int id, \fBJoyState\fP *const state, QObject * parent = \fCnullptr\fP)"
+
+.SS "GetStateByJoystick::~GetStateByJoystick ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void GetStateByJoystick::axisSetup (int id, int state)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void GetStateByJoystick::ballSetup (int id, int stateX, int stateY)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void GetStateByJoystick::buttonSetup (int id, bool state)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void GetStateByJoystick::connectToJoystick ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void GetStateByJoystick::disconnectFromJoystick ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void GetStateByJoystick::hatSetup (int id, int state)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void GetStateByJoystick::setAvaliableJoystick ()\fC [private]\fP"
+
+.SS "void GetStateByJoystick::stop ()"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBVJoystickAdapter\fP* GetStateByJoystick::joyAdapter\fC [private]\fP"
+
+.SS "\fBJoyState\fP* GetStateByJoystick::joyState\fC [private]\fP"
+
+.SS "bool GetStateByJoystick::loopFlag\fC [private]\fP"
+
+.SS "int GetStateByJoystick::LoopTime =50\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

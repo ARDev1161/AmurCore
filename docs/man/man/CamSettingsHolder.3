@@ -1,0 +1,188 @@
+.TH "CamSettingsHolder" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CamSettingsHolder
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <camsettingsholder\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCamSettingsHolder\fP ()"
+.br
+.ti -1c
+.RI "Mat \fBremap\fP (const Mat &image)"
+.br
+.ti -1c
+.RI "bool \fBgetReady\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetReady\fP (bool value)"
+.br
+.ti -1c
+.RI "Mat \fBgetCameraMatrix\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetCameraMatrix\fP (const Mat &value)"
+.br
+.ti -1c
+.RI "Mat \fBgetDistCoeffs\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetDistCoeffs\fP (const Mat &value)"
+.br
+.ti -1c
+.RI "vector< vector< Point3f > > \fBgetObjectPoints\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetObjectPoints\fP (const vector< vector< Point3f > > &value)"
+.br
+.ti -1c
+.RI "vector< vector< Point2f > > \fBgetImagePoints\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetImagePoints\fP (const vector< vector< Point2f > > &value)"
+.br
+.ti -1c
+.RI "vector< Mat > \fBgetRvecs\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetRvecs\fP (const vector< Mat > &value)"
+.br
+.ti -1c
+.RI "vector< Mat > \fBgetTvecs\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetTvecs\fP (const vector< Mat > &value)"
+.br
+.ti -1c
+.RI "int \fBgetFlag\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetFlag\fP (int value)"
+.br
+.ti -1c
+.RI "Size \fBgetImageSize\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetImageSize\fP (const Size &value)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBready\fP = false"
+.br
+.ti -1c
+.RI "bool \fBmustInitUndistort\fP"
+.br
+.ti -1c
+.RI "int \fBflag\fP"
+.br
+.ti -1c
+.RI "Size \fBimageSize\fP"
+.br
+.ti -1c
+.RI "Mat \fBmap1\fP"
+.br
+.ti -1c
+.RI "Mat \fBmap2\fP"
+.br
+.ti -1c
+.RI "Mat \fBdistCoeffs\fP"
+.br
+.ti -1c
+.RI "Mat \fBcameraMatrix\fP"
+.br
+.ti -1c
+.RI "vector< Mat > \fBrvecs\fP"
+.br
+.ti -1c
+.RI "vector< Mat > \fBtvecs\fP"
+.br
+.ti -1c
+.RI "vector< vector< Point3f > > \fBobjectPoints\fP"
+.br
+.ti -1c
+.RI "vector< vector< Point2f > > \fBimagePoints\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "CamSettingsHolder::CamSettingsHolder ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "Mat CamSettingsHolder::getCameraMatrix () const"
+
+.SS "Mat CamSettingsHolder::getDistCoeffs () const"
+
+.SS "int CamSettingsHolder::getFlag () const"
+
+.SS "vector< vector< Point2f > > CamSettingsHolder::getImagePoints () const"
+
+.SS "Size CamSettingsHolder::getImageSize () const"
+
+.SS "vector< vector< Point3f > > CamSettingsHolder::getObjectPoints () const"
+
+.SS "bool CamSettingsHolder::getReady () const"
+
+.SS "vector< Mat > CamSettingsHolder::getRvecs () const"
+
+.SS "vector< Mat > CamSettingsHolder::getTvecs () const"
+
+.SS "Mat CamSettingsHolder::remap (const Mat & image)"
+
+.SS "void CamSettingsHolder::setCameraMatrix (const Mat & value)"
+
+.SS "void CamSettingsHolder::setDistCoeffs (const Mat & value)"
+
+.SS "void CamSettingsHolder::setFlag (int value)"
+
+.SS "void CamSettingsHolder::setImagePoints (const vector< vector< Point2f > > & value)"
+
+.SS "void CamSettingsHolder::setImageSize (const Size & value)"
+
+.SS "void CamSettingsHolder::setObjectPoints (const vector< vector< Point3f > > & value)"
+
+.SS "void CamSettingsHolder::setReady (bool value)"
+
+.SS "void CamSettingsHolder::setRvecs (const vector< Mat > & value)"
+
+.SS "void CamSettingsHolder::setTvecs (const vector< Mat > & value)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "Mat CamSettingsHolder::cameraMatrix\fC [private]\fP"
+
+.SS "Mat CamSettingsHolder::distCoeffs\fC [private]\fP"
+
+.SS "int CamSettingsHolder::flag\fC [private]\fP"
+
+.SS "vector<vector<Point2f> > CamSettingsHolder::imagePoints\fC [private]\fP"
+
+.SS "Size CamSettingsHolder::imageSize\fC [private]\fP"
+
+.SS "Mat CamSettingsHolder::map1\fC [private]\fP"
+
+.SS "Mat CamSettingsHolder::map2\fC [private]\fP"
+
+.SS "bool CamSettingsHolder::mustInitUndistort\fC [private]\fP"
+
+.SS "vector<vector<Point3f> > CamSettingsHolder::objectPoints\fC [private]\fP"
+
+.SS "bool CamSettingsHolder::ready = false\fC [private]\fP"
+
+.SS "vector<Mat> CamSettingsHolder::rvecs\fC [private]\fP"
+
+.SS "vector<Mat> CamSettingsHolder::tvecs\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

@@ -1,0 +1,182 @@
+.TH "CamCalibrate" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CamCalibrate
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <camcalibrate\&.h>\fP
+.PP
+Inherits QDialog\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBframeUpdate\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCamCalibrate\fP (Mat *source, \fBCamSettingsHolder\fP *holder, QWidget *parent=0)"
+.br
+.ti -1c
+.RI "\fB~CamCalibrate\fP ()"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBon_buttonBox_accepted\fP ()"
+.br
+.ti -1c
+.RI "void \fBon_buttonBox_rejected\fP ()"
+.br
+.ti -1c
+.RI "void \fBon_pushButton_clicked\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBoutMat\fP (Mat &ToOut)"
+.br
+.ti -1c
+.RI "void \fBinitFields\fP ()"
+.br
+.ti -1c
+.RI "void \fBgetCalibInfo\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::CamCalibrate * \fBui\fP"
+.br
+.ti -1c
+.RI "bool \fBstarted\fP = false"
+.br
+.ti -1c
+.RI "int \fBpauseForChangePosition\fP = 0"
+.br
+.ti -1c
+.RI "int \fBnumCornersHor\fP"
+.br
+.ti -1c
+.RI "int \fBnumCornersVer\fP"
+.br
+.ti -1c
+.RI "int \fBnumSquares\fP"
+.br
+.ti -1c
+.RI "int \fBsuccesses\fP = 0"
+.br
+.ti -1c
+.RI "\fBCamSettingsHolder\fP * \fBcamHolder\fP"
+.br
+.ti -1c
+.RI "\fBCalibrator\fP * \fBcamCalib\fP"
+.br
+.ti -1c
+.RI "vector< Point3f > \fBobjectCorners\fP"
+.br
+.ti -1c
+.RI "vector< Point2f > \fBimageCorners\fP"
+.br
+.ti -1c
+.RI "vector< vector< Point3f > > \fBobjectPoints\fP"
+.br
+.ti -1c
+.RI "vector< vector< Point2f > > \fBimagePoints\fP"
+.br
+.ti -1c
+.RI "Size \fBboardSize\fP"
+.br
+.ti -1c
+.RI "Mat * \fBsourceMat\fP"
+.br
+.ti -1c
+.RI "Mat \fBgraySaved\fP"
+.br
+.ti -1c
+.RI "Mat \fBgray\fP"
+.br
+.ti -1c
+.RI "Mat \fBout\fP"
+.br
+.ti -1c
+.RI "Mat \fBdistCoeffs\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "CamCalibrate::CamCalibrate (Mat * source, \fBCamSettingsHolder\fP * holder, QWidget * parent = \fC0\fP)\fC [explicit]\fP"
+
+.SS "CamCalibrate::~CamCalibrate ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void CamCalibrate::frameUpdate ()\fC [slot]\fP"
+
+.SS "void CamCalibrate::getCalibInfo ()\fC [private]\fP"
+
+.SS "void CamCalibrate::initFields ()\fC [private]\fP"
+
+.SS "void CamCalibrate::on_buttonBox_accepted ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void CamCalibrate::on_buttonBox_rejected ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void CamCalibrate::on_pushButton_clicked ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void CamCalibrate::outMat (Mat & ToOut)\fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "Size CamCalibrate::boardSize\fC [private]\fP"
+
+.SS "\fBCalibrator\fP* CamCalibrate::camCalib\fC [private]\fP"
+
+.SS "\fBCamSettingsHolder\fP* CamCalibrate::camHolder\fC [private]\fP"
+
+.SS "Mat CamCalibrate::distCoeffs\fC [private]\fP"
+
+.SS "Mat CamCalibrate::gray\fC [private]\fP"
+
+.SS "Mat CamCalibrate::graySaved\fC [private]\fP"
+
+.SS "vector<Point2f> CamCalibrate::imageCorners\fC [private]\fP"
+
+.SS "vector<vector<Point2f> > CamCalibrate::imagePoints\fC [private]\fP"
+
+.SS "int CamCalibrate::numCornersHor\fC [private]\fP"
+
+.SS "int CamCalibrate::numCornersVer\fC [private]\fP"
+
+.SS "int CamCalibrate::numSquares\fC [private]\fP"
+
+.SS "vector<Point3f> CamCalibrate::objectCorners\fC [private]\fP"
+
+.SS "vector<vector<Point3f> > CamCalibrate::objectPoints\fC [private]\fP"
+
+.SS "Mat CamCalibrate::out\fC [private]\fP"
+
+.SS "int CamCalibrate::pauseForChangePosition = 0\fC [private]\fP"
+
+.SS "Mat* CamCalibrate::sourceMat\fC [private]\fP"
+
+.SS "bool CamCalibrate::started = false\fC [private]\fP"
+
+.SS "int CamCalibrate::successes = 0\fC [private]\fP"
+
+.SS "Ui::CamCalibrate* CamCalibrate::ui\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

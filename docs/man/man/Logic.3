@@ -1,0 +1,92 @@
+.TH "Logic" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Logic
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <logic\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBLogic\fP (\fBJoyState\fP *\fBjoyState\fP, AMUR::AmurControls *\fBcontrols\fP, AMUR::AmurSensors *\fBsensors\fP)"
+.br
+.ti -1c
+.RI "void \fBprocess\fP ()"
+.br
+.ti -1c
+.RI "Mat \fBgetOutMat\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetOutMat\fP (Mat &value)"
+.br
+.ti -1c
+.RI "void \fBsetSrcMat\fP (Mat *const value)"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinitLogic\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Mat * \fBsrcMat\fP"
+.br
+.ti -1c
+.RI "Mat * \fBoutMat\fP"
+.br
+.ti -1c
+.RI "\fBJoyState\fP * \fBjoyState\fP"
+.br
+.ti -1c
+.RI "\fBMovements\fP * \fBmove\fP"
+.br
+.ti -1c
+.RI "AMUR::AmurControls * \fBcontrols\fP"
+.br
+.ti -1c
+.RI "AMUR::AmurSensors * \fBsensors\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Logic::Logic (\fBJoyState\fP * joyState, AMUR::AmurControls * controls, AMUR::AmurSensors * sensors)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "Mat Logic::getOutMat () const"
+
+.SS "void Logic::initLogic ()\fC [private]\fP"
+
+.SS "void Logic::process ()"
+
+.SS "void Logic::setOutMat (Mat & value)"
+
+.SS "void Logic::setSrcMat (Mat *const value)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "AMUR::AmurControls* Logic::controls\fC [private]\fP"
+
+.SS "\fBJoyState\fP* Logic::joyState\fC [private]\fP"
+
+.SS "\fBMovements\fP* Logic::move\fC [private]\fP"
+
+.SS "Mat* Logic::outMat\fC [private]\fP"
+
+.SS "AMUR::AmurSensors* Logic::sensors\fC [private]\fP"
+
+.SS "Mat* Logic::srcMat\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

@@ -1,0 +1,213 @@
+.TH "logic/speech/prim_type.h" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+logic/speech/prim_type.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sphinx_config\&.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "union \fBanytype_s\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB__BIGSTACKVARIABLE__\fP"
+.br
+.ti -1c
+.RI "#define \fBTRUE\fP   1"
+.br
+.ti -1c
+.RI "#define \fBFALSE\fP   0"
+.br
+.ti -1c
+.RI "#define \fBNULL\fP   (void *)0"
+.br
+.ti -1c
+.RI "#define \fBMAX_INT32\fP   ((\fBint32\fP) 0x7fffffff)"
+.br
+.ti -1c
+.RI "#define \fBMAX_INT16\fP   ((\fBint16\fP) 0x00007fff)"
+.br
+.ti -1c
+.RI "#define \fBMAX_INT8\fP   ((\fBint8\fP)  0x0000007f)"
+.br
+.ti -1c
+.RI "#define \fBMAX_NEG_INT32\fP   ((\fBint32\fP) 0x80000000)"
+.br
+.ti -1c
+.RI "#define \fBMAX_NEG_INT16\fP   ((\fBint16\fP) 0xffff8000)"
+.br
+.ti -1c
+.RI "#define \fBMAX_NEG_INT8\fP   ((\fBint8\fP)  0xffffff80)"
+.br
+.ti -1c
+.RI "#define \fBMAX_UINT32\fP   ((\fBuint32\fP) 0xffffffff)"
+.br
+.ti -1c
+.RI "#define \fBMAX_UINT16\fP   ((\fBuint16\fP) 0x0000ffff)"
+.br
+.ti -1c
+.RI "#define \fBMAX_UINT8\fP   ((\fBuint8\fP)  0x000000ff)"
+.br
+.ti -1c
+.RI "#define \fBMAX_POS_FLOAT32\fP   3\&.4e+38f"
+.br
+.ti -1c
+.RI "#define \fBMIN_POS_FLOAT32\fP   1\&.2e\-38f	/* But not 0 */"
+.br
+.ti -1c
+.RI "#define \fBMAX_POS_FLOAT64\fP   1\&.8e+307"
+.br
+.ti -1c
+.RI "#define \fBMIN_POS_FLOAT64\fP   2\&.2e\-308"
+.br
+.ti -1c
+.RI "#define \fBMAX_IEEE_NORM_POS_FLOAT32\fP   3\&.4e+38f"
+.br
+.ti -1c
+.RI "#define \fBMIN_IEEE_NORM_POS_FLOAT32\fP   1\&.2e\-38f"
+.br
+.ti -1c
+.RI "#define \fBMIN_IEEE_NORM_NEG_FLOAT32\fP   \-3\&.4e+38f"
+.br
+.ti -1c
+.RI "#define \fBMAX_IEEE_NORM_POS_FLOAT64\fP   1\&.8e+307"
+.br
+.ti -1c
+.RI "#define \fBMIN_IEEE_NORM_POS_FLOAT64\fP   2\&.2e\-308"
+.br
+.ti -1c
+.RI "#define \fBMIN_IEEE_NORM_NEG_FLOAT64\fP   \-1\&.8e+307"
+.br
+.ti -1c
+.RI "#define \fBMIN_NEG_FLOAT32\fP   ((\fBfloat32\fP) (\-\fBMIN_POS_FLOAT32\fP))"
+.br
+.ti -1c
+.RI "#define \fBMIN_NEG_FLOAT64\fP   ((\fBfloat64\fP) (\-\fBMIN_POS_FLOAT64\fP))"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef union \fBanytype_s\fP \fBanytype_t\fP"
+.br
+.ti -1c
+.RI "typedef int \fBint32\fP"
+.br
+.ti -1c
+.RI "typedef short \fBint16\fP"
+.br
+.ti -1c
+.RI "typedef signed char \fBint8\fP"
+.br
+.ti -1c
+.RI "typedef unsigned int \fBuint32\fP"
+.br
+.ti -1c
+.RI "typedef unsigned short \fBuint16\fP"
+.br
+.ti -1c
+.RI "typedef unsigned char \fBuint8\fP"
+.br
+.ti -1c
+.RI "typedef float \fBfloat32\fP"
+.br
+.ti -1c
+.RI "typedef double \fBfloat64\fP"
+.br
+.ti -1c
+.RI "typedef double \fBint64\fP"
+.br
+.ti -1c
+.RI "typedef double \fBuint64\fP"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define __BIGSTACKVARIABLE__"
+
+.SS "#define FALSE   0"
+
+.SS "#define MAX_IEEE_NORM_POS_FLOAT32   3\&.4e+38f"
+
+.SS "#define MAX_IEEE_NORM_POS_FLOAT64   1\&.8e+307"
+
+.SS "#define MAX_INT16   ((\fBint16\fP) 0x00007fff)"
+
+.SS "#define MAX_INT32   ((\fBint32\fP) 0x7fffffff)"
+
+.SS "#define MAX_INT8   ((\fBint8\fP)  0x0000007f)"
+
+.SS "#define MAX_NEG_INT16   ((\fBint16\fP) 0xffff8000)"
+
+.SS "#define MAX_NEG_INT32   ((\fBint32\fP) 0x80000000)"
+
+.SS "#define MAX_NEG_INT8   ((\fBint8\fP)  0xffffff80)"
+
+.SS "#define MAX_POS_FLOAT32   3\&.4e+38f"
+
+.SS "#define MAX_POS_FLOAT64   1\&.8e+307"
+
+.SS "#define MAX_UINT16   ((\fBuint16\fP) 0x0000ffff)"
+
+.SS "#define MAX_UINT32   ((\fBuint32\fP) 0xffffffff)"
+
+.SS "#define MAX_UINT8   ((\fBuint8\fP)  0x000000ff)"
+
+.SS "#define MIN_IEEE_NORM_NEG_FLOAT32   \-3\&.4e+38f"
+
+.SS "#define MIN_IEEE_NORM_NEG_FLOAT64   \-1\&.8e+307"
+
+.SS "#define MIN_IEEE_NORM_POS_FLOAT32   1\&.2e\-38f"
+
+.SS "#define MIN_IEEE_NORM_POS_FLOAT64   2\&.2e\-308"
+
+.SS "#define MIN_NEG_FLOAT32   ((\fBfloat32\fP) (\-\fBMIN_POS_FLOAT32\fP))"
+
+.SS "#define MIN_NEG_FLOAT64   ((\fBfloat64\fP) (\-\fBMIN_POS_FLOAT64\fP))"
+
+.SS "#define MIN_POS_FLOAT32   1\&.2e\-38f	/* But not 0 */"
+
+.SS "#define MIN_POS_FLOAT64   2\&.2e\-308"
+
+.SS "#define NULL   (void *)0"
+
+.SS "#define TRUE   1"
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef union \fBanytype_s\fP \fBanytype_t\fP"
+
+.SS "typedef float \fBfloat32\fP"
+
+.SS "typedef double \fBfloat64\fP"
+
+.SS "typedef short \fBint16\fP"
+
+.SS "typedef int \fBint32\fP"
+
+.SS "typedef double \fBint64\fP"
+
+.SS "typedef signed char \fBint8\fP"
+
+.SS "typedef unsigned short \fBuint16\fP"
+
+.SS "typedef unsigned int \fBuint32\fP"
+
+.SS "typedef double \fBuint64\fP"
+
+.SS "typedef unsigned char \fBuint8\fP"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

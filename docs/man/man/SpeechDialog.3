@@ -1,0 +1,158 @@
+.TH "SpeechDialog" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SpeechDialog
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <speechdialog\&.h>\fP
+.PP
+Inherits QDialog\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBspeak\fP ()"
+.br
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetRate\fP (int)"
+.br
+.ti -1c
+.RI "void \fBsetPitch\fP (int)"
+.br
+.ti -1c
+.RI "void \fBsetVolume\fP (int \fBvolume\fP)"
+.br
+.ti -1c
+.RI "void \fBstateChanged\fP (QTextToSpeech::State state)"
+.br
+.ti -1c
+.RI "void \fBengineSelected\fP (int index)"
+.br
+.ti -1c
+.RI "void \fBlanguageSelected\fP (int language)"
+.br
+.ti -1c
+.RI "void \fBvoiceSelected\fP (int index)"
+.br
+.ti -1c
+.RI "void \fBlocaleChanged\fP (const QLocale &locale)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSpeechDialog\fP (QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~SpeechDialog\fP ()"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBon_buttonBox_accepted\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::SpeechDialog * \fBui\fP"
+.br
+.ti -1c
+.RI "int * \fBrate\fP"
+.br
+.ti -1c
+.RI "int * \fBpitch\fP"
+.br
+.ti -1c
+.RI "int * \fBvolume\fP"
+.br
+.ti -1c
+.RI "bool * \fBstarted\fP"
+.br
+.ti -1c
+.RI "QString \fBengineName\fP"
+.br
+.ti -1c
+.RI "QTextToSpeech * \fBspeech\fP"
+.br
+.ti -1c
+.RI "QVector< QVoice > * \fBvoices\fP"
+.br
+.ti -1c
+.RI "QVector< QString > * \fBengines\fP"
+.br
+.ti -1c
+.RI "QVector< QString > * \fBlistRows\fP"
+.br
+.ti -1c
+.RI "QVector< QVariant > * \fBlanguages\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "SpeechDialog::SpeechDialog (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "SpeechDialog::~SpeechDialog ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void SpeechDialog::engineSelected (int index)\fC [slot]\fP"
+
+.SS "void SpeechDialog::languageSelected (int language)\fC [slot]\fP"
+
+.SS "void SpeechDialog::localeChanged (const QLocale & locale)\fC [slot]\fP"
+
+.SS "void SpeechDialog::on_buttonBox_accepted ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void SpeechDialog::setPitch (int pitch)\fC [slot]\fP"
+
+.SS "void SpeechDialog::setRate (int rate)\fC [slot]\fP"
+
+.SS "void SpeechDialog::setVolume (int volume)\fC [slot]\fP"
+
+.SS "void SpeechDialog::speak ()\fC [slot]\fP"
+
+.SS "void SpeechDialog::stateChanged (QTextToSpeech::State state)\fC [slot]\fP"
+
+.SS "void SpeechDialog::stop ()\fC [slot]\fP"
+
+.SS "void SpeechDialog::voiceSelected (int index)\fC [slot]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QString SpeechDialog::engineName\fC [private]\fP"
+
+.SS "QVector<QString>* SpeechDialog::engines\fC [private]\fP"
+
+.SS "QVector<QVariant>* SpeechDialog::languages\fC [private]\fP"
+
+.SS "QVector<QString>* SpeechDialog::listRows\fC [private]\fP"
+
+.SS "int* SpeechDialog::pitch\fC [private]\fP"
+
+.SS "int* SpeechDialog::rate\fC [private]\fP"
+
+.SS "QTextToSpeech* SpeechDialog::speech\fC [private]\fP"
+
+.SS "bool* SpeechDialog::started\fC [private]\fP"
+
+.SS "Ui::SpeechDialog* SpeechDialog::ui\fC [private]\fP"
+
+.SS "QVector<QVoice>* SpeechDialog::voices\fC [private]\fP"
+
+.SS "int* SpeechDialog::volume\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

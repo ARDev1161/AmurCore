@@ -1,0 +1,88 @@
+.TH "CalibratorWorker" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CalibratorWorker
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <calibratorworker\&.h>\fP
+.PP
+Inherits QObject\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBprocess\fP ()"
+.br
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBfinished\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCalibratorWorker\fP (\fBCamSettingsHolder\fP *holder)"
+.br
+.ti -1c
+.RI "\fB~CalibratorWorker\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBCamSettingsHolder\fP * \fBcamHolder\fP"
+.br
+.ti -1c
+.RI "Mat \fBdistCoeffs\fP"
+.br
+.ti -1c
+.RI "Mat \fBcameraMatrix\fP"
+.br
+.ti -1c
+.RI "vector< Mat > \fBrvecs\fP"
+.br
+.ti -1c
+.RI "vector< Mat > \fBtvecs\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "CalibratorWorker::CalibratorWorker (\fBCamSettingsHolder\fP * holder)"
+
+.SS "CalibratorWorker::~CalibratorWorker ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void CalibratorWorker::finished ()\fC [signal]\fP"
+
+.SS "void CalibratorWorker::process ()\fC [slot]\fP"
+
+.SS "void CalibratorWorker::stop ()\fC [slot]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "Mat CalibratorWorker::cameraMatrix\fC [private]\fP"
+
+.SS "\fBCamSettingsHolder\fP* CalibratorWorker::camHolder\fC [private]\fP"
+
+.SS "Mat CalibratorWorker::distCoeffs\fC [private]\fP"
+
+.SS "vector<Mat> CalibratorWorker::rvecs\fC [private]\fP"
+
+.SS "vector<Mat> CalibratorWorker::tvecs\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

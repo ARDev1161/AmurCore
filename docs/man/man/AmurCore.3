@@ -1,0 +1,241 @@
+.TH "AmurCore" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AmurCore
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <amurcore\&.h>\fP
+.PP
+Inherits QMainWindow\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBtimeout\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAmurCore\fP (QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~AmurCore\fP ()"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBresizeEvent\fP (QResizeEvent *e) override"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBframeUpdate\fP ()"
+.br
+.ti -1c
+.RI "void \fBcalibDialogOpen\fP ()"
+.br
+.ti -1c
+.RI "void \fBspeechDialogOpen\fP ()"
+.br
+.ti -1c
+.RI "void \fBconnectDialogOpen\fP ()"
+.br
+.ti -1c
+.RI "void \fBjoystickDialogOpen\fP ()"
+.br
+.ti -1c
+.RI "void \fBfetchJoystickId\fP ()"
+.br
+.ti -1c
+.RI "void \fBamurHalt\fP ()"
+.br
+.ti -1c
+.RI "void \fBamurReboot\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBstartCap\fP ()"
+.br
+.ti -1c
+.RI "void \fBstartTimer\fP ()"
+.br
+.ti -1c
+.RI "void \fBinitialize\fP ()"
+.br
+.ti -1c
+.RI "void \fBconnMenu\fP ()"
+.br
+.ti -1c
+.RI "void \fBworker\fP ()"
+.br
+.ti -1c
+.RI "void \fBoutMat\fP (Mat &toOut)"
+.br
+.ti -1c
+.RI "void \fBundistortMat\fP (Mat &inMat, Mat &\fBoutMat\fP)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::AmurCore * \fBui\fP"
+.br
+.ti -1c
+.RI "QTimer * \fBtmrTimer\fP"
+.br
+.ti -1c
+.RI "QString * \fBhostName\fP"
+.br
+.ti -1c
+.RI "QString \fBstatusMessage\fP = 'No robot connected'"
+.br
+.ti -1c
+.RI "std::string \fBaddress_mask\fP = '0\&.0\&.0\&.0:7777'"
+.br
+.ti -1c
+.RI "\fBSpeechDialog\fP * \fBspeechDialog\fP"
+.br
+.ti -1c
+.RI "\fBConnectDialog\fP * \fBconnectDialog\fP"
+.br
+.ti -1c
+.RI "\fBJoystickDialog\fP * \fBjoystickDialog\fP"
+.br
+.ti -1c
+.RI "\fBNetworkController\fP * \fBnetwork\fP"
+.br
+.ti -1c
+.RI "AMUR::AmurControls * \fBcontrols\fP"
+.br
+.ti -1c
+.RI "AMUR::AmurSensors * \fBsensors\fP"
+.br
+.ti -1c
+.RI "\fBJoystick\fP * \fBjoyThread\fP"
+.br
+.ti -1c
+.RI "\fBJoyState\fP * \fBjoyState\fP"
+.br
+.ti -1c
+.RI "\fBLogic\fP * \fBamurLogic\fP"
+.br
+.ti -1c
+.RI "\fBCamSettingsHolder\fP * \fBcamHolder\fP"
+.br
+.ti -1c
+.RI "VideoCapture \fBcapture\fP"
+.br
+.ti -1c
+.RI "Mat \fBsourceMat\fP"
+.br
+.ti -1c
+.RI "Mat \fBundistortedMat\fP"
+.br
+.ti -1c
+.RI "Mat \fBoutputMat\fP"
+.br
+.ti -1c
+.RI "int \fBloopTime\fP = 50"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AmurCore::AmurCore (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "AmurCore::~AmurCore ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void AmurCore::amurHalt ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::amurReboot ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::calibDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::connectDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::connMenu ()\fC [private]\fP"
+
+.SS "void AmurCore::fetchJoystickId ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::frameUpdate ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::initialize ()\fC [private]\fP"
+
+.SS "void AmurCore::joystickDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::outMat (Mat & toOut)\fC [private]\fP"
+
+.SS "void AmurCore::resizeEvent (QResizeEvent * e)\fC [override]\fP, \fC [protected]\fP"
+
+.SS "void AmurCore::speechDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::startCap ()\fC [private]\fP"
+
+.SS "void AmurCore::startTimer ()\fC [private]\fP"
+
+.SS "void AmurCore::timeout ()\fC [signal]\fP"
+
+.SS "void AmurCore::undistortMat (Mat & inMat, Mat & outMat)\fC [private]\fP"
+
+.SS "void AmurCore::worker ()\fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::string AmurCore::address_mask = '0\&.0\&.0\&.0:7777'\fC [private]\fP"
+
+.SS "\fBLogic\fP* AmurCore::amurLogic\fC [private]\fP"
+
+.SS "\fBCamSettingsHolder\fP* AmurCore::camHolder\fC [private]\fP"
+
+.SS "VideoCapture AmurCore::capture\fC [private]\fP"
+
+.SS "\fBConnectDialog\fP* AmurCore::connectDialog\fC [private]\fP"
+
+.SS "AMUR::AmurControls* AmurCore::controls\fC [private]\fP"
+
+.SS "QString* AmurCore::hostName\fC [private]\fP"
+
+.SS "\fBJoyState\fP* AmurCore::joyState\fC [private]\fP"
+
+.SS "\fBJoystickDialog\fP* AmurCore::joystickDialog\fC [private]\fP"
+
+.SS "\fBJoystick\fP* AmurCore::joyThread\fC [private]\fP"
+
+.SS "int AmurCore::loopTime = 50\fC [private]\fP"
+
+.SS "\fBNetworkController\fP* AmurCore::network\fC [private]\fP"
+
+.SS "Mat AmurCore::outputMat\fC [private]\fP"
+
+.SS "AMUR::AmurSensors* AmurCore::sensors\fC [private]\fP"
+
+.SS "Mat AmurCore::sourceMat\fC [private]\fP"
+
+.SS "\fBSpeechDialog\fP* AmurCore::speechDialog\fC [private]\fP"
+
+.SS "QString AmurCore::statusMessage = 'No robot connected'\fC [private]\fP"
+
+.SS "QTimer* AmurCore::tmrTimer\fC [private]\fP"
+
+.SS "Ui::AmurCore* AmurCore::ui\fC [private]\fP"
+
+.SS "Mat AmurCore::undistortedMat\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

@@ -1,0 +1,13 @@
+<map id="AmurCore::calibDialogOpen" name="AmurCore::calibDialogOpen">
+<area shape="rect" id="node1" title=" " alt="" coords="5,130,185,157"/>
+<area shape="rect" id="node2" href="$classCamCalibrate.html#ad2a0800c6d7b855d1753255e6ea8dfbe" title=" " alt="" coords="233,71,415,98"/>
+<area shape="rect" id="node10" href="$classCamSettingsHolder.html#a610944047b872a01281a187b60daef0d" title=" " alt="" coords="253,123,395,164"/>
+<area shape="rect" id="node11" href="$classCamSettingsHolder.html#a8883903902b659f271674d188e57a5b3" title=" " alt="" coords="253,188,395,229"/>
+<area shape="rect" id="node3" href="$classCamCalibrate.html#ae2f55b8c8599bba172589a2e6925209d" title=" " alt="" coords="463,46,637,73"/>
+<area shape="rect" id="node9" href="$classCamCalibrate.html#aef403e16f2f6f6f47b0887de7135e858" title=" " alt="" coords="477,97,623,123"/>
+<area shape="rect" id="node4" href="$classCamSettingsHolder.html#aec23bbba4b47426ff778953345c2dd5e" title=" " alt="" coords="707,5,849,47"/>
+<area shape="rect" id="node5" href="$classCamCalibrate.html#afe712017aab14f2552aed3b270b400a5" title=" " alt="" coords="685,71,871,112"/>
+<area shape="rect" id="node6" href="$classCalibrator.html#af2f2148de93fe59cc8e63919160fcee5" title=" " alt="" coords="919,19,1063,46"/>
+<area shape="rect" id="node7" href="$classCamSettingsHolder.html#aa4c98f62d97f091479a6c1a9d6d99b98" title=" " alt="" coords="920,71,1061,112"/>
+<area shape="rect" id="node8" href="$classCamSettingsHolder.html#ac340d82a9009e29eaad1ccb0b0f8a408" title=" " alt="" coords="920,136,1061,177"/>
+</map>

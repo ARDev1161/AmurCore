@@ -1,0 +1,8 @@
+<map id="GetStateByJoystick" name="GetStateByJoystick">
+<area shape="rect" id="node1" title=" " alt="" coords="38,448,217,672"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,76,83"/>
+<area shape="rect" id="node3" href="$classVJoystickAdapter.html" title=" " alt="" coords="217,132,411,385"/>
+<area shape="rect" id="node4" href="$classVJoystickAdapter_1_1VJoystickThread.html" title=" " alt="" coords="319,507,506,613"/>
+<area shape="rect" id="node5" title=" " alt="" coords="506,220,578,297"/>
+<area shape="rect" id="node6" href="$structJoyState.html" title=" " alt="" coords="63,161,192,356"/>
+</map>

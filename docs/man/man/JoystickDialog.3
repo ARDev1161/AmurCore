@@ -1,0 +1,159 @@
+.TH "JoystickDialog" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+JoystickDialog
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <joystickdialog\&.h>\fP
+.PP
+Inherits QDialog\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBJoystickDialog\fP (\fBJoyState\fP *const state, QWidget *parent=0)"
+.br
+.ti -1c
+.RI "\fB~JoystickDialog\fP ()"
+.br
+.in -1c
+.SS "Private Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBMAX_JOYSTICK_BUTTONS\fP = 30 }"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "int \fBconnectToJoystick\fP ()"
+.br
+.ti -1c
+.RI "void \fBdisconnectFromJoystick\fP ()"
+.br
+.ti -1c
+.RI "void \fBscanJoystickDevice\fP ()"
+.br
+.ti -1c
+.RI "void \fBaxisSetup\fP (int id, int state)"
+.br
+.ti -1c
+.RI "void \fBhatSetup\fP (int id, int state)"
+.br
+.ti -1c
+.RI "void \fBbuttonSetup\fP (int id, bool state)"
+.br
+.ti -1c
+.RI "void \fBballSetup\fP (int id, int stateX, int stateY)"
+.br
+.ti -1c
+.RI "void \fBon_JoystickDialog_accepted\fP ()"
+.br
+.ti -1c
+.RI "void \fBon_JoystickDialog_rejected\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetDefaultText\fP ()"
+.br
+.ti -1c
+.RI "void \fBinitFields\fP ()"
+.br
+.ti -1c
+.RI "void \fBconnMenu\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetDialog\fP ()"
+.br
+.ti -1c
+.RI "int \fBloadJoy\fP (int \fBjoyId\fP)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::JoystickDialog * \fBui\fP"
+.br
+.ti -1c
+.RI "QVector< bool > \fBbuttonVector\fP"
+.br
+.ti -1c
+.RI "\fBJoyState\fP * \fBjoyState\fP"
+.br
+.ti -1c
+.RI "\fBVJoystickAdapter\fP * \fBjoyAdapter\fP"
+.br
+.ti -1c
+.RI "int \fBjoyId\fP"
+.br
+.in -1c
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "anonymous enum\fC [private]\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIMAX_JOYSTICK_BUTTONS \fP\fP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "JoystickDialog::JoystickDialog (\fBJoyState\fP *const state, QWidget * parent = \fC0\fP)\fC [explicit]\fP"
+
+.SS "JoystickDialog::~JoystickDialog ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void JoystickDialog::axisSetup (int id, int state)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void JoystickDialog::ballSetup (int id, int stateX, int stateY)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void JoystickDialog::buttonSetup (int id, bool state)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "int JoystickDialog::connectToJoystick ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void JoystickDialog::connMenu ()\fC [private]\fP"
+
+.SS "void JoystickDialog::disconnectFromJoystick ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void JoystickDialog::hatSetup (int id, int state)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void JoystickDialog::initFields ()\fC [private]\fP"
+
+.SS "int JoystickDialog::loadJoy (int joyId)\fC [private]\fP"
+
+.SS "void JoystickDialog::on_JoystickDialog_accepted ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void JoystickDialog::on_JoystickDialog_rejected ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void JoystickDialog::scanJoystickDevice ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void JoystickDialog::setDefaultText ()\fC [private]\fP"
+
+.SS "void JoystickDialog::setDialog ()\fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QVector<bool> JoystickDialog::buttonVector\fC [private]\fP"
+
+.SS "\fBVJoystickAdapter\fP* JoystickDialog::joyAdapter\fC [private]\fP"
+
+.SS "int JoystickDialog::joyId\fC [private]\fP"
+
+.SS "\fBJoyState\fP* JoystickDialog::joyState\fC [private]\fP"
+
+.SS "Ui::JoystickDialog* JoystickDialog::ui\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

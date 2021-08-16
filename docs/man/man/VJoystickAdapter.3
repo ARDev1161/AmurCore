@@ -1,0 +1,172 @@
+.TH "VJoystickAdapter" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+VJoystickAdapter
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <v_joystick_adapter\&.h>\fP
+.PP
+Inherits QObject\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBVJoystickThread\fP"
+.br
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBHatPosition\fP { \fBJOYSTICK_HAT_CENTERED\fP = SDL_HAT_DOWN, \fBJOYSTICK_HAT_UP\fP = SDL_HAT_UP, \fBJOYSTICK_HAT_UP_RIGHT\fP = SDL_HAT_RIGHT, \fBJOYSTICK_HAT_RIGHT\fP = SDL_HAT_RIGHT, \fBJOYSTICK_HAT_RIGHT_DOWN\fP = SDL_HAT_RIGHTDOWN, \fBJOYSTICK_HAT_DOWN\fP = SDL_HAT_DOWN, \fBJOYSTICK_HAT_DOWN_LEFT\fP = SDL_HAT_LEFTDOWN, \fBJOYSTICK_HAT_LEFT\fP = SDL_HAT_LEFT, \fBJOYSTICK_HAT_LEFT_UP\fP = SDL_HAT_LEFTUP }"
+.br
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBsigButtonChanged\fP (int id, bool state)"
+.br
+.ti -1c
+.RI "void \fBsigAxisChanged\fP (int id, int state)"
+.br
+.ti -1c
+.RI "void \fBsigHatChanged\fP (int id, int state)"
+.br
+.ti -1c
+.RI "void \fBsigBallChanged\fP (int id, int stateX, int stateY)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVJoystickAdapter\fP (QObject *parent=0)"
+.br
+.ti -1c
+.RI "\fB~VJoystickAdapter\fP ()"
+.br
+.ti -1c
+.RI "bool \fBopen\fP (int id)"
+.br
+.ti -1c
+.RI "void \fBclose\fP ()"
+.br
+.ti -1c
+.RI "bool \fBisConnected\fP () const"
+.br
+.ti -1c
+.RI "int \fBgetJoystickId\fP () const"
+.br
+.ti -1c
+.RI "QString \fBgetJoystickName\fP () const"
+.br
+.ti -1c
+.RI "int \fBgetJoystickNumAxes\fP () const"
+.br
+.ti -1c
+.RI "int \fBgetJoystickNumHats\fP () const"
+.br
+.ti -1c
+.RI "int \fBgetJoystickNumBalls\fP () const"
+.br
+.ti -1c
+.RI "int \fBgetJoystickNumButtons\fP () const"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static int \fBgetNumAvailableJoystick\fP ()"
+.br
+.ti -1c
+.RI "static QStringList \fBgetAvailableJoystickName\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "SDL_Joystick * \fBm_joystick\fP"
+.br
+.ti -1c
+.RI "\fBVJoystickThread\fP * \fBm_joystickThread\fP"
+.br
+.in -1c
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBVJoystickAdapter::HatPosition\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIJOYSTICK_HAT_CENTERED \fP\fP
+.TP
+\fB\fIJOYSTICK_HAT_UP \fP\fP
+.TP
+\fB\fIJOYSTICK_HAT_UP_RIGHT \fP\fP
+.TP
+\fB\fIJOYSTICK_HAT_RIGHT \fP\fP
+.TP
+\fB\fIJOYSTICK_HAT_RIGHT_DOWN \fP\fP
+.TP
+\fB\fIJOYSTICK_HAT_DOWN \fP\fP
+.TP
+\fB\fIJOYSTICK_HAT_DOWN_LEFT \fP\fP
+.TP
+\fB\fIJOYSTICK_HAT_LEFT \fP\fP
+.TP
+\fB\fIJOYSTICK_HAT_LEFT_UP \fP\fP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "VJoystickAdapter::VJoystickAdapter (QObject * parent = \fC0\fP)\fC [explicit]\fP"
+
+.SS "VJoystickAdapter::~VJoystickAdapter ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void VJoystickAdapter::close ()"
+
+.SS "QStringList VJoystickAdapter::getAvailableJoystickName ()\fC [static]\fP"
+
+.SS "int VJoystickAdapter::getJoystickId () const\fC [inline]\fP"
+
+.SS "QString VJoystickAdapter::getJoystickName () const\fC [inline]\fP"
+
+.SS "int VJoystickAdapter::getJoystickNumAxes () const\fC [inline]\fP"
+
+.SS "int VJoystickAdapter::getJoystickNumBalls () const\fC [inline]\fP"
+
+.SS "int VJoystickAdapter::getJoystickNumButtons () const\fC [inline]\fP"
+
+.SS "int VJoystickAdapter::getJoystickNumHats () const\fC [inline]\fP"
+
+.SS "int VJoystickAdapter::getNumAvailableJoystick ()\fC [static]\fP"
+
+.SS "bool VJoystickAdapter::isConnected () const\fC [inline]\fP"
+
+.SS "bool VJoystickAdapter::open (int id)"
+
+.SS "void VJoystickAdapter::sigAxisChanged (int id, int state)\fC [signal]\fP"
+
+.SS "void VJoystickAdapter::sigBallChanged (int id, int stateX, int stateY)\fC [signal]\fP"
+
+.SS "void VJoystickAdapter::sigButtonChanged (int id, bool state)\fC [signal]\fP"
+
+.SS "void VJoystickAdapter::sigHatChanged (int id, int state)\fC [signal]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "SDL_Joystick* VJoystickAdapter::m_joystick\fC [private]\fP"
+
+.SS "\fBVJoystickThread\fP* VJoystickAdapter::m_joystickThread\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

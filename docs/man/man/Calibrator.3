@@ -1,0 +1,64 @@
+.TH "Calibrator" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Calibrator
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <calibrator\&.h>\fP
+.PP
+Inherits QObject\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBstopAll\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCalibrator\fP (\fBCamSettingsHolder\fP *holder)"
+.br
+.ti -1c
+.RI "\fB~Calibrator\fP ()"
+.br
+.ti -1c
+.RI "void \fBaddThread\fP ()"
+.br
+.ti -1c
+.RI "void \fBstopThreads\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBCamSettingsHolder\fP * \fBcamHolder\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Calibrator::Calibrator (\fBCamSettingsHolder\fP * holder)"
+
+.SS "Calibrator::~Calibrator ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Calibrator::addThread ()"
+
+.SS "void Calibrator::stopAll ()\fC [signal]\fP"
+
+.SS "void Calibrator::stopThreads ()"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBCamSettingsHolder\fP* Calibrator::camHolder\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

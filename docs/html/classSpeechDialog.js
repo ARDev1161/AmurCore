@@ -1,0 +1,27 @@
+var classSpeechDialog =
+[
+    [ "SpeechDialog", "classSpeechDialog.html#ac0f5383a9cd3d80bcc0e0a94425e0596", null ],
+    [ "~SpeechDialog", "classSpeechDialog.html#a9264cb8967d000beba507e23438aeab8", null ],
+    [ "engineSelected", "classSpeechDialog.html#ad074a234ef4e22ea276a0ccacd008c31", null ],
+    [ "languageSelected", "classSpeechDialog.html#a85a7b42ce268136d179266304f7dfe7d", null ],
+    [ "localeChanged", "classSpeechDialog.html#aca5a62735ff52bcd699cb2bb1effe54e", null ],
+    [ "on_buttonBox_accepted", "classSpeechDialog.html#ab397282a56ede5b05f488593de2e5bb9", null ],
+    [ "setPitch", "classSpeechDialog.html#a3800aa60d710d63e65779e1a08bf649a", null ],
+    [ "setRate", "classSpeechDialog.html#ac0660a9595fbb4c95336d82e0de17063", null ],
+    [ "setVolume", "classSpeechDialog.html#a16948e0e24dada81b6a9159b34698a1c", null ],
+    [ "speak", "classSpeechDialog.html#afb358f7835833b2e913ba78fc8c6b4a0", null ],
+    [ "stateChanged", "classSpeechDialog.html#a91c7a9f99f8e1394a613ee275c2233e0", null ],
+    [ "stop", "classSpeechDialog.html#ac7a28234ff64c53f33d063abd36d7f7a", null ],
+    [ "voiceSelected", "classSpeechDialog.html#a834c60bc1f88879b3bb2a9da6d0713bc", null ],
+    [ "engineName", "classSpeechDialog.html#a6e844e1cb9d57bfc1f017f986c0d5df0", null ],
+    [ "engines", "classSpeechDialog.html#aeb2ab618846d77456d933405c4129df6", null ],
+    [ "languages", "classSpeechDialog.html#ac4bb6a24c69a45f193fd3bfdadf9d1af", null ],
+    [ "listRows", "classSpeechDialog.html#a8819403330b2506c7cff319b19de369f", null ],
+    [ "pitch", "classSpeechDialog.html#a79574427f19d5b27efc1c65075aa98e0", null ],
+    [ "rate", "classSpeechDialog.html#a967d0a93a17a19bc3cca15c874d541ed", null ],
+    [ "speech", "classSpeechDialog.html#a69177ec9fccae83af9bad4483c445fb1", null ],
+    [ "started", "classSpeechDialog.html#a17f1f91f33dd3e894ff4ffe2c313cea3", null ],
+    [ "ui", "classSpeechDialog.html#ac132a10a03519f6765859c3cd20481a4", null ],
+    [ "voices", "classSpeechDialog.html#aae96ff0c8112db5c1e618aa1518fcd0c", null ],
+    [ "volume", "classSpeechDialog.html#ae1b7c5b9750727d15a25f966b077b093", null ]
+];

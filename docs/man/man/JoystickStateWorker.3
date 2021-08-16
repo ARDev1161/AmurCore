@@ -1,0 +1,87 @@
+.TH "JoystickStateWorker" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+JoystickStateWorker
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <joystickstateworker\&.h>\fP
+.PP
+Inherits QObject\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBprocess\fP ()"
+.br
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBfinished\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBJoystickStateWorker\fP (int id, \fBJoyState\fP *const state)"
+.br
+.ti -1c
+.RI "\fB~JoystickStateWorker\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBchangeJoystickId\fP (int id)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBjoyId\fP = \-1"
+.br
+.ti -1c
+.RI "\fBJoyState\fP * \fBjoyState\fP"
+.br
+.ti -1c
+.RI "\fBGetStateByJoystick\fP * \fBjoyStateController\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "JoystickStateWorker::JoystickStateWorker (int id, \fBJoyState\fP *const state)"
+
+.SS "JoystickStateWorker::~JoystickStateWorker ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void JoystickStateWorker::changeJoystickId (int id)\fC [private]\fP"
+
+.SS "void JoystickStateWorker::finished ()\fC [signal]\fP"
+
+.SS "void JoystickStateWorker::process ()\fC [slot]\fP"
+
+.SS "void JoystickStateWorker::stop ()\fC [slot]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "int JoystickStateWorker::joyId = \-1\fC [private]\fP"
+
+.SS "\fBJoyState\fP* JoystickStateWorker::joyState\fC [private]\fP"
+
+.SS "\fBGetStateByJoystick\fP* JoystickStateWorker::joyStateController\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.
