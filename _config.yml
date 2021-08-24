@@ -2,3 +2,7 @@ theme: jekyll-theme-cayman
 title : AmurCore
 description : Control software for AMUR robots
 show_downloads : true
+
+github :
+   zip_url : https://github.com/ARDev1161/AmurCore/archive/refs/heads/master.zip
+   tar_url : https://github.com/ARDev1161/AmurCore/archive/refs/heads/master.tar.gz
