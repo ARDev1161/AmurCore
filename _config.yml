@@ -1,1 +1,4 @@
 theme: jekyll-theme-cayman
+title : AmurCore
+description : Control software for AMUR robots
+show_downloads : true
