@@ -1,6 +1,6 @@
 var classGetStateByJoystick =
 [
-    [ "GetStateByJoystick", "classGetStateByJoystick.html#aff05fb0551cd95cb24f85c1129f8ad66", null ],
+    [ "GetStateByJoystick", "classGetStateByJoystick.html#a51fb9be676a60aee04f6afd76af54521", null ],
     [ "~GetStateByJoystick", "classGetStateByJoystick.html#ac9ac6f3e66f9961032192dca375bd3b8", null ],
     [ "axisSetup", "classGetStateByJoystick.html#a0db6dd092b330821bcf3adc2201a5bb0", null ],
     [ "ballSetup", "classGetStateByJoystick.html#a274e3fdaa173f2592076f71f13388120", null ],

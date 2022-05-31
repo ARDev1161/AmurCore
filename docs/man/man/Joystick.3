@@ -1,4 +1,4 @@
-.TH "Joystick" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "Joystick" 3 "Tue May 31 2022" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -21,7 +21,7 @@ Inherits QObject\&.
 
 .in +1c
 .ti -1c
-.RI "\fBJoystick\fP (int id, AMUR::AmurControls *const \fBcontrols\fP, \fBJoyState\fP *const state)"
+.RI "\fBJoystick\fP (\fBJoyState\fP *const state)"
 .br
 .ti -1c
 .RI "\fB~Joystick\fP ()"
@@ -37,18 +37,12 @@ Inherits QObject\&.
 
 .in +1c
 .ti -1c
-.RI "int \fBjoyId\fP"
-.br
-.ti -1c
 .RI "\fBJoyState\fP * \fBjoyState\fP"
-.br
-.ti -1c
-.RI "AMUR::AmurControls * \fBcontrols\fP"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "Joystick::Joystick (int id, AMUR::AmurControls *const controls, \fBJoyState\fP *const state)"
+.SS "Joystick::Joystick (\fBJoyState\fP *const state)"
 
 .SS "Joystick::~Joystick ()"
 
@@ -62,10 +56,6 @@ Inherits QObject\&.
 
 .SH "Member Data Documentation"
 .PP 
-.SS "AMUR::AmurControls* Joystick::controls\fC [private]\fP"
-
-.SS "int Joystick::joyId\fC [private]\fP"
-
 .SS "\fBJoyState\fP* Joystick::joyState\fC [private]\fP"
 
 

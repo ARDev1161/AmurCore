@@ -1,4 +1,4 @@
-.TH "logic/movements.h" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "logic/movements.h" 3 "Tue May 31 2022" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,13 +6,58 @@ logic/movements.h
 .SH SYNOPSIS
 .br
 .PP
+\fC#include '\&.\&./joystick/joystick\&.h'\fP
+.br
+
 .SS "Classes"
 
 .in +1c
 .ti -1c
+.RI "struct \fBMoveSettings\fP"
+.br
+.ti -1c
+.RI "struct \fBMoveSettings::JoyBindings\fP"
+.br
+.ti -1c
 .RI "class \fBMovements\fP"
 .br
 .in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBWHEEL_X_AXIS\fP   joyState\->joystickXaxis"
+.br
+.ti -1c
+.RI "#define \fBWHEEL_Y_AXIS\fP   joyState\->joystickYaxis"
+.br
+.ti -1c
+.RI "#define \fBCAM_X_AXIS\fP   joyState\->joystickZLTaxis"
+.br
+.ti -1c
+.RI "#define \fBCAM_Y_AXIS\fP   joyState\->joystickXrotation"
+.br
+.ti -1c
+.RI "#define \fBHAND_AXIS\fP   joyState\->joystickXrotation"
+.br
+.ti -1c
+.RI "#define \fBDIVIDER\fP   129"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define CAM_X_AXIS   joyState\->joystickZLTaxis"
+
+.SS "#define CAM_Y_AXIS   joyState\->joystickXrotation"
+
+.SS "#define DIVIDER   129"
+
+.SS "#define HAND_AXIS   joyState\->joystickXrotation"
+
+.SS "#define WHEEL_X_AXIS   joyState\->joystickXaxis"
+
+.SS "#define WHEEL_Y_AXIS   joyState\->joystickYaxis"
+
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for AmurCore from the source code\&.

@@ -16,10 +16,12 @@ var annotated_dup =
     [ "JoystickStateWorker", "classJoystickStateWorker.html", "classJoystickStateWorker" ],
     [ "Logic", "classLogic.html", "classLogic" ],
     [ "Movements", "classMovements.html", "classMovements" ],
+    [ "MoveSettings", "structMoveSettings.html", "structMoveSettings" ],
     [ "NetworkController", "classNetworkController.html", "classNetworkController" ],
     [ "Session", "classSession.html", "classSession" ],
     [ "SpeechDialog", "classSpeechDialog.html", "classSpeechDialog" ],
     [ "SphinxRecognizer", "classSphinxRecognizer.html", "classSphinxRecognizer" ],
+    [ "System", "classSystem.html", "classSystem" ],
     [ "VJoystickAdapter", "classVJoystickAdapter.html", "classVJoystickAdapter" ],
     [ "Worker", "classWorker.html", "classWorker" ]
 ];

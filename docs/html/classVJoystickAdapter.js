@@ -29,6 +29,7 @@ var classVJoystickAdapter =
     [ "sigBallChanged", "classVJoystickAdapter.html#a428227dcc20b1ab2870388cbc834f3cf", null ],
     [ "sigButtonChanged", "classVJoystickAdapter.html#a7927d46dfd46ba57c28ec3596fb90db7", null ],
     [ "sigHatChanged", "classVJoystickAdapter.html#aac3c20558dcf6527ec3fef6c0fa7482a", null ],
+    [ "test_haptic", "classVJoystickAdapter.html#a0c56faca85ea7819f59113377492ed44", null ],
     [ "m_joystick", "classVJoystickAdapter.html#a1339ae98c1a5910868fcf3e381fbd5d4", null ],
     [ "m_joystickThread", "classVJoystickAdapter.html#a94829a76d74e7a65dfc8a3cefa4c309e", null ]
 ];

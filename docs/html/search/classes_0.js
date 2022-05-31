@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['amurcore_315',['AmurCore',['../classAmurCore.html',1,'']]],
-  ['anytype_5fs_316',['anytype_s',['../unionanytype__s.html',1,'']]]
+  ['amurcore_338',['AmurCore',['../classAmurCore.html',1,'']]],
+  ['anytype_5fs_339',['anytype_s',['../unionanytype__s.html',1,'']]]
 ];

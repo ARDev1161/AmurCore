@@ -1,16 +1,17 @@
 <map id="JoystickDialog::setDialog" name="JoystickDialog::setDialog">
-<area shape="rect" id="node1" title=" " alt="" coords="5,209,172,236"/>
-<area shape="rect" id="node2" href="$classVJoystickAdapter.html#a2ae973a7fdba12b00e15eaf0427e92f5" title=" " alt="" coords="499,27,705,53"/>
-<area shape="rect" id="node3" href="$classVJoystickAdapter.html#a5721b194b2e815eb3cbfe6fb589944ad" title=" " alt="" coords="220,52,451,79"/>
-<area shape="rect" id="node4" href="$classVJoystickAdapter.html#af0a7f41703ecded788fb4a32e5dcd8d1" title=" " alt="" coords="237,103,433,145"/>
-<area shape="rect" id="node5" href="$classVJoystickAdapter.html#a1d1f3e1ca024a25af0c9cd88501e816f" title=" " alt="" coords="237,169,433,210"/>
-<area shape="rect" id="node6" href="$classVJoystickAdapter.html#ab44631a9afcab3cd87bcfd540ba8aaab" title=" " alt="" coords="237,234,433,275"/>
-<area shape="rect" id="node7" href="$classVJoystickAdapter.html#a98a69334d4d441e7e2d7c8bfaa37699f" title=" " alt="" coords="237,299,433,341"/>
-<area shape="rect" id="node8" href="$classJoystickDialog.html#a38b5d0436ddd21ef48762db6e00115b8" title=" " alt="" coords="257,365,413,392"/>
-<area shape="rect" id="node14" href="$classJoystickDialog.html#a710cc5ab2ac84bfd21ea6bcc02094971" title=" " alt="" coords="237,416,433,443"/>
-<area shape="rect" id="node9" href="$classJoystickDialog.html#ace5cc001a9e20ad75ddd59254337850a" title=" " alt="" coords="517,264,687,291"/>
-<area shape="rect" id="node10" href="$classJoystickDialog.html#a8f15e59a3e9bcb05579099dc429d2033" title=" " alt="" coords="519,315,685,341"/>
-<area shape="rect" id="node11" href="$classJoystickDialog.html#a1bc3582a55b99e6765d52fe910427019" title=" " alt="" coords="511,365,693,392"/>
-<area shape="rect" id="node12" href="$classJoystickDialog.html#a007f02d3007e093855a90fce0a765201" title=" " alt="" coords="520,416,684,443"/>
-<area shape="rect" id="node13" href="$classVJoystickAdapter.html#a1ff469267a405e986ff45c66ec0007c9" title=" " alt="" coords="523,467,681,493"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,213,172,240"/>
+<area shape="rect" id="node2" href="$classVJoystickAdapter.html#a2ae973a7fdba12b00e15eaf0427e92f5" title=" " alt="" coords="232,5,439,32"/>
+<area shape="rect" id="node3" href="$classVJoystickAdapter.html#a5721b194b2e815eb3cbfe6fb589944ad" title=" " alt="" coords="220,56,451,83"/>
+<area shape="rect" id="node4" href="$classVJoystickAdapter.html#af0a7f41703ecded788fb4a32e5dcd8d1" title=" " alt="" coords="237,107,433,149"/>
+<area shape="rect" id="node5" href="$classVJoystickAdapter.html#a1d1f3e1ca024a25af0c9cd88501e816f" title=" " alt="" coords="237,173,433,214"/>
+<area shape="rect" id="node6" href="$classVJoystickAdapter.html#ab44631a9afcab3cd87bcfd540ba8aaab" title=" " alt="" coords="237,238,433,279"/>
+<area shape="rect" id="node7" href="$classVJoystickAdapter.html#a98a69334d4d441e7e2d7c8bfaa37699f" title=" " alt="" coords="237,303,433,345"/>
+<area shape="rect" id="node8" href="$classJoystickDialog.html#a38b5d0436ddd21ef48762db6e00115b8" title=" " alt="" coords="257,369,413,396"/>
+<area shape="rect" id="node15" href="$classJoystickDialog.html#a710cc5ab2ac84bfd21ea6bcc02094971" title=" " alt="" coords="237,420,433,447"/>
+<area shape="rect" id="node9" href="$classJoystickDialog.html#ace5cc001a9e20ad75ddd59254337850a" title=" " alt="" coords="505,268,675,295"/>
+<area shape="rect" id="node10" href="$classJoystickDialog.html#a8f15e59a3e9bcb05579099dc429d2033" title=" " alt="" coords="507,319,673,345"/>
+<area shape="rect" id="node11" href="$classJoystickDialog.html#a1bc3582a55b99e6765d52fe910427019" title=" " alt="" coords="499,369,681,396"/>
+<area shape="rect" id="node12" href="$classJoystickDialog.html#a007f02d3007e093855a90fce0a765201" title=" " alt="" coords="508,420,672,447"/>
+<area shape="rect" id="node13" href="$classVJoystickAdapter.html#a1ff469267a405e986ff45c66ec0007c9" title=" " alt="" coords="511,471,669,497"/>
+<area shape="rect" id="node14" href="$classVJoystickAdapter.html#a0c56faca85ea7819f59113377492ed44" title=" " alt="" coords="729,463,881,505"/>
 </map>

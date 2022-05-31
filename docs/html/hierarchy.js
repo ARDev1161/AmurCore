@@ -3,9 +3,11 @@ var hierarchy =
     [ "anytype_s", "unionanytype__s.html", null ],
     [ "CamSettingsHolder", "classCamSettingsHolder.html", null ],
     [ "grpcClient", "classgrpcClient.html", null ],
+    [ "MoveSettings::JoyBindings", "structMoveSettings_1_1JoyBindings.html", null ],
     [ "JoyState", "structJoyState.html", null ],
     [ "Logic", "classLogic.html", null ],
     [ "Movements", "classMovements.html", null ],
+    [ "MoveSettings", "structMoveSettings.html", null ],
     [ "NetworkController", "classNetworkController.html", null ],
     [ "QDialog", null, [
       [ "CamCalibrate", "classCamCalibrate.html", null ],
@@ -32,5 +34,6 @@ var hierarchy =
     [ "AMUR::ClientOnRobot::Service", null, [
       [ "grpcServer", "classgrpcServer.html", null ]
     ] ],
-    [ "SphinxRecognizer", "classSphinxRecognizer.html", null ]
+    [ "SphinxRecognizer", "classSphinxRecognizer.html", null ],
+    [ "System", "classSystem.html", null ]
 ];

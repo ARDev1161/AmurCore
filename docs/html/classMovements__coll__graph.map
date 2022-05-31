@@ -1,4 +1,6 @@
 <map id="Movements" name="Movements">
-<area shape="rect" id="node1" title=" " alt="" coords="15,263,125,355"/>
-<area shape="rect" id="node2" href="$structJoyState.html" title=" " alt="" coords="5,5,135,200"/>
+<area shape="rect" id="node1" title=" " alt="" coords="81,432,268,583"/>
+<area shape="rect" id="node2" href="$structMoveSettings.html" title=" " alt="" coords="43,219,146,296"/>
+<area shape="rect" id="node3" href="$structMoveSettings_1_1JoyBindings.html" title=" " alt="" coords="5,5,184,97"/>
+<area shape="rect" id="node4" href="$structJoyState.html" title=" " alt="" coords="170,160,299,355"/>
 </map>

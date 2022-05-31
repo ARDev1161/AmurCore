@@ -1,6 +1,10 @@
 <map id="joystick/joystickstateworker.h" name="joystick/joystickstateworker.h">
-<area shape="rect" id="node1" title=" " alt="" coords="73,5,265,32"/>
-<area shape="rect" id="node2" href="$joystick_8h.html" title=" " alt="" coords="13,80,137,107"/>
-<area shape="rect" id="node4" href="$joystickstateworker_8cpp.html" title=" " alt="" coords="161,80,367,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="152,5,344,32"/>
+<area shape="rect" id="node2" href="$joystick_8h.html" title=" " alt="" coords="91,80,215,107"/>
+<area shape="rect" id="node8" href="$joystickstateworker_8cpp.html" title=" " alt="" coords="239,80,446,107"/>
 <area shape="rect" id="node3" href="$joystick_8cpp.html" title=" " alt="" coords="5,155,144,181"/>
+<area shape="rect" id="node4" href="$movements_8h.html" title=" " alt="" coords="168,155,299,181"/>
+<area shape="rect" id="node5" href="$logic_8h.html" title=" " alt="" coords="116,229,207,256"/>
+<area shape="rect" id="node7" href="$movements_8cpp.html" title=" " alt="" coords="231,229,377,256"/>
+<area shape="rect" id="node6" href="$logic_8cpp.html" title=" " alt="" coords="109,304,213,331"/>
 </map>

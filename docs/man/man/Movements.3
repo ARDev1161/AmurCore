@@ -1,4 +1,4 @@
-.TH "Movements" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "Movements" 3 "Tue May 31 2022" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,17 +15,39 @@ Movements
 .RI "\fBMovements\fP (\fBJoyState\fP *\fBjoyState\fP, AMUR::AmurControls *\fBcontrols\fP)"
 .br
 .ti -1c
-.RI "int \fBjoyTranslate\fP ()"
+.RI "int \fBupdate\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcheckChangeRelayButton\fP (int buttonNumber)"
+.br
+.ti -1c
+.RI "void \fBcheckChangeLightButton\fP (int buttonNumber)"
+.br
+.ti -1c
+.RI "int \fBwheelProcess\fP (int xAxis, int yAxis)"
+.br
+.ti -1c
+.RI "int \fBmoveCameraProcess\fP (int xAxis, int yAxis)"
 .br
 .in -1c
 .SS "Private Attributes"
 
 .in +1c
 .ti -1c
+.RI "AMUR::AmurControls * \fBcontrols\fP"
+.br
+.ti -1c
+.RI "\fBMoveSettings\fP \fBmoveSettings\fP"
+.br
+.ti -1c
 .RI "\fBJoyState\fP * \fBjoyState\fP"
 .br
 .ti -1c
-.RI "AMUR::AmurControls * \fBcontrols\fP"
+.RI "\fBJoyState\fP \fBlastJoyState\fP"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
@@ -34,13 +56,25 @@ Movements
 
 .SH "Member Function Documentation"
 .PP 
-.SS "int Movements::joyTranslate ()"
+.SS "void Movements::checkChangeLightButton (int buttonNumber)\fC [private]\fP"
+
+.SS "void Movements::checkChangeRelayButton (int buttonNumber)\fC [private]\fP"
+
+.SS "int Movements::moveCameraProcess (int xAxis, int yAxis)\fC [private]\fP"
+
+.SS "int Movements::update ()"
+
+.SS "int Movements::wheelProcess (int xAxis, int yAxis)\fC [private]\fP"
 
 .SH "Member Data Documentation"
 .PP 
 .SS "AMUR::AmurControls* Movements::controls\fC [private]\fP"
 
 .SS "\fBJoyState\fP* Movements::joyState\fC [private]\fP"
+
+.SS "\fBJoyState\fP Movements::lastJoyState\fC [private]\fP"
+
+.SS "\fBMoveSettings\fP Movements::moveSettings\fC [private]\fP"
 
 
 .SH "Author"

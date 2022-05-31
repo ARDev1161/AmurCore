@@ -1,11 +1,12 @@
 <map id="JoystickDialog::hatSetup" name="JoystickDialog::hatSetup">
-<area shape="rect" id="node1" title=" " alt="" coords="1092,132,1256,159"/>
-<area shape="rect" id="node2" href="$classJoystickDialog.html#ac8f1e130269dcd340da46ab288c5d3d0" title=" " alt="" coords="869,63,1044,105"/>
-<area shape="rect" id="node7" href="$classJoystickDialog.html#a38b5d0436ddd21ef48762db6e00115b8" title=" " alt="" coords="879,161,1035,188"/>
-<area shape="rect" id="node3" href="$classJoystickDialog.html#aa30db76aa742d811c026492895193ecf" title=" " alt="" coords="213,157,385,184"/>
-<area shape="rect" id="node5" href="$classJoystickDialog.html#ac692d09095dc8cd1ae103915f5b8c3a7" title=" " alt="" coords="655,30,821,71"/>
-<area shape="rect" id="node6" href="$classJoystickDialog.html#abefb9a00a34ee4d57b6982361a2cbb3d" title=" " alt="" coords="655,95,821,137"/>
-<area shape="rect" id="node4" href="$classJoystickDialog.html#af84e054efce6c8b6945cde7279fe6c67" title=" " alt="" coords="5,179,165,221"/>
-<area shape="rect" id="node8" href="$classJoystickDialog.html#a22af748a30288845458ed60ac17f9218" title=" " alt="" coords="433,150,607,191"/>
-<area shape="rect" id="node9" href="$classJoystickDialog.html#ae6e40f1abadffdb9a555f498247dd676" title=" " alt="" coords="655,212,821,239"/>
+<area shape="rect" id="node1" title=" " alt="" coords="1099,170,1263,197"/>
+<area shape="rect" id="node2" href="$classJoystickDialog.html#ac8f1e130269dcd340da46ab288c5d3d0" title=" " alt="" coords="876,100,1051,142"/>
+<area shape="rect" id="node8" href="$classJoystickDialog.html#a38b5d0436ddd21ef48762db6e00115b8" title=" " alt="" coords="885,232,1041,258"/>
+<area shape="rect" id="node3" href="$classJoystickDialog.html#aa30db76aa742d811c026492895193ecf" title=" " alt="" coords="213,228,385,254"/>
+<area shape="rect" id="node5" href="$classJoystickDialog.html#a5964dd23a71fde074be8702b05a8e3df" title=" " alt="" coords="655,35,828,76"/>
+<area shape="rect" id="node6" href="$classJoystickDialog.html#ac692d09095dc8cd1ae103915f5b8c3a7" title=" " alt="" coords="658,100,825,142"/>
+<area shape="rect" id="node7" href="$classJoystickDialog.html#abefb9a00a34ee4d57b6982361a2cbb3d" title=" " alt="" coords="658,166,825,207"/>
+<area shape="rect" id="node4" href="$classJoystickDialog.html#af84e054efce6c8b6945cde7279fe6c67" title=" " alt="" coords="5,250,165,291"/>
+<area shape="rect" id="node9" href="$classJoystickDialog.html#a22af748a30288845458ed60ac17f9218" title=" " alt="" coords="433,220,607,262"/>
+<area shape="rect" id="node10" href="$classJoystickDialog.html#ae6e40f1abadffdb9a555f498247dd676" title=" " alt="" coords="658,282,825,309"/>
 </map>

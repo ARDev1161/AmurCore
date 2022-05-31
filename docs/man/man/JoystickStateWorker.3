@@ -1,4 +1,4 @@
-.TH "JoystickStateWorker" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "JoystickStateWorker" 3 "Tue May 31 2022" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -31,25 +31,15 @@ Inherits QObject\&.
 
 .in +1c
 .ti -1c
-.RI "\fBJoystickStateWorker\fP (int id, \fBJoyState\fP *const state)"
+.RI "\fBJoystickStateWorker\fP (\fBJoyState\fP *const state)"
 .br
 .ti -1c
 .RI "\fB~JoystickStateWorker\fP ()"
 .br
 .in -1c
-.SS "Private Member Functions"
-
-.in +1c
-.ti -1c
-.RI "void \fBchangeJoystickId\fP (int id)"
-.br
-.in -1c
 .SS "Private Attributes"
 
 .in +1c
-.ti -1c
-.RI "int \fBjoyId\fP = \-1"
-.br
 .ti -1c
 .RI "\fBJoyState\fP * \fBjoyState\fP"
 .br
@@ -59,14 +49,12 @@ Inherits QObject\&.
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "JoystickStateWorker::JoystickStateWorker (int id, \fBJoyState\fP *const state)"
+.SS "JoystickStateWorker::JoystickStateWorker (\fBJoyState\fP *const state)"
 
 .SS "JoystickStateWorker::~JoystickStateWorker ()"
 
 .SH "Member Function Documentation"
 .PP 
-.SS "void JoystickStateWorker::changeJoystickId (int id)\fC [private]\fP"
-
 .SS "void JoystickStateWorker::finished ()\fC [signal]\fP"
 
 .SS "void JoystickStateWorker::process ()\fC [slot]\fP"
@@ -75,8 +63,6 @@ Inherits QObject\&.
 
 .SH "Member Data Documentation"
 .PP 
-.SS "int JoystickStateWorker::joyId = \-1\fC [private]\fP"
-
 .SS "\fBJoyState\fP* JoystickStateWorker::joyState\fC [private]\fP"
 
 .SS "\fBGetStateByJoystick\fP* JoystickStateWorker::joyStateController\fC [private]\fP"

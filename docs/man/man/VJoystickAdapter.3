@@ -1,4 +1,4 @@
-.TH "VJoystickAdapter" 3 "Mon Aug 16 2021" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "VJoystickAdapter" 3 "Tue May 31 2022" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -75,6 +75,9 @@ Inherits QObject\&.
 .br
 .ti -1c
 .RI "int \fBgetJoystickNumButtons\fP () const"
+.br
+.ti -1c
+.RI "int \fBtest_haptic\fP ()"
 .br
 .in -1c
 .SS "Static Public Member Functions"
@@ -159,6 +162,8 @@ Inherits QObject\&.
 .SS "void VJoystickAdapter::sigButtonChanged (int id, bool state)\fC [signal]\fP"
 
 .SS "void VJoystickAdapter::sigHatChanged (int id, int state)\fC [signal]\fP"
+
+.SS "int VJoystickAdapter::test_haptic ()"
 
 .SH "Member Data Documentation"
 .PP 

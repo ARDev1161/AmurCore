@@ -1,13 +1,17 @@
 <map id="AmurCore::startCap" name="AmurCore::startCap">
-<area shape="rect" id="node1" title=" " alt="" coords="5,107,140,133"/>
-<area shape="rect" id="node2" href="$classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="188,107,349,133"/>
-<area shape="rect" id="node3" href="$classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="397,107,523,133"/>
-<area shape="rect" id="node4" href="$classLogic.html#a82ac96bf427006f77ee9238f022a9472" title=" " alt="" coords="589,5,711,32"/>
-<area shape="rect" id="node5" href="$classAmurCore.html#a6c7d5af7322ad0586428dc70fa1f8df2" title=" " alt="" coords="797,117,924,144"/>
-<area shape="rect" id="node6" href="$classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="597,56,703,83"/>
-<area shape="rect" id="node8" href="$classLogic.html#a28e53fcdf563bd313f060b6702c743c9" title=" " alt="" coords="590,157,710,184"/>
-<area shape="rect" id="node9" href="$classAmurCore.html#a7f29997a8d1cd0cefc312b4a2a3bd660" title=" " alt="" coords="571,208,729,235"/>
-<area shape="rect" id="node7" href="$classMovements.html#ae980715120f042b5f34b8f2539139e40" title=" " alt="" coords="777,56,944,83"/>
-<area shape="rect" id="node10" href="$classCamSettingsHolder.html#a610944047b872a01281a187b60daef0d" title=" " alt="" coords="790,190,931,231"/>
-<area shape="rect" id="node11" href="$classCamSettingsHolder.html#ab515ea2e2c6a6e3e913f6ac540a591bc" title=" " alt="" coords="790,255,931,297"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,158,140,185"/>
+<area shape="rect" id="node2" href="$classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="188,158,349,185"/>
+<area shape="rect" id="node3" href="$classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="397,158,523,185"/>
+<area shape="rect" id="node4" href="$classLogic.html#a82ac96bf427006f77ee9238f022a9472" title=" " alt="" coords="589,57,711,83"/>
+<area shape="rect" id="node5" href="$classAmurCore.html#a6c7d5af7322ad0586428dc70fa1f8df2" title=" " alt="" coords="785,169,911,195"/>
+<area shape="rect" id="node6" href="$classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="597,107,703,134"/>
+<area shape="rect" id="node12" href="$classLogic.html#a28e53fcdf563bd313f060b6702c743c9" title=" " alt="" coords="590,209,710,235"/>
+<area shape="rect" id="node13" href="$classAmurCore.html#a7f29997a8d1cd0cefc312b4a2a3bd660" title=" " alt="" coords="571,259,729,286"/>
+<area shape="rect" id="node7" href="$classMovements.html#a92357438ace26e6258b150e34a75b6ca" title=" " alt="" coords="781,107,915,134"/>
+<area shape="rect" id="node8" href="$classMovements.html#afe1fbaab4f9cd9fb41409274cabc9b8c" title=" " alt="" coords="975,5,1179,47"/>
+<area shape="rect" id="node9" href="$classMovements.html#ae2885a769fe8b59e1e0d11b5b154bbed" title=" " alt="" coords="974,71,1181,112"/>
+<area shape="rect" id="node10" href="$classMovements.html#a9abf18d457bd1734761cbc21c6d33313" title=" " alt="" coords="967,137,1188,163"/>
+<area shape="rect" id="node11" href="$classMovements.html#afd30b04d9afd0d8bd39315258896666f" title=" " alt="" coords="988,187,1167,214"/>
+<area shape="rect" id="node14" href="$classCamSettingsHolder.html#a610944047b872a01281a187b60daef0d" title=" " alt="" coords="777,241,919,283"/>
+<area shape="rect" id="node15" href="$classCamSettingsHolder.html#ab515ea2e2c6a6e3e913f6ac540a591bc" title=" " alt="" coords="777,307,919,348"/>
 </map>
