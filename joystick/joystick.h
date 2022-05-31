@@ -8,14 +8,9 @@ class Joystick: public QObject
 {
     Q_OBJECT
 
-    int joyId;
-
     JoyState *joyState;
-
-    AMUR::AmurControls *controls;
-
 public:
-    Joystick(int id, AMUR::AmurControls * const controls, JoyState * const state);
+    Joystick(JoyState * const state);
     ~Joystick();
 
     void addThread();

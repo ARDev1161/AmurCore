@@ -19,6 +19,7 @@ JoystickDialog::JoystickDialog(JoyState * const state, QWidget *parent) :
 JoystickDialog::~JoystickDialog()
 {
     disconnectFromJoystick();
+
     delete ui;
     delete joyAdapter;
 }
@@ -101,7 +102,7 @@ int JoystickDialog::loadJoy(int joyId)
 {
     if(joyAdapter->open(joyId))
     {
-        connect(joyAdapter, SIGNAL(sigButtonChanged(int, bool)), this, SLOT(buttonSetup(int,bool)));
+        connect(joyAdapter, SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
         connect(joyAdapter, SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
         connect(joyAdapter, SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
         connect(joyAdapter, SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
@@ -157,6 +158,7 @@ void JoystickDialog::on_JoystickDialog_accepted()
 {
     scanJoystickDevice();
     joyState->joyId = this->joyId;
+    disconnectFromJoystick();
 }
 
 void JoystickDialog::on_JoystickDialog_rejected()

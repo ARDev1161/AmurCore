@@ -114,10 +114,7 @@ void AmurCore::amurReboot()
 
 void AmurCore::fetchJoystickId()
 {
-    //implement here
-    int id = joyState->joyId;
-
-    joyThread = new Joystick(id, controls, joyState);
+    joyThread = new Joystick(joyState);
     joyThread->addThread();
 }
 
@@ -169,7 +166,7 @@ void AmurCore::undistortMat(Mat &inMat, Mat &outMat)
 void AmurCore::worker()
 {
     cv::flip(sourceMat, sourceMat, 1);
-    cv::resize(sourceMat, sourceMat, Size(320, 240));
+//    cv::resize(sourceMat, sourceMat, Size(320, 240));
 
     undistortMat(sourceMat, undistortedMat);
 

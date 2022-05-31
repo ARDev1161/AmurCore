@@ -1,12 +1,11 @@
 #include "getstatebyjoy.h"
 
-GetStateByJoystick::GetStateByJoystick(int id, JoyState * const state, QObject *parent) :
+GetStateByJoystick::GetStateByJoystick(JoyState * const state, QObject *parent) :
     QObject(parent),
     loopFlag(true),
     joyState(state)
 {
     joyState->buttonVector = QVector<bool>(MAX_JOYSTICK_BUTTONS);
-    joyState->joyId = id;
     joyAdapter = new VJoystickAdapter();
     connectToJoystick();
 }
@@ -26,7 +25,7 @@ void GetStateByJoystick::connectToJoystick()
     if(joyState->joyId != -1)
         if(joyAdapter->open(joyState->joyId))
         {
-            connect(joyAdapter, SIGNAL(sigButtonChanged(int, bool)), this, SLOT(buttonSetup(int,bool)));
+            connect(joyAdapter, SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
             connect(joyAdapter, SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
             connect(joyAdapter, SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
             connect(joyAdapter, SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
@@ -38,7 +37,7 @@ void GetStateByJoystick::disconnectFromJoystick()
     if(joyAdapter->isConnected())
     {
         joyAdapter->close();
-        disconnect(joyAdapter, SIGNAL(sigButtonChanged(int, bool)), this, SLOT(buttonSetup(int,bool)));
+        disconnect(joyAdapter, SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
         disconnect(joyAdapter, SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
         disconnect(joyAdapter, SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
         disconnect(joyAdapter, SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));

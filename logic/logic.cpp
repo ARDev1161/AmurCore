@@ -27,7 +27,7 @@ void Logic::process()
 //    srcMat->copyTo(outMat);
     outMat = srcMat;
 
-    move->joyTranslate();
+    move->update();
 }
 
 Mat Logic::getOutMat() const

@@ -18,8 +18,6 @@
 
 #include "v_joystick_adapter.h"
 
-#include <SDL/SDL.h>
-
 VJoystickAdapter::VJoystickAdapter(QObject *parent) :
     QObject(parent),
     m_joystick(0)
@@ -42,15 +40,17 @@ bool VJoystickAdapter::open(int id)
 {
     Q_ASSERT(!m_joystick);
 
-    if(SDL_JoystickOpened(id))
+    if(SDL_JoystickGetAttached(m_joystick))
         return false;
     m_joystick = SDL_JoystickOpen(id);
-    if(SDL_JoystickOpened(id))
+    if(SDL_JoystickGetAttached(m_joystick))
     {
+        test_haptic();
         m_joystickThread->start();
     }
     else
         m_joystick = 0;
+
     return m_joystick;
 }
 
@@ -118,9 +118,51 @@ QStringList VJoystickAdapter::getAvailableJoystickName()
     int joyNum = getNumAvailableJoystick();
 
     for(int i = 0; i < joyNum; ++i)
-        joyNames.push_front(QString(SDL_JoystickName(i)));
+        joyNames.push_front(QString(SDL_JoystickNameForIndex(i)));
 
     return joyNames;
+}
+
+int VJoystickAdapter::test_haptic() {
+ SDL_Haptic *haptic;
+ SDL_HapticEffect effect;
+ int effect_id;
+
+ // Open the device
+ haptic = SDL_HapticOpenFromJoystick( m_joystick );
+ if (haptic == NULL) return -1; // Most likely joystick isn't haptic
+
+ // See if it can do sine waves
+ if ((SDL_HapticQuery(haptic) & SDL_HAPTIC_SINE)==0) {
+  SDL_HapticClose(haptic); // No sine effect
+  return -1;
+ }
+
+ // Create the effect
+ SDL_memset( &effect, 0, sizeof(SDL_HapticEffect) ); // 0 is safe default
+ effect.type = SDL_HAPTIC_SINE;
+ effect.periodic.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
+ effect.periodic.direction.dir[0] = 18000; // Force comes from south
+ effect.periodic.period = 1000; // 1000 ms
+ effect.periodic.magnitude = 20000; // 20000/32767 strength
+ effect.periodic.length = 5000; // 5 seconds long
+ effect.periodic.attack_length = 1000; // Takes 1 second to get max strength
+ effect.periodic.fade_length = 1000; // Takes 1 second to fade away
+
+ // Upload the effect
+ effect_id = SDL_HapticNewEffect( haptic, &effect );
+
+ // Test the effect
+ SDL_HapticRunEffect( haptic, effect_id, 1 );
+ SDL_Delay( 5000); // Wait for the effect to finish
+
+ // We destroy the effect, although closing the device also does this
+ SDL_HapticDestroyEffect( haptic, effect_id );
+
+ // Close the device
+ SDL_HapticClose(haptic);
+
+ return 0; // Success
 }
 
 #include "moc_v_joystick_adapter.cpp"

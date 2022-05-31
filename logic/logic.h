@@ -2,8 +2,8 @@
 #define LOGIC_H
 
 #include "opencv2/opencv.hpp"
-#include "logic/speech/speechdialog.h"
-#include "logic/movements.h"
+#include "speech/speechdialog.h"
+#include "movements.h"
 
 using namespace cv;
 class Logic

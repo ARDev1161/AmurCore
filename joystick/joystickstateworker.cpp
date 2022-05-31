@@ -1,7 +1,6 @@
 #include "joystickstateworker.h"
 
-JoystickStateWorker::JoystickStateWorker(int id, JoyState * const state):
-    joyId(id),
+JoystickStateWorker::JoystickStateWorker(JoyState * const state):
     joyState(state)
 {
 }
@@ -14,16 +13,11 @@ JoystickStateWorker::~JoystickStateWorker()
 
 void JoystickStateWorker::process()
 {
-    joyStateController = new GetStateByJoystick(joyId, joyState);
+    joyStateController = new GetStateByJoystick(joyState);
 }
 
 void JoystickStateWorker::stop()
 {
     if(joyStateController != nullptr)
             joyStateController->stop();
-}
-
-void JoystickStateWorker::changeJoystickId(int id)
-{
-    joyId = id;
 }

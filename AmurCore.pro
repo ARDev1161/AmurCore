@@ -24,7 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += /usr/include/opencv4/
 
-INCLUDEPATH += /usr/include/SDL/
+INCLUDEPATH += /usr/include/SDL2/
 
 # INCLUDEPATH += /usr/include/pocketsphinx/
 # INCLUDEPATH += /usr/include/sphinxbase/
@@ -34,12 +34,13 @@ INCLUDEPATH += /usr/include/SDL/
 
 LIBS += -L$$LIBS_PATH /
 
-LIBS += -lSDL
+LIBS += -lSDL2
 
 LIBS += -L/usr/local/include/grpc++ \
         -lprotobuf \
         -lgrpc++ \
-        -lgrpc++_reflection
+        -lgrpc++_reflection \
+        -labsl_synchronization
 
 LIBS += -lopencv_core \
         -lopencv_calib3d \
@@ -85,6 +86,7 @@ SOURCES += \
         threads/worker.cpp \
 #Logic sources
         logic/logic.cpp \
+        logic/system.cpp \
         logic/movements.cpp \
         logic/speech/speechdialog.cpp \
         logic/speech/sphinxrecognizer.cpp
@@ -118,6 +120,7 @@ HEADERS += \
         threads/worker.h \
 #Logic headers
         logic/logic.h \
+        logic/system.h \
         logic/movements.h \
         logic/speech/prim_type.h \
         logic/speech/speechdialog.h \

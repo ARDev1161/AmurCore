@@ -22,7 +22,9 @@
 #include <QThread>
 #include <QString>
 #include <QStringList>
-#include <SDL/SDL_joystick.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_joystick.h>
+#include <SDL2/SDL_haptic.h>
 
 class VJoystickAdapter : public QObject
 {
@@ -51,16 +53,16 @@ public:
     void close();
     bool isConnected() const
     {
-        return m_joystick ? SDL_JoystickOpened(getJoystickId()) : false;
+        return SDL_JoystickGetAttached(m_joystick);
     }
 
     inline int getJoystickId() const
     {
-        return SDL_JoystickIndex(m_joystick);
+        return SDL_JoystickGetPlayerIndex(m_joystick);
     }
     inline QString getJoystickName() const
     {
-        return QString(SDL_JoystickName(getJoystickId()));
+        return QString(SDL_JoystickName(m_joystick));
     }
     inline int getJoystickNumAxes() const
     {
@@ -79,6 +81,7 @@ public:
         return SDL_JoystickNumButtons(m_joystick);
     }
 
+    int test_haptic();
     static int getNumAvailableJoystick();
     static QStringList getAvailableJoystickName();
 
