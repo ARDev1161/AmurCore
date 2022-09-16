@@ -27,8 +27,8 @@ var NAVTREE =
   [ "AmurCore", "index.html", [
     [ "Amur Core", "md_README.html", [
       [ "Requirements:", "md_README.html#autotoc_md1", null ],
-      [ "Sensors of Zanya:", "md_README.html#autotoc_md2", null ],
-      [ "Controls of Zanya:", "md_README.html#autotoc_md3", null ]
+      [ "Sensors of robot:", "md_README.html#autotoc_md2", null ],
+      [ "Controls of Robot:", "md_README.html#autotoc_md3", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
