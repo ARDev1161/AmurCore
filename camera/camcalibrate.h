@@ -2,6 +2,7 @@
 #define CAMCALIBRATE_H
 
 #include <QDialog>
+#include <chrono>
 #include "camsettingsholder.h"
 #include "calibrator.h"
 
@@ -22,7 +23,8 @@ class CamCalibrate : public QDialog
 
     bool started = false;
 
-    int pauseForChangePosition = 0;
+    std::chrono::time_point<std::chrono::steady_clock> timePoint;
+    std::chrono::seconds pauseForChangePosition;
 
     int numCornersHor;
     int numCornersVer;

@@ -2,13 +2,13 @@ cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 project(JoystickHandler LANGUAGES C CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets)
 
 set(JOYSTICK_SOURCES
     v_joystick_adapter.cpp     v_joystick_adapter.h
@@ -20,11 +20,12 @@ set(JOYSTICK_SOURCES
     joystickdialog.ui
 )
 
-add_library(JoystickHandler
+add_library(${PROJECT_NAME}
             SHARED
             ${JOYSTICK_SOURCES}
            )
 
-target_link_libraries(JoystickHandler PRIVATE
+target_link_libraries(${PROJECT_NAME} PRIVATE
+                                      Qt${QT_VERSION_MAJOR}::Core
                                       Qt${QT_VERSION_MAJOR}::Widgets
                                   )

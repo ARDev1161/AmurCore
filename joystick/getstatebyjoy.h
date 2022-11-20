@@ -1,9 +1,9 @@
 #ifndef GETSTATEBYJOY_H
 #define GETSTATEBYJOY_H
 
-#include <QTimer>
 #include <QObject>
 #include <QVector>
+#include <QTimer>
 #include <QDebug>
 #include "v_joystick_adapter.h"
 #include "../network/protobuf/amur.pb.h"

@@ -7,6 +7,7 @@ CamCalibrate::CamCalibrate(Mat *source, CamSettingsHolder *holder, QWidget *pare
 {
     ui->setupUi(this);
 
+    pauseForChangePosition = std::chrono::seconds(2);
     camHolder = holder;
     camHolder->setFlag(0);
     sourceMat = source;
@@ -55,7 +56,9 @@ void CamCalibrate::getCalibInfo()
 
         bool found = findChessboardCorners(gray, boardSize, imageCorners, CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_NORMALIZE_IMAGE | CALIB_CB_FILTER_QUADS | CALIB_CB_FAST_CHECK);
 
-        if(found & (pauseForChangePosition > 7))
+        auto timeNow = std::chrono::steady_clock::now();
+
+        if(found && (timePoint + pauseForChangePosition < timeNow))
         {
             cornerSubPix(gray, imageCorners, Size(7, 7), Size(-1, -1), TermCriteria(TermCriteria::EPS | TermCriteria::MAX_ITER, 30, 0.1));
 
@@ -68,10 +71,9 @@ void CamCalibrate::getCalibInfo()
             if(ui)
                 ui->labelSuccessed->setText(QString::number(successes));
 
-            pauseForChangePosition = 0;
+            timePoint = timeNow;
          }
 
-        pauseForChangePosition++;
         if(successes > 20)
             on_buttonBox_accepted();
 }

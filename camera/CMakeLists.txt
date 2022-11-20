@@ -7,6 +7,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets)
+
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+
 set(CAMERA_SOURCES
     calibrator.cpp           calibrator.h
     calibratorworker.cpp     calibratorworker.h
@@ -16,7 +22,13 @@ set(CAMERA_SOURCES
     camcalibrate.ui
 )
 
-#add_library(CameraSetup
-#            SHARED
-#            ${CAMERA_SOURCES}
-#           )
+add_library(${PROJECT_NAME}
+            SHARED
+            ${CAMERA_SOURCES}
+           )
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+                    Qt${QT_VERSION_MAJOR}::Core
+                    Qt${QT_VERSION_MAJOR}::Widgets
+                    ${OpenCV_LIBS}
+                )
