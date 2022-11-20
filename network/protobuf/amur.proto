@@ -138,7 +138,7 @@ service ClientOnRobot{
     rpc DataStreamExchange (stream AmurSensors) returns (stream AmurControls);
 
     //Broadcast message & waiting clients answers
-    rpc SendServerCredentials (ServerCredentials) returns (stream ClientCredentials);
+    rpc SendServerCredentials (ManagerCredentials) returns (stream RobotCredentials);
 }
 
 service ServerOnRobot{

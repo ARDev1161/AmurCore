@@ -8,7 +8,8 @@ NetworkController::NetworkController(AMUR::AmurControls* const controls, AMUR::A
 
     udpSocket = new QUdpSocket(this);
 
-    connect(&timer, &QTimer::timeout, this, &NetworkController::arpBroadcastMessage);
+//    connect(&timer, &QTimer::timeout, this, &NetworkController::arpBroadcastMessage);
+    // TODO
 }
 
 int NetworkController::runClient(std::string &server_address) // TODO - send const &<vector> of robots id
