@@ -30,14 +30,14 @@ void AmurCore::initialize()
     speechDialog = new SpeechDialog(this);
     connectDialog = new ConnectDialog(this);
 
-    network = new NetworkController(controls, sensors);
+    network = new NetworkController(controls, sensors); // TODO - add robot id & &<vector> of robots id
     amurLogic = new Logic(joyState, controls, sensors);
 
     connMenu();
     startTimer();
     startCap();
 
-    network->runServer(address_mask);
+    network->runServer(address_mask); // Start AmurCore gRPC server
 }
 
 void AmurCore::connMenu()

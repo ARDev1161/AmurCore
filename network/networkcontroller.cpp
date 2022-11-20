@@ -1,13 +1,17 @@
 #include "networkcontroller.h"
 
 
-NetworkController::NetworkController(AMUR::AmurControls* const controls, AMUR::AmurSensors* const sensors)
+NetworkController::NetworkController(AMUR::AmurControls* const controls, AMUR::AmurSensors* const sensors)  // TODO - add robot id & &<vector> of robots id
 {
     this->controls = controls;
     this->sensors = sensors;
+
+    udpSocket = new QUdpSocket(this);
+
+    connect(&timer, &QTimer::timeout, this, &NetworkController::arpBroadcastMessage);
 }
 
-int NetworkController::runClient(std::string &server_address)
+int NetworkController::runClient(std::string &server_address) // TODO - send const &<vector> of robots id
 {
     // Instantiate the client. It requires a channel, out of which the actual RPCs
     // are created. This channel models a connection to an endpoint specified by
@@ -29,7 +33,7 @@ int NetworkController::runClient(std::string &server_address)
     return 0;
 }
 
-int NetworkController::runServer(std::string &address_mask)
+int NetworkController::runServer(std::string &address_mask) // TODO - send const &<vector> of robots id
 {
     std::thread thr([&]()
      {
@@ -60,4 +64,21 @@ int NetworkController::runServer(std::string &address_mask)
     thr.detach();
 
     return 0;
+}
+
+void NetworkController::startBroadcasting()
+{
+    timer.start(msBroadcastDelay);
+}
+
+void NetworkController::stopBroadcasting()
+{
+    if(timer.isActive())
+        timer.stop();
+}
+
+int NetworkController::arpBroadcastMessage(std::string &broadcast_address)
+{
+        QByteArray datagram = "Broadcast message " + QByteArray::number(messageNo);
+        udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
 }

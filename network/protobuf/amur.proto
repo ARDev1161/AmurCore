@@ -112,7 +112,8 @@ message AmurSensors{
    Misc misc = 7;
 }
 
-message ServerCredentials{
+// Manager - control machine, with AmurCore
+message ManagerCredentials{
     string serverIP = 1; // IP address of server
     string NetMask = 2;
     string serverName = 3;
@@ -121,7 +122,8 @@ message ServerCredentials{
     string hashSum = 6; // Hash summ of packet
 }
 
-message ClientCredentials{
+// Robot - controlled/execution machine, with AmurClient
+message RobotCredentials{
     string clientIP = 1; // IP address of robot
     string clientMAC = 2; // MAC address of network interface
     string hashedSerialID = 3; // Hashed serial ID of robot
@@ -134,6 +136,9 @@ service ClientOnRobot{
 
     //Bidirectional stream
     rpc DataStreamExchange (stream AmurSensors) returns (stream AmurControls);
+
+    //Broadcast message & waiting clients answers
+    rpc SendServerCredentials (ServerCredentials) returns (stream ClientCredentials);
 }
 
 service ServerOnRobot{

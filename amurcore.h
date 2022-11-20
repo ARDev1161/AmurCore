@@ -47,6 +47,7 @@ class AmurCore : public QMainWindow
     ConnectDialog *connectDialog;
     JoystickDialog *joystickDialog;
 
+     // TODO - add vector with robots id
     NetworkController *network;
 
     AMUR::AmurControls *controls;
