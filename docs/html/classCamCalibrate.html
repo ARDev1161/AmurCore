@@ -154,8 +154,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a6a2cccc29a46f11c71cb0cdfedd9ce4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac53ea186e7a4d63e4d7fa6457a164d1c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamCalibrate.html#ac53ea186e7a4d63e4d7fa6457a164d1c">started</a> = false</td></tr>
 <tr class="separator:ac53ea186e7a4d63e4d7fa6457a164d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a78ea284b6f2fd508920798ae053d94"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamCalibrate.html#a6a78ea284b6f2fd508920798ae053d94">pauseForChangePosition</a> = 0</td></tr>
-<tr class="separator:a6a78ea284b6f2fd508920798ae053d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a8ae788de2054d2c020297a6810adc2"><td class="memItemLeft" align="right" valign="top">std::chrono::time_point&lt; std::chrono::steady_clock &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamCalibrate.html#a5a8ae788de2054d2c020297a6810adc2">timePoint</a></td></tr>
+<tr class="separator:a5a8ae788de2054d2c020297a6810adc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea222818dedc18fe7feeefbd5d6c4b35"><td class="memItemLeft" align="right" valign="top">std::chrono::seconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamCalibrate.html#aea222818dedc18fe7feeefbd5d6c4b35">pauseForChangePosition</a></td></tr>
+<tr class="separator:aea222818dedc18fe7feeefbd5d6c4b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af97aff3438ecb75e57b181c7d51182cc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc">numCornersHor</a></td></tr>
 <tr class="separator:af97aff3438ecb75e57b181c7d51182cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6964f38cb5e3360697390e8a767a367c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c">numCornersVer</a></td></tr>
@@ -865,8 +867,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a6a78ea284b6f2fd508920798ae053d94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a78ea284b6f2fd508920798ae053d94">&#9670;&nbsp;</a></span>pauseForChangePosition</h2>
+<a id="aea222818dedc18fe7feeefbd5d6c4b35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea222818dedc18fe7feeefbd5d6c4b35">&#9670;&nbsp;</a></span>pauseForChangePosition</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -875,7 +877,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int CamCalibrate::pauseForChangePosition = 0</td>
+          <td class="memname">std::chrono::seconds CamCalibrate::pauseForChangePosition</td>
         </tr>
       </table>
   </td>
@@ -942,6 +944,28 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">int CamCalibrate::successes = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a8ae788de2054d2c020297a6810adc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a8ae788de2054d2c020297a6810adc2">&#9670;&nbsp;</a></span>timePoint</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::chrono::time_point&lt;std::chrono::steady_clock&gt; CamCalibrate::timePoint</td>
         </tr>
       </table>
   </td>

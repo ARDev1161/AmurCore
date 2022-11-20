@@ -60,8 +60,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "amurcore_8cpp.html",
-"classSpeechDialog.html#a17f1f91f33dd3e894ff4ffe2c313cea3",
-"v__joystick__adapter_8h_source.html"
+"classSpeechDialog.html#a16948e0e24dada81b6a9159b34698a1c",
+"v__joystick__adapter_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

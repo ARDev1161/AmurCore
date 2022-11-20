@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classSpeechDialog.html#a16948e0e24dada81b6a9159b34698a1c":[2,0,20,8],
 "classSpeechDialog.html#a17f1f91f33dd3e894ff4ffe2c313cea3":[2,0,20,20],
 "classSpeechDialog.html#a3800aa60d710d63e65779e1a08bf649a":[2,0,20,6],
 "classSpeechDialog.html#a69177ec9fccae83af9bad4483c445fb1":[2,0,20,19],
@@ -101,8 +102,8 @@ var NAVTREEINDEX1 =
 "dir_b71e9c10552984757907f0ca0d59e659.html":[3,0,4],
 "dir_c901c14b65aa229498a52b725b3d4a2c.html":[3,0,3],
 "files.html":[3,0],
-"functions.html":[2,3,0,0],
 "functions.html":[2,3,0],
+"functions.html":[2,3,0,0],
 "functions_b.html":[2,3,0,1],
 "functions_c.html":[2,3,0,2],
 "functions_d.html":[2,3,0,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "unionanytype__s.html#a702ec3b3f98e1364ce475cd5c0d3b619":[2,0,1,3],
 "unionanytype__s.html#aa819b7996e6d9530340be88e0d218590":[2,0,1,0],
 "unionanytype__s.html#ad06e5319b02ebff60fd00113baad6cf6":[2,0,1,2],
-"v__joystick__adapter_8cpp.html":[3,0,1,8],
-"v__joystick__adapter_8h.html":[3,0,1,9]
+"v__joystick__adapter_8cpp.html":[3,0,1,8]
 };

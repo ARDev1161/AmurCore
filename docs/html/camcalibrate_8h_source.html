@@ -91,95 +91,99 @@ $(document).ready(function(){initNavTree('camcalibrate_8h_source.html',''); init
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CAMCALIBRATE_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QDialog&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="camsettingsholder_8h.html">camsettingsholder.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="calibrator_8h.html">calibrator.h</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="camcalibrate_8h.html#ab15452cc15107bc3008ff72bb855aa91">    8</a></span>&#160;<span class="preprocessor">#define COUNT_SKIP_FRAMES 7</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using namespace </span>cv;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceUi.html">Ui</a> {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">class </span><a class="code" href="classCamCalibrate.html">CamCalibrate</a>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classCamCalibrate.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCamCalibrate.html">CamCalibrate</a> : <span class="keyword">public</span> QDialog</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a6a2cccc29a46f11c71cb0cdfedd9ce4b">   21</a></span>&#160;    Ui::CamCalibrate *<a class="code" href="classCamCalibrate.html#a6a2cccc29a46f11c71cb0cdfedd9ce4b">ui</a>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#ac53ea186e7a4d63e4d7fa6457a164d1c">   23</a></span>&#160;    <span class="keywordtype">bool</span> started = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a6a78ea284b6f2fd508920798ae053d94">   25</a></span>&#160;    <span class="keywordtype">int</span> pauseForChangePosition = 0;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc">   27</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc">numCornersHor</a>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c">   28</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c">numCornersVer</a>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199">   29</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199">numSquares</a>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#ae402fd66023c671b4a1d32f9f2cebb36">   31</a></span>&#160;    <span class="keywordtype">int</span> successes = 0;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="camsettingsholder_8h.html">camsettingsholder.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="calibrator_8h.html">calibrator.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="camcalibrate_8h.html#ab15452cc15107bc3008ff72bb855aa91">    9</a></span>&#160;<span class="preprocessor">#define COUNT_SKIP_FRAMES 7</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using namespace </span>cv;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceUi.html">Ui</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">class </span><a class="code" href="classCamCalibrate.html">CamCalibrate</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classCamCalibrate.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCamCalibrate.html">CamCalibrate</a> : <span class="keyword">public</span> QDialog</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a6a2cccc29a46f11c71cb0cdfedd9ce4b">   22</a></span>&#160;    Ui::CamCalibrate *<a class="code" href="classCamCalibrate.html#a6a2cccc29a46f11c71cb0cdfedd9ce4b">ui</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#ac53ea186e7a4d63e4d7fa6457a164d1c">   24</a></span>&#160;    <span class="keywordtype">bool</span> started = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a5a8ae788de2054d2c020297a6810adc2">   26</a></span>&#160;    std::chrono::time_point&lt;std::chrono::steady_clock&gt; <a class="code" href="classCamCalibrate.html#a5a8ae788de2054d2c020297a6810adc2">timePoint</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#aea222818dedc18fe7feeefbd5d6c4b35">   27</a></span>&#160;    std::chrono::seconds <a class="code" href="classCamCalibrate.html#aea222818dedc18fe7feeefbd5d6c4b35">pauseForChangePosition</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc">   29</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc">numCornersHor</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c">   30</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c">numCornersVer</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199">   31</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199">numSquares</a>;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a53d38389a2017ab37d76b730adb7f0f4">   33</a></span>&#160;    <a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *<a class="code" href="classCamCalibrate.html#a53d38389a2017ab37d76b730adb7f0f4">camHolder</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a853fa4700d27bc727ddd59ca6478c376">   34</a></span>&#160;    <a class="code" href="classCalibrator.html">Calibrator</a> *<a class="code" href="classCamCalibrate.html#a853fa4700d27bc727ddd59ca6478c376">camCalib</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">//input points:</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e">   37</a></span>&#160;    vector&lt;Point3f&gt; <a class="code" href="classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e">objectCorners</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#acbda5ac4d9b777d38570668b6caad27a">   38</a></span>&#160;    vector&lt;Point2f&gt; <a class="code" href="classCamCalibrate.html#acbda5ac4d9b777d38570668b6caad27a">imageCorners</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285">   40</a></span>&#160;    vector&lt;vector&lt;Point3f&gt;&gt; <a class="code" href="classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285">objectPoints</a>; <span class="comment">// real world 3D coordinates</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a856bd20b8f8dda0c36b7117709c92352">   41</a></span>&#160;    vector&lt;vector&lt;Point2f&gt;&gt; <a class="code" href="classCamCalibrate.html#a856bd20b8f8dda0c36b7117709c92352">imagePoints</a>; <span class="comment">// 2D coordinates (pixel values)</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a84c8da5b3c38cb733173b54adf8736c6">   43</a></span>&#160;    Size <a class="code" href="classCamCalibrate.html#a84c8da5b3c38cb733173b54adf8736c6">boardSize</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#ae402fd66023c671b4a1d32f9f2cebb36">   33</a></span>&#160;    <span class="keywordtype">int</span> successes = 0;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a53d38389a2017ab37d76b730adb7f0f4">   35</a></span>&#160;    <a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *<a class="code" href="classCamCalibrate.html#a53d38389a2017ab37d76b730adb7f0f4">camHolder</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a853fa4700d27bc727ddd59ca6478c376">   36</a></span>&#160;    <a class="code" href="classCalibrator.html">Calibrator</a> *<a class="code" href="classCamCalibrate.html#a853fa4700d27bc727ddd59ca6478c376">camCalib</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">//input points:</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e">   39</a></span>&#160;    vector&lt;Point3f&gt; <a class="code" href="classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e">objectCorners</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#acbda5ac4d9b777d38570668b6caad27a">   40</a></span>&#160;    vector&lt;Point2f&gt; <a class="code" href="classCamCalibrate.html#acbda5ac4d9b777d38570668b6caad27a">imageCorners</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285">   42</a></span>&#160;    vector&lt;vector&lt;Point3f&gt;&gt; <a class="code" href="classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285">objectPoints</a>; <span class="comment">// real world 3D coordinates</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a856bd20b8f8dda0c36b7117709c92352">   43</a></span>&#160;    vector&lt;vector&lt;Point2f&gt;&gt; <a class="code" href="classCamCalibrate.html#a856bd20b8f8dda0c36b7117709c92352">imagePoints</a>; <span class="comment">// 2D coordinates (pixel values)</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#aa5169369b8ea859911ade698730fd9f2">   45</a></span>&#160;    Mat *<a class="code" href="classCamCalibrate.html#aa5169369b8ea859911ade698730fd9f2">sourceMat</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a84c8da5b3c38cb733173b54adf8736c6">   45</a></span>&#160;    Size <a class="code" href="classCamCalibrate.html#a84c8da5b3c38cb733173b54adf8736c6">boardSize</a>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a449a4b4f91e4bdceb07fff277b6402cf">   47</a></span>&#160;    Mat <a class="code" href="classCamCalibrate.html#a449a4b4f91e4bdceb07fff277b6402cf">graySaved</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a9d91db29356055366b012ef708c219fc">   48</a></span>&#160;    Mat <a class="code" href="classCamCalibrate.html#a9d91db29356055366b012ef708c219fc">gray</a>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719">   49</a></span>&#160;    Mat <a class="code" href="classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719">out</a>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a5784d0ce5ff4d46849f65fff7b2de669">   51</a></span>&#160;    Mat <a class="code" href="classCamCalibrate.html#a5784d0ce5ff4d46849f65fff7b2de669">distCoeffs</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#aa5169369b8ea859911ade698730fd9f2">   47</a></span>&#160;    Mat *<a class="code" href="classCamCalibrate.html#aa5169369b8ea859911ade698730fd9f2">sourceMat</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a449a4b4f91e4bdceb07fff277b6402cf">   49</a></span>&#160;    Mat <a class="code" href="classCamCalibrate.html#a449a4b4f91e4bdceb07fff277b6402cf">graySaved</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a9d91db29356055366b012ef708c219fc">   50</a></span>&#160;    Mat <a class="code" href="classCamCalibrate.html#a9d91db29356055366b012ef708c219fc">gray</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719">   51</a></span>&#160;    Mat <a class="code" href="classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719">out</a>;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classCamCalibrate.html">CamCalibrate</a>(Mat *source, <a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *holder, QWidget *parent = 0);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    ~<a class="code" href="classCamCalibrate.html">CamCalibrate</a>();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> frameUpdate();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> on_buttonBox_accepted();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> on_buttonBox_rejected();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> on_pushButton_clicked();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> outMat(Mat &amp;ToOut);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> initFields();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> getCalibInfo();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CAMCALIBRATE_H</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classCamCalibrate.html#a5784d0ce5ff4d46849f65fff7b2de669">   53</a></span>&#160;    Mat <a class="code" href="classCamCalibrate.html#a5784d0ce5ff4d46849f65fff7b2de669">distCoeffs</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classCamCalibrate.html">CamCalibrate</a>(Mat *source, <a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *holder, QWidget *parent = 0);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    ~<a class="code" href="classCamCalibrate.html">CamCalibrate</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> frameUpdate();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> on_buttonBox_accepted();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> on_buttonBox_rejected();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> on_pushButton_clicked();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> outMat(Mat &amp;ToOut);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> initFields();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> getCalibInfo();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CAMCALIBRATE_H</span></div>
 <div class="ttc" id="acalibrator_8h_html"><div class="ttname"><a href="calibrator_8h.html">calibrator.h</a></div></div>
 <div class="ttc" id="acamsettingsholder_8h_html"><div class="ttname"><a href="camsettingsholder_8h.html">camsettingsholder.h</a></div></div>
 <div class="ttc" id="aclassCalibrator_html"><div class="ttname"><a href="classCalibrator.html">Calibrator</a></div><div class="ttdef"><b>Definition:</b> calibrator.h:8</div></div>
-<div class="ttc" id="aclassCamCalibrate_html"><div class="ttname"><a href="classCamCalibrate.html">CamCalibrate</a></div><div class="ttdef"><b>Definition:</b> camcalibrate.h:18</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a0aed46c36ec46bafc440fca4898d5719"><div class="ttname"><a href="classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719">CamCalibrate::out</a></div><div class="ttdeci">Mat out</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:49</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a3de0b8fe4b8015f1d155f21212968199"><div class="ttname"><a href="classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199">CamCalibrate::numSquares</a></div><div class="ttdeci">int numSquares</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:29</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a449a4b4f91e4bdceb07fff277b6402cf"><div class="ttname"><a href="classCamCalibrate.html#a449a4b4f91e4bdceb07fff277b6402cf">CamCalibrate::graySaved</a></div><div class="ttdeci">Mat graySaved</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:47</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a53d38389a2017ab37d76b730adb7f0f4"><div class="ttname"><a href="classCamCalibrate.html#a53d38389a2017ab37d76b730adb7f0f4">CamCalibrate::camHolder</a></div><div class="ttdeci">CamSettingsHolder * camHolder</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:33</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a5784d0ce5ff4d46849f65fff7b2de669"><div class="ttname"><a href="classCamCalibrate.html#a5784d0ce5ff4d46849f65fff7b2de669">CamCalibrate::distCoeffs</a></div><div class="ttdeci">Mat distCoeffs</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:51</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a6964f38cb5e3360697390e8a767a367c"><div class="ttname"><a href="classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c">CamCalibrate::numCornersVer</a></div><div class="ttdeci">int numCornersVer</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:28</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a6a2cccc29a46f11c71cb0cdfedd9ce4b"><div class="ttname"><a href="classCamCalibrate.html#a6a2cccc29a46f11c71cb0cdfedd9ce4b">CamCalibrate::ui</a></div><div class="ttdeci">Ui::CamCalibrate * ui</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:21</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a84c8da5b3c38cb733173b54adf8736c6"><div class="ttname"><a href="classCamCalibrate.html#a84c8da5b3c38cb733173b54adf8736c6">CamCalibrate::boardSize</a></div><div class="ttdeci">Size boardSize</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:43</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a853fa4700d27bc727ddd59ca6478c376"><div class="ttname"><a href="classCamCalibrate.html#a853fa4700d27bc727ddd59ca6478c376">CamCalibrate::camCalib</a></div><div class="ttdeci">Calibrator * camCalib</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:34</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a856bd20b8f8dda0c36b7117709c92352"><div class="ttname"><a href="classCamCalibrate.html#a856bd20b8f8dda0c36b7117709c92352">CamCalibrate::imagePoints</a></div><div class="ttdeci">vector&lt; vector&lt; Point2f &gt; &gt; imagePoints</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:41</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_a9d91db29356055366b012ef708c219fc"><div class="ttname"><a href="classCamCalibrate.html#a9d91db29356055366b012ef708c219fc">CamCalibrate::gray</a></div><div class="ttdeci">Mat gray</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:48</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_aa5169369b8ea859911ade698730fd9f2"><div class="ttname"><a href="classCamCalibrate.html#aa5169369b8ea859911ade698730fd9f2">CamCalibrate::sourceMat</a></div><div class="ttdeci">Mat * sourceMat</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:45</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_acbda5ac4d9b777d38570668b6caad27a"><div class="ttname"><a href="classCamCalibrate.html#acbda5ac4d9b777d38570668b6caad27a">CamCalibrate::imageCorners</a></div><div class="ttdeci">vector&lt; Point2f &gt; imageCorners</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:38</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_ad5bbf7e76fdda3ca330eceb4b23f2285"><div class="ttname"><a href="classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285">CamCalibrate::objectPoints</a></div><div class="ttdeci">vector&lt; vector&lt; Point3f &gt; &gt; objectPoints</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:40</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_af97aff3438ecb75e57b181c7d51182cc"><div class="ttname"><a href="classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc">CamCalibrate::numCornersHor</a></div><div class="ttdeci">int numCornersHor</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:27</div></div>
-<div class="ttc" id="aclassCamCalibrate_html_af9ff2fc8e37a872d13b6d111e6dbd55e"><div class="ttname"><a href="classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e">CamCalibrate::objectCorners</a></div><div class="ttdeci">vector&lt; Point3f &gt; objectCorners</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:37</div></div>
+<div class="ttc" id="aclassCamCalibrate_html"><div class="ttname"><a href="classCamCalibrate.html">CamCalibrate</a></div><div class="ttdef"><b>Definition:</b> camcalibrate.h:19</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a0aed46c36ec46bafc440fca4898d5719"><div class="ttname"><a href="classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719">CamCalibrate::out</a></div><div class="ttdeci">Mat out</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:51</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a3de0b8fe4b8015f1d155f21212968199"><div class="ttname"><a href="classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199">CamCalibrate::numSquares</a></div><div class="ttdeci">int numSquares</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:31</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a449a4b4f91e4bdceb07fff277b6402cf"><div class="ttname"><a href="classCamCalibrate.html#a449a4b4f91e4bdceb07fff277b6402cf">CamCalibrate::graySaved</a></div><div class="ttdeci">Mat graySaved</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:49</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a53d38389a2017ab37d76b730adb7f0f4"><div class="ttname"><a href="classCamCalibrate.html#a53d38389a2017ab37d76b730adb7f0f4">CamCalibrate::camHolder</a></div><div class="ttdeci">CamSettingsHolder * camHolder</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:35</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a5784d0ce5ff4d46849f65fff7b2de669"><div class="ttname"><a href="classCamCalibrate.html#a5784d0ce5ff4d46849f65fff7b2de669">CamCalibrate::distCoeffs</a></div><div class="ttdeci">Mat distCoeffs</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:53</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a5a8ae788de2054d2c020297a6810adc2"><div class="ttname"><a href="classCamCalibrate.html#a5a8ae788de2054d2c020297a6810adc2">CamCalibrate::timePoint</a></div><div class="ttdeci">std::chrono::time_point&lt; std::chrono::steady_clock &gt; timePoint</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:26</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a6964f38cb5e3360697390e8a767a367c"><div class="ttname"><a href="classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c">CamCalibrate::numCornersVer</a></div><div class="ttdeci">int numCornersVer</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:30</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a6a2cccc29a46f11c71cb0cdfedd9ce4b"><div class="ttname"><a href="classCamCalibrate.html#a6a2cccc29a46f11c71cb0cdfedd9ce4b">CamCalibrate::ui</a></div><div class="ttdeci">Ui::CamCalibrate * ui</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:22</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a84c8da5b3c38cb733173b54adf8736c6"><div class="ttname"><a href="classCamCalibrate.html#a84c8da5b3c38cb733173b54adf8736c6">CamCalibrate::boardSize</a></div><div class="ttdeci">Size boardSize</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:45</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a853fa4700d27bc727ddd59ca6478c376"><div class="ttname"><a href="classCamCalibrate.html#a853fa4700d27bc727ddd59ca6478c376">CamCalibrate::camCalib</a></div><div class="ttdeci">Calibrator * camCalib</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:36</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a856bd20b8f8dda0c36b7117709c92352"><div class="ttname"><a href="classCamCalibrate.html#a856bd20b8f8dda0c36b7117709c92352">CamCalibrate::imagePoints</a></div><div class="ttdeci">vector&lt; vector&lt; Point2f &gt; &gt; imagePoints</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:43</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_a9d91db29356055366b012ef708c219fc"><div class="ttname"><a href="classCamCalibrate.html#a9d91db29356055366b012ef708c219fc">CamCalibrate::gray</a></div><div class="ttdeci">Mat gray</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:50</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_aa5169369b8ea859911ade698730fd9f2"><div class="ttname"><a href="classCamCalibrate.html#aa5169369b8ea859911ade698730fd9f2">CamCalibrate::sourceMat</a></div><div class="ttdeci">Mat * sourceMat</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:47</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_acbda5ac4d9b777d38570668b6caad27a"><div class="ttname"><a href="classCamCalibrate.html#acbda5ac4d9b777d38570668b6caad27a">CamCalibrate::imageCorners</a></div><div class="ttdeci">vector&lt; Point2f &gt; imageCorners</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:40</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_ad5bbf7e76fdda3ca330eceb4b23f2285"><div class="ttname"><a href="classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285">CamCalibrate::objectPoints</a></div><div class="ttdeci">vector&lt; vector&lt; Point3f &gt; &gt; objectPoints</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:42</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_aea222818dedc18fe7feeefbd5d6c4b35"><div class="ttname"><a href="classCamCalibrate.html#aea222818dedc18fe7feeefbd5d6c4b35">CamCalibrate::pauseForChangePosition</a></div><div class="ttdeci">std::chrono::seconds pauseForChangePosition</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:27</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_af97aff3438ecb75e57b181c7d51182cc"><div class="ttname"><a href="classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc">CamCalibrate::numCornersHor</a></div><div class="ttdeci">int numCornersHor</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:29</div></div>
+<div class="ttc" id="aclassCamCalibrate_html_af9ff2fc8e37a872d13b6d111e6dbd55e"><div class="ttname"><a href="classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e">CamCalibrate::objectCorners</a></div><div class="ttdeci">vector&lt; Point3f &gt; objectCorners</div><div class="ttdef"><b>Definition:</b> camcalibrate.h:39</div></div>
 <div class="ttc" id="aclassCamSettingsHolder_html"><div class="ttname"><a href="classCamSettingsHolder.html">CamSettingsHolder</a></div><div class="ttdef"><b>Definition:</b> camsettingsholder.h:10</div></div>
 <div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition:</b> amurcore.h:29</div></div>
 </div><!-- fragment --></div><!-- contents -->

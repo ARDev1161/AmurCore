@@ -63,7 +63,10 @@ Inherits QDialog\&.
 .RI "bool \fBstarted\fP = false"
 .br
 .ti -1c
-.RI "int \fBpauseForChangePosition\fP = 0"
+.RI "std::chrono::time_point< std::chrono::steady_clock > \fBtimePoint\fP"
+.br
+.ti -1c
+.RI "std::chrono::seconds \fBpauseForChangePosition\fP"
 .br
 .ti -1c
 .RI "int \fBnumCornersHor\fP"
@@ -166,13 +169,15 @@ Inherits QDialog\&.
 
 .SS "Mat CamCalibrate::out\fC [private]\fP"
 
-.SS "int CamCalibrate::pauseForChangePosition = 0\fC [private]\fP"
+.SS "std::chrono::seconds CamCalibrate::pauseForChangePosition\fC [private]\fP"
 
 .SS "Mat* CamCalibrate::sourceMat\fC [private]\fP"
 
 .SS "bool CamCalibrate::started = false\fC [private]\fP"
 
 .SS "int CamCalibrate::successes = 0\fC [private]\fP"
+
+.SS "std::chrono::time_point<std::chrono::steady_clock> CamCalibrate::timePoint\fC [private]\fP"
 
 .SS "Ui::CamCalibrate* CamCalibrate::ui\fC [private]\fP"
 

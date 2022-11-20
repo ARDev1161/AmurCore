@@ -23,9 +23,10 @@ var classCamCalibrate =
     [ "objectCorners", "classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e", null ],
     [ "objectPoints", "classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285", null ],
     [ "out", "classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719", null ],
-    [ "pauseForChangePosition", "classCamCalibrate.html#a6a78ea284b6f2fd508920798ae053d94", null ],
+    [ "pauseForChangePosition", "classCamCalibrate.html#aea222818dedc18fe7feeefbd5d6c4b35", null ],
     [ "sourceMat", "classCamCalibrate.html#aa5169369b8ea859911ade698730fd9f2", null ],
     [ "started", "classCamCalibrate.html#ac53ea186e7a4d63e4d7fa6457a164d1c", null ],
     [ "successes", "classCamCalibrate.html#ae402fd66023c671b4a1d32f9f2cebb36", null ],
+    [ "timePoint", "classCamCalibrate.html#a5a8ae788de2054d2c020297a6810adc2", null ],
     [ "ui", "classCamCalibrate.html#a6a2cccc29a46f11c71cb0cdfedd9ce4b", null ]
 ];
