@@ -1,4 +1,4 @@
-.TH "NetworkController" 3 "Fri Sep 16 2022" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "NetworkController" 3 "Sun Nov 20 2022" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,6 +8,8 @@ NetworkController
 .PP
 .PP
 \fC#include <networkcontroller\&.h>\fP
+.PP
+Inherits QObject\&.
 .SS "Public Member Functions"
 
 .in +1c
@@ -19,6 +21,19 @@ NetworkController
 .br
 .ti -1c
 .RI "int \fBrunServer\fP (std::string &address_mask)"
+.br
+.ti -1c
+.RI "void \fBstartBroadcasting\fP ()"
+.br
+.ti -1c
+.RI "void \fBstopBroadcasting\fP ()"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "int \fBarpBroadcastMessage\fP (std::string &broadcast_address)"
 .br
 .in -1c
 .SS "Private Attributes"
@@ -39,6 +54,24 @@ NetworkController
 .ti -1c
 .RI "\fBgrpcServer\fP \fBservice\fP"
 .br
+.ti -1c
+.RI "\fBJSONWorker\fP * \fBjson\fP = nullptr"
+.br
+.ti -1c
+.RI "QUdpSocket * \fBudpSocket\fP = nullptr"
+.br
+.ti -1c
+.RI "QTimer \fBtimer\fP"
+.br
+.ti -1c
+.RI "int \fBmessageNo\fP = 1"
+.br
+.ti -1c
+.RI "int \fBmsBroadcastDelay\fP = 1000"
+.br
+.ti -1c
+.RI "int \fBarpPort\fP = 11111"
+.br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
@@ -46,21 +79,39 @@ NetworkController
 
 .SH "Member Function Documentation"
 .PP 
+.SS "int NetworkController::arpBroadcastMessage (std::string & broadcast_address)\fC [private]\fP, \fC [slot]\fP"
+
 .SS "int NetworkController::runClient (std::string & server_address)"
 
 .SS "int NetworkController::runServer (std::string & address_mask)"
 
+.SS "void NetworkController::startBroadcasting ()"
+
+.SS "void NetworkController::stopBroadcasting ()"
+
 .SH "Member Data Documentation"
 .PP 
+.SS "int NetworkController::arpPort = 11111\fC [private]\fP"
+
 .SS "grpc::ServerBuilder NetworkController::builder\fC [private]\fP"
 
 .SS "grpc::Status NetworkController::clientStatus\fC [private]\fP"
 
 .SS "AMUR::AmurControls* NetworkController::controls\fC [private]\fP"
 
+.SS "\fBJSONWorker\fP* NetworkController::json = nullptr\fC [private]\fP"
+
+.SS "int NetworkController::messageNo = 1\fC [private]\fP"
+
+.SS "int NetworkController::msBroadcastDelay = 1000\fC [private]\fP"
+
 .SS "AMUR::AmurSensors* NetworkController::sensors\fC [private]\fP"
 
 .SS "\fBgrpcServer\fP NetworkController::service\fC [private]\fP"
+
+.SS "QTimer NetworkController::timer\fC [private]\fP"
+
+.SS "QUdpSocket* NetworkController::udpSocket = nullptr\fC [private]\fP"
 
 
 .SH "Author"

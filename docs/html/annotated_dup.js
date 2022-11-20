@@ -14,6 +14,7 @@ var annotated_dup =
     [ "Joystick", "classJoystick.html", "classJoystick" ],
     [ "JoystickDialog", "classJoystickDialog.html", "classJoystickDialog" ],
     [ "JoystickStateWorker", "classJoystickStateWorker.html", "classJoystickStateWorker" ],
+    [ "JSONWorker", "classJSONWorker.html", "classJSONWorker" ],
     [ "Logic", "classLogic.html", "classLogic" ],
     [ "Movements", "classMovements.html", "classMovements" ],
     [ "MoveSettings", "structMoveSettings.html", "structMoveSettings" ],

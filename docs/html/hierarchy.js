@@ -8,7 +8,6 @@ var hierarchy =
     [ "Logic", "classLogic.html", null ],
     [ "Movements", "classMovements.html", null ],
     [ "MoveSettings", "structMoveSettings.html", null ],
-    [ "NetworkController", "classNetworkController.html", null ],
     [ "QDialog", null, [
       [ "CamCalibrate", "classCamCalibrate.html", null ],
       [ "ConnectDialog", "classConnectDialog.html", null ],
@@ -22,8 +21,10 @@ var hierarchy =
       [ "Calibrator", "classCalibrator.html", null ],
       [ "CalibratorWorker", "classCalibratorWorker.html", null ],
       [ "GetStateByJoystick", "classGetStateByJoystick.html", null ],
+      [ "JSONWorker", "classJSONWorker.html", null ],
       [ "Joystick", "classJoystick.html", null ],
       [ "JoystickStateWorker", "classJoystickStateWorker.html", null ],
+      [ "NetworkController", "classNetworkController.html", null ],
       [ "Session", "classSession.html", null ],
       [ "VJoystickAdapter", "classVJoystickAdapter.html", null ],
       [ "Worker", "classWorker.html", null ]

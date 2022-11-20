@@ -8,6 +8,10 @@ var dir_c901c14b65aa229498a52b725b3d4a2c =
     [ "connectdialog.h", "connectdialog_8h.html", [
       [ "ConnectDialog", "classConnectDialog.html", "classConnectDialog" ]
     ] ],
+    [ "jsonworker.cpp", "jsonworker_8cpp.html", null ],
+    [ "jsonworker.h", "jsonworker_8h.html", [
+      [ "JSONWorker", "classJSONWorker.html", "classJSONWorker" ]
+    ] ],
     [ "networkcontroller.cpp", "networkcontroller_8cpp.html", null ],
     [ "networkcontroller.h", "networkcontroller_8h.html", [
       [ "NetworkController", "classNetworkController.html", "classNetworkController" ]

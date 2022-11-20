@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['getstatebyjoystick_345',['GetStateByJoystick',['../classGetStateByJoystick.html',1,'']]],
-  ['grpcclient_346',['grpcClient',['../classgrpcClient.html',1,'']]],
-  ['grpcserver_347',['grpcServer',['../classgrpcServer.html',1,'']]]
+  ['getstatebyjoystick_360',['GetStateByJoystick',['../classGetStateByJoystick.html',1,'']]],
+  ['grpcclient_361',['grpcClient',['../classgrpcClient.html',1,'']]],
+  ['grpcserver_362',['grpcServer',['../classgrpcServer.html',1,'']]]
 ];
