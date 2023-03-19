@@ -1,5 +1,5 @@
 # Amur Core
-This is application for communicate with robot on RPi base with [AmurClient].
+This is application for communicate with robot on RPi base with [AmurClient](https://github.com/ARDev1161/AmurClient).
 
 ## Requirements:
   1) Qt 5.12.2 + qmake
