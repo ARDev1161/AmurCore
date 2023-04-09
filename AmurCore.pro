@@ -39,6 +39,8 @@ LIBS += -lSDL2
 LIBS += -L/usr/local/include/grpc++ \
         -lprotobuf \
         -lgrpc++ \
+        -lgrpc \
+        -lgpr \
         -lgrpc++_reflection \
         -labsl_synchronization
 
@@ -76,7 +78,7 @@ SOURCES += \
         joystick/joystickstateworker.cpp \
 #Network sources
         network/connectdialog.cpp \
-    network/jsonworker.cpp \
+        network/jsonworker.cpp \
         network/networkcontroller.cpp \
         network/client.cpp \
         network/server.cpp \
