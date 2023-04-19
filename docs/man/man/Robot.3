@@ -1,0 +1,88 @@
+.TH "Robot" 3 "Wed Apr 19 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Robot
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <networkcontroller\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRobot\fP (const QHostAddress &\fBaddress\fP, quint16 \fBport\fP, QUdpSocket *socket)"
+.br
+.ti -1c
+.RI "void \fBsendData\fP (const QByteArray &data)"
+.br
+.ti -1c
+.RI "QHostAddress \fBaddress\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetAddress\fP (const QHostAddress &newAddress)"
+.br
+.ti -1c
+.RI "quint16 \fBport\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetPort\fP (quint16 newPort)"
+.br
+.ti -1c
+.RI "quint16 \fBgetPortForAnswer\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetPortForAnswer\fP (quint16 newPortForAnswer)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QHostAddress \fBm_address\fP"
+.br
+.ti -1c
+.RI "quint16 \fBm_port\fP"
+.br
+.ti -1c
+.RI "quint16 \fBportForAnswer\fP = 0"
+.br
+.ti -1c
+.RI "QUdpSocket * \fBm_socket\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Robot::Robot (const QHostAddress & address, quint16 port, QUdpSocket * socket)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QHostAddress Robot::address () const"
+
+.SS "quint16 Robot::getPortForAnswer () const"
+
+.SS "quint16 Robot::port () const"
+
+.SS "void Robot::sendData (const QByteArray & data)\fC [inline]\fP"
+
+.SS "void Robot::setAddress (const QHostAddress & newAddress)"
+
+.SS "void Robot::setPort (quint16 newPort)"
+
+.SS "void Robot::setPortForAnswer (quint16 newPortForAnswer)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QHostAddress Robot::m_address\fC [private]\fP"
+
+.SS "quint16 Robot::m_port\fC [private]\fP"
+
+.SS "QUdpSocket* Robot::m_socket\fC [private]\fP"
+
+.SS "quint16 Robot::portForAnswer = 0\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

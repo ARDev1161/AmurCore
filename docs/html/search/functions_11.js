@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['test_5fhaptic_553',['test_haptic',['../classVJoystickAdapter.html#a0c56faca85ea7819f59113377492ed44',1,'VJoystickAdapter']]],
-  ['timeout_554',['timeout',['../classAmurCore.html#a4a9d3974fd8f7f13b123f8340fbddf1c',1,'AmurCore']]]
+  ['test_5fhaptic_569',['test_haptic',['../classVJoystickAdapter.html#a0c56faca85ea7819f59113377492ed44',1,'VJoystickAdapter']]],
+  ['timeout_570',['timeout',['../classAmurCore.html#a4a9d3974fd8f7f13b123f8340fbddf1c',1,'AmurCore']]]
 ];

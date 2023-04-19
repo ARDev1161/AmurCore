@@ -1,4 +1,4 @@
-.TH "NetworkController" 3 "Sun Mar 19 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "NetworkController" 3 "Wed Apr 19 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -17,23 +17,22 @@ Inherits QObject\&.
 .RI "\fBNetworkController\fP (AMUR::AmurControls *const \fBcontrols\fP, AMUR::AmurSensors *const \fBsensors\fP)"
 .br
 .ti -1c
+.RI "\fB~NetworkController\fP ()"
+.br
+.ti -1c
 .RI "int \fBrunClient\fP (std::string &server_address)"
 .br
 .ti -1c
 .RI "int \fBrunServer\fP (std::string &address_mask)"
 .br
 .ti -1c
+.RI "int \fBrunArpingService\fP (int \fBarpPort\fP, int gRPCPort)"
+.br
+.ti -1c
 .RI "void \fBstartBroadcasting\fP ()"
 .br
 .ti -1c
 .RI "void \fBstopBroadcasting\fP ()"
-.br
-.in -1c
-.SS "Private Slots"
-
-.in +1c
-.ti -1c
-.RI "int \fBarpBroadcastMessage\fP (std::string &broadcast_address)"
 .br
 .in -1c
 .SS "Private Attributes"
@@ -55,10 +54,7 @@ Inherits QObject\&.
 .RI "\fBgrpcServer\fP \fBservice\fP"
 .br
 .ti -1c
-.RI "\fBJSONWorker\fP * \fBjson\fP = nullptr"
-.br
-.ti -1c
-.RI "QUdpSocket * \fBudpSocket\fP = nullptr"
+.RI "JSONWorker * \fBjson\fP = nullptr"
 .br
 .ti -1c
 .RI "QTimer \fBtimer\fP"
@@ -67,19 +63,30 @@ Inherits QObject\&.
 .RI "int \fBmessageNo\fP = 1"
 .br
 .ti -1c
-.RI "int \fBmsBroadcastDelay\fP = 1000"
+.RI "QUdpSocket * \fBudpSocket\fP = nullptr"
 .br
 .ti -1c
-.RI "int \fBarpPort\fP = 11111"
+.RI "QList< \fBRobot\fP * > \fBrobots\fP"
+.br
+.ti -1c
+.RI "QMap< quint16, QUdpSocket * > \fBclientSockets\fP"
+.br
+.ti -1c
+.RI "int \fBarpPort\fP = 7776"
+.br
+.ti -1c
+.RI "int \fBmsBroadcastDelay\fP = 1000"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "NetworkController::NetworkController (AMUR::AmurControls *const controls, AMUR::AmurSensors *const sensors)"
 
+.SS "NetworkController::~NetworkController ()"
+
 .SH "Member Function Documentation"
 .PP 
-.SS "int NetworkController::arpBroadcastMessage (std::string & broadcast_address)\fC [private]\fP, \fC [slot]\fP"
+.SS "int NetworkController::runArpingService (int arpPort, int gRPCPort)"
 
 .SS "int NetworkController::runClient (std::string & server_address)"
 
@@ -91,19 +98,23 @@ Inherits QObject\&.
 
 .SH "Member Data Documentation"
 .PP 
-.SS "int NetworkController::arpPort = 11111\fC [private]\fP"
+.SS "int NetworkController::arpPort = 7776\fC [private]\fP"
 
 .SS "grpc::ServerBuilder NetworkController::builder\fC [private]\fP"
+
+.SS "QMap<quint16, QUdpSocket*> NetworkController::clientSockets\fC [private]\fP"
 
 .SS "grpc::Status NetworkController::clientStatus\fC [private]\fP"
 
 .SS "AMUR::AmurControls* NetworkController::controls\fC [private]\fP"
 
-.SS "\fBJSONWorker\fP* NetworkController::json = nullptr\fC [private]\fP"
+.SS "JSONWorker* NetworkController::json = nullptr\fC [private]\fP"
 
 .SS "int NetworkController::messageNo = 1\fC [private]\fP"
 
 .SS "int NetworkController::msBroadcastDelay = 1000\fC [private]\fP"
+
+.SS "QList<\fBRobot\fP*> NetworkController::robots\fC [private]\fP"
 
 .SS "AMUR::AmurSensors* NetworkController::sensors\fC [private]\fP"
 

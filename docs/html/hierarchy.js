@@ -21,7 +21,6 @@ var hierarchy =
       [ "Calibrator", "classCalibrator.html", null ],
       [ "CalibratorWorker", "classCalibratorWorker.html", null ],
       [ "GetStateByJoystick", "classGetStateByJoystick.html", null ],
-      [ "JSONWorker", "classJSONWorker.html", null ],
       [ "Joystick", "classJoystick.html", null ],
       [ "JoystickStateWorker", "classJoystickStateWorker.html", null ],
       [ "NetworkController", "classNetworkController.html", null ],
@@ -32,6 +31,7 @@ var hierarchy =
     [ "QThread", null, [
       [ "VJoystickAdapter::VJoystickThread", "classVJoystickAdapter_1_1VJoystickThread.html", null ]
     ] ],
+    [ "Robot", "classRobot.html", null ],
     [ "AMUR::ClientOnRobot::Service", null, [
       [ "grpcServer", "classgrpcServer.html", null ]
     ] ],

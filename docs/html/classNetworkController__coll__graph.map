@@ -1,7 +1,6 @@
 <map id="NetworkController" name="NetworkController">
-<area shape="rect" id="node1" title=" " alt="" coords="29,360,196,628"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,13,76,90"/>
-<area shape="rect" id="node3" href="$classJSONWorker.html" title=" " alt="" coords="53,169,172,275"/>
-<area shape="rect" id="node4" href="$classgrpcServer.html" title=" " alt="" coords="197,147,359,297"/>
-<area shape="rect" id="node5" title=" " alt="" coords="203,5,353,97"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,360,157,687"/>
+<area shape="rect" id="node2" title=" " alt="" coords="25,183,95,261"/>
+<area shape="rect" id="node3" href="$classgrpcServer.html" title=" " alt="" coords="120,147,283,297"/>
+<area shape="rect" id="node4" title=" " alt="" coords="126,5,277,97"/>
 </map>

@@ -1,4 +1,4 @@
-.TH "AmurCore" 3 "Sun Mar 19 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "AmurCore" 3 "Wed Apr 19 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -103,7 +103,13 @@ Inherits QMainWindow\&.
 .RI "QString \fBstatusMessage\fP = 'No robot connected'"
 .br
 .ti -1c
-.RI "std::string \fBaddress_mask\fP = '0\&.0\&.0\&.0:7777'"
+.RI "int \fBarpPort\fP = 11111"
+.br
+.ti -1c
+.RI "int \fBgrpcPort\fP = 7777"
+.br
+.ti -1c
+.RI "std::string \fBaddress_mask\fP = '0\&.0\&.0\&.0:' + std::to_string(\fBgrpcPort\fP)"
 .br
 .ti -1c
 .RI "\fBSpeechDialog\fP * \fBspeechDialog\fP"
@@ -195,9 +201,11 @@ Inherits QMainWindow\&.
 
 .SH "Member Data Documentation"
 .PP 
-.SS "std::string AmurCore::address_mask = '0\&.0\&.0\&.0:7777'\fC [private]\fP"
+.SS "std::string AmurCore::address_mask = '0\&.0\&.0\&.0:' + std::to_string(\fBgrpcPort\fP)\fC [private]\fP"
 
 .SS "\fBLogic\fP* AmurCore::amurLogic\fC [private]\fP"
+
+.SS "int AmurCore::arpPort = 11111\fC [private]\fP"
 
 .SS "\fBCamSettingsHolder\fP* AmurCore::camHolder\fC [private]\fP"
 
@@ -206,6 +214,8 @@ Inherits QMainWindow\&.
 .SS "\fBConnectDialog\fP* AmurCore::connectDialog\fC [private]\fP"
 
 .SS "AMUR::AmurControls* AmurCore::controls\fC [private]\fP"
+
+.SS "int AmurCore::grpcPort = 7777\fC [private]\fP"
 
 .SS "QString* AmurCore::hostName\fC [private]\fP"
 
