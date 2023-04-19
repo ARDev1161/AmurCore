@@ -37,6 +37,7 @@ void AmurCore::initialize()
     startTimer();
     startCap();
 
+    network->runArpingService(arpPort, grpcPort); // Start listening for initial arp message from robots
     network->runServer(address_mask); // Start AmurCore gRPC server
 }
 

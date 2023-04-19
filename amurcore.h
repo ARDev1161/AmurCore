@@ -41,7 +41,9 @@ class AmurCore : public QMainWindow
     QString *hostName;
     QString statusMessage = "No robot connected";
 
-    std::string address_mask = "0.0.0.0:7777";
+    int arpPort = 11111;
+    int grpcPort = 7777;
+    std::string address_mask = "0.0.0.0:" + std::to_string(grpcPort);
 
     SpeechDialog *speechDialog;
     ConnectDialog *connectDialog;
@@ -52,8 +54,6 @@ class AmurCore : public QMainWindow
 
     AMUR::AmurControls *controls;
     AMUR::AmurSensors *sensors;
-
-//    TCP *tcpThread;
 
     Joystick *joyThread;
     JoyState *joyState;

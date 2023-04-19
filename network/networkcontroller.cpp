@@ -12,6 +12,15 @@ NetworkController::NetworkController(AMUR::AmurControls* const controls, AMUR::A
     // TODO
 }
 
+NetworkController::~NetworkController()
+{
+    // Clear list of robots
+    for (auto robot : robots) {
+        delete robot;
+    }
+    robots.clear();
+}
+
 int NetworkController::runClient(std::string &server_address) // TODO - send const &<vector> of robots id
 {
     // Instantiate the client. It requires a channel, out of which the actual RPCs
@@ -78,8 +87,89 @@ void NetworkController::stopBroadcasting()
         timer.stop();
 }
 
-int NetworkController::arpBroadcastMessage(std::string &broadcast_address)
+int NetworkController::runArpingService(int arpPort, int gRPCPort)
 {
-        QByteArray datagram = "Broadcast message " + QByteArray::number(messageNo);
-        udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
+    udpSocket->bind(QHostAddress::AnyIPv4, arpPort);
+
+    QObject::connect(udpSocket, &QUdpSocket::readyRead, [&, gRPCPort](){
+        while (udpSocket->hasPendingDatagrams()) {
+            QByteArray datagram;
+            datagram.resize(udpSocket->pendingDatagramSize());
+
+            QHostAddress senderAddress;
+            quint16 senderBCastPort;
+            udpSocket->readDatagram(datagram.data(), datagram.size(), &senderAddress, &senderBCastPort);
+
+            // Split message by separator
+            QString message = QString::fromUtf8(datagram);
+            QStringList parsed = message.split(u':');
+
+            // Process message if it have preambula - "AMUR:"
+            if(parsed.empty())
+                continue;
+
+            if("AMUR" == parsed.at(0)){
+                qDebug() << "Received arping message: " << message << " from " << senderAddress.toString() << ":" << senderBCastPort;
+
+                int arpingPort = 0;
+                if(parsed.size() > 2)
+                    arpingPort = parsed.at(2).toInt();
+
+                // Check if the client is already in the list
+                Robot *robot = nullptr;
+                for (int i = 0; i < robots.size(); ++i) {
+                    if (robots[i]->address() == senderAddress && robots[i]->port() == senderBCastPort) {
+                        robot = robots[i];
+                        break;
+                    }
+                }
+
+                // Add a new client if it not found in list of robots
+                if (!robot) {
+                    robot = new Robot(senderAddress, senderBCastPort, udpSocket);
+                    if(arpingPort > 0)
+                        robot->setPortForAnswer(arpingPort);
+                    robots.append(robot);
+                    qDebug() << "Added new client " << senderAddress.toString() << ":" << senderBCastPort;
+                }
+
+                QByteArray response = "OK:" + QByteArray::number(gRPCPort);
+                robot->sendData(response);
+            }
+
+        }
+    });
+
+    std::cout << "" << std::endl;
+}
+
+
+quint16 Robot::getPortForAnswer() const
+{
+    return portForAnswer;
+}
+
+void Robot::setPortForAnswer(quint16 newPortForAnswer)
+{
+    portForAnswer = newPortForAnswer;
+}
+
+QHostAddress Robot::address() const
+{
+    return m_address;
+}
+
+void Robot::setAddress(const QHostAddress &newAddress)
+{
+    m_address = newAddress;
+}
+
+quint16 Robot::port() const
+{
+    return m_port;
+}
+
+void Robot::setPort(quint16 newPort)
+{
+    m_port = newPort;
 }

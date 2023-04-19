@@ -78,7 +78,6 @@ SOURCES += \
         joystick/joystickstateworker.cpp \
 #Network sources
         network/connectdialog.cpp \
-        network/jsonworker.cpp \
         network/networkcontroller.cpp \
         network/client.cpp \
         network/server.cpp \
@@ -99,7 +98,6 @@ PRECOMPILED_HEADER = pch.h
 
 HEADERS += \
         amurcore.h \
-    network/jsonworker.h \
         pch.h \
 #Cameras headers
         camera/camcalibrate.h \
@@ -140,7 +138,6 @@ FORMS += \
 DISTFILES += \
         Doxyfile \
         README.md \
-        network/arpMessage.json \
         network/protobuf/amur.proto \
         network/protobuf/rebuild.sh \
         data/images/no_picture.jpeg
