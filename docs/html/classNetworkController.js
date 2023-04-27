@@ -12,7 +12,6 @@ var classNetworkController =
     [ "clientSockets", "classNetworkController.html#a642e05aa5cf6a6d5aa9b79047c403e04", null ],
     [ "clientStatus", "classNetworkController.html#a359fa99529c7cae60f37c9fab7c66080", null ],
     [ "controls", "classNetworkController.html#a4f6c59f3f555f0b6db17d51a42d221f9", null ],
-    [ "json", "classNetworkController.html#aa8081533fd0d52dbc0bf160f3786b770", null ],
     [ "messageNo", "classNetworkController.html#a35a7e64255858c0df2b0cd59ac555f75", null ],
     [ "msBroadcastDelay", "classNetworkController.html#a198973f61c6f554efdc62e17d335271e", null ],
     [ "robots", "classNetworkController.html#a954e4db67283948642a3e93d9d24053f", null ],

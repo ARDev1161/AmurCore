@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classRobot.html#a6b416bd2cf2853b5779332e7283bda6a":[2,0,18,6],
 "classRobot.html#a88b3548002d69157932bd30b6e01c1d0":[2,0,18,10],
 "classRobot.html#aabc8b13ae1dc3a0bfe2ad46f563a9804":[2,0,18,1],
 "classRobot.html#ac935b7c91f73a447c8b31006f62b3774":[2,0,18,11],
@@ -249,5 +248,6 @@ var NAVTREEINDEX1 =
 "structJoyState.html#adc9af4c6b7454303b22f8422f5054831":[2,0,10,2],
 "structMoveSettings.html":[2,0,16],
 "structMoveSettings.html#a485468e6ca3770f831061452acc618c4":[2,0,16,1],
-"structMoveSettings_1_1JoyBindings.html":[2,0,16,0]
+"structMoveSettings_1_1JoyBindings.html":[2,0,16,0],
+"structMoveSettings_1_1JoyBindings.html#a72fcd6928d5fb0442feecea7df4be03c":[2,0,16,0,1]
 };

@@ -1,4 +1,4 @@
-.TH "NetworkController" 3 "Wed Apr 19 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "NetworkController" 3 "Thu Apr 27 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -54,9 +54,6 @@ Inherits QObject\&.
 .RI "\fBgrpcServer\fP \fBservice\fP"
 .br
 .ti -1c
-.RI "JSONWorker * \fBjson\fP = nullptr"
-.br
-.ti -1c
 .RI "QTimer \fBtimer\fP"
 .br
 .ti -1c
@@ -107,8 +104,6 @@ Inherits QObject\&.
 .SS "grpc::Status NetworkController::clientStatus\fC [private]\fP"
 
 .SS "AMUR::AmurControls* NetworkController::controls\fC [private]\fP"
-
-.SS "JSONWorker* NetworkController::json = nullptr\fC [private]\fP"
 
 .SS "int NetworkController::messageNo = 1\fC [private]\fP"
 

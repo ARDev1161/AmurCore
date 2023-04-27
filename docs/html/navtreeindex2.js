@@ -1,6 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"structMoveSettings_1_1JoyBindings.html#a72fcd6928d5fb0442feecea7df4be03c":[2,0,16,0,1],
 "structMoveSettings_1_1JoyBindings.html#a9934491caaf8dba9bef14633f1ad159b":[2,0,16,0,0],
 "system_8cpp.html":[3,0,2,5],
 "system_8h.html":[3,0,2,6],

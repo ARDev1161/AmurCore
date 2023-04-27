@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['movements_382',['Movements',['../classMovements.html',1,'']]],
-  ['movesettings_383',['MoveSettings',['../structMoveSettings.html',1,'']]]
+  ['movements_381',['Movements',['../classMovements.html',1,'']]],
+  ['movesettings_382',['MoveSettings',['../structMoveSettings.html',1,'']]]
 ];
