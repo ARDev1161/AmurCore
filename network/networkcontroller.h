@@ -10,7 +10,6 @@
 
 #include "client.h"
 #include "server.h"
-#include "jsonworker.h"
 
 QT_BEGIN_NAMESPACE
 class QUdpSocket;
@@ -55,8 +54,6 @@ class NetworkController : QObject
 
     grpc::ServerBuilder builder;
     grpcServer service;
-
-    JSONWorker *json = nullptr;
 
     QTimer timer;
     int messageNo = 1;
