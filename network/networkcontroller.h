@@ -4,9 +4,9 @@
 #include <iostream>
 #include <thread>
 
+#include <QObject>
 #include <QtNetwork>
 #include <QTimer>
-#include <QObject>
 
 #include "client.h"
 #include "server.h"

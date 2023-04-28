@@ -1,12 +1,9 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
-project(SpeechProcessor LANGUAGES C CXX)
+project(SpeechProccessor LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-find_package(Qt5TextToSpeech)
-find_package(Qt5Widgets)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
@@ -17,3 +14,14 @@ set(SPEECH_SOURCES
     speechdialog.ui
 )
 
+add_library(${PROJECT_NAME}
+            SHARED
+            ${SPEECH_SOURCES}
+           )
+
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS TextToSpeech REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::TextToSpeech)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+                    Qt${QT_VERSION_MAJOR}::Widgets
+                )

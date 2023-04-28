@@ -98,8 +98,8 @@ set(IMAGES
     data/images/no_picture.jpeg
 )
 
-add_subdirectory(network)
 add_subdirectory(camera)
+add_subdirectory(network)
 add_subdirectory(joystick)
 add_subdirectory(threads)
 add_subdirectory(logic)
@@ -109,12 +109,6 @@ set(PROJECT_SOURCES
         pch.h
         amurcore.cpp    amurcore.h
         AmurCore.ui
-
-        ${CAMERA_SOURCES}
-        ${JOYSTICK_SOURCES}
-        ${NETWORK_SOURCES}
-        ${THREADS_SOURCES}
-        ${LOGIC_SOURCES}
 
         ${TS_FILES}
         ${IMAGES}
@@ -147,7 +141,7 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(AmurCore PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+target_link_libraries(AmurCore PRIVATE
                         LogicCore
                         CameraSetup
                         ThreadsHandler
@@ -157,6 +151,7 @@ target_link_libraries(AmurCore PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
                         config++
                         ${SDL2_LIBRARIES}
                         ${OpenCV_LIBS}
+                        Qt${QT_VERSION_MAJOR}::Widgets
 )
 
 set_target_properties(AmurCore PROPERTIES
