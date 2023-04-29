@@ -83,8 +83,8 @@ configure_file(
         AmurCore.cfg
         )
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools TextToSpeech)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools TextToSpeech)
 
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
@@ -147,10 +147,12 @@ target_link_libraries(AmurCore PRIVATE
                         ThreadsHandler
                         JoystickHandler
                         NetworkController
+                        SpeechProccessor
 
                         config++
                         ${SDL2_LIBRARIES}
                         ${OpenCV_LIBS}
+                        Qt${QT_VERSION_MAJOR}::TextToSpeech
                         Qt${QT_VERSION_MAJOR}::Widgets
 )
 

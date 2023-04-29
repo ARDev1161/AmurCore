@@ -19,7 +19,6 @@ add_library(${PROJECT_NAME}
             ${SPEECH_SOURCES}
            )
 
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS TextToSpeech REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::TextToSpeech)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
