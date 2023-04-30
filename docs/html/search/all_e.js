@@ -1,14 +1,12 @@
 var searchData=
 [
-  ['objectcorners_222',['objectCorners',['../classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e',1,'CamCalibrate']]],
-  ['objectpoints_223',['objectPoints',['../classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285',1,'CamCalibrate::objectPoints()'],['../classCamSettingsHolder.html#ad989789907e392ced3d330868c179180',1,'CamSettingsHolder::objectPoints()']]],
-  ['on_5fbuttonbox_5faccepted_224',['on_buttonBox_accepted',['../classCamCalibrate.html#afe712017aab14f2552aed3b270b400a5',1,'CamCalibrate::on_buttonBox_accepted()'],['../classSpeechDialog.html#ab397282a56ede5b05f488593de2e5bb9',1,'SpeechDialog::on_buttonBox_accepted()'],['../classConnectDialog.html#a36992293b76ee8201e3949c4ec2a3791',1,'ConnectDialog::on_buttonBox_accepted()']]],
-  ['on_5fbuttonbox_5frejected_225',['on_buttonBox_rejected',['../classCamCalibrate.html#ac9f727d25b89c80c966beaec1a03e9b4',1,'CamCalibrate']]],
-  ['on_5fjoystickdialog_5faccepted_226',['on_JoystickDialog_accepted',['../classJoystickDialog.html#a5964dd23a71fde074be8702b05a8e3df',1,'JoystickDialog']]],
-  ['on_5fjoystickdialog_5frejected_227',['on_JoystickDialog_rejected',['../classJoystickDialog.html#ac692d09095dc8cd1ae103915f5b8c3a7',1,'JoystickDialog']]],
-  ['on_5fpushbutton_5fclicked_228',['on_pushButton_clicked',['../classCamCalibrate.html#a358e885e33b92cd42212f2b6356acdc6',1,'CamCalibrate']]],
-  ['open_229',['open',['../classVJoystickAdapter.html#a1ff469267a405e986ff45c66ec0007c9',1,'VJoystickAdapter']]],
-  ['out_230',['out',['../classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719',1,'CamCalibrate']]],
-  ['outmat_231',['outMat',['../classLogic.html#a2597d0e03cefdf4953e26e0aa073fc16',1,'Logic::outMat()'],['../classAmurCore.html#a6c7d5af7322ad0586428dc70fa1f8df2',1,'AmurCore::outMat()'],['../classCamCalibrate.html#aef403e16f2f6f6f47b0887de7135e858',1,'CamCalibrate::outMat()']]],
-  ['outputmat_232',['outputMat',['../classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10',1,'AmurCore']]]
+  ['network_215',['network',['../classAmurCore.html#a1b5aca30657d64c3a147a8584969a805',1,'AmurCore']]],
+  ['networkcontroller_216',['NetworkController',['../classNetworkController.html',1,'NetworkController'],['../classNetworkController.html#a43ec8cbc168e2aad5c2728594c579a85',1,'NetworkController::NetworkController()']]],
+  ['networkcontroller_2ecpp_217',['networkcontroller.cpp',['../networkcontroller_8cpp.html',1,'']]],
+  ['networkcontroller_2eh_218',['networkcontroller.h',['../networkcontroller_8h.html',1,'']]],
+  ['no_5fpicture_219',['NO_PICTURE',['../amurcore_8h.html#a6b11015f693203e20fe2b246179bdd7c',1,'amurcore.h']]],
+  ['null_220',['NULL',['../prim__type_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4',1,'prim_type.h']]],
+  ['numcornershor_221',['numCornersHor',['../classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc',1,'CamCalibrate']]],
+  ['numcornersver_222',['numCornersVer',['../classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c',1,'CamCalibrate']]],
+  ['numsquares_223',['numSquares',['../classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199',1,'CamCalibrate']]]
 ];

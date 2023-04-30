@@ -25,10 +25,13 @@
 var NAVTREE =
 [
   [ "AmurCore", "index.html", [
+    [ "0.2.0 (2023-04-30)", "md_CHANGELOG.html", [
+      [ "0.1 (2022-06-01)", "md_CHANGELOG.html#autotoc_md3", null ]
+    ] ],
     [ "Amur Core", "md_README.html", [
-      [ "Requirements:", "md_README.html#autotoc_md1", null ],
-      [ "Sensors of robot:", "md_README.html#autotoc_md2", null ],
-      [ "Controls of Robot:", "md_README.html#autotoc_md3", null ]
+      [ "Requirements:", "md_README.html#autotoc_md5", null ],
+      [ "Sensors of robot:", "md_README.html#autotoc_md6", null ],
+      [ "Controls of Robot:", "md_README.html#autotoc_md7", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
@@ -61,7 +64,7 @@ var NAVTREEINDEX =
 [
 "amurcore_8cpp.html",
 "classRobot.html#a88b3548002d69157932bd30b6e01c1d0",
-"structMoveSettings_1_1JoyBindings.html#a9934491caaf8dba9bef14633f1ad159b"
+"structMoveSettings.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

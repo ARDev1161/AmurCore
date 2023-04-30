@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['amur_20core_748',['Amur Core',['../md_README.html',1,'']]]
+  ['0_2e2_2e0_20_282023_2d04_2d30_29_751',['0.2.0 (2023-04-30)',['../md_CHANGELOG.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_5f_5fbigstackvariable_5f_5f_0',['__BIGSTACKVARIABLE__',['../prim__type_8h.html#a64d603953ff96570ac4072daaeaeb36b',1,'prim_type.h']]]
+  ['0_2e2_2e0_20_282023_2d04_2d30_29_0',['0.2.0 (2023-04-30)',['../md_CHANGELOG.html',1,'']]]
 ];

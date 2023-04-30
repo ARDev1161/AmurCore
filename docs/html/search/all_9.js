@@ -1,15 +1,7 @@
 var searchData=
 [
-  ['i_109',['i',['../unionanytype__s.html#a34ab20b326601115a718ed1ada34640f',1,'anytype_s']]],
-  ['imagecorners_110',['imageCorners',['../classCamCalibrate.html#acbda5ac4d9b777d38570668b6caad27a',1,'CamCalibrate']]],
-  ['imagepoints_111',['imagePoints',['../classCamCalibrate.html#a856bd20b8f8dda0c36b7117709c92352',1,'CamCalibrate::imagePoints()'],['../classCamSettingsHolder.html#a9c12e39ce40f315490a19f7119247645',1,'CamSettingsHolder::imagePoints()']]],
-  ['imagesize_112',['imageSize',['../classCamSettingsHolder.html#a92741d75f6d41d3223c867e3642fbc1a',1,'CamSettingsHolder']]],
-  ['initfields_113',['initFields',['../classCamCalibrate.html#ae11831a0ba31ab04f57dc5db7d625fbe',1,'CamCalibrate::initFields()'],['../classJoystickDialog.html#acb2a7dff1fbf1e40b4134dbe7b372ddf',1,'JoystickDialog::initFields()']]],
-  ['initialize_114',['initialize',['../classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9',1,'AmurCore']]],
-  ['initlogic_115',['initLogic',['../classLogic.html#ae40fbd8f3e394e554159b558c8ab1ea3',1,'Logic']]],
-  ['int16_116',['int16',['../prim__type_8h.html#a4355d16fcf9f644c9ac84293f0b1801f',1,'prim_type.h']]],
-  ['int32_117',['int32',['../prim__type_8h.html#a56f1a81c92849566ae864511088eb7e8',1,'prim_type.h']]],
-  ['int64_118',['int64',['../prim__type_8h.html#a5ca2adc31be9c44adfeb373feb166821',1,'prim_type.h']]],
-  ['int8_119',['int8',['../prim__type_8h.html#a1b956fe1df85f3c132b21edb4e116458',1,'prim_type.h']]],
-  ['isconnected_120',['isConnected',['../classVJoystickAdapter.html#adb85711b6b4ea7c19657564c0640fc98',1,'VJoystickAdapter']]]
+  ['hand_5faxis_107',['HAND_AXIS',['../movements_8h.html#a22d55b7de658a3b18311d3406d325f46',1,'movements.h']]],
+  ['hatposition_108',['HatPosition',['../classVJoystickAdapter.html#ae286d0f4f211e6f3ccf680ed45f0ff46',1,'VJoystickAdapter']]],
+  ['hatsetup_109',['hatSetup',['../classGetStateByJoystick.html#adc802f0601e95c7d25af421e34d5bcd7',1,'GetStateByJoystick::hatSetup()'],['../classJoystickDialog.html#a007f02d3007e093855a90fce0a765201',1,'JoystickDialog::hatSetup()']]],
+  ['hostname_110',['hostName',['../classAmurCore.html#aa8b4ad0fd01573043031463d011dd55b',1,'AmurCore']]]
 ];

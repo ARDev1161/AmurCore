@@ -1,17 +1,10 @@
 var searchData=
 [
-  ['_7eamurcore_350',['~AmurCore',['../classAmurCore.html#aae769f4fd193bdd989949561891ab9ec',1,'AmurCore']]],
-  ['_7ecalibrator_351',['~Calibrator',['../classCalibrator.html#a42f20b668e32d1b43b2de39cb477e04f',1,'Calibrator']]],
-  ['_7ecalibratorworker_352',['~CalibratorWorker',['../classCalibratorWorker.html#af1142d78be90cd038711bd2a86b3ae8e',1,'CalibratorWorker']]],
-  ['_7ecamcalibrate_353',['~CamCalibrate',['../classCamCalibrate.html#a1d1422811edf01a4c9c4c0a029902fe9',1,'CamCalibrate']]],
-  ['_7econnectdialog_354',['~ConnectDialog',['../classConnectDialog.html#a019b699922abb0602dd6310c54e20cb4',1,'ConnectDialog']]],
-  ['_7egetstatebyjoystick_355',['~GetStateByJoystick',['../classGetStateByJoystick.html#ac9ac6f3e66f9961032192dca375bd3b8',1,'GetStateByJoystick']]],
-  ['_7ejoystick_356',['~Joystick',['../classJoystick.html#a23429c0470e1a32b8de61e1ad7c251c1',1,'Joystick']]],
-  ['_7ejoystickdialog_357',['~JoystickDialog',['../classJoystickDialog.html#abefb9a00a34ee4d57b6982361a2cbb3d',1,'JoystickDialog']]],
-  ['_7ejoystickstateworker_358',['~JoystickStateWorker',['../classJoystickStateWorker.html#ae309b33ae8083b515d607b4f30272037',1,'JoystickStateWorker']]],
-  ['_7enetworkcontroller_359',['~NetworkController',['../classNetworkController.html#aa7d43d9250c321ff3942064dea59951f',1,'NetworkController']]],
-  ['_7esession_360',['~Session',['../classSession.html#a8753bb9dee966b7d39abc9b7237cd665',1,'Session']]],
-  ['_7espeechdialog_361',['~SpeechDialog',['../classSpeechDialog.html#a9264cb8967d000beba507e23438aeab8',1,'SpeechDialog']]],
-  ['_7evjoystickadapter_362',['~VJoystickAdapter',['../classVJoystickAdapter.html#a69da565e08ea770910fee295ae564640',1,'VJoystickAdapter']]],
-  ['_7eworker_363',['~Worker',['../classWorker.html#aa8e4543ef1e93fd9d884269ba30c5bfe',1,'Worker']]]
+  ['wheel_5fx_5faxis_345',['WHEEL_X_AXIS',['../movements_8h.html#ae0c13bda321617f0e448e20e25964243',1,'movements.h']]],
+  ['wheel_5fy_5faxis_346',['WHEEL_Y_AXIS',['../movements_8h.html#a90ff90523fcd4d3322b0849a468b6112',1,'movements.h']]],
+  ['wheelprocess_347',['wheelProcess',['../classMovements.html#afd30b04d9afd0d8bd39315258896666f',1,'Movements']]],
+  ['worker_348',['Worker',['../classWorker.html',1,'Worker'],['../classWorker.html#a3754817df06ffe220f7f0d903c78ccac',1,'Worker::Worker()']]],
+  ['worker_349',['worker',['../classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796',1,'AmurCore']]],
+  ['worker_2ecpp_350',['worker.cpp',['../worker_8cpp.html',1,'']]],
+  ['worker_2eh_351',['worker.h',['../worker_8h.html',1,'']]]
 ];
