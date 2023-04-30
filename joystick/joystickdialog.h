@@ -5,6 +5,7 @@
 #include <QVector>
 
 #include "v_joystick_adapter.h"
+#include "getstatebyjoy.h"
 
 namespace Ui {
 class JoystickDialog;

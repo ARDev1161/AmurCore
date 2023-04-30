@@ -4,8 +4,6 @@ project(NetworkController VERSION 0.88 LANGUAGES CXX)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
-add_subdirectory(protobuf)
-
 set(CLIENT_LIB 
     client.cpp 
     client.h
@@ -20,7 +18,9 @@ set(CONNECT_DIALOG
     connectdialog.cpp   connectdialog.h
     connectdialog.ui
    )
-   
+
+add_subdirectory(protobuf)
+
 set(NETWORK_LIB 
     networkcontroller.cpp 
     networkcontroller.h 
@@ -30,14 +30,16 @@ set(NETWORK_LIB
     ${PROTOS_LIB}
    )
 
-#add_library(NetworkController
-#            STATIC
-#            ${NETWORK_LIB}
-#            )
+add_library(${PROJECT_NAME}
+            STATIC
+            ${NETWORK_LIB}
+            )
 
-#target_link_libraries(NetworkController AMURProtos)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::Network)
 
-#add_executable(TestNetController main.cpp)
-#target_link_libraries(TestNetController NetworkController
-    #AMURProtos
-    #)
+target_link_libraries(${PROJECT_NAME} PRIVATE
+                    AMURProtos
+                    Qt${QT_VERSION_MAJOR}::Widgets
+                )
+

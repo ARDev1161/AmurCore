@@ -141,6 +141,7 @@ int NetworkController::runArpingService(int arpPort, int gRPCPort)
     });
 
     std::cout << "" << std::endl;
+    return 0;
 }
 
 

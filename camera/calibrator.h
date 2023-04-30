@@ -2,6 +2,7 @@
 #define CALIBRATOR_H
 
 #include <QObject>
+#include <QThread>
 #include "calibratorworker.h"
 
 class Calibrator : public QObject

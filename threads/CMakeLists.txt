@@ -12,7 +12,11 @@ set(THREADS_SOURCES
     worker.cpp  worker.h
 )
 
-#add_library(ThreadsHandler
-#            SHARED
-#            ${THREADS_SOURCES}
-#           )
+add_library(ThreadsHandler
+            SHARED
+            ${THREADS_SOURCES}
+           )
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+            Qt${QT_VERSION_MAJOR}::Core
+           )
