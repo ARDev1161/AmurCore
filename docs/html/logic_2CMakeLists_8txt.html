@@ -92,12 +92,32 @@ $(document).ready(function(){initNavTree('logic_2CMakeLists_8txt.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9a50b2fa398c0084c2b4a3d5f2435069"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logic_2CMakeLists_8txt.html#a9a50b2fa398c0084c2b4a3d5f2435069">cmake_minimum_required</a> (VERSION 3.8 FATAL_ERROR) project(LogicCore LANGUAGES C CXX) <a class="el" href="joystick_2CMakeLists_8txt.html#a2a09246cfb4fd3e847801cc51bba11a4">set</a>(CMAKE_CXX_STANDARD 11) <a class="el" href="joystick_2CMakeLists_8txt.html#a2a09246cfb4fd3e847801cc51bba11a4">set</a>(CMAKE_CXX_STANDARD_REQUIRED ON) get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY) <a class="el" href="joystick_2CMakeLists_8txt.html#a2a09246cfb4fd3e847801cc51bba11a4">set</a>(LOGIC_SOURCES movements.cpp movements.h system.cpp system.h logic.cpp logic.h) add_library(LogicCore SHARED $</td></tr>
-<tr class="separator:a9a50b2fa398c0084c2b4a3d5f2435069"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab60f1346db81babea21b2181d8b1c7d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logic_2CMakeLists_8txt.html#ab60f1346db81babea21b2181d8b1c7d7">cmake_minimum_required</a> (VERSION 3.8 FATAL_ERROR) project(LogicCore LANGUAGES C CXX) set(CMAKE_CXX_STANDARD 11) set(CMAKE_CXX_STANDARD_REQUIRED ON) get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY) add_subdirectory(speech) set(LOGIC_SOURCES movements.cpp movements.h system.cpp system.h logic.cpp logic.h $</td></tr>
+<tr class="separator:ab60f1346db81babea21b2181d8b1c7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32a4d954f302b2f429997fd9145b8b13"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logic_2CMakeLists_8txt.html#a32a4d954f302b2f429997fd9145b8b13">add_library</a> (${PROJECT_NAME} SHARED ${LOGIC_SOURCES}) target_link_libraries($</td></tr>
+<tr class="separator:a32a4d954f302b2f429997fd9145b8b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a9a50b2fa398c0084c2b4a3d5f2435069"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a50b2fa398c0084c2b4a3d5f2435069">&#9670;&nbsp;</a></span>cmake_minimum_required()</h2>
+<a id="a32a4d954f302b2f429997fd9145b8b13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32a4d954f302b2f429997fd9145b8b13">&#9670;&nbsp;</a></span>add_library()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">add_library </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>${PROJECT_NAME} SHARED ${LOGIC_SOURCES}</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab60f1346db81babea21b2181d8b1c7d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab60f1346db81babea21b2181d8b1c7d7">&#9670;&nbsp;</a></span>cmake_minimum_required()</h2>
 
 <div class="memitem">
 <div class="memproto">

@@ -1,4 +1,4 @@
-.TH "threads/CMakeLists.txt" 3 "Thu Apr 27 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "threads/CMakeLists.txt" 3 "Sun Apr 30 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,6 +6,17 @@ threads/CMakeLists.txt
 .SH SYNOPSIS
 .br
 .PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBcmake_minimum_required\fP (VERSION 3\&.8 FATAL_ERROR) project(ThreadsHandler LANGUAGES C CXX) set(CMAKE_CXX_STANDARD 11) set(CMAKE_CXX_STANDARD_REQUIRED ON) get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY) set(THREADS_SOURCES session\&.cpp session\&.h worker\&.cpp worker\&.h) \fBadd_library\fP(ThreadsHandler SHARED $"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "cmake_minimum_required (VERSION 3\&.8 FATAL_ERROR)"
+
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for AmurCore from the source code\&.

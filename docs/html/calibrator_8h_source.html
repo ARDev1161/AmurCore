@@ -91,33 +91,34 @@ $(document).ready(function(){initNavTree('calibrator_8h_source.html',''); initRe
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CALIBRATOR_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="calibratorworker_8h.html">calibratorworker.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="classCalibrator.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCalibrator.html">Calibrator</a> : <span class="keyword">public</span> QObject</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classCalibrator.html#ac557e6a2d0e3b1e0de227e2216c3eedb">   11</a></span>&#160;    <a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *<a class="code" href="classCalibrator.html#ac557e6a2d0e3b1e0de227e2216c3eedb">camHolder</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classCalibrator.html#a2affbc36d852ac9fe10edd90dde934ba">Calibrator</a>(<a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *holder);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classCalibrator.html#a42f20b668e32d1b43b2de39cb477e04f">~Calibrator</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCalibrator.html#af2f2148de93fe59cc8e63919160fcee5">addThread</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCalibrator.html#a08303c8ec9c55b6655c21532d4e1295b">stopThreads</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;signals:</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classCalibrator.html#aea4ad67eccfe07b449d347782d6cbb86">   21</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCalibrator.html#aea4ad67eccfe07b449d347782d6cbb86">stopAll</a>(); <span class="comment">//остановка всех потоков</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CALIBRATOR_H</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QThread&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="calibratorworker_8h.html">calibratorworker.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classCalibrator.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCalibrator.html">Calibrator</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classCalibrator.html#ac557e6a2d0e3b1e0de227e2216c3eedb">   12</a></span>&#160;    <a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *<a class="code" href="classCalibrator.html#ac557e6a2d0e3b1e0de227e2216c3eedb">camHolder</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classCalibrator.html#a2affbc36d852ac9fe10edd90dde934ba">Calibrator</a>(<a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *holder);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classCalibrator.html#a42f20b668e32d1b43b2de39cb477e04f">~Calibrator</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCalibrator.html#af2f2148de93fe59cc8e63919160fcee5">addThread</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCalibrator.html#a08303c8ec9c55b6655c21532d4e1295b">stopThreads</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;signals:</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classCalibrator.html#aea4ad67eccfe07b449d347782d6cbb86">   22</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCalibrator.html#aea4ad67eccfe07b449d347782d6cbb86">stopAll</a>(); <span class="comment">//остановка всех потоков</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CALIBRATOR_H</span></div>
 <div class="ttc" id="acalibratorworker_8h_html"><div class="ttname"><a href="calibratorworker_8h.html">calibratorworker.h</a></div></div>
-<div class="ttc" id="aclassCalibrator_html"><div class="ttname"><a href="classCalibrator.html">Calibrator</a></div><div class="ttdef"><b>Definition:</b> calibrator.h:8</div></div>
+<div class="ttc" id="aclassCalibrator_html"><div class="ttname"><a href="classCalibrator.html">Calibrator</a></div><div class="ttdef"><b>Definition:</b> calibrator.h:9</div></div>
 <div class="ttc" id="aclassCalibrator_html_a08303c8ec9c55b6655c21532d4e1295b"><div class="ttname"><a href="classCalibrator.html#a08303c8ec9c55b6655c21532d4e1295b">Calibrator::stopThreads</a></div><div class="ttdeci">void stopThreads()</div><div class="ttdef"><b>Definition:</b> calibrator.cpp:31</div></div>
 <div class="ttc" id="aclassCalibrator_html_a2affbc36d852ac9fe10edd90dde934ba"><div class="ttname"><a href="classCalibrator.html#a2affbc36d852ac9fe10edd90dde934ba">Calibrator::Calibrator</a></div><div class="ttdeci">Calibrator(CamSettingsHolder *holder)</div><div class="ttdef"><b>Definition:</b> calibrator.cpp:3</div></div>
 <div class="ttc" id="aclassCalibrator_html_a42f20b668e32d1b43b2de39cb477e04f"><div class="ttname"><a href="classCalibrator.html#a42f20b668e32d1b43b2de39cb477e04f">Calibrator::~Calibrator</a></div><div class="ttdeci">~Calibrator()</div><div class="ttdef"><b>Definition:</b> calibrator.cpp:8</div></div>
-<div class="ttc" id="aclassCalibrator_html_ac557e6a2d0e3b1e0de227e2216c3eedb"><div class="ttname"><a href="classCalibrator.html#ac557e6a2d0e3b1e0de227e2216c3eedb">Calibrator::camHolder</a></div><div class="ttdeci">CamSettingsHolder * camHolder</div><div class="ttdef"><b>Definition:</b> calibrator.h:11</div></div>
+<div class="ttc" id="aclassCalibrator_html_ac557e6a2d0e3b1e0de227e2216c3eedb"><div class="ttname"><a href="classCalibrator.html#ac557e6a2d0e3b1e0de227e2216c3eedb">Calibrator::camHolder</a></div><div class="ttdeci">CamSettingsHolder * camHolder</div><div class="ttdef"><b>Definition:</b> calibrator.h:12</div></div>
 <div class="ttc" id="aclassCalibrator_html_aea4ad67eccfe07b449d347782d6cbb86"><div class="ttname"><a href="classCalibrator.html#aea4ad67eccfe07b449d347782d6cbb86">Calibrator::stopAll</a></div><div class="ttdeci">void stopAll()</div></div>
 <div class="ttc" id="aclassCalibrator_html_af2f2148de93fe59cc8e63919160fcee5"><div class="ttname"><a href="classCalibrator.html#af2f2148de93fe59cc8e63919160fcee5">Calibrator::addThread</a></div><div class="ttdeci">void addThread()</div><div class="ttdef"><b>Definition:</b> calibrator.cpp:16</div></div>
 <div class="ttc" id="aclassCamSettingsHolder_html"><div class="ttname"><a href="classCamSettingsHolder.html">CamSettingsHolder</a></div><div class="ttdef"><b>Definition:</b> camsettingsholder.h:10</div></div>
