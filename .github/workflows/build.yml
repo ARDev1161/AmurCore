@@ -41,18 +41,22 @@ jobs:
             SDL2:p
             qwt-qt5:p
             qt5-base:p
+            qt5-static:p
             qt5-speech:p
             qt5-multimedia:p
             qt5-translations:p
             
       - name: Dir
-        run: find *qt*.cmake
+        run: dir D:\
+        
+      - name: Dir e
+        run: dir D:\msys64
         
       - name: Dir m
         run: dir D:\msys64\mingw64\lib
         
       - name: Dir w
-        run: dir D:\msys64\mingw64\x86_64-w64-mingw32\lib
+        run: dir D:\msys64\mingw64\share
 
 #       - name: '🚧 Build TOOL'
 #         run: |
