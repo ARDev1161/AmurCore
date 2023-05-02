@@ -45,7 +45,7 @@ jobs:
           install: >-
             git
             make
-            libconfig++
+            libconfig
           pacboy: >-
             toolchain:p
             cmake:p
