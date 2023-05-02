@@ -56,7 +56,7 @@ jobs:
         run: dir D:\msys64\mingw64\lib
         
       - name: Dir w
-        run: dir D:\msys64\mingw64\share
+        run: dir D:\msys64\mingw64\share\qt5
 
 #       - name: '🚧 Build TOOL'
 #         run: |
@@ -91,7 +91,7 @@ jobs:
 
       - name: Configure CMake
         env:
-          CMAKE_PREFIX_PATH: D:\msys64\mingw64\lib
+          CMAKE_PREFIX_PATH: D:\msys64\mingw64\share\qt5
         run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}'/build
 
       - name: Build
