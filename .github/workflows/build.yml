@@ -45,7 +45,7 @@ jobs:
         run: git clone https://github.com/Microsoft/vcpkg.git ${{github.workspace}}/vcpkg
         
       - name: Bootstrap vcpkg
-        run: ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
+        run: '${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh'
         
       - name: Setup OpenCV
         run: vcpkg install opencv
