@@ -38,32 +38,36 @@ jobs:
             opencv:p
             ninja:p
             SDL2:p
+            qt5-base:p
+            qt5-speech:p
+            qt5-multimedia:p
+            qt5-translations:p
             
 #       - name: '🚧 Build TOOL'
 #         run: |
 #           cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release
 #           cmake --build build
                                         
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
-        with:
-          version: '5.15.2'
-          host: 'windows'
-          target: 'desktop'
-          arch: 'win64_msvc2019_64'
-          dir: '${{ github.workspace }}/example/'
-          install-deps: 'true'
-          modules: 'qtcharts qtwebengine'
-          archives: 'qtbase qtsvg'
-          cache: 'false'
-          cache-key-prefix: 'install-qt-action'
-          setup-python: 'true'
-          tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
-          set-env: 'true'
-          tools-only: 'false'
-          aqtversion: '==2.1.*'
-          py7zrversion: '==0.19.*'
-          extra: '--external 7z'
+#       - name: Install Qt
+#         uses: jurplel/install-qt-action@v3
+#         with:
+#           version: '5.15.2'
+#           host: 'windows'
+#           target: 'desktop'
+#           arch: 'win64_msvc2019_64'
+#           dir: '${{ github.workspace }}/example/'
+#           install-deps: 'true'
+#           modules: 'qtcharts qtwebengine'
+#           archives: 'qtbase qtsvg'
+#           cache: 'false'
+#           cache-key-prefix: 'install-qt-action'
+#           setup-python: 'true'
+#           tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
+#           set-env: 'true'
+#           tools-only: 'false'
+#           aqtversion: '==2.1.*'
+#           py7zrversion: '==0.19.*'
+#           extra: '--external 7z'
 
 #       - name: Setup cmake
 #         uses: jwlawson/actions-setup-cmake@v1.13
