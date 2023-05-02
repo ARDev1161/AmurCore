@@ -12,17 +12,49 @@ env:
 jobs:
   build:
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { icon: '⬛', sys: mingw32 }
+          - { icon: '🟦', sys: mingw64 }
+          - { icon: '🟨', sys: ucrt64  }
+          - { icon: '🟧', sys: clang64 }
+    name: 🚧${{ matrix.icon }} ${{ matrix.sys }}
     defaults:
         run:
             shell: msys2 {0}
 
     steps:
-      - uses: msys2/setup-msys2@v2
+      - name: '🧰 Checkout'
+        uses: actions/checkout@v3
         with:
-            install: mingw-w64-x86_64-toolchain
-            msystem: mingw64
-            release: false
+          fetch-depth: 0
+    
+#       - uses: msys2/setup-msys2@v2
+#         with:
+#             install: mingw-w64-x86_64-toolchain
+#             msystem: mingw64
+#             release: false
 
+      - name: '${{ matrix.icon }} Setup MSYS2'
+        with:
+          msystem: ${{matrix.sys}}
+          update: true
+          install: >-
+            git
+            make
+            libconfig++
+          pacboy: >-
+            toolchain:p
+            cmake:p
+#             ninja:p
+            
+#       - name: '🚧 Build TOOL'
+#         run: |
+#           cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release
+#           cmake --build build
+          
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
@@ -47,7 +79,14 @@ jobs:
 #       - name: List files in Qt
 #         run: find ${{env.Qt5_Dir}}
 
-      - uses: actions/checkout@v2
+      - uses: Dovyski/setup-opencv-action@v1.1
+        with:
+          opencv-version: '4.7.0'
+
+#       - name: Setup cmake
+#         uses: jwlawson/actions-setup-cmake@v1.13
+#         with:
+#           cmake-version: '3.16.x'
 
       - name: Configure CMake
         env:
