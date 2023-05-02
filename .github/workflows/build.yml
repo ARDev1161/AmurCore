@@ -21,73 +21,55 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-  
-      - name: Setup vcpkg
-        run: git clone https://github.com/Microsoft/vcpkg.git ${{github.workspace}}/vcpkg
         
-      - name: Bootstrap vcpkg
-        run: ${{github.workspace}}/vcpkg/bootstrap-vcpkg.bat
-                
-      - name: Setup libconfig
-        run: ${{github.workspace}}/vcpkg/vcpkg install libconfig --clean-after-build
-        
-      - name: Setup gRPC
-        run: ${{github.workspace}}/vcpkg/vcpkg install grpc --clean-after-build
-        
-      - name: Setup OpenCV
-        run: ${{github.workspace}}/vcpkg/vcpkg install opencv --clean-after-build
-        
-      - name: Setup Qt5
-        run: ${{github.workspace}}/vcpkg/vcpkg install qt5 --clean-after-build
-        
-      - name: Setup SDL2
-        run: ${{github.workspace}}/vcpkg/vcpkg install sdl2 --clean-after-build
-        
-#       - name: 'Setup MSYS2'
-#         uses: msys2/setup-msys2@v2
-#         with:
-#           msystem: mingw64
-#           update: true
-#           install: >-
-#             git
-#             make
-#           pacboy: >-
-#             toolchain:p
-#             cmake:p
-#             libconfig:p
-#             ninja:p
+      - name: 'Setup MSYS2'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: mingw64
+          update: true
+          install: >-
+            git
+            make
+          pacboy: >-
+            toolchain:p
+            cmake:p
+            libconfig:p
+            grpc:p
+            opencv:p
+            ninja:p
+            SDL2:p
             
 #       - name: '🚧 Build TOOL'
 #         run: |
 #           cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release
 #           cmake --build build
                                         
-#       - name: Install Qt
-#         uses: jurplel/install-qt-action@v3
-#         with:
-#           version: '5.15.2'
-#           host: 'windows'
-#           target: 'desktop'
-#           arch: 'win64_msvc2019_64'
-#           dir: '${{ github.workspace }}/example/'
-#           install-deps: 'true'
-#           modules: 'qtcharts qtwebengine'
-#           archives: 'qtbase qtsvg'
-#           cache: 'false'
-#           cache-key-prefix: 'install-qt-action'
-#           setup-python: 'true'
-#           tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
-#           set-env: 'true'
-#           tools-only: 'false'
-#           aqtversion: '==2.1.*'
-#           py7zrversion: '==0.19.*'
-#           extra: '--external 7z'
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '5.15.2'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
+          dir: '${{ github.workspace }}/example/'
+          install-deps: 'true'
+          modules: 'qtcharts qtwebengine'
+          archives: 'qtbase qtsvg'
+          cache: 'false'
+          cache-key-prefix: 'install-qt-action'
+          setup-python: 'true'
+          tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
+          set-env: 'true'
+          tools-only: 'false'
+          aqtversion: '==2.1.*'
+          py7zrversion: '==0.19.*'
+          extra: '--external 7z'
 
 #       - name: Setup cmake
 #         uses: jwlawson/actions-setup-cmake@v1.13
 #         with:
 #           cmake-version: '3.16.x'
-
+                              
       - name: Configure CMake
         env:
           CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
