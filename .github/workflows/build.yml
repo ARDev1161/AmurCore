@@ -42,10 +42,10 @@ jobs:
 #           cmake --build build
                 
       - name: Setup vcpkg
-        run: git clone https://github.com/Microsoft/vcpkg.git ${{github.workspace}}/vcpkg
+        run: git clone https://github.com/Microsoft/vcpkg.git
         
       - name: Bootstrap vcpkg
-        run: '${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh'
+        run: ./vcpkg/bootstrap-vcpkg.sh
         
       - name: Setup OpenCV
         run: vcpkg install opencv
