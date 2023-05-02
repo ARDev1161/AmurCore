@@ -38,7 +38,7 @@ jobs:
 #             release: false
 
       - name: '${{ matrix.icon }} Setup MSYS2'
-      - uses: msys2/setup-msys2@v2
+        uses: msys2/setup-msys2@v2
         with:
           msystem: ${{matrix.sys}}
           update: true
@@ -80,7 +80,8 @@ jobs:
 #       - name: List files in Qt
 #         run: find ${{env.Qt5_Dir}}
 
-      - uses: Dovyski/setup-opencv-action@v1.1
+      - name: Setup OpenCV
+        uses: Dovyski/setup-opencv-action@v1.1
         with:
           opencv-version: '4.7.0'
 
