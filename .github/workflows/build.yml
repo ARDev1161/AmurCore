@@ -46,7 +46,7 @@ jobs:
             qt5-translations:p
             
       - name: Dir
-        run: dir D:\msys64\
+        run: find *qt*.cmake
         
       - name: Dir m
         run: dir D:\msys64\mingw64\lib
