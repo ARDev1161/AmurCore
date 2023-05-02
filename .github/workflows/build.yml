@@ -2,8 +2,9 @@ name: AmurCore Build
 
 on:
   push:
-    tags:
-      - '*'
+    branches: [ develop ]
+#     tags:
+#       - '*'
 
 env:
   BUILD_TYPE: Release
@@ -43,8 +44,8 @@ jobs:
           py7zrversion: '==0.19.*'
           extra: '--external 7z'
 
-      - name: List files in Qt
-        run: find ${{env.Qt5_Dir}}
+#       - name: List files in Qt
+#         run: find ${{env.Qt5_Dir}}
 
       - uses: actions/checkout@v2
 
