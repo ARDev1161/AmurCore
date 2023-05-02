@@ -12,15 +12,6 @@ env:
 jobs:
   build:
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - { icon: '⬛', sys: mingw32 }
-          - { icon: '🟦', sys: mingw64 }
-          - { icon: '🟨', sys: ucrt64  }
-          - { icon: '🟧', sys: clang64 }
-    name: 🚧${{ matrix.icon }} ${{ matrix.sys }}
     defaults:
         run:
             shell: msys2 {0}
@@ -37,10 +28,10 @@ jobs:
 #             msystem: mingw64
 #             release: false
 
-      - name: '${{ matrix.icon }} Setup MSYS2'
+      - name: 'Setup MSYS2'
         uses: msys2/setup-msys2@v2
         with:
-          msystem: ${{matrix.sys}}
+          msystem: mingw64
           update: true
           install: >-
             git
@@ -81,9 +72,6 @@ jobs:
           aqtversion: '==2.1.*'
           py7zrversion: '==0.19.*'
           extra: '--external 7z'
-
-#       - name: List files in Qt
-#         run: find ${{env.Qt5_Dir}}
 
       - name: Setup OpenCV
         uses: Dovyski/setup-opencv-action@v1.1
