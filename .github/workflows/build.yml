@@ -48,10 +48,10 @@ jobs:
         run: dir D:\msys64\
         
       - name: Dir m
-        run: dir D:\msys64\mingw32
+        run: dir D:\msys64\mingw64\lib
         
       - name: Dir w
-        run: dir D:\msys64\mingw64
+        run: dir D:\msys64\mingw64\x86_64-w64-mingw32
 
 #       - name: '🚧 Build TOOL'
 #         run: |
@@ -86,7 +86,7 @@ jobs:
 
       - name: Configure CMake
         env:
-          CMAKE_PREFIX_PATH: D:\msys64\usr
+          CMAKE_PREFIX_PATH: D:\msys64\mingw64\
         run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}'/build
 
       - name: Build
