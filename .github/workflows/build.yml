@@ -26,7 +26,7 @@ jobs:
         run: git clone https://github.com/Microsoft/vcpkg.git ${{github.workspace}}/vcpkg
         
       - name: Bootstrap vcpkg
-        run: ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
+        run: ${{github.workspace}}/vcpkg/bootstrap-vcpkg.bat
                 
       - name: Setup libconfig
         run: ${{github.workspace}}/vcpkg/vcpkg install libconfig --clean-after-build
