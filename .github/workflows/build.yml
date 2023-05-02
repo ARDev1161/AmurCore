@@ -48,10 +48,10 @@ jobs:
         run: ./vcpkg/bootstrap-vcpkg.sh
         
       - name: Setup OpenCV
-        run: vcpkg install opencv
+        run: vcpkg/vcpkg install opencv
           
       - name: Setup gRPC
-        run: vcpkg install grpc
+        run: vcpkg/vcpkg install grpc
               
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
