@@ -53,10 +53,10 @@ jobs:
         run: dir D:\msys64
         
       - name: Dir m
-        run: dir D:\msys64\mingw64\lib
+        run: dir D:\msys64\mingw64\lib\cmake
         
       - name: Dir w
-        run: dir D:\msys64\mingw64\share\qt5
+        run: dir D:\msys64\mingw64\lib\cmake\qt5
 
 #       - name: '🚧 Build TOOL'
 #         run: |
