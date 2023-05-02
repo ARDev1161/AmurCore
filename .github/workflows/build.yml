@@ -1,0 +1,58 @@
+name: AmurCore Build
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+        run:
+            shell: msys2 {0}
+
+    steps:
+      - uses: msys2/setup-msys2@v2
+        with:
+            install: mingw-w64-x86_64-toolchain
+            msystem: mingw64
+            release: false
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '5.15.2'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_mingw73'
+          dir: '${{github.workspace}}/qt/'
+          install-deps: 'true'
+
+      - name: List files in Qt
+        run: find ${{env.Qt5_Dir}}
+
+      - uses: actions/checkout@v2
+
+      - name: Configure CMake
+        env:
+          CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
+        run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}'/build
+
+      - name: Build
+        run: cmake --build '${{github.workspace}}'/build
+
+      - uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r AmurCore-${{ github.ref_name }}-windows.zip '${{github.workspace}}'/build
+
+      - name: Release
+        if: ${{ github.event.action == 'released' || github.event.action == 'prereleased' }}
+        uses: softprops/action-gh-release@17cd0d34deddf848fc0e7d9be5202c148c270a0a
+        with:
+          files: AmurCore-${{ github.ref_name }}-windows.zip
+
+
