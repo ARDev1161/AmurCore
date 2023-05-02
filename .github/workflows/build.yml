@@ -45,19 +45,7 @@ jobs:
             qt5-speech:p
             qt5-multimedia:p
             qt5-translations:p
-            
-      - name: Dir
-        run: dir D:\
-        
-      - name: Dir e
-        run: dir D:\msys64
-        
-      - name: Dir m
-        run: dir D:\msys64\mingw64\lib\cmake
-        
-      - name: Dir w
-        run: dir D:\msys64\mingw64\lib\cmake\qt5
-
+          
 #       - name: '🚧 Build TOOL'
 #         run: |
 #           cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release
@@ -91,7 +79,7 @@ jobs:
 
       - name: Configure CMake
         env:
-          CMAKE_PREFIX_PATH: D:\msys64\mingw64\share\qt5
+          CMAKE_PREFIX_PATH: D:\msys64\mingw64\lib\cmake\Qt5
         run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}'/build
 
       - name: Build
