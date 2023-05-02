@@ -74,10 +74,10 @@ jobs:
 #         uses: jwlawson/actions-setup-cmake@v1.13
 #         with:
 #           cmake-version: '3.16.x'
-                              
+
       - name: Configure CMake
         env:
-          CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
+          CMAKE_PREFIX_PATH: D:\
         run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}'/build
 
       - name: Build
