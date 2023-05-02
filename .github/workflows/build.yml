@@ -44,6 +44,9 @@ jobs:
             qt5-multimedia:p
             qt5-translations:p
             
+      - name: Dir
+        run: dir D:\
+
 #       - name: '🚧 Build TOOL'
 #         run: |
 #           cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release
