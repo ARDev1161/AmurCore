@@ -45,10 +45,10 @@ jobs:
           install: >-
             git
             make
-            libconfig
           pacboy: >-
             toolchain:p
             cmake:p
+            libconfig:p
 #             ninja:p
             
 #       - name: '🚧 Build TOOL'
