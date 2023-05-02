@@ -45,7 +45,10 @@ jobs:
             qt5-translations:p
             
       - name: Dir
-        run: dir D:\msys64\
+        run: dir D:\msys64\opt
+        
+      - name: Dir m
+        run: dir D:\msys64\mingw64
 
 #       - name: '🚧 Build TOOL'
 #         run: |
