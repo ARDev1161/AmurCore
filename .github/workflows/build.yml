@@ -45,7 +45,7 @@ jobs:
             qt5-translations:p
             
       - name: Dir
-        run: dir D:\
+        run: dir D:\msys64\
 
 #       - name: '🚧 Build TOOL'
 #         run: |
@@ -80,7 +80,7 @@ jobs:
 
       - name: Configure CMake
         env:
-          CMAKE_PREFIX_PATH: D:\
+          CMAKE_PREFIX_PATH: D:\msys64\
         run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}'/build
 
       - name: Build
