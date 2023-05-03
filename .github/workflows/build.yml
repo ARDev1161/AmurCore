@@ -79,8 +79,11 @@ jobs:
 #         with:
 #           cmake-version: '3.16.x'
         
+      - name: dir
+        run: dir D:\msys64\mingw64\
+        
       - name: dir q
-        run: dir D:\msys64\mingw64\lib\cmake
+        run: dir D:\msys64\mingw64\include
         
       - name: Configure CMake
         env:
