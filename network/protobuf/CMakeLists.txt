@@ -18,24 +18,24 @@ find_package(Threads REQUIRED)
 
 include(FindPackageHandleStandardArgs)
 
-if(ATOMIC_INCLUDE_DIRS AND ATOMIC_LIBRARIES)
-  set(ATOMIC_FIND_QUIETLY TRUE)
-else()
-  find_library(
-    ATOMIC_LIBRARY
-    NAMES atomic atomic.so.1 libatomic.so.1
-    HINTS ${ATOMIC_ROOT_DIR}
-    PATH_SUFFIXES ${LIBRARY_PATH_PREFIX})
+# if(ATOMIC_INCLUDE_DIRS AND ATOMIC_LIBRARIES)
+#  set(ATOMIC_FIND_QUIETLY TRUE)
+#else()
+#  find_library(
+#    ATOMIC_LIBRARY
+#    NAMES atomic atomic.so.1 libatomic.so.1
+#    HINTS ${ATOMIC_ROOT_DIR}
+#    PATH_SUFFIXES ${LIBRARY_PATH_PREFIX})
 
-  set(ATOMIC_LIBRARIES ${ATOMIC_LIBRARY})
+#  set(ATOMIC_LIBRARIES ${ATOMIC_LIBRARY})
 
-  find_package_handle_standard_args(
-    atomic 
-    DEFAULT_MSG 
-    ATOMIC_LIBRARY)
+#  find_package_handle_standard_args(
+#    atomic 
+#    DEFAULT_MSG 
+#    ATOMIC_LIBRARY)
 
-  mark_as_advanced(ATOMIC_LIBRARY)
-endif()
+#  mark_as_advanced(ATOMIC_LIBRARY)
+#endif()
 
 
 set(GRPC_FETCHCONTENT false CACHE BOOL "Use FetchContent for download gRPC, or use system gRPC? yes/NO.")
@@ -176,7 +176,7 @@ add_library(AMURProtos
            )
 
 target_link_libraries(AMURProtos
-                      ${ATOMIC_LIBRARY}
+                      # ${ATOMIC_LIBRARY}
                       ${_REFLECTION}
                       ${_GRPC_GRPCPP}
                       ${_PROTOBUF_LIBPROTOBUF}
