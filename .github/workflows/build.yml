@@ -33,7 +33,9 @@ jobs:
             make
           pacboy: >-
             toolchain:p
+            gcc:p
             cmake:p
+            winpthreads-git:p
             libconfig:p
             grpc:p
             zlib:p
