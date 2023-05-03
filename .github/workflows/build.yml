@@ -84,7 +84,6 @@ jobs:
       - name: Configure CMake
         env:
           CMAKE_PREFIX_PATH: D:\msys64\mingw64\lib\cmake 
-          #\Qt5;D:\msys64\mingw64\lib\cmake\SDL2;D:\msys64\mingw64\lib\cmake\libconfig++;;D:\msys64\mingw64\lib\cmake\opencv4
         run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}'/build
 
       - name: Build
