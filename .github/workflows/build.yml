@@ -30,10 +30,10 @@ jobs:
           update: true
           install: >-
             git
+            gcc
             make
           pacboy: >-
             toolchain:p
-            gcc:p
             cmake:p
             winpthreads-git:p
             libconfig:p
@@ -77,14 +77,18 @@ jobs:
 #           aqtversion: '==2.1.*'
 #           py7zrversion: '==0.19.*'
 #           extra: '--external 7z'
-
-#       - name: Setup cmake
-#         uses: jwlawson/actions-setup-cmake@v1.13
-#         with:
-#           cmake-version: '3.16.x'
                 
       - name: Build protocol buffers
         run: ${{github.workspace}}/network/protobuf/rebuild.sh
+        
+      - name: Dir libs
+        run: dir D:\msys64\mingw64\lib\
+        
+      - name: Dir cmake
+        run: dir D:\msys64\mingw64\lib\cmake\
+        
+      - name: Dir include
+        run: dir D:\msys64\mingw64\include\
         
       - name: Configure CMake
         env:
