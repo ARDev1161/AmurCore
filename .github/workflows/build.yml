@@ -36,6 +36,7 @@ jobs:
             cmake:p
             libconfig:p
             grpc:p
+            protobuf:p
             opencv:p
             ninja:p
             SDL2:p
