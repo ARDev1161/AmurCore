@@ -81,7 +81,7 @@ jobs:
 #           cmake-version: '3.16.x'
                 
       - name: Build protocol buffers
-        run: ./${{github.workspace}}/network/protobuf/rebuild.sh
+        run: ${{github.workspace}}/network/protobuf/rebuild.sh
         
       - name: Configure CMake
         env:
