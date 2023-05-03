@@ -37,6 +37,7 @@ jobs:
             libconfig:p
             grpc:p
             zlib:p
+            libatomic_ops:p
             protobuf:p
             opencv:p
             ninja:p
