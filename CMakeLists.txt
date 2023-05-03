@@ -41,7 +41,7 @@ add_compile_options(
 #    -Werror
 
     -Wall
-    -Wextra
+#    -Wextra
     -Wpedantic
 
     -Wcast-align
