@@ -87,7 +87,7 @@ jobs:
         
       - name: Configure CMake
         env:
-          CMAKE_PREFIX_PATH: D:\msys64\mingw64\lib\cmake 
+          CMAKE_PREFIX_PATH: D:\msys64\mingw64\lib\cmake;D:\msys64\mingw64\include 
         run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}'/build
 
       - name: Build
