@@ -89,7 +89,7 @@ jobs:
           CMAKE_PREFIX_PATH: D:\msys64\mingw64\lib\cmake;D:\msys64\mingw64\bin\;D:\msys64\mingw64\share\;
           CMAKE_INCLUDE_PATH: D:\msys64\mingw64\include
           CMAKE_LIBRARY_PATH: D:\msys64\mingw64\lib\
-        run: cmake -G "MinGW Makefile" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}/build'
+        run: cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}/build'
 
       - name: Build
         run: cmake --build '${{github.workspace}}/build'
