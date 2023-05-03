@@ -77,16 +77,13 @@ jobs:
 #         uses: jwlawson/actions-setup-cmake@v1.13
 #         with:
 #           cmake-version: '3.16.x'
-
-      - name: dir
-        run: dir D:\msys64\mingw64\lib\cmake\Qt5
         
       - name: dir q
         run: dir D:\msys64\mingw64\lib\cmake
         
       - name: Configure CMake
         env:
-          CMAKE_PREFIX_PATH: D:\msys64\mingw64\lib\cmake\Qt5;D:\msys64\mingw64\lib\cmake\SDL2;D:\msys64\mingw64\lib\cmake\libconfig++;
+          CMAKE_PREFIX_PATH: D:\msys64\mingw64\lib\cmake\Qt5;D:\msys64\mingw64\lib\cmake\SDL2;D:\msys64\mingw64\lib\cmake\libconfig++;;D:\msys64\mingw64\lib\cmake\opencv4
         run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -B '${{github.workspace}}'/build
 
       - name: Build
