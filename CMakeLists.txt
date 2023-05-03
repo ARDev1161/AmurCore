@@ -40,12 +40,11 @@ endif()
 # Set default compile flags for GCC
 if(CMAKE_COMPILER_IS_GNUCXX)
     message(STATUS "GCC detected, adding compile flags")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++98 -pedantic -Wall -Wextra")
-endif(CMAKE_COMPILER_IS_GNUCXX)
-
 add_compile_options(
 #    -Werror
-
+    -Wall
+    -Wpedantic
+    -Wextra
     -Wcast-align
     -Wcast-qual
 #    -Wconversion
@@ -72,6 +71,7 @@ add_compile_options(
     -Wundef
     -Wno-unused
 )
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 if(NOT CMAKE_CXX_EXTENSIONS)
     set(CMAKE_CXX_EXTENSIONS OFF)
