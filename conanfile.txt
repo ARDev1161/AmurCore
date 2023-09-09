@@ -1,0 +1,17 @@
+[requires]
+protobuf/3.21.12
+grpc/1.54.3
+libconfig/1.7.3
+sdl/2.28.2
+opencv/4.5.5
+qt/6.5.2
+
+[tool_requires]
+cmake/3.27.4
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[layout]
+cmake_layout
