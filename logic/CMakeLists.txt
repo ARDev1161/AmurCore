@@ -10,6 +10,10 @@ get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 add_subdirectory(speech)
 
 set(LOGIC_SOURCES
+    bindings/bindparameter.h bindings/bindparameter.cpp
+    bindings/bindingsloader.h bindings/bindingsloader.cpp
+    bindings/bindingsconnector.h bindings/bindingsconnector.cpp
+
     movements.cpp movements.h
     system.cpp    system.h
     logic.cpp     logic.h

@@ -21,10 +21,14 @@ class Robot
     quint16 m_port;
     quint16 portForAnswer = 0;
     QUdpSocket *m_socket;
+    bool connected = false;
 public:
     Robot(const QHostAddress &address, quint16 port, QUdpSocket *socket)
         : m_address(address), m_port(port), m_socket(socket)
     {}
+    ~Robot(){
+        delete m_socket;
+    }
 
     void sendData(const QByteArray &data)
     {
@@ -41,18 +45,19 @@ public:
     void setPort(quint16 newPort);
     quint16 getPortForAnswer() const;
     void setPortForAnswer(quint16 newPortForAnswer);
+    bool isConnected() const;
 };
 
 class NetworkController : QObject
 {
     Q_OBJECT
 
+    // TODO move to Robot
     AMUR::AmurSensors *sensors;
     AMUR::AmurControls *controls;
 
     grpc::Status clientStatus;
 
-    grpc::ServerBuilder builder;
     grpcServer service;
 
     QTimer timer;

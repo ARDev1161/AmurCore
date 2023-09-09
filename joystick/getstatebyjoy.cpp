@@ -5,7 +5,7 @@ GetStateByJoystick::GetStateByJoystick(JoyState * const state, QObject *parent) 
     loopFlag(true),
     joyState(state)
 {
-    joyState->buttonVector = QVector<bool>(MAX_JOYSTICK_BUTTONS);
+    joyState->setButtonVector(QVector<bool>(MAX_JOYSTICK_BUTTONS));
     joyAdapter = new VJoystickAdapter();
     connectToJoystick();
 }
@@ -22,8 +22,8 @@ void GetStateByJoystick::stop()
 
 void GetStateByJoystick::connectToJoystick()
 {
-    if(joyState->joyId != -1)
-        if(joyAdapter->open(joyState->joyId))
+    if(joyState->getJoyId() != -1)
+        if(joyAdapter->open(joyState->getJoyId()))
         {
             connect(joyAdapter, SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
             connect(joyAdapter, SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
@@ -42,7 +42,7 @@ void GetStateByJoystick::disconnectFromJoystick()
         disconnect(joyAdapter, SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
         disconnect(joyAdapter, SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
     }
-    joyState->joyId = -1;
+    joyState->setJoyId(-1);
 }
 
 void GetStateByJoystick::axisSetup(int id, int state)
@@ -50,22 +50,22 @@ void GetStateByJoystick::axisSetup(int id, int state)
     switch(id)
     {
     case 0:
-        joyState->joystickXaxis = (tr("%1").arg(state)).toInt();
+        joyState->setJoystickXaxis((tr("%1").arg(state)).toInt());
         break;
     case 1:
-        joyState->joystickYaxis = (tr("%1").arg(-1*state)).toInt();
+        joyState->setJoystickYaxis((tr("%1").arg(-1*state)).toInt());
         break;
     case 2:
-        joyState->joystickZLTaxis = (tr("%1").arg(state)).toInt();
+        joyState->setJoystickZLTaxis((tr("%1").arg(state)).toInt());
         break;
     case 3:
-        joyState->joystickXrotation = (tr("%1").arg(state)).toInt();
+        joyState->setJoystickXrotation((tr("%1").arg(state)).toInt());
         break;
     case 4:
-        joyState->joystickYrotation = (tr("%1").arg(-1*state)).toInt();
+        joyState->setJoystickYrotation((tr("%1").arg(-1*state)).toInt());
         break;
     case 5:
-        joyState->joystickZRTaxis = (tr("%1").arg(state)).toInt();
+        joyState->setJoystickZRTaxis((tr("%1").arg(state)).toInt());
         break;
     }
 }
@@ -73,17 +73,17 @@ void GetStateByJoystick::axisSetup(int id, int state)
 void GetStateByJoystick::hatSetup(int id, int state)
 {
     Q_UNUSED(id);
-    joyState->joystickPOV0 = (tr("%1").arg(state)).toInt();
+    joyState->setJoystickPOV0((tr("%1").arg(state)).toInt());
 }
 
 void GetStateByJoystick::buttonSetup(int id, bool state)
 {
-    joyState->buttonVector[id] = state;
+    joyState->setButton(id, state);
 
     QString buttonTest = "";
     for(int i = 0; i < MAX_JOYSTICK_BUTTONS; ++i)
     {
-        if(joyState->buttonVector[i] == true)
+        if(joyState->getButton(i) == true)
         {
             if(i < 10)
                 buttonTest += tr("0%1  ").arg(i);

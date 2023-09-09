@@ -47,11 +47,14 @@ int NetworkController::runServer(std::string &address_mask) // TODO - send const
 {
     std::thread thr([&]()
      {
+      grpc::ServerBuilder builder;
+
       grpc::EnableDefaultHealthCheckService(true);
       grpc::reflection::InitProtoReflectionServerBuilderPlugin();
 
       // Send protos pointers to server
       service.setProtosPointers(controls, sensors);
+      // TODO: add getting current ip addr
 
       // Listen on the given address without any authentication mechanism.
       builder.AddListeningPort(address_mask, grpc::InsecureServerCredentials());
@@ -153,6 +156,11 @@ quint16 Robot::getPortForAnswer() const
 void Robot::setPortForAnswer(quint16 newPortForAnswer)
 {
     portForAnswer = newPortForAnswer;
+}
+
+bool Robot::isConnected() const
+{
+    return connected;
 }
 
 QHostAddress Robot::address() const

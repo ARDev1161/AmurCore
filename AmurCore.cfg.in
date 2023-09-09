@@ -23,15 +23,15 @@ Amur:
          bitmask = 0x1FC3;
     };
 
-    Logic:
-    {
+#    Logic:
+#    {
 
-    };
+#    };
 
-    Network:
-    {
-        address = "176.193.245.203:7777";
-    };
+#    Network:
+#    {
+#        address = "176.193.245.203:7777";
+#    };
 
 
     Peripheral:

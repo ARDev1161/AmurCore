@@ -1,0 +1,65 @@
+# Bindings configuration file
+
+// Joy axis: min - -255 max - 255 default - 0
+// Button: 0/1
+// Combination: Multiply button value & axis value
+
+Base:
+{
+    Motor:
+    {
+#          left = JOY_ZL_AXIS;
+#          right = JOY_ZR_AXIS;
+    };
+
+    Axis:
+    {
+    # Left stick controlling robot base
+        x = JOY_X_AXIS;
+        y = JOY_Y_AXIS;
+    };
+};
+
+Manipulator:
+{
+    Motor:
+    {
+#         leftOuter = 15;
+#         rightOuter = 15;
+#         leftInternal = 15;
+#         rightInternal = 15;
+#         gripper = 15
+    };
+
+    Gripper:
+    {
+        x = JOY_X_AXIS;
+        y = JOY_Y_AXIS;
+        z = JOY_Y_AXIS;
+    };
+};
+
+Camera:
+{
+    # Right stick controlling camera
+    x = JOY_ZLT_AXIS;
+    y = JOY_XROT_AXIS;
+
+    Light:
+    {
+    # joy button 3 enable LED light
+        led = 3;
+    };
+};
+
+Logic:
+{
+    # Press both sticks for calibration
+    runIMUcalibration = [7, 8];
+    emergencyStop = 4;
+};
+
+UI:
+{
+    blockJoy = 6;
+};

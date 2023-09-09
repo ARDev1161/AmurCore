@@ -15,6 +15,7 @@ set(JOYSTICK_SOURCES
     getstatebyjoy.cpp          getstatebyjoy.h
     joystickstateworker.cpp    joystickstateworker.h
     joystick.cpp               joystick.h
+    joystate.h                 joystate.cpp
 
     joystickdialog.cpp joystickdialog.h
     joystickdialog.ui

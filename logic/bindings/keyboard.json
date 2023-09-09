@@ -1,0 +1,36 @@
+{
+  "Base": {
+    "Axis": {
+      "x": ["Key_W", "Key_S"],
+      "y": ["Key_A", "Key_D"]
+    }
+  },
+  "Manipulator": {
+    "Motor": {
+      "leftOuter": ["Key_M", "Key_Comma"],
+      "rightOuter": ["Key_Period", "Key_Question"],
+      "leftInternal": ["Key_J", "Key_K"],
+      "rightInternal": ["Key_L", "Key_Semicolon"]
+    },
+    "Gripper": {
+      "x": ["Shift+Key_Up", "Shift+Key_Down"],
+      "y": ["Shift+Key_Left", "Shift+Key_Right"],
+      "z": ["Key_Home", "Key_End"],
+      "grab": "Key_Space"
+    }
+  },
+  "Camera": {
+    "x": ["Key_Up", "Key_Down"],
+    "y": ["Key_Left", "Key_Right"],
+    "Light": {
+      "led": "Key_F"
+    }
+  },
+  "Logic": {
+    "runIMUcalibration": "Key_I",
+    "emergencyStop": "Key_Backspace"
+  },
+  "UI": {
+    "blockJoy": "Key_B"
+  }
+}

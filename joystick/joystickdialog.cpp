@@ -50,8 +50,8 @@ void JoystickDialog::scanJoystickDevice()
 
 void JoystickDialog::setDialog()
 {
-    if( (joyAdapter->getJoystickId() < 0) && (joyState->joyId >= 0))
-        loadJoy(joyState->joyId);
+    if( (joyAdapter->getJoystickId() < 0) && (joyState->getJoyId() >= 0))
+        loadJoy(joyState->getJoyId());
 
     if( joyAdapter->getJoystickId() < 0 )
     {
@@ -157,7 +157,7 @@ void JoystickDialog::disconnectFromJoystick()
 void JoystickDialog::on_JoystickDialog_accepted()
 {
     scanJoystickDevice();
-    joyState->joyId = this->joyId;
+    joyState->setJoyId(this->joyId);
     disconnectFromJoystick();
 }
 
