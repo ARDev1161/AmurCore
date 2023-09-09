@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['add_5flibrary_442',['add_library',['../logic_2CMakeLists_8txt.html#a32a4d954f302b2f429997fd9145b8b13',1,'CMakeLists.txt']]],
-  ['address_443',['address',['../classRobot.html#aabc8b13ae1dc3a0bfe2ad46f563a9804',1,'Robot']]],
-  ['addthread_444',['addThread',['../classCalibrator.html#af2f2148de93fe59cc8e63919160fcee5',1,'Calibrator::addThread()'],['../classJoystick.html#aada137437aaa76351b07ace231696cb2',1,'Joystick::addThread()'],['../classSession.html#a0f192a74453570eb2df7165cd3f1982d',1,'Session::addThread()']]],
-  ['amurcore_445',['AmurCore',['../classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651',1,'AmurCore']]],
-  ['amurhalt_446',['amurHalt',['../classAmurCore.html#a485ef2773e71b05327b8e7fd4dab340d',1,'AmurCore']]],
-  ['amurreboot_447',['amurReboot',['../classAmurCore.html#ac0679708558de694ff7299e898d8df78',1,'AmurCore']]],
-  ['axissetup_448',['axisSetup',['../classGetStateByJoystick.html#a0db6dd092b330821bcf3adc2201a5bb0',1,'GetStateByJoystick::axisSetup()'],['../classJoystickDialog.html#ace5cc001a9e20ad75ddd59254337850a',1,'JoystickDialog::axisSetup()']]]
+  ['add_5flibrary_443',['add_library',['../logic_2CMakeLists_8txt.html#a32a4d954f302b2f429997fd9145b8b13',1,'CMakeLists.txt']]],
+  ['address_444',['address',['../classRobot.html#aabc8b13ae1dc3a0bfe2ad46f563a9804',1,'Robot']]],
+  ['addthread_445',['addThread',['../classCalibrator.html#af2f2148de93fe59cc8e63919160fcee5',1,'Calibrator::addThread()'],['../classJoystick.html#aada137437aaa76351b07ace231696cb2',1,'Joystick::addThread()'],['../classSession.html#a0f192a74453570eb2df7165cd3f1982d',1,'Session::addThread()']]],
+  ['amurcore_446',['AmurCore',['../classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651',1,'AmurCore']]],
+  ['amurhalt_447',['amurHalt',['../classAmurCore.html#a485ef2773e71b05327b8e7fd4dab340d',1,'AmurCore']]],
+  ['amurreboot_448',['amurReboot',['../classAmurCore.html#ac0679708558de694ff7299e898d8df78',1,'AmurCore']]],
+  ['axissetup_449',['axisSetup',['../classGetStateByJoystick.html#a0db6dd092b330821bcf3adc2201a5bb0',1,'GetStateByJoystick::axisSetup()'],['../classJoystickDialog.html#ace5cc001a9e20ad75ddd59254337850a',1,'JoystickDialog::axisSetup()']]]
 ];

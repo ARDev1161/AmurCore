@@ -12,6 +12,7 @@ var searchData=
   ['client_2ecpp_405',['client.cpp',['../client_8cpp.html',1,'']]],
   ['client_2eh_406',['client.h',['../client_8h.html',1,'']]],
   ['cmakelists_2etxt_407',['CMakeLists.txt',['../joystick_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../threads_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../network_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../logic_2speech_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../logic_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../CMakeLists_8txt.html',1,'(Global Namespace)'],['../camera_2CMakeLists_8txt.html',1,'(Global Namespace)']]],
-  ['connectdialog_2ecpp_408',['connectdialog.cpp',['../connectdialog_8cpp.html',1,'']]],
-  ['connectdialog_2eh_409',['connectdialog.h',['../connectdialog_8h.html',1,'']]]
+  ['conanfile_2etxt_408',['conanfile.txt',['../conanfile_8txt.html',1,'']]],
+  ['connectdialog_2ecpp_409',['connectdialog.cpp',['../connectdialog_8cpp.html',1,'']]],
+  ['connectdialog_2eh_410',['connectdialog.h',['../connectdialog_8h.html',1,'']]]
 ];
