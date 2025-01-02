@@ -1,9 +1,6 @@
-cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-project(ThreadsHandler LANGUAGES C CXX)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(ThreadsHandler LANGUAGES CXX)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
@@ -13,7 +10,7 @@ set(THREADS_SOURCES
 )
 
 add_library(ThreadsHandler
-            SHARED
+            STATIC
             ${THREADS_SOURCES}
            )
 

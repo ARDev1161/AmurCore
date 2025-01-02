@@ -6,7 +6,7 @@
 #include <QTimer>
 #include <QDebug>
 #include "v_joystick_adapter.h"
-#include "../network/protobuf/amur.pb.h"
+#include "network/protobuf/amur.pb.h"
 
 struct JoyState{
     int joyId = -1;

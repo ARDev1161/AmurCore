@@ -7,7 +7,7 @@
 #include <grpcpp/health_check_service_interface.h>
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 
-#include "protobuf/amur.grpc.pb.h"
+#include "network/protobuf/amur.grpc.pb.h"
 
 // Logic and data behind the server's behavior.
 class grpcServer final : public AMUR::ClientOnRobot::Service

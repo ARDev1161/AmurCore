@@ -1,9 +1,6 @@
-cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-project(LogicCore LANGUAGES C CXX)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(LogicCore LANGUAGES CXX)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
@@ -18,7 +15,7 @@ set(LOGIC_SOURCES
 )
 
 add_library(${PROJECT_NAME}
-            SHARED
+            STATIC
             ${LOGIC_SOURCES}
            )
 

@@ -1,8 +1,10 @@
-cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-project(NetworkController VERSION 0.88 LANGUAGES CXX)
+project(NetworkController LANGUAGES CXX)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
+
+add_subdirectory(protobuf)
 
 set(CLIENT_LIB 
     client.cpp 
@@ -19,8 +21,6 @@ set(CONNECT_DIALOG
     connectdialog.ui
    )
 
-add_subdirectory(protobuf)
-
 set(NETWORK_LIB 
     networkcontroller.cpp 
     networkcontroller.h 
@@ -29,6 +29,8 @@ set(NETWORK_LIB
     ${CONNECT_DIALOG}
     ${PROTOS_LIB}
    )
+
+include_directories("${CMAKE_BINARY_DIR}")
 
 add_library(${PROJECT_NAME}
             STATIC

@@ -6,7 +6,7 @@
 
 #include <grpcpp/grpcpp.h>
 
-#include "protobuf/amur.grpc.pb.h"
+#include "network/protobuf/amur.grpc.pb.h"
 
 class grpcClient
 {

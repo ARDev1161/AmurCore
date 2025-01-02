@@ -164,5 +164,3 @@ int VJoystickAdapter::test_haptic() {
 
  return 0; // Success
 }
-
-#include "moc_v_joystick_adapter.cpp"

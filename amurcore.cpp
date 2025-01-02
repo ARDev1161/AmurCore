@@ -7,7 +7,7 @@ AmurCore::AmurCore(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    outputMat = imread("../AmurCore/data/images/no_picture.jpeg");
+    outputMat = imread("data/images/no_picture.jpeg");
 
     this->initialize();
 }

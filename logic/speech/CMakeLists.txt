@@ -1,9 +1,6 @@
-cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-project(SpeechProccessor LANGUAGES C CXX)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(SpeechProccessor LANGUAGES CXX)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
@@ -15,7 +12,7 @@ set(SPEECH_SOURCES
 )
 
 add_library(${PROJECT_NAME}
-            SHARED
+            STATIC
             ${SPEECH_SOURCES}
            )
 
