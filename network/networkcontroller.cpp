@@ -1,23 +1,16 @@
 #include "networkcontroller.h"
 
-
 NetworkController::NetworkController(AMUR::AmurControls* const controls, AMUR::AmurSensors* const sensors)  // TODO - add robot id & &<vector> of robots id
 {
     this->controls = controls;
     this->sensors = sensors;
 
     udpSocket = new QUdpSocket(this);
-
-//    connect(&timer, &QTimer::timeout, this, &NetworkController::arpBroadcastMessage);
-    // TODO
 }
 
 NetworkController::~NetworkController()
 {
     // Clear list of robots
-    for (auto robot : robots) {
-        delete robot;
-    }
     robots.clear();
 }
 
@@ -76,18 +69,7 @@ int NetworkController::runServer(std::string &address_mask) // TODO - send const
     return 0;
 }
 
-void NetworkController::startBroadcasting()
-{
-    timer.start(msBroadcastDelay);
-}
-
-void NetworkController::stopBroadcasting()
-{
-    if(timer.isActive())
-        timer.stop();
-}
-
-int NetworkController::runArpingService(int arpPort, int gRPCPort)
+int NetworkController::runArpingService(int arpPort, int gRPCPort, QString &arpHeader)
 {
     udpSocket->bind(QHostAddress::AnyIPv4, arpPort);
 
@@ -108,15 +90,19 @@ int NetworkController::runArpingService(int arpPort, int gRPCPort)
             if(parsed.empty())
                 continue;
 
-            if("AMUR" == parsed.at(0)){
+            if(arpHeader == parsed.at(0)){
                 qDebug() << "Received arping message: " << message << " from " << senderAddress.toString() << ":" << senderBCastPort;
+
+                QString machineID;
+                if(parsed.size() > 1)
+                    machineID = parsed.at(1);
 
                 int arpingPort = 0;
                 if(parsed.size() > 2)
                     arpingPort = parsed.at(2).toInt();
 
                 // Check if the client is already in the list
-                Robot *robot = nullptr;
+                std::shared_ptr<RobotEntry> robot;
                 for (int i = 0; i < robots.size(); ++i) {
                     if (robots[i]->address() == senderAddress && robots[i]->port() == senderBCastPort) {
                         robot = robots[i];
@@ -125,10 +111,14 @@ int NetworkController::runArpingService(int arpPort, int gRPCPort)
                 }
 
                 // Add a new client if it not found in list of robots
-                if (!robot) {
-                    robot = new Robot(senderAddress, senderBCastPort, udpSocket);
+                if (robot == nullptr) {
+                    robot = std::make_shared<RobotEntry>(udpSocket, senderAddress, senderBCastPort);
+                    robot->setMachineID(machineID);
+
+                    // set custom port for answer if setted
                     if(arpingPort > 0)
                         robot->setPortForAnswer(arpingPort);
+
                     robots.append(robot);
                     qDebug() << "Added new client " << senderAddress.toString() << ":" << senderBCastPort;
                 }
@@ -144,33 +134,7 @@ int NetworkController::runArpingService(int arpPort, int gRPCPort)
     return 0;
 }
 
-
-quint16 Robot::getPortForAnswer() const
+QList< std::shared_ptr<RobotEntry> > NetworkController::getRobots() const
 {
-    return portForAnswer;
-}
-
-void Robot::setPortForAnswer(quint16 newPortForAnswer)
-{
-    portForAnswer = newPortForAnswer;
-}
-
-QHostAddress Robot::address() const
-{
-    return m_address;
-}
-
-void Robot::setAddress(const QHostAddress &newAddress)
-{
-    m_address = newAddress;
-}
-
-quint16 Robot::port() const
-{
-    return m_port;
-}
-
-void Robot::setPort(quint16 newPort)
-{
-    m_port = newPort;
+    return robots;
 }

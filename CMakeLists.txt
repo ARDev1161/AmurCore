@@ -75,7 +75,7 @@ configure_file(
         AmurCore.cfg
         )
 
-set(GRPC_FETCHCONTENT true CACHE BOOL "Use FetchContent for download gRPC, or use system gRPC? yes/NO.")
+set(GRPC_FETCHCONTENT true CACHE BOOL "Use FetchContent for download gRPC, or use system gRPC? YES/no.")
 include(cmake/grpc.cmake)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/grpc-src/include/")
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/grpc-src/third_party/protobuf/src/")
@@ -84,8 +84,8 @@ include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/grpc-src/third_party/abse
 # for generated pb files
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools TextToSpeech)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools TextToSpeech)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql LinguistTools TextToSpeech)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql LinguistTools TextToSpeech)
 
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
@@ -105,12 +105,20 @@ add_subdirectory(network)
 add_subdirectory(joystick)
 add_subdirectory(threads)
 add_subdirectory(logic)
+add_subdirectory(config)
+
+set(CONFIG_PROCESSOR
+    config/configprocessor.h
+    config/configprocessor.cpp
+   )
 
 set(PROJECT_SOURCES
         main.cpp
         pch.h
         amurcore.cpp    amurcore.h
         AmurCore.ui
+
+        ${CONFIG_PROCESSOR}
 
         ${TS_FILES}
         ${IMAGES}

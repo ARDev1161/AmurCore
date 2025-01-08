@@ -23,7 +23,9 @@ set(CONNECT_DIALOG
 
 set(NETWORK_LIB 
     networkcontroller.cpp 
-    networkcontroller.h 
+    networkcontroller.h
+    robotentry.h
+    robotrepository.h robotrepository.cpp
     ${CLIENT_LIB} 
     ${SERVER_LIB}
     ${CONNECT_DIALOG}
@@ -38,10 +40,14 @@ add_library(${PROJECT_NAME}
             )
 
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::Network)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC
+    Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_VERSION_MAJOR}::Sql
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-                    AMURProtos
-                    Qt${QT_VERSION_MAJOR}::Widgets
-                )
+    AMURProtos
+    Qt${QT_VERSION_MAJOR}::Widgets
+)
 

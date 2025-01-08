@@ -34,23 +34,27 @@ class AmurCore : public QMainWindow
 {
     Q_OBJECT
 
-
     Ui::AmurCore *ui;
 
     QTimer *tmrTimer;
     QString *hostName;
     QString statusMessage = "No robot connected";
 
+    const char *configName = "AmurCore.cfg";
+    ConfigProcessor *config;
+
     int arpPort = 11111;
     int grpcPort = 7777;
+    QString arpHeader = "AMUR";
     std::string address_mask = "0.0.0.0:" + std::to_string(grpcPort);
+    // TODO - add vector with robots id
+    std::shared_ptr<NetworkController> network;
+    std::shared_ptr<RobotRepository> repo;
 
     SpeechDialog *speechDialog;
     ConnectDialog *connectDialog;
     JoystickDialog *joystickDialog;
 
-     // TODO - add vector with robots id
-    NetworkController *network;
 
     AMUR::AmurControls *controls;
     AMUR::AmurSensors *sensors;
@@ -86,6 +90,7 @@ private slots:
     void amurReboot();
 
 private:
+    void fillFieldsByConfig();
     void startCap();
     void startTimer();
     void initialize();

@@ -10,6 +10,7 @@
 
 #include <opencv4/opencv2/opencv.hpp>
 
+#include "network/robotrepository.h"
 #include "network/protobuf/amur.grpc.pb.h"
 #include "network/networkcontroller.h"
 
@@ -21,5 +22,7 @@
 #include "camera/camsettingsholder.h"
 
 #include "logic/logic.h"
+
+#include "config/configprocessor.h"
 
 #endif // __cplusplus

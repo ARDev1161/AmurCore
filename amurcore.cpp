@@ -7,6 +7,9 @@ AmurCore::AmurCore(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    config = new ConfigProcessor(configName); // Load config file
+    fillFieldsByConfig(); // Fill fields by config file
+
     outputMat = imread("data/images/no_picture.jpeg");
 
     this->initialize();
@@ -16,6 +19,15 @@ AmurCore::AmurCore(QWidget *parent) :
 {
     capture.release();
     delete ui;
+}
+
+void AmurCore::fillFieldsByConfig()
+{
+    std::string ip ;
+    // int result = config->searchString("Amur.Network.address", ip);
+    // if(ip != ""){
+    //     this->address = ip;
+    // }
 }
 
 void AmurCore::initialize()
@@ -28,17 +40,22 @@ void AmurCore::initialize()
 
     joystickDialog = new JoystickDialog(joyState, this);
     speechDialog = new SpeechDialog(this);
-    connectDialog = new ConnectDialog(this);
 
-    network = new NetworkController(controls, sensors); // TODO - add robot id & &<vector> of robots id
     amurLogic = new Logic(joyState, controls, sensors);
+
+    repo = std::make_shared<RobotRepository>("myRobots.db");
+    if (!repo->openDatabase()) {
+        qDebug() << "Cannot open database!";
+    }
+
+    network = std::make_shared<NetworkController>(controls, sensors); // TODO - add robot id & &<vector> of robots id
+    network->runArpingService(arpPort, grpcPort, arpHeader); // Start listening for initial arp message from robots
+    network->runServer(address_mask); // Start AmurCore gRPC server
+    connectDialog = new ConnectDialog(this, network, repo);
 
     connMenu();
     startTimer();
     startCap();
-
-    network->runArpingService(arpPort, grpcPort); // Start listening for initial arp message from robots
-    network->runServer(address_mask); // Start AmurCore gRPC server
 }
 
 void AmurCore::connMenu()
