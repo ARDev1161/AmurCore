@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['wheel_5fx_5faxis_345',['WHEEL_X_AXIS',['../movements_8h.html#ae0c13bda321617f0e448e20e25964243',1,'movements.h']]],
-  ['wheel_5fy_5faxis_346',['WHEEL_Y_AXIS',['../movements_8h.html#a90ff90523fcd4d3322b0849a468b6112',1,'movements.h']]],
-  ['wheelprocess_347',['wheelProcess',['../classMovements.html#afd30b04d9afd0d8bd39315258896666f',1,'Movements']]],
-  ['worker_348',['Worker',['../classWorker.html',1,'Worker'],['../classWorker.html#a3754817df06ffe220f7f0d903c78ccac',1,'Worker::Worker()']]],
-  ['worker_349',['worker',['../classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796',1,'AmurCore']]],
-  ['worker_2ecpp_350',['worker.cpp',['../worker_8cpp.html',1,'']]],
-  ['worker_2eh_351',['worker.h',['../worker_8h.html',1,'']]]
+  ['v_5fjoystick_5fadapter_2ecpp_405',['v_joystick_adapter.cpp',['../v__joystick__adapter_8cpp.html',1,'']]],
+  ['v_5fjoystick_5fadapter_2eh_406',['v_joystick_adapter.h',['../v__joystick__adapter_8h.html',1,'']]],
+  ['version_407',['version',['../CMakeLists_8txt.html#a4c7a521b8f1a0769c09bfa4a1fca7dab',1,'CMakeLists.txt']]],
+  ['vjoystickadapter_408',['VJoystickAdapter',['../classVJoystickAdapter.html',1,'VJoystickAdapter'],['../classVJoystickAdapter.html#a7153908bc8edcb8d955f93c61f7ebbe6',1,'VJoystickAdapter::VJoystickAdapter(QObject *parent=0)']]],
+  ['vjoystickthread_409',['VJoystickThread',['../classVJoystickAdapter_1_1VJoystickThread.html',1,'VJoystickAdapter::VJoystickThread'],['../classVJoystickAdapter_1_1VJoystickThread.html#a7a40cbc31f31fe1c6f36e2d3e2435793',1,'VJoystickAdapter::VJoystickThread::VJoystickThread()']]],
+  ['voices_410',['voices',['../classSpeechDialog.html#aae96ff0c8112db5c1e618aa1518fcd0c',1,'SpeechDialog']]],
+  ['voiceselected_411',['voiceSelected',['../classSpeechDialog.html#a834c60bc1f88879b3bb2a9da6d0713bc',1,'SpeechDialog']]],
+  ['volume_412',['volume',['../classSpeechDialog.html#ae1b7c5b9750727d15a25f966b077b093',1,'SpeechDialog']]]
 ];

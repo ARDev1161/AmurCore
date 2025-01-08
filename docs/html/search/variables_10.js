@@ -1,14 +1,9 @@
 var searchData=
 [
-  ['sensors_676',['sensors',['../classLogic.html#a548199d9e193e1b76bfb71ee262d3920',1,'Logic::sensors()'],['../classgrpcClient.html#a3a7bbd6ad088f69dded69c60d6d7ac28',1,'grpcClient::sensors()'],['../classNetworkController.html#a25fe34c706f86efb85fd7cd3e7cabcca',1,'NetworkController::sensors()'],['../classgrpcServer.html#ad47392a833a201d6f3e52fa71d9d88c4',1,'grpcServer::sensors()'],['../classAmurCore.html#a6e387e8148e9744771a90fd95c7b4e91',1,'AmurCore::sensors()']]],
-  ['service_677',['service',['../classNetworkController.html#a2182e367e953a8634b64e69817e8a37b',1,'NetworkController']]],
-  ['sourcemat_678',['sourceMat',['../classAmurCore.html#a66c9bcc7556e86aab98f23ffb499c280',1,'AmurCore::sourceMat()'],['../classCamCalibrate.html#aa5169369b8ea859911ade698730fd9f2',1,'CamCalibrate::sourceMat()']]],
-  ['speech_679',['speech',['../classSpeechDialog.html#a69177ec9fccae83af9bad4483c445fb1',1,'SpeechDialog']]],
-  ['speechdialog_680',['speechDialog',['../classAmurCore.html#a314685484ecfd4a32f4ee87818ec5f90',1,'AmurCore']]],
-  ['srcmat_681',['srcMat',['../classLogic.html#a352394ea40e7d017ce276f9bf066380b',1,'Logic']]],
-  ['started_682',['started',['../classCamCalibrate.html#ac53ea186e7a4d63e4d7fa6457a164d1c',1,'CamCalibrate::started()'],['../classSpeechDialog.html#a17f1f91f33dd3e894ff4ffe2c313cea3',1,'SpeechDialog::started()']]],
-  ['statusmessage_683',['statusMessage',['../classAmurCore.html#ac54cc87ff9f9861f2eaa8c9765378089',1,'AmurCore']]],
-  ['stoppedstream_684',['stoppedStream',['../classgrpcClient.html#a9ae335b34c0043d59d3c04881c1ababc',1,'grpcClient']]],
-  ['stub_5f_685',['stub_',['../classgrpcClient.html#a8b49063085fb2889d43dcc916604af1b',1,'grpcClient']]],
-  ['successes_686',['successes',['../classCamCalibrate.html#ae402fd66023c671b4a1d32f9f2cebb36',1,'CamCalibrate']]]
+  ['rate_810',['rate',['../classSpeechDialog.html#a967d0a93a17a19bc3cca15c874d541ed',1,'SpeechDialog']]],
+  ['ready_811',['ready',['../classCamSettingsHolder.html#aceefa27fed6d90203db384ac921ccdc2',1,'CamSettingsHolder']]],
+  ['relaybutton_812',['relayButton',['../structMoveSettings_1_1JoyBindings.html#a72fcd6928d5fb0442feecea7df4be03c',1,'MoveSettings::JoyBindings']]],
+  ['repo_813',['repo',['../classAmurCore.html#a18b665869f40e1fd1e08efc46aec9090',1,'AmurCore::repo()'],['../classConnectDialog.html#a60a3b5e5d3d6333e54e64ceb83c6a706',1,'ConnectDialog::repo()']]],
+  ['robots_814',['robots',['../classNetworkController.html#ab7afc6c0e2434dafe4ab901506bd2543',1,'NetworkController']]],
+  ['rvecs_815',['rvecs',['../classCalibratorWorker.html#a346d739d4866f12619aac7285a5a2641',1,'CalibratorWorker::rvecs()'],['../classCamSettingsHolder.html#ac3fcb5817edc8118190d1314f47aaf6c',1,'CamSettingsHolder::rvecs()']]]
 ];

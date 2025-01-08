@@ -1,4 +1,4 @@
-.TH "ConnectDialog" 3 "Sat Sep 9 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "ConnectDialog" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,7 +14,7 @@ Inherits QDialog\&.
 
 .in +1c
 .ti -1c
-.RI "\fBConnectDialog\fP (QWidget *parent=0)"
+.RI "\fBConnectDialog\fP (QWidget *parent, std::shared_ptr< \fBNetworkController\fP > \fBnetworkController\fP, std::shared_ptr< \fBRobotRepository\fP > \fBrepo\fP)"
 .br
 .ti -1c
 .RI "\fB~ConnectDialog\fP ()"
@@ -24,29 +24,88 @@ Inherits QDialog\&.
 
 .in +1c
 .ti -1c
+.RI "void \fBupdateTable\fP ()"
+.br
+.ti -1c
+.RI "void \fBonRobotNameChanged\fP (QTableWidgetItem *item)"
+.br
+.ti -1c
+.RI "void \fBonTableRowDoubleClicked\fP (int row, int column)"
+.br
+.ti -1c
 .RI "void \fBon_buttonBox_accepted\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBcategorizeRobots\fP (const \fBRobotList\fP &\fBknownRobots\fP, const \fBRobotList\fP &activeRobots, \fBRobotList\fP &activeUnknown, \fBRobotList\fP &knownInactive, \fBRobotList\fP &activeKnown)"
+.br
+.ti -1c
+.RI "void \fBsetupTableHeaders\fP (QTableWidget *tableWidget)"
+.br
+.ti -1c
+.RI "int \fBfillTableWithRobots\fP (QTableWidget *tableWidget, const \fBRobotList\fP &robots, const QColor &backgroundColor, const QColor &textColor, int startRow)"
+.br
+.ti -1c
+.RI "\fBRobotEntryPtr\fP \fBfindRobotByMachineId\fP (const \fBRobotList\fP &robots, const QString &machineId)"
 .br
 .in -1c
 .SS "Private Attributes"
 
 .in +1c
 .ti -1c
+.RI "std::shared_ptr< \fBNetworkController\fP > \fBnetworkController\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBRobotRepository\fP > \fBrepo\fP"
+.br
+.ti -1c
+.RI "\fBRobotList\fP \fBknownRobots\fP"
+.br
+.ti -1c
 .RI "Ui::ConnectDialog * \fBui\fP"
+.br
+.ti -1c
+.RI "QTimer * \fBupdateTimer\fP"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "ConnectDialog::ConnectDialog (QWidget * parent = \fC0\fP)\fC [explicit]\fP"
+.SS "ConnectDialog::ConnectDialog (QWidget * parent, std::shared_ptr< \fBNetworkController\fP > networkController, std::shared_ptr< \fBRobotRepository\fP > repo)\fC [explicit]\fP"
 
 .SS "ConnectDialog::~ConnectDialog ()"
 
 .SH "Member Function Documentation"
 .PP 
+.SS "bool ConnectDialog::categorizeRobots (const \fBRobotList\fP & knownRobots, const \fBRobotList\fP & activeRobots, \fBRobotList\fP & activeUnknown, \fBRobotList\fP & knownInactive, \fBRobotList\fP & activeKnown)\fC [private]\fP"
+
+.SS "int ConnectDialog::fillTableWithRobots (QTableWidget * tableWidget, const \fBRobotList\fP & robots, const QColor & backgroundColor, const QColor & textColor, int startRow)\fC [private]\fP"
+
+.SS "\fBRobotEntryPtr\fP ConnectDialog::findRobotByMachineId (const \fBRobotList\fP & robots, const QString & machineId)\fC [private]\fP"
+
 .SS "void ConnectDialog::on_buttonBox_accepted ()\fC [private]\fP, \fC [slot]\fP"
 
+.SS "void ConnectDialog::onRobotNameChanged (QTableWidgetItem * item)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void ConnectDialog::onTableRowDoubleClicked (int row, int column)\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void ConnectDialog::setupTableHeaders (QTableWidget * tableWidget)\fC [private]\fP"
+
+.SS "void ConnectDialog::updateTable ()\fC [private]\fP, \fC [slot]\fP"
+Get robot list & split it to categories
 .SH "Member Data Documentation"
 .PP 
+.SS "\fBRobotList\fP ConnectDialog::knownRobots\fC [private]\fP"
+
+.SS "std::shared_ptr<\fBNetworkController\fP> ConnectDialog::networkController\fC [private]\fP"
+
+.SS "std::shared_ptr<\fBRobotRepository\fP> ConnectDialog::repo\fC [private]\fP"
+
 .SS "Ui::ConnectDialog* ConnectDialog::ui\fC [private]\fP"
+
+.SS "QTimer* ConnectDialog::updateTimer\fC [private]\fP"
 
 
 .SH "Author"

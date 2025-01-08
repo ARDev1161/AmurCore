@@ -98,7 +98,7 @@ Inheritance diagram for NetworkController:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNetworkController__inherit__graph.png" border="0" usemap="#aNetworkController_inherit__map" alt="Inheritance graph"/></div>
 <map name="aNetworkController_inherit__map" id="aNetworkController_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,131,157,457"/>
+<area shape="rect" title=" " alt="" coords="5,131,157,399"/>
 <area shape="rect" title=" " alt="" coords="46,5,117,83"/>
 </map>
 </div>
@@ -107,7 +107,7 @@ Collaboration diagram for NetworkController:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNetworkController__coll__graph.png" border="0" usemap="#aNetworkController_coll__map" alt="Collaboration graph"/></div>
 <map name="aNetworkController_coll__map" id="aNetworkController_coll__map">
-<area shape="rect" title=" " alt="" coords="5,360,157,672"/>
+<area shape="rect" title=" " alt="" coords="5,360,157,613"/>
 <area shape="rect" title=" " alt="" coords="25,183,95,261"/>
 <area shape="rect" href="classgrpcServer.html" title=" " alt="" coords="120,147,283,297"/>
 <area shape="rect" title=" " alt="" coords="126,5,277,97"/>
@@ -124,12 +124,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0a23911025a48814505b4f9abcacd839"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65637245c5c3a4f3e07a1507232340cf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a65637245c5c3a4f3e07a1507232340cf">runServer</a> (std::string &amp;address_mask)</td></tr>
 <tr class="separator:a65637245c5c3a4f3e07a1507232340cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad4a90a965a3b4e131f74d33a0b02f72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#aad4a90a965a3b4e131f74d33a0b02f72">runArpingService</a> (int <a class="el" href="classNetworkController.html#af2802721971425d59be55bcb42baf487">arpPort</a>, int gRPCPort)</td></tr>
-<tr class="separator:aad4a90a965a3b4e131f74d33a0b02f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2305fe44de317e3ffa2bafc14e557d9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a2305fe44de317e3ffa2bafc14e557d9b">startBroadcasting</a> ()</td></tr>
-<tr class="separator:a2305fe44de317e3ffa2bafc14e557d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65fbae0da6388abee90883c3aa749276"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a65fbae0da6388abee90883c3aa749276">stopBroadcasting</a> ()</td></tr>
-<tr class="separator:a65fbae0da6388abee90883c3aa749276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cbc14b694c4207c4758d85444c63aa6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a3cbc14b694c4207c4758d85444c63aa6">runArpingService</a> (int arpPort, int gRPCPort, QString &amp;arpHeader)</td></tr>
+<tr class="separator:a3cbc14b694c4207c4758d85444c63aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a445123b5cd86a4be48e79b54b4689a4c"><td class="memItemLeft" align="right" valign="top">QList&lt; std::shared_ptr&lt; <a class="el" href="classRobotEntry.html">RobotEntry</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a445123b5cd86a4be48e79b54b4689a4c">getRobots</a> () const</td></tr>
+<tr class="separator:a445123b5cd86a4be48e79b54b4689a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -143,20 +141,14 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a030fa2be52a5be3d9fbeaa2344003726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2182e367e953a8634b64e69817e8a37b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgrpcServer.html">grpcServer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a2182e367e953a8634b64e69817e8a37b">service</a></td></tr>
 <tr class="separator:a2182e367e953a8634b64e69817e8a37b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1106681e84c18601580b4d9e20b23358"><td class="memItemLeft" align="right" valign="top">QTimer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a1106681e84c18601580b4d9e20b23358">timer</a></td></tr>
-<tr class="separator:a1106681e84c18601580b4d9e20b23358"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35a7e64255858c0df2b0cd59ac555f75"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a35a7e64255858c0df2b0cd59ac555f75">messageNo</a> = 1</td></tr>
 <tr class="separator:a35a7e64255858c0df2b0cd59ac555f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5455fa1812a3625678bb0b8fad93997d"><td class="memItemLeft" align="right" valign="top">QUdpSocket *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a5455fa1812a3625678bb0b8fad93997d">udpSocket</a> = nullptr</td></tr>
 <tr class="separator:a5455fa1812a3625678bb0b8fad93997d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a954e4db67283948642a3e93d9d24053f"><td class="memItemLeft" align="right" valign="top">QList&lt; <a class="el" href="classRobot.html">Robot</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a954e4db67283948642a3e93d9d24053f">robots</a></td></tr>
-<tr class="separator:a954e4db67283948642a3e93d9d24053f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7afc6c0e2434dafe4ab901506bd2543"><td class="memItemLeft" align="right" valign="top">QList&lt; std::shared_ptr&lt; <a class="el" href="classRobotEntry.html">RobotEntry</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#ab7afc6c0e2434dafe4ab901506bd2543">robots</a></td></tr>
+<tr class="separator:ab7afc6c0e2434dafe4ab901506bd2543"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642e05aa5cf6a6d5aa9b79047c403e04"><td class="memItemLeft" align="right" valign="top">QMap&lt; quint16, QUdpSocket * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a642e05aa5cf6a6d5aa9b79047c403e04">clientSockets</a></td></tr>
 <tr class="separator:a642e05aa5cf6a6d5aa9b79047c403e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2802721971425d59be55bcb42baf487"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#af2802721971425d59be55bcb42baf487">arpPort</a> = 7776</td></tr>
-<tr class="separator:af2802721971425d59be55bcb42baf487"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a198973f61c6f554efdc62e17d335271e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a198973f61c6f554efdc62e17d335271e">msBroadcastDelay</a> = 1000</td></tr>
-<tr class="separator:a198973f61c6f554efdc62e17d335271e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a43ec8cbc168e2aad5c2728594c579a85"></a>
@@ -205,8 +197,25 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aad4a90a965a3b4e131f74d33a0b02f72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad4a90a965a3b4e131f74d33a0b02f72">&#9670;&nbsp;</a></span>runArpingService()</h2>
+<a id="a445123b5cd86a4be48e79b54b4689a4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a445123b5cd86a4be48e79b54b4689a4c">&#9670;&nbsp;</a></span>getRobots()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QList&lt; std::shared_ptr&lt; <a class="el" href="classRobotEntry.html">RobotEntry</a> &gt; &gt; NetworkController::getRobots </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3cbc14b694c4207c4758d85444c63aa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cbc14b694c4207c4758d85444c63aa6">&#9670;&nbsp;</a></span>runArpingService()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +230,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>gRPCPort</em>&#160;</td>
+          <td class="paramname"><em>gRPCPort</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>arpHeader</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -230,16 +245,6 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classNetworkController_aad4a90a965a3b4e131f74d33a0b02f72_icgraph.png" border="0" usemap="#aclassNetworkController_aad4a90a965a3b4e131f74d33a0b02f72_icgraph" alt=""/></div>
-<map name="aclassNetworkController_aad4a90a965a3b4e131f74d33a0b02f72_icgraph" id="aclassNetworkController_aad4a90a965a3b4e131f74d33a0b02f72_icgraph">
-<area shape="rect" title=" " alt="" coords="377,5,509,47"/>
-<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,13,329,39"/>
-<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,13,149,39"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -294,76 +299,10 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="classgrpcServer.html#a4405721eaa6197b2a37c0ec825f77cab" title=" " alt="" coords="185,13,380,39"/>
 </map>
 </div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classNetworkController_a65637245c5c3a4f3e07a1507232340cf_icgraph.png" border="0" usemap="#aclassNetworkController_a65637245c5c3a4f3e07a1507232340cf_icgraph" alt=""/></div>
-<map name="aclassNetworkController_a65637245c5c3a4f3e07a1507232340cf_icgraph" id="aclassNetworkController_a65637245c5c3a4f3e07a1507232340cf_icgraph">
-<area shape="rect" title=" " alt="" coords="377,5,509,47"/>
-<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,13,329,39"/>
-<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,13,149,39"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a2305fe44de317e3ffa2bafc14e557d9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2305fe44de317e3ffa2bafc14e557d9b">&#9670;&nbsp;</a></span>startBroadcasting()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NetworkController::startBroadcasting </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a65fbae0da6388abee90883c3aa749276"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65fbae0da6388abee90883c3aa749276">&#9670;&nbsp;</a></span>stopBroadcasting()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NetworkController::stopBroadcasting </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="af2802721971425d59be55bcb42baf487"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2802721971425d59be55bcb42baf487">&#9670;&nbsp;</a></span>arpPort</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int NetworkController::arpPort = 7776</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a030fa2be52a5be3d9fbeaa2344003726"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a030fa2be52a5be3d9fbeaa2344003726">&#9670;&nbsp;</a></span>builder</h2>
 
@@ -474,8 +413,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a198973f61c6f554efdc62e17d335271e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a198973f61c6f554efdc62e17d335271e">&#9670;&nbsp;</a></span>msBroadcastDelay</h2>
+<a id="ab7afc6c0e2434dafe4ab901506bd2543"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7afc6c0e2434dafe4ab901506bd2543">&#9670;&nbsp;</a></span>robots</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -484,29 +423,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int NetworkController::msBroadcastDelay = 1000</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a954e4db67283948642a3e93d9d24053f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a954e4db67283948642a3e93d9d24053f">&#9670;&nbsp;</a></span>robots</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QList&lt;<a class="el" href="classRobot.html">Robot</a>*&gt; NetworkController::robots</td>
+          <td class="memname">QList&lt; std::shared_ptr&lt;<a class="el" href="classRobotEntry.html">RobotEntry</a>&gt; &gt; NetworkController::robots</td>
         </tr>
       </table>
   </td>
@@ -551,28 +468,6 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classgrpcServer.html">grpcServer</a> NetworkController::service</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1106681e84c18601580b4d9e20b23358"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1106681e84c18601580b4d9e20b23358">&#9670;&nbsp;</a></span>timer</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QTimer NetworkController::timer</td>
         </tr>
       </table>
   </td>

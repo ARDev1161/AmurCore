@@ -1,4 +1,4 @@
-.TH "NetworkController" 3 "Sat Sep 9 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "NetworkController" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -26,13 +26,10 @@ Inherits QObject\&.
 .RI "int \fBrunServer\fP (std::string &address_mask)"
 .br
 .ti -1c
-.RI "int \fBrunArpingService\fP (int \fBarpPort\fP, int gRPCPort)"
+.RI "int \fBrunArpingService\fP (int arpPort, int gRPCPort, QString &arpHeader)"
 .br
 .ti -1c
-.RI "void \fBstartBroadcasting\fP ()"
-.br
-.ti -1c
-.RI "void \fBstopBroadcasting\fP ()"
+.RI "QList< std::shared_ptr< \fBRobotEntry\fP > > \fBgetRobots\fP () const"
 .br
 .in -1c
 .SS "Private Attributes"
@@ -54,25 +51,16 @@ Inherits QObject\&.
 .RI "\fBgrpcServer\fP \fBservice\fP"
 .br
 .ti -1c
-.RI "QTimer \fBtimer\fP"
-.br
-.ti -1c
 .RI "int \fBmessageNo\fP = 1"
 .br
 .ti -1c
 .RI "QUdpSocket * \fBudpSocket\fP = nullptr"
 .br
 .ti -1c
-.RI "QList< \fBRobot\fP * > \fBrobots\fP"
+.RI "QList< std::shared_ptr< \fBRobotEntry\fP > > \fBrobots\fP"
 .br
 .ti -1c
 .RI "QMap< quint16, QUdpSocket * > \fBclientSockets\fP"
-.br
-.ti -1c
-.RI "int \fBarpPort\fP = 7776"
-.br
-.ti -1c
-.RI "int \fBmsBroadcastDelay\fP = 1000"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
@@ -83,20 +71,16 @@ Inherits QObject\&.
 
 .SH "Member Function Documentation"
 .PP 
-.SS "int NetworkController::runArpingService (int arpPort, int gRPCPort)"
+.SS "QList< std::shared_ptr< \fBRobotEntry\fP > > NetworkController::getRobots () const"
+
+.SS "int NetworkController::runArpingService (int arpPort, int gRPCPort, QString & arpHeader)"
 
 .SS "int NetworkController::runClient (std::string & server_address)"
 
 .SS "int NetworkController::runServer (std::string & address_mask)"
 
-.SS "void NetworkController::startBroadcasting ()"
-
-.SS "void NetworkController::stopBroadcasting ()"
-
 .SH "Member Data Documentation"
 .PP 
-.SS "int NetworkController::arpPort = 7776\fC [private]\fP"
-
 .SS "grpc::ServerBuilder NetworkController::builder\fC [private]\fP"
 
 .SS "QMap<quint16, QUdpSocket*> NetworkController::clientSockets\fC [private]\fP"
@@ -107,15 +91,11 @@ Inherits QObject\&.
 
 .SS "int NetworkController::messageNo = 1\fC [private]\fP"
 
-.SS "int NetworkController::msBroadcastDelay = 1000\fC [private]\fP"
-
-.SS "QList<\fBRobot\fP*> NetworkController::robots\fC [private]\fP"
+.SS "QList< std::shared_ptr<\fBRobotEntry\fP> > NetworkController::robots\fC [private]\fP"
 
 .SS "AMUR::AmurSensors* NetworkController::sensors\fC [private]\fP"
 
 .SS "\fBgrpcServer\fP NetworkController::service\fC [private]\fP"
-
-.SS "QTimer NetworkController::timer\fC [private]\fP"
 
 .SS "QUdpSocket* NetworkController::udpSocket = nullptr\fC [private]\fP"
 

@@ -1,0 +1,102 @@
+.TH "RobotRepository" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RobotRepository
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <robotrepository\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRobotRepository\fP (const QString &dbName)"
+.br
+.ti -1c
+.RI "\fB~RobotRepository\fP ()"
+.br
+.ti -1c
+.RI "bool \fBopenDatabase\fP ()"
+.br
+.ti -1c
+.RI "bool \fBrobotExists\fP (const QString &machineID)"
+.br
+.ti -1c
+.RI "bool \fBdeleteRobot\fP (const \fBRobotEntryPtr\fP &robot)"
+.br
+.ti -1c
+.RI "bool \fBupdateRobot\fP (const \fBRobotEntryPtr\fP &robot)"
+.br
+.ti -1c
+.RI "bool \fBaddRobot\fP (const \fBRobotEntryPtr\fP robot)"
+.br
+.ti -1c
+.RI "bool \fBaddRobots\fP (const \fBRobotList\fP &robots)"
+.br
+.ti -1c
+.RI "\fBRobotList\fP \fBloadRobots\fP (QUdpSocket *socket=nullptr)"
+.br
+.ti -1c
+.RI "\fBRobotList\fP \fBsearchRobots\fP (QUdpSocket *socket=nullptr, const QString &machineID=QString(), const QString &name=QString(), const QString &address=QString(), const QString &macAddress=QString())"
+.br
+.ti -1c
+.RI "bool \fBdeleteRobots\fP (const QString &machineID=QString(), const QString &name=QString(), const QString &address=QString(), const QString &macAddress=QString())"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBcreateTableIfNotExists\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QSqlDatabase \fBm_db\fP"
+.br
+.ti -1c
+.RI "QString \fBm_dbName\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "RobotRepository::RobotRepository (const QString & dbName)\fC [explicit]\fP"
+
+.SS "RobotRepository::~RobotRepository ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool RobotRepository::addRobot (const \fBRobotEntryPtr\fP robot)"
+
+.SS "bool RobotRepository::addRobots (const \fBRobotList\fP & robots)"
+
+.SS "bool RobotRepository::createTableIfNotExists ()\fC [private]\fP"
+
+.SS "bool RobotRepository::deleteRobot (const \fBRobotEntryPtr\fP & robot)"
+
+.SS "bool RobotRepository::deleteRobots (const QString & machineID = \fCQString()\fP, const QString & name = \fCQString()\fP, const QString & address = \fCQString()\fP, const QString & macAddress = \fCQString()\fP)"
+
+.SS "\fBRobotList\fP RobotRepository::loadRobots (QUdpSocket * socket = \fCnullptr\fP)"
+
+.SS "bool RobotRepository::openDatabase ()"
+
+.SS "bool RobotRepository::robotExists (const QString & machineID)"
+
+.SS "\fBRobotList\fP RobotRepository::searchRobots (QUdpSocket * socket = \fCnullptr\fP, const QString & machineID = \fCQString()\fP, const QString & name = \fCQString()\fP, const QString & address = \fCQString()\fP, const QString & macAddress = \fCQString()\fP)"
+
+.SS "bool RobotRepository::updateRobot (const \fBRobotEntryPtr\fP & robot)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QSqlDatabase RobotRepository::m_db\fC [private]\fP"
+
+.SS "QString RobotRepository::m_dbName\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

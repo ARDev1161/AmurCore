@@ -1,7 +1,23 @@
 var searchData=
 [
-  ['network_658',['network',['../classAmurCore.html#a1b5aca30657d64c3a147a8584969a805',1,'AmurCore']]],
-  ['numcornershor_659',['numCornersHor',['../classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc',1,'CamCalibrate']]],
-  ['numcornersver_660',['numCornersVer',['../classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c',1,'CamCalibrate']]],
-  ['numsquares_661',['numSquares',['../classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199',1,'CamCalibrate']]]
+  ['m_5fadapter_777',['m_adapter',['../classVJoystickAdapter_1_1VJoystickThread.html#aadc5254f8866ee7a5c5560bff05d1449',1,'VJoystickAdapter::VJoystickThread']]],
+  ['m_5faddress_778',['m_address',['../classRobotEntry.html#a1ca7950688a3c502b0f88b6c4562dbfd',1,'RobotEntry']]],
+  ['m_5fdb_779',['m_db',['../classRobotRepository.html#a4a56b7d73a96f3d1aa2412dcb2d81e5c',1,'RobotRepository']]],
+  ['m_5fdbname_780',['m_dbName',['../classRobotRepository.html#adbb88d64e21224db8a3b5ea264e1ce30',1,'RobotRepository']]],
+  ['m_5fjoystick_781',['m_joystick',['../classVJoystickAdapter.html#a1339ae98c1a5910868fcf3e381fbd5d4',1,'VJoystickAdapter']]],
+  ['m_5fjoystickthread_782',['m_joystickThread',['../classVJoystickAdapter.html#a94829a76d74e7a65dfc8a3cefa4c309e',1,'VJoystickAdapter']]],
+  ['m_5fmacaddress_783',['m_macAddress',['../classRobotEntry.html#a08b821412ab4f2259724c707c21a772e',1,'RobotEntry']]],
+  ['m_5fmachineid_784',['m_machineID',['../classRobotEntry.html#a10c40dc4550c3edddf2953e0a86701aa',1,'RobotEntry']]],
+  ['m_5fname_785',['m_name',['../classRobotEntry.html#a180d32b50c1bc252815348534287aed4',1,'RobotEntry']]],
+  ['m_5fport_786',['m_port',['../classRobotEntry.html#a3776dc4d43f20f87da6e72177f7ac5a0',1,'RobotEntry']]],
+  ['m_5fportforanswer_787',['m_portForAnswer',['../classRobotEntry.html#a8bfba8714d49899df68e5f0c40819f99',1,'RobotEntry']]],
+  ['m_5fsocket_788',['m_socket',['../classRobotEntry.html#a292c0be196c39bd03dd68c6eaf04e2a6',1,'RobotEntry']]],
+  ['map1_789',['map1',['../classCamSettingsHolder.html#a3e64f82479a8b15161da00085dc67a09',1,'CamSettingsHolder']]],
+  ['map2_790',['map2',['../classCamSettingsHolder.html#aed6e6719d20cbc1b129a433bff632f00',1,'CamSettingsHolder']]],
+  ['messageno_791',['messageNo',['../classNetworkController.html#a35a7e64255858c0df2b0cd59ac555f75',1,'NetworkController']]],
+  ['move_792',['move',['../classLogic.html#a0a4f42508182243ba32cd65596ca35a1',1,'Logic']]],
+  ['movesettings_793',['moveSettings',['../classMovements.html#adc311612dd0ce3b753e1439d53353675',1,'Movements']]],
+  ['muclient_794',['muClient',['../classgrpcClient.html#a9a8a26f672c439bd439b62f6f648f882',1,'grpcClient']]],
+  ['muserver_795',['muServer',['../classgrpcServer.html#a33fdb8b89a90a900af52918b676704be',1,'grpcServer']]],
+  ['mustinitundistort_796',['mustInitUndistort',['../classCamSettingsHolder.html#ac4d04264b64360a10aefb4ca8595b944',1,'CamSettingsHolder']]]
 ];

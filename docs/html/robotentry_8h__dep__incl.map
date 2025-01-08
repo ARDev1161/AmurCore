@@ -1,0 +1,9 @@
+<map id="network/robotentry.h" name="network/robotentry.h">
+<area shape="rect" id="node1" title=" " alt="" coords="233,5,372,32"/>
+<area shape="rect" id="node2" href="$networkcontroller_8h.html" title=" " alt="" coords="113,80,295,107"/>
+<area shape="rect" id="node6" href="$robotrepository_8h.html" title=" " alt="" coords="319,80,486,107"/>
+<area shape="rect" id="node3" href="$connectdialog_8h.html" title=" " alt="" coords="224,155,387,181"/>
+<area shape="rect" id="node5" href="$networkcontroller_8cpp.html" title=" " alt="" coords="5,155,200,181"/>
+<area shape="rect" id="node4" href="$connectdialog_8cpp.html" title=" " alt="" coords="217,229,393,256"/>
+<area shape="rect" id="node7" href="$robotrepository_8cpp.html" title=" " alt="" coords="411,155,592,181"/>
+</map>

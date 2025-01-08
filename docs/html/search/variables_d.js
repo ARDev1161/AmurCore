@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['objectcorners_662',['objectCorners',['../classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e',1,'CamCalibrate']]],
-  ['objectpoints_663',['objectPoints',['../classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285',1,'CamCalibrate::objectPoints()'],['../classCamSettingsHolder.html#ad989789907e392ced3d330868c179180',1,'CamSettingsHolder::objectPoints()']]],
-  ['out_664',['out',['../classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719',1,'CamCalibrate']]],
-  ['outmat_665',['outMat',['../classLogic.html#a2597d0e03cefdf4953e26e0aa073fc16',1,'Logic']]],
-  ['outputmat_666',['outputMat',['../classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10',1,'AmurCore']]]
+  ['network_797',['network',['../classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1',1,'AmurCore']]],
+  ['networkcontroller_798',['networkController',['../classConnectDialog.html#ad7a913aea611bc1669f72ca41cf6bf0c',1,'ConnectDialog']]],
+  ['numcornershor_799',['numCornersHor',['../classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc',1,'CamCalibrate']]],
+  ['numcornersver_800',['numCornersVer',['../classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c',1,'CamCalibrate']]],
+  ['numsquares_801',['numSquares',['../classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199',1,'CamCalibrate']]]
 ];

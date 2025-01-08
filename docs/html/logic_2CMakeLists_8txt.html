@@ -92,14 +92,14 @@ $(document).ready(function(){initNavTree('logic_2CMakeLists_8txt.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab60f1346db81babea21b2181d8b1c7d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logic_2CMakeLists_8txt.html#ab60f1346db81babea21b2181d8b1c7d7">cmake_minimum_required</a> (VERSION 3.8 FATAL_ERROR) project(LogicCore LANGUAGES C CXX) set(CMAKE_CXX_STANDARD 11) set(CMAKE_CXX_STANDARD_REQUIRED ON) get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY) add_subdirectory(speech) set(LOGIC_SOURCES movements.cpp movements.h system.cpp system.h logic.cpp logic.h $</td></tr>
-<tr class="separator:ab60f1346db81babea21b2181d8b1c7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32a4d954f302b2f429997fd9145b8b13"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logic_2CMakeLists_8txt.html#a32a4d954f302b2f429997fd9145b8b13">add_library</a> (${PROJECT_NAME} SHARED ${LOGIC_SOURCES}) target_link_libraries($</td></tr>
-<tr class="separator:a32a4d954f302b2f429997fd9145b8b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5b76b37814fbfc8f6627c7da4d0a073"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logic_2CMakeLists_8txt.html#ae5b76b37814fbfc8f6627c7da4d0a073">cmake_minimum_required</a> (VERSION 3.16 FATAL_ERROR) <a class="el" href="CMakeLists_8txt.html#a753da1782765afcf0b6e5d290a1c1d9e">project</a>(LogicCore LANGUAGES CXX) get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY) add_subdirectory(speech) <a class="el" href="CMakeLists_8txt.html#ab4917dc596664c999ac0a50aa4ae0110">set</a>(LOGIC_SOURCES movements.cpp movements.h system.cpp system.h logic.cpp logic.h $</td></tr>
+<tr class="separator:ae5b76b37814fbfc8f6627c7da4d0a073"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a29e793bdce27f44c4f9c456fa9557"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logic_2CMakeLists_8txt.html#a20a29e793bdce27f44c4f9c456fa9557">add_library</a> (${PROJECT_NAME} STATIC ${LOGIC_SOURCES}) target_link_libraries($</td></tr>
+<tr class="separator:a20a29e793bdce27f44c4f9c456fa9557"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a32a4d954f302b2f429997fd9145b8b13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32a4d954f302b2f429997fd9145b8b13">&#9670;&nbsp;</a></span>add_library()</h2>
+<a id="a20a29e793bdce27f44c4f9c456fa9557"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a29e793bdce27f44c4f9c456fa9557">&#9670;&nbsp;</a></span>add_library()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -108,7 +108,7 @@ Functions</h2></td></tr>
           <td class="memname">add_library </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>${PROJECT_NAME} SHARED ${LOGIC_SOURCES}</em></td><td>)</td>
+          <td class="paramname"><em>${PROJECT_NAME} STATIC ${LOGIC_SOURCES}</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -116,8 +116,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab60f1346db81babea21b2181d8b1c7d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab60f1346db81babea21b2181d8b1c7d7">&#9670;&nbsp;</a></span>cmake_minimum_required()</h2>
+<a id="ae5b76b37814fbfc8f6627c7da4d0a073"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5b76b37814fbfc8f6627c7da4d0a073">&#9670;&nbsp;</a></span>cmake_minimum_required()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,7 +125,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">cmake_minimum_required </td>
           <td>(</td>
-          <td class="paramtype">VERSION 3.8&#160;</td>
+          <td class="paramtype">VERSION 3.16&#160;</td>
           <td class="paramname"><em>FATAL_ERROR</em></td><td>)</td>
           <td></td>
         </tr>

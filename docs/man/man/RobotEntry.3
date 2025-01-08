@@ -1,0 +1,144 @@
+.TH "RobotEntry" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RobotEntry
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <robotentry\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRobotEntry\fP ()=default"
+.br
+.ti -1c
+.RI "\fBRobotEntry\fP (QUdpSocket *socket, const QHostAddress &\fBaddress\fP, quint16 \fBport\fP, QString \fBmachineID\fP=QString(), QString \fBname\fP=QString(), QString \fBmacAddress\fP=QString())"
+.br
+.ti -1c
+.RI "void \fBsendData\fP (const QByteArray &data)"
+.br
+.ti -1c
+.RI "QString \fBname\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetName\fP (const QString &val)"
+.br
+.ti -1c
+.RI "QString \fBmachineID\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetMachineID\fP (const QString &val)"
+.br
+.ti -1c
+.RI "QHostAddress \fBaddress\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetAddress\fP (const QHostAddress &val)"
+.br
+.ti -1c
+.RI "quint16 \fBport\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetPort\fP (quint16 val)"
+.br
+.ti -1c
+.RI "quint16 \fBgetPortForAnswer\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetPortForAnswer\fP (quint16 val)"
+.br
+.ti -1c
+.RI "QString \fBmacAddress\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetMacAddress\fP (const QString &val)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QString \fBm_name\fP"
+.br
+.ti -1c
+.RI "QString \fBm_machineID\fP"
+.br
+.ti -1c
+.RI "QHostAddress \fBm_address\fP"
+.br
+.RI "IP address\&. "
+.ti -1c
+.RI "quint16 \fBm_port\fP"
+.br
+.ti -1c
+.RI "quint16 \fBm_portForAnswer\fP = 0"
+.br
+.ti -1c
+.RI "QString \fBm_macAddress\fP"
+.br
+.RI "MAC address\&. "
+.ti -1c
+.RI "QUdpSocket * \fBm_socket\fP = nullptr"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "RobotEntry::RobotEntry ()\fC [default]\fP"
+
+.SS "RobotEntry::RobotEntry (QUdpSocket * socket, const QHostAddress & address, quint16 port, QString machineID = \fCQString()\fP, QString name = \fCQString()\fP, QString macAddress = \fCQString()\fP)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QHostAddress RobotEntry::address () const\fC [inline]\fP"
+
+.SS "quint16 RobotEntry::getPortForAnswer () const\fC [inline]\fP"
+
+.SS "QString RobotEntry::macAddress () const\fC [inline]\fP"
+
+.SS "QString RobotEntry::machineID () const\fC [inline]\fP"
+
+.SS "QString RobotEntry::name () const\fC [inline]\fP"
+
+.SS "quint16 RobotEntry::port () const\fC [inline]\fP"
+
+.SS "void RobotEntry::sendData (const QByteArray & data)\fC [inline]\fP"
+
+.SS "void RobotEntry::setAddress (const QHostAddress & val)\fC [inline]\fP"
+
+.SS "void RobotEntry::setMacAddress (const QString & val)\fC [inline]\fP"
+
+.SS "void RobotEntry::setMachineID (const QString & val)\fC [inline]\fP"
+
+.SS "void RobotEntry::setName (const QString & val)\fC [inline]\fP"
+
+.SS "void RobotEntry::setPort (quint16 val)\fC [inline]\fP"
+
+.SS "void RobotEntry::setPortForAnswer (quint16 val)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QHostAddress RobotEntry::m_address\fC [private]\fP"
+
+.PP
+IP address\&. 
+.SS "QString RobotEntry::m_macAddress\fC [private]\fP"
+
+.PP
+MAC address\&. 
+.SS "QString RobotEntry::m_machineID\fC [private]\fP"
+
+.SS "QString RobotEntry::m_name\fC [private]\fP"
+
+.SS "quint16 RobotEntry::m_port\fC [private]\fP"
+
+.SS "quint16 RobotEntry::m_portForAnswer = 0\fC [private]\fP"
+
+.SS "QUdpSocket* RobotEntry::m_socket = nullptr\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

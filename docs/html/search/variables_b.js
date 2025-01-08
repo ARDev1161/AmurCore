@@ -1,18 +1,10 @@
 var searchData=
 [
-  ['m_5fadapter_643',['m_adapter',['../classVJoystickAdapter_1_1VJoystickThread.html#aadc5254f8866ee7a5c5560bff05d1449',1,'VJoystickAdapter::VJoystickThread']]],
-  ['m_5faddress_644',['m_address',['../classRobot.html#acffb9faf0e034ba516a96f6968bbfc75',1,'Robot']]],
-  ['m_5fjoystick_645',['m_joystick',['../classVJoystickAdapter.html#a1339ae98c1a5910868fcf3e381fbd5d4',1,'VJoystickAdapter']]],
-  ['m_5fjoystickthread_646',['m_joystickThread',['../classVJoystickAdapter.html#a94829a76d74e7a65dfc8a3cefa4c309e',1,'VJoystickAdapter']]],
-  ['m_5fport_647',['m_port',['../classRobot.html#ae9e99f02cf74ea101d1a340e2381d48f',1,'Robot']]],
-  ['m_5fsocket_648',['m_socket',['../classRobot.html#a88b3548002d69157932bd30b6e01c1d0',1,'Robot']]],
-  ['map1_649',['map1',['../classCamSettingsHolder.html#a3e64f82479a8b15161da00085dc67a09',1,'CamSettingsHolder']]],
-  ['map2_650',['map2',['../classCamSettingsHolder.html#aed6e6719d20cbc1b129a433bff632f00',1,'CamSettingsHolder']]],
-  ['messageno_651',['messageNo',['../classNetworkController.html#a35a7e64255858c0df2b0cd59ac555f75',1,'NetworkController']]],
-  ['move_652',['move',['../classLogic.html#a0a4f42508182243ba32cd65596ca35a1',1,'Logic']]],
-  ['movesettings_653',['moveSettings',['../classMovements.html#adc311612dd0ce3b753e1439d53353675',1,'Movements']]],
-  ['msbroadcastdelay_654',['msBroadcastDelay',['../classNetworkController.html#a198973f61c6f554efdc62e17d335271e',1,'NetworkController']]],
-  ['muclient_655',['muClient',['../classgrpcClient.html#a9a8a26f672c439bd439b62f6f648f882',1,'grpcClient']]],
-  ['muserver_656',['muServer',['../classgrpcServer.html#a33fdb8b89a90a900af52918b676704be',1,'grpcServer']]],
-  ['mustinitundistort_657',['mustInitUndistort',['../classCamSettingsHolder.html#ac4d04264b64360a10aefb4ca8595b944',1,'CamSettingsHolder']]]
+  ['languages_770',['languages',['../classSpeechDialog.html#ac4bb6a24c69a45f193fd3bfdadf9d1af',1,'SpeechDialog']]],
+  ['lastjoystate_771',['lastJoyState',['../classMovements.html#a7d5940eea7fa127cefba6eb6407f71e9',1,'Movements']]],
+  ['lightbutton_772',['lightButton',['../structMoveSettings_1_1JoyBindings.html#a9934491caaf8dba9bef14633f1ad159b',1,'MoveSettings::JoyBindings']]],
+  ['listrows_773',['listRows',['../classSpeechDialog.html#a8819403330b2506c7cff319b19de369f',1,'SpeechDialog']]],
+  ['loopflag_774',['loopFlag',['../classGetStateByJoystick.html#a08fa6edd1c3fa4011cff3f0c283e4e0f',1,'GetStateByJoystick']]],
+  ['looptime_775',['LoopTime',['../classGetStateByJoystick.html#a66d31e9706c734994f9d0f39c7fb435a',1,'GetStateByJoystick']]],
+  ['looptime_776',['loopTime',['../classAmurCore.html#a00dec7ab81c485c19cc9b4bfdaed9a90',1,'AmurCore']]]
 ];

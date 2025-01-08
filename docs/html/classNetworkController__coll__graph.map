@@ -1,5 +1,5 @@
 <map id="NetworkController" name="NetworkController">
-<area shape="rect" id="node1" title=" " alt="" coords="5,360,157,672"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,360,157,613"/>
 <area shape="rect" id="node2" title=" " alt="" coords="25,183,95,261"/>
 <area shape="rect" id="node3" href="$classgrpcServer.html" title=" " alt="" coords="120,147,283,297"/>
 <area shape="rect" id="node4" title=" " alt="" coords="126,5,277,97"/>

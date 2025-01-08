@@ -1,4 +1,4 @@
-.TH "AmurCore" 3 "Sat Sep 9 2023" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "AmurCore" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -66,6 +66,9 @@ Inherits QMainWindow\&.
 
 .in +1c
 .ti -1c
+.RI "void \fBfillFieldsByConfig\fP ()"
+.br
+.ti -1c
 .RI "void \fBstartCap\fP ()"
 .br
 .ti -1c
@@ -103,13 +106,28 @@ Inherits QMainWindow\&.
 .RI "QString \fBstatusMessage\fP = 'No robot connected'"
 .br
 .ti -1c
+.RI "const char * \fBconfigName\fP = 'AmurCore\&.cfg'"
+.br
+.ti -1c
+.RI "\fBConfigProcessor\fP * \fBconfig\fP"
+.br
+.ti -1c
 .RI "int \fBarpPort\fP = 11111"
 .br
 .ti -1c
 .RI "int \fBgrpcPort\fP = 7777"
 .br
 .ti -1c
+.RI "QString \fBarpHeader\fP = 'AMUR'"
+.br
+.ti -1c
 .RI "std::string \fBaddress_mask\fP = '0\&.0\&.0\&.0:' + std::to_string(\fBgrpcPort\fP)"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBNetworkController\fP > \fBnetwork\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBRobotRepository\fP > \fBrepo\fP"
 .br
 .ti -1c
 .RI "\fBSpeechDialog\fP * \fBspeechDialog\fP"
@@ -119,9 +137,6 @@ Inherits QMainWindow\&.
 .br
 .ti -1c
 .RI "\fBJoystickDialog\fP * \fBjoystickDialog\fP"
-.br
-.ti -1c
-.RI "\fBNetworkController\fP * \fBnetwork\fP"
 .br
 .ti -1c
 .RI "AMUR::AmurControls * \fBcontrols\fP"
@@ -177,6 +192,8 @@ Inherits QMainWindow\&.
 
 .SS "void AmurCore::fetchJoystickId ()\fC [private]\fP, \fC [slot]\fP"
 
+.SS "void AmurCore::fillFieldsByConfig ()\fC [private]\fP"
+
 .SS "void AmurCore::frameUpdate ()\fC [private]\fP, \fC [slot]\fP"
 
 .SS "void AmurCore::initialize ()\fC [private]\fP"
@@ -205,11 +222,17 @@ Inherits QMainWindow\&.
 
 .SS "\fBLogic\fP* AmurCore::amurLogic\fC [private]\fP"
 
+.SS "QString AmurCore::arpHeader = 'AMUR'\fC [private]\fP"
+
 .SS "int AmurCore::arpPort = 11111\fC [private]\fP"
 
 .SS "\fBCamSettingsHolder\fP* AmurCore::camHolder\fC [private]\fP"
 
 .SS "VideoCapture AmurCore::capture\fC [private]\fP"
+
+.SS "\fBConfigProcessor\fP* AmurCore::config\fC [private]\fP"
+
+.SS "const char* AmurCore::configName = 'AmurCore\&.cfg'\fC [private]\fP"
 
 .SS "\fBConnectDialog\fP* AmurCore::connectDialog\fC [private]\fP"
 
@@ -227,9 +250,11 @@ Inherits QMainWindow\&.
 
 .SS "int AmurCore::loopTime = 50\fC [private]\fP"
 
-.SS "\fBNetworkController\fP* AmurCore::network\fC [private]\fP"
+.SS "std::shared_ptr<\fBNetworkController\fP> AmurCore::network\fC [private]\fP"
 
 .SS "Mat AmurCore::outputMat\fC [private]\fP"
+
+.SS "std::shared_ptr<\fBRobotRepository\fP> AmurCore::repo\fC [private]\fP"
 
 .SS "AMUR::AmurSensors* AmurCore::sensors\fC [private]\fP"
 

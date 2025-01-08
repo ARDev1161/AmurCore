@@ -2,6 +2,7 @@ var hierarchy =
 [
     [ "anytype_s", "unionanytype__s.html", null ],
     [ "CamSettingsHolder", "classCamSettingsHolder.html", null ],
+    [ "ConfigProcessor", "classConfigProcessor.html", null ],
     [ "grpcClient", "classgrpcClient.html", null ],
     [ "MoveSettings::JoyBindings", "structMoveSettings_1_1JoyBindings.html", null ],
     [ "JoyState", "structJoyState.html", null ],
@@ -31,7 +32,8 @@ var hierarchy =
     [ "QThread", null, [
       [ "VJoystickAdapter::VJoystickThread", "classVJoystickAdapter_1_1VJoystickThread.html", null ]
     ] ],
-    [ "Robot", "classRobot.html", null ],
+    [ "RobotEntry", "classRobotEntry.html", null ],
+    [ "RobotRepository", "classRobotRepository.html", null ],
     [ "AMUR::ClientOnRobot::Service", null, [
       [ "grpcServer", "classgrpcServer.html", null ]
     ] ],
