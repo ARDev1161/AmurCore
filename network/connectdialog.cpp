@@ -288,3 +288,9 @@ RobotEntryPtr ConnectDialog::findRobotByMachineId(const RobotList &robots, const
     return (it != robots.end()) ? *it : nullptr; // Если найден, возвращаем указатель, иначе nullptr
 }
 
+
+void ConnectDialog::on_connectButton_clicked()
+{
+
+}
+

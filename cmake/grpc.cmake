@@ -72,6 +72,13 @@ elseif(GRPC_FETCHCONTENT)
   set(ABSL_ENABLE_INSTALL ON)
   set(ABSL_PROPAGATE_CXX_STD ON)
 
+  set(FETCHCONTENT_QUIET OFF)
+
+  # Save flags
+  set(_SAVED_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+  # Set -w for hiding warnings
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
+
   include(FetchContent)
   FetchContent_Declare(
     grpc
@@ -82,6 +89,9 @@ elseif(GRPC_FETCHCONTENT)
     # that's currently under test.
     GIT_TAG        v1.69.0)
   FetchContent_MakeAvailable(grpc)
+
+  # Restore previous flags
+  set(CMAKE_CXX_FLAGS "${_SAVED_CXX_FLAGS}")
 
   # Since FetchContent uses add_subdirectory under the hood, we can use
   # the grpc targets directly from this build.

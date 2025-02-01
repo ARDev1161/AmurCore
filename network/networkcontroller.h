@@ -21,8 +21,9 @@ class NetworkController : QObject
 {
     Q_OBJECT
 
-    AMUR::AmurSensors *sensors;
-    AMUR::AmurControls *controls;
+    std::shared_ptr<Controls> controls;
+    std::shared_ptr<Sensors> sensors;
+    std::shared_ptr<map_service::GetMapResponse> map;
 
     grpc::Status clientStatus;
 
@@ -36,7 +37,10 @@ class NetworkController : QObject
     QList< std::shared_ptr<RobotEntry> > robots;
     QMap<quint16, QUdpSocket*> clientSockets;
 public:
-    NetworkController(AMUR::AmurControls* const controls, AMUR::AmurSensors* const sensors);
+    NetworkController(std::shared_ptr<Controls> controlsPtr,
+                      std::shared_ptr<Sensors> sensorsPtr,
+                      std::shared_ptr<map_service::GetMapResponse> mapPtr);
+
     ~NetworkController();
 
     int runClient(std::string &server_address); // Server address & port for client

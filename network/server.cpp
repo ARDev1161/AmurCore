@@ -1,13 +1,16 @@
 #include "server.h"
 
-void grpcServer::setProtosPointers(AMUR::AmurControls *const controls, AMUR::AmurSensors *const sensors)
+void grpcServer::setProtosPointers( std::shared_ptr<Controls> controlsPtr,
+                                    std::shared_ptr<Sensors> sensorsPtr,
+                                    std::shared_ptr<map_service::GetMapResponse> mapPtr)
 {
-    this->controls = controls;
-    this->sensors = sensors;
+    this->controls = controlsPtr;
+    this->sensors = sensorsPtr;
+    this->map = mapPtr;
 }
 
 grpc::Status grpcServer::DataExchange ([[maybe_unused]] grpc::ServerContext* context,
-                          const AMUR::AmurSensors* request, AMUR::AmurControls* reply)
+                          const Sensors* request, Controls* reply)
 {
   std::unique_lock<std::mutex> ul(muServer);
   *sensors = *request;
@@ -19,20 +22,40 @@ grpc::Status grpcServer::DataExchange ([[maybe_unused]] grpc::ServerContext* con
 }
 
 grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContext* context,
-                                grpc::ServerReaderWriter<AMUR::AmurControls, AMUR::AmurSensors >* stream)
+                                grpc::ServerReaderWriter<Controls, Sensors >* stream)
 {
     std::unique_lock<std::mutex> ul(muServer, std::defer_lock);
 
     while(true)
     {
       ul.lock();
-      if(!(stream->Read(sensors)))
+      if(!(stream->Read(sensors.get())))
           return grpc::Status::OK;
       ul.unlock();
 
       // Write controls
       stream->Write(*controls);
     }
+}
+
+grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
+                                   grpc::ServerReaderWriter<map_service::GetMapRequest, map_service::GetMapResponse>* stream)
+{
+    map_service::GetMapRequest request;
+
+    std::unique_lock<std::mutex> ul(muMap, std::defer_lock);
+    while(true)
+    {
+      ul.lock();
+      if(!(stream->Read(map.get())))
+          return grpc::Status::OK;
+      ul.unlock();
+
+      // Write controls
+      stream->Write(request);
+    }
+
+    return grpc::Status::OK;
 }
 
 // TODO - make async methods

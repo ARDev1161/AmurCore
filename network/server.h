@@ -7,23 +7,31 @@
 #include <grpcpp/health_check_service_interface.h>
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 
-#include "network/protobuf/amur.grpc.pb.h"
+#include "network/protobuf/robot.grpc.pb.h"
+
+using namespace Robot;
 
 // Logic and data behind the server's behavior.
-class grpcServer final : public AMUR::ClientOnRobot::Service
+class grpcServer final : public ClientOnRobot::Service
 {
-  AMUR::AmurControls *controls;
-  AMUR::AmurSensors *sensors;
-  std::mutex muServer;
+  std::shared_ptr<Controls> controls;
+  std::shared_ptr<Sensors> sensors;
+  std::shared_ptr<map_service::GetMapResponse> map;
+  std::mutex muServer, muMap;
 
   grpc::Status DataExchange([[maybe_unused]] grpc::ServerContext* context,
-                            const AMUR::AmurSensors* request, AMUR::AmurControls* reply) override;
+                            const Sensors* request, Controls* reply) override;
 
   grpc::Status DataStreamExchange([[maybe_unused]] grpc::ServerContext* context,
-                                  grpc::ServerReaderWriter<AMUR::AmurControls, AMUR::AmurSensors>* stream) override;
+                                  grpc::ServerReaderWriter<Controls, Sensors>* stream) override;
+
+  grpc::Status MapStream([[maybe_unused]] grpc::ServerContext* context,
+                            grpc::ServerReaderWriter<map_service::GetMapRequest, map_service::GetMapResponse>* stream) override;
 
 public:
-    void setProtosPointers(AMUR::AmurControls *const controls, AMUR::AmurSensors *const sensors);
+    void setProtosPointers(std::shared_ptr<Controls> controlsPtr,
+                           std::shared_ptr<Sensors> sensorsPtr,
+                           std::shared_ptr<map_service::GetMapResponse> mapPtr);
     int checkConn();
 };
 

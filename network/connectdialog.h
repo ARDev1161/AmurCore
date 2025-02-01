@@ -43,6 +43,8 @@ private slots:
     void onTableRowDoubleClicked(int row, int column);
     void on_buttonBox_accepted();
 
+    void on_connectButton_clicked();
+
 private:
     Ui::ConnectDialog *ui;
     QTimer *updateTimer; // Таймер для периодического вызова updateTable

@@ -1,10 +1,12 @@
 #include "networkcontroller.h"
 
-NetworkController::NetworkController(AMUR::AmurControls* const controls, AMUR::AmurSensors* const sensors)  // TODO - add robot id & &<vector> of robots id
+NetworkController::NetworkController(std::shared_ptr<Controls> controlsPtr,
+                                     std::shared_ptr<Sensors> sensorsPtr,
+                                     std::shared_ptr<map_service::GetMapResponse> mapPtr)  // TODO - add robot id & &<vector> of robots id
+    : controls(controlsPtr),
+      sensors(sensorsPtr),
+      map(mapPtr)
 {
-    this->controls = controls;
-    this->sensors = sensors;
-
     udpSocket = new QUdpSocket(this);
 }
 
@@ -25,7 +27,7 @@ int NetworkController::runClient(std::string &server_address) // TODO - send con
     std::thread thr([&]()
      {
         grpcClient client(grpc::CreateChannel(
-            server_address, grpc::InsecureChannelCredentials()), sensors, controls);
+            server_address, grpc::InsecureChannelCredentials()), controls, sensors, map);
 
         clientStatus = client.DataStreamExchange();
         std::cout << "State is OK?: " << clientStatus.ok() << std::endl;
@@ -44,7 +46,7 @@ int NetworkController::runServer(std::string &address_mask) // TODO - send const
       grpc::reflection::InitProtoReflectionServerBuilderPlugin();
 
       // Send protos pointers to server
-      service.setProtosPointers(controls, sensors);
+      service.setProtosPointers(controls, sensors, map);
 
       // Listen on the given address without any authentication mechanism.
       builder.AddListeningPort(address_mask, grpc::InsecureServerCredentials());
@@ -104,23 +106,23 @@ int NetworkController::runArpingService(int arpPort, int gRPCPort, QString &arpH
                 // Check if the client is already in the list
                 std::shared_ptr<RobotEntry> robot;
                 for (int i = 0; i < robots.size(); ++i) {
-                    if (robots[i]->address() == senderAddress && robots[i]->port() == senderBCastPort) {
+                    if (robots[i]->address() == senderAddress) {
                         robot = robots[i];
                         break;
                     }
                 }
 
                 // Add a new client if it not found in list of robots
-                if (robot == nullptr) {
+                if (!robot) {
                     robot = std::make_shared<RobotEntry>(udpSocket, senderAddress, senderBCastPort);
                     robot->setMachineID(machineID);
 
                     // set custom port for answer if setted
                     if(arpingPort > 0)
-                        robot->setPortForAnswer(arpingPort);
+                        robot->setPort(arpingPort);
 
                     robots.append(robot);
-                    qDebug() << "Added new client " << senderAddress.toString() << ":" << senderBCastPort;
+                    qDebug() << "Added new client " << senderAddress.toString() << ":" << arpingPort;
                 }
 
                 QByteArray response = "OK:" + QByteArray::number(gRPCPort);
