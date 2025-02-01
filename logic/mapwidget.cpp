@@ -1,0 +1,249 @@
+#include "mapwidget.h"
+#include <QPainter>
+#include <QDebug>
+#include <QWheelEvent>
+#include <QMouseEvent>
+#include <algorithm>
+#include <QtMath>
+
+MapWidget::MapWidget(QWidget* parent)
+    : QWidget(parent),
+      m_scaleFactor(1.0),
+      m_minScale(0.1),
+      m_maxScale(10.0),
+      m_offset(0, 0),
+      m_panning(false),
+      m_robot_x(0.0f),
+      m_robot_y(0.0f),
+      m_robot_theta(0.0),
+      m_mapResolution(0.05) // Примерная начальная разрешающая способность (метр/пиксель)
+{
+    setBackgroundRole(QPalette::Base);
+    setAutoFillBackground(true);
+
+    // Загрузка изображения робота из ресурсов
+    if(!m_robotPixmap.load(":/images/robot_triangle.png")) {
+        qWarning() << "Couldn't load image of robot. Creating default triangle";
+        // Создаём треугольник по умолчанию
+        m_robotPixmap = QPixmap(20, 20);
+        m_robotPixmap.fill(Qt::transparent);
+        QPainter painter(&m_robotPixmap);
+        painter.setBrush(Qt::green);
+        QPoint points[3] = { QPoint(10, 0), QPoint(0, 20), QPoint(20, 20) };
+        painter.drawPolygon(points, 3);
+    }
+}
+
+
+MapWidget::~MapWidget()
+{
+    // Очистка ресурсов, если необходимо
+}
+
+void MapWidget::setMapData(const std::vector<int8_t>& data,
+                           int width, int height,
+                           double resolution,
+                           double originX, double originY)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+
+    if (width <= 0 || height <= 0 || data.empty()) {
+//        qWarning() << "Invalid map data.";
+        m_mapImage = QImage(); // Пустое изображение
+        update();
+        return;
+    }
+
+    m_mapResolution = resolution; // Устанавливаем разрешение карты
+    m_originX = originX;
+    m_originY = originY;
+
+    // Создаём QImage с форматом ARGB32
+    QImage newImage(width, height, QImage::Format_ARGB32);
+    newImage.fill(Qt::white); // Заполняем белым фоном
+
+    // Обработка данных карты
+    for(int y = 0; y < height; ++y) {
+        for(int x = 0; x < width; ++x) {
+            int index = y * width + x;
+            int8_t val = data[index];
+
+            QColor color;
+            if(val < 0) {
+                // Неизвестная область
+                color = QColor(128, 128, 128); // Серый
+            }
+            else {
+                // val от 0 до 100
+                // Линейная интерполяция: 0 -> белый, 100 -> чёрный
+                int shade = 255 - static_cast<int>(2.55 * val);
+                color = QColor(shade, shade, shade);
+            }
+
+            newImage.setPixelColor(x, y, color);
+        }
+    }
+
+    // Отражаем изображение по вертикали, чтобы соответствовать системе координат Qt
+    m_mapImage = newImage.mirrored(false, true);
+
+    // Обновляем масштабирование, чтобы вся карта помещалась в виджет
+    QSize widgetSize = size();
+    updateScaleOnResize(widgetSize.width(), widgetSize.height());
+
+    // Инициируем перерисовку виджета
+    update();
+}
+
+void MapWidget::setRobotLocation(double posX, double posY) {
+    m_robot_x = posX;
+    m_robot_y = posY;
+}
+
+void MapWidget::setRobotOrientation(PoseQuaternion quaternion) {
+    // Конвертация кватерниона в угол поворота (yaw)
+    double siny_cosp = 2.0 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
+    double cosy_cosp = 1.0 - 2.0 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
+    double yaw = std::atan2(siny_cosp, cosy_cosp);
+    m_robot_theta = -yaw + M_PI / 2.0;
+}
+
+void MapWidget::setRobotOrientation(double yaw)
+{
+    m_robot_theta = yaw;
+}
+
+void MapWidget::setRobotPose(double posX, double posY, PoseQuaternion quaternion)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+
+    setRobotLocation(posX, -posY);
+    setRobotOrientation(quaternion);
+}
+
+void MapWidget::paintEvent(QPaintEvent* /*event*/)
+{
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+
+    if(!m_mapImage.isNull()) {
+        // Применяем масштабирование и сдвиг
+        painter.translate(m_offset);
+        painter.scale(m_scaleFactor, m_scaleFactor);
+
+        // Рисуем карту
+        painter.drawImage(0, 0, m_mapImage);
+
+        // Рисуем робота
+        {
+            std::lock_guard<std::mutex> lock(m_mutex);
+            // Преобразование положения робота из метров в пиксели с учетом происхождения карты
+            double robot_pixel_x = (m_robot_x - m_originX) / m_mapResolution;
+            double robot_pixel_y = (m_robot_y - m_originY) / m_mapResolution;
+
+            // Определяем размер робота в пикселях
+            double robot_size = 20.0 / m_scaleFactor; // Настройте размер по необходимости
+
+            // Создаём трансформацию для робота
+            QTransform transform;
+            transform.translate(robot_pixel_x, robot_pixel_y);
+            transform.rotateRadians(m_robot_theta);
+
+            // Применяем трансформацию
+            painter.setTransform(transform, true); // Сохраняем существующие трансформации
+
+            // Рисуем изображение робота, центрированное в (0,0)
+            QPointF topLeft(-m_robotPixmap.width() / 2.0, -m_robotPixmap.height() / 2.0);
+            painter.drawPixmap(topLeft, m_robotPixmap.scaled(robot_size, robot_size, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
+    }
+}
+
+void MapWidget::resizeEvent(QResizeEvent* event)
+{
+    QWidget::resizeEvent(event);
+
+    QSize widgetSize = event->size();
+    updateScaleOnResize(widgetSize.width(), widgetSize.height());
+    update();
+}
+
+void MapWidget::wheelEvent(QWheelEvent* event)
+{
+    if(m_mapImage.isNull()) {
+        event->ignore();
+        return;
+    }
+
+    // Определяем направление прокрутки
+    QPoint numDegrees = event->angleDelta() / 8;
+    if(numDegrees.y() == 0) {
+        event->ignore();
+        return;
+    }
+
+    double factor = 1.15;
+    if(numDegrees.y() > 0) {
+        // Zoom in
+        m_scaleFactor *= factor;
+    }
+    else {
+        // Zoom out
+        m_scaleFactor /= factor;
+    }
+
+    // Ограничиваем масштабирование
+    m_scaleFactor = std::clamp(m_scaleFactor, m_minScale, m_maxScale);
+
+    update();
+}
+
+void MapWidget::mousePressEvent(QMouseEvent* event)
+{
+    if(event->button() == Qt::LeftButton && !m_mapImage.isNull()) {
+        m_panning = true;
+        m_lastMousePos = event->pos();
+        setCursor(Qt::ClosedHandCursor);
+    }
+}
+
+void MapWidget::mouseMoveEvent(QMouseEvent* event)
+{
+    if(m_panning) {
+        QPoint delta = event->pos() - m_lastMousePos;
+        m_lastMousePos = event->pos();
+        m_offset += delta;
+        update();
+    }
+}
+
+void MapWidget::mouseReleaseEvent(QMouseEvent* event)
+{
+    if(event->button() == Qt::LeftButton && m_panning) {
+        m_panning = false;
+        setCursor(Qt::ArrowCursor);
+    }
+}
+
+void MapWidget::updateScaleOnResize(int widgetWidth, int widgetHeight)
+{
+    if(m_mapImage.isNull()) {
+        return;
+    }
+
+    double scaleX = static_cast<double>(widgetWidth) / m_mapImage.width();
+    double scaleY = static_cast<double>(widgetHeight) / m_mapImage.height();
+
+    // Выбираем минимальный масштаб, чтобы вся карта помещалась
+    m_scaleFactor = std::min(scaleX, scaleY);
+
+    // Ограничиваем масштабирование
+    m_scaleFactor = std::clamp(m_scaleFactor, m_minScale, m_maxScale);
+
+    // Центрируем карту
+    double scaledWidth = m_mapImage.width() * m_scaleFactor;
+    double scaledHeight = m_mapImage.height() * m_scaleFactor;
+
+    m_offset = QPoint(static_cast<int>((widgetWidth - scaledWidth) / 2),
+                      static_cast<int>((widgetHeight - scaledHeight) / 2));
+}
