@@ -1,0 +1,6 @@
+<map id="MapDialog::poseToQuaternion" name="MapDialog::poseToQuaternion">
+<area shape="rect" id="node1" title=" " alt="" coords="668,31,863,57"/>
+<area shape="rect" id="node2" href="$classMapDialog.html#ae78f95154bc619bc2bbae3ff10c4f256" title="Проверяет, изменились ли данные положения робота." alt="" coords="429,5,620,32"/>
+<area shape="rect" id="node3" href="$classMapDialog.html#a6f78c9c4a3a9c828f5a98132ad41fa7e" title="Слот для обновления отображаемой карты." alt="" coords="204,31,381,57"/>
+<area shape="rect" id="node4" href="$classMapDialog.html#a7c1deea303dcae75fef29869f85e140c" title=" " alt="" coords="5,31,156,57"/>
+</map>

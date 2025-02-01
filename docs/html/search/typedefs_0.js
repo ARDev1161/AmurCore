@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['anytype_5ft_837',['anytype_t',['../prim__type_8h.html#abfc21839f45a6def491687f823eaa94d',1,'prim_type.h']]]
+  ['robotentryptr_850',['RobotEntryPtr',['../robotentry_8h.html#abbcd653985eacc6f2c9fd13d3d506c33',1,'robotentry.h']]],
+  ['robotlist_851',['RobotList',['../robotentry_8h.html#ae1d464d087454cef5993c049534b8563',1,'robotentry.h']]]
 ];

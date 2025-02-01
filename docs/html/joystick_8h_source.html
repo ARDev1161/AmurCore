@@ -97,9 +97,9 @@ $(document).ready(function(){initNavTree('joystick_8h_source.html',''); initResi
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classJoystick.html#a9c68dc7f0bdf6b22474116f76ead2f9d">   11</a></span>&#160;    <a class="code" href="structJoyState.html">JoyState</a> *<a class="code" href="classJoystick.html#a9c68dc7f0bdf6b22474116f76ead2f9d">joyState</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classJoystick.html#a5d28f691dcaf47dbf5515059bf35913c">   11</a></span>&#160;    std::shared_ptr&lt;JoyState&gt; <a class="code" href="classJoystick.html#a5d28f691dcaf47dbf5515059bf35913c">joyState</a>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="classJoystick.html#aa84c3702e00355d76192d031265267bd">Joystick</a>(<a class="code" href="structJoyState.html">JoyState</a> * <span class="keyword">const</span> state);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="classJoystick.html#a45177bc4d5ff5fa9e286bba0205fda02">Joystick</a>(<span class="keyword">const</span> std::shared_ptr&lt;JoyState&gt; state);</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classJoystick.html#a23429c0470e1a32b8de61e1ad7c251c1">~Joystick</a>();</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJoystick.html#aada137437aaa76351b07ace231696cb2">addThread</a>();</div>
@@ -113,13 +113,12 @@ $(document).ready(function(){initNavTree('joystick_8h_source.html',''); initResi
 <div class="ttc" id="aclassJoystick_html"><div class="ttname"><a href="classJoystick.html">Joystick</a></div><div class="ttdef"><b>Definition:</b> joystick.h:8</div></div>
 <div class="ttc" id="aclassJoystick_html_a23429c0470e1a32b8de61e1ad7c251c1"><div class="ttname"><a href="classJoystick.html#a23429c0470e1a32b8de61e1ad7c251c1">Joystick::~Joystick</a></div><div class="ttdeci">~Joystick()</div><div class="ttdef"><b>Definition:</b> joystick.cpp:9</div></div>
 <div class="ttc" id="aclassJoystick_html_a2551bacac4307e130e4d9c076e5213c4"><div class="ttname"><a href="classJoystick.html#a2551bacac4307e130e4d9c076e5213c4">Joystick::stopThreads</a></div><div class="ttdeci">void stopThreads()</div><div class="ttdef"><b>Definition:</b> joystick.cpp:29</div></div>
-<div class="ttc" id="aclassJoystick_html_a9c68dc7f0bdf6b22474116f76ead2f9d"><div class="ttname"><a href="classJoystick.html#a9c68dc7f0bdf6b22474116f76ead2f9d">Joystick::joyState</a></div><div class="ttdeci">JoyState * joyState</div><div class="ttdef"><b>Definition:</b> joystick.h:11</div></div>
-<div class="ttc" id="aclassJoystick_html_aa84c3702e00355d76192d031265267bd"><div class="ttname"><a href="classJoystick.html#aa84c3702e00355d76192d031265267bd">Joystick::Joystick</a></div><div class="ttdeci">Joystick(JoyState *const state)</div><div class="ttdef"><b>Definition:</b> joystick.cpp:3</div></div>
+<div class="ttc" id="aclassJoystick_html_a45177bc4d5ff5fa9e286bba0205fda02"><div class="ttname"><a href="classJoystick.html#a45177bc4d5ff5fa9e286bba0205fda02">Joystick::Joystick</a></div><div class="ttdeci">Joystick(const std::shared_ptr&lt; JoyState &gt; state)</div><div class="ttdef"><b>Definition:</b> joystick.cpp:3</div></div>
+<div class="ttc" id="aclassJoystick_html_a5d28f691dcaf47dbf5515059bf35913c"><div class="ttname"><a href="classJoystick.html#a5d28f691dcaf47dbf5515059bf35913c">Joystick::joyState</a></div><div class="ttdeci">std::shared_ptr&lt; JoyState &gt; joyState</div><div class="ttdef"><b>Definition:</b> joystick.h:11</div></div>
 <div class="ttc" id="aclassJoystick_html_aada137437aaa76351b07ace231696cb2"><div class="ttname"><a href="classJoystick.html#aada137437aaa76351b07ace231696cb2">Joystick::addThread</a></div><div class="ttdeci">void addThread()</div><div class="ttdef"><b>Definition:</b> joystick.cpp:14</div></div>
 <div class="ttc" id="aclassJoystick_html_afa4e6addc5ccd6752a4a74a33cff7be0"><div class="ttname"><a href="classJoystick.html#afa4e6addc5ccd6752a4a74a33cff7be0">Joystick::stopAll</a></div><div class="ttdeci">void stopAll()</div></div>
 <div class="ttc" id="ajoystickdialog_8h_html"><div class="ttname"><a href="joystickdialog_8h.html">joystickdialog.h</a></div></div>
 <div class="ttc" id="ajoystickstateworker_8h_html"><div class="ttname"><a href="joystickstateworker_8h.html">joystickstateworker.h</a></div></div>
-<div class="ttc" id="astructJoyState_html"><div class="ttname"><a href="structJoyState.html">JoyState</a></div><div class="ttdef"><b>Definition:</b> getstatebyjoy.h:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

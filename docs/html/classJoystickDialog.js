@@ -1,6 +1,6 @@
 var classJoystickDialog =
 [
-    [ "JoystickDialog", "classJoystickDialog.html#af84e054efce6c8b6945cde7279fe6c67", null ],
+    [ "JoystickDialog", "classJoystickDialog.html#ae0b7e2d7c9d28b306a409db4e9c01dab", null ],
     [ "~JoystickDialog", "classJoystickDialog.html#abefb9a00a34ee4d57b6982361a2cbb3d", null ],
     [ "axisSetup", "classJoystickDialog.html#ace5cc001a9e20ad75ddd59254337850a", null ],
     [ "ballSetup", "classJoystickDialog.html#a8f15e59a3e9bcb05579099dc429d2033", null ],
@@ -19,6 +19,6 @@ var classJoystickDialog =
     [ "buttonVector", "classJoystickDialog.html#a0b73f0b97dda65ce8618fe257d65a17f", null ],
     [ "joyAdapter", "classJoystickDialog.html#ac115489ec92801800221cc7e579a6de1", null ],
     [ "joyId", "classJoystickDialog.html#a06004b908999098e04ce6531119ffa32", null ],
-    [ "joyState", "classJoystickDialog.html#a98caaa9ab7d1eaedf736e61e0f354e4d", null ],
+    [ "joyState", "classJoystickDialog.html#a40b7102758de472628b1dbbbd6e4e9b2", null ],
     [ "ui", "classJoystickDialog.html#a12abc9b92206c4c6a7a05b8db0ae6336", null ]
 ];

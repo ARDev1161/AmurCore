@@ -1,4 +1,4 @@
-.TH "threads/CMakeLists.txt" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "threads/CMakeLists.txt" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,7 +10,7 @@ threads/CMakeLists.txt
 
 .in +1c
 .ti -1c
-.RI "\fBcmake_minimum_required\fP (VERSION 3\&.16 FATAL_ERROR) \fBproject\fP(ThreadsHandler LANGUAGES CXX) get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY) \fBset\fP(THREADS_SOURCES session\&.cpp session\&.h worker\&.cpp worker\&.h) \fBadd_library\fP(ThreadsHandler STATIC $"
+.RI "\fBcmake_minimum_required\fP (VERSION 3\&.16 FATAL_ERROR) \fBproject\fP(ThreadsHandler LANGUAGES CXX) get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY) set(THREADS_SOURCES session\&.cpp session\&.h worker\&.cpp worker\&.h) add_library(ThreadsHandler STATIC $"
 .br
 .in -1c
 .SH "Function Documentation"

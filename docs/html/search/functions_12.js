@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['undistortmat_698',['undistortMat',['../classAmurCore.html#a7f29997a8d1cd0cefc312b4a2a3bd660',1,'AmurCore']]],
-  ['update_699',['update',['../classMovements.html#a92357438ace26e6258b150e34a75b6ca',1,'Movements']]],
-  ['updaterobot_700',['updateRobot',['../classRobotRepository.html#a9037f7e6bb7749005ddd7795ce57d96d',1,'RobotRepository']]],
-  ['updatetable_701',['updateTable',['../classConnectDialog.html#ad6431fd2e2677eac819239a720db5206',1,'ConnectDialog']]]
+  ['vjoystickadapter_698',['VJoystickAdapter',['../classVJoystickAdapter.html#a7153908bc8edcb8d955f93c61f7ebbe6',1,'VJoystickAdapter']]],
+  ['vjoystickthread_699',['VJoystickThread',['../classVJoystickAdapter_1_1VJoystickThread.html#a7a40cbc31f31fe1c6f36e2d3e2435793',1,'VJoystickAdapter::VJoystickThread']]]
 ];

@@ -1,4 +1,4 @@
-.TH "grpcServer" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "grpcServer" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -9,12 +9,12 @@ grpcServer
 .PP
 \fC#include <server\&.h>\fP
 .PP
-Inherits AMUR::ClientOnRobot::Service\&.
+Inherits ClientOnRobot::Service\&.
 .SS "Public Member Functions"
 
 .in +1c
 .ti -1c
-.RI "void \fBsetProtosPointers\fP (AMUR::AmurControls *const \fBcontrols\fP, AMUR::AmurSensors *const \fBsensors\fP)"
+.RI "void \fBsetProtosPointers\fP (std::shared_ptr< Controls > controlsPtr, std::shared_ptr< Sensors > sensorsPtr, std::shared_ptr< map_service::GetMapResponse > mapPtr)"
 .br
 .ti -1c
 .RI "int \fBcheckConn\fP ()"
@@ -24,42 +24,57 @@ Inherits AMUR::ClientOnRobot::Service\&.
 
 .in +1c
 .ti -1c
-.RI "grpc::Status \fBDataExchange\fP ([[maybe_unused]] grpc::ServerContext *context, const AMUR::AmurSensors *request, AMUR::AmurControls *reply) override"
+.RI "grpc::Status \fBDataExchange\fP ([[maybe_unused]] grpc::ServerContext *context, const Sensors *request, Controls *reply) override"
 .br
 .ti -1c
-.RI "grpc::Status \fBDataStreamExchange\fP ([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter< AMUR::AmurControls, AMUR::AmurSensors > *stream) override"
+.RI "grpc::Status \fBDataStreamExchange\fP ([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter< Controls, Sensors > *stream) override"
+.br
+.ti -1c
+.RI "grpc::Status \fBMapStream\fP ([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter< map_service::GetMapRequest, map_service::GetMapResponse > *stream) override"
 .br
 .in -1c
 .SS "Private Attributes"
 
 .in +1c
 .ti -1c
-.RI "AMUR::AmurControls * \fBcontrols\fP"
+.RI "std::shared_ptr< Controls > \fBcontrols\fP"
 .br
 .ti -1c
-.RI "AMUR::AmurSensors * \fBsensors\fP"
+.RI "std::shared_ptr< Sensors > \fBsensors\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< map_service::GetMapResponse > \fBmap\fP"
 .br
 .ti -1c
 .RI "std::mutex \fBmuServer\fP"
+.br
+.ti -1c
+.RI "std::mutex \fBmuMap\fP"
 .br
 .in -1c
 .SH "Member Function Documentation"
 .PP 
 .SS "int grpcServer::checkConn ()"
 
-.SS "grpc::Status grpcServer::DataExchange ([[maybe_unused] ] grpc::ServerContext * context, const AMUR::AmurSensors * request, AMUR::AmurControls * reply)\fC [override]\fP, \fC [private]\fP"
+.SS "grpc::Status grpcServer::DataExchange ([[maybe_unused] ] grpc::ServerContext * context, const Sensors * request, Controls * reply)\fC [override]\fP, \fC [private]\fP"
 
-.SS "grpc::Status grpcServer::DataStreamExchange ([[maybe_unused] ] grpc::ServerContext * context, grpc::ServerReaderWriter< AMUR::AmurControls, AMUR::AmurSensors > * stream)\fC [override]\fP, \fC [private]\fP"
+.SS "grpc::Status grpcServer::DataStreamExchange ([[maybe_unused] ] grpc::ServerContext * context, grpc::ServerReaderWriter< Controls, Sensors > * stream)\fC [override]\fP, \fC [private]\fP"
 
-.SS "void grpcServer::setProtosPointers (AMUR::AmurControls *const controls, AMUR::AmurSensors *const sensors)"
+.SS "grpc::Status grpcServer::MapStream ([[maybe_unused] ] grpc::ServerContext * context, grpc::ServerReaderWriter< map_service::GetMapRequest, map_service::GetMapResponse > * stream)\fC [override]\fP, \fC [private]\fP"
+
+.SS "void grpcServer::setProtosPointers (std::shared_ptr< Controls > controlsPtr, std::shared_ptr< Sensors > sensorsPtr, std::shared_ptr< map_service::GetMapResponse > mapPtr)"
 
 .SH "Member Data Documentation"
 .PP 
-.SS "AMUR::AmurControls* grpcServer::controls\fC [private]\fP"
+.SS "std::shared_ptr<Controls> grpcServer::controls\fC [private]\fP"
+
+.SS "std::shared_ptr<map_service::GetMapResponse> grpcServer::map\fC [private]\fP"
+
+.SS "std::mutex grpcServer::muMap\fC [private]\fP"
 
 .SS "std::mutex grpcServer::muServer\fC [private]\fP"
 
-.SS "AMUR::AmurSensors* grpcServer::sensors\fC [private]\fP"
+.SS "std::shared_ptr<Sensors> grpcServer::sensors\fC [private]\fP"
 
 
 .SH "Author"

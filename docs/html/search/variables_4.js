@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['enginename_743',['engineName',['../classSpeechDialog.html#a6e844e1cb9d57bfc1f017f986c0d5df0',1,'SpeechDialog']]],
-  ['engines_744',['engines',['../classSpeechDialog.html#aeb2ab618846d77456d933405c4129df6',1,'SpeechDialog']]]
+  ['flag_741',['flag',['../classCamSettingsHolder.html#a07e764736841dbec6c2a93d419596812',1,'CamSettingsHolder']]]
 ];

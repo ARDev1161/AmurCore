@@ -1,12 +1,8 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,208,76,235"/>
-<area shape="rect" id="node2" href="$classCalibrator.html" title=" " alt="" coords="157,5,234,32"/>
-<area shape="rect" id="node3" href="$classCalibratorWorker.html" title=" " alt="" coords="136,56,255,83"/>
-<area shape="rect" id="node4" href="$classGetStateByJoystick.html" title=" " alt="" coords="127,107,264,133"/>
-<area shape="rect" id="node5" href="$classJoystick.html" title=" " alt="" coords="160,157,231,184"/>
-<area shape="rect" id="node6" href="$classJoystickStateWorker.html" title=" " alt="" coords="124,208,267,235"/>
-<area shape="rect" id="node7" href="$classNetworkController.html" title=" " alt="" coords="132,259,259,285"/>
-<area shape="rect" id="node8" href="$classSession.html" title=" " alt="" coords="161,309,230,336"/>
-<area shape="rect" id="node9" href="$classVJoystickAdapter.html" title=" " alt="" coords="133,360,257,387"/>
-<area shape="rect" id="node10" href="$classWorker.html" title=" " alt="" coords="164,411,227,437"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,73,133"/>
+<area shape="rect" id="node2" href="$classCamCalibrate.html" title=" " alt="" coords="129,5,229,32"/>
+<area shape="rect" id="node3" href="$classConnectDialog.html" title=" " alt="" coords="125,56,232,83"/>
+<area shape="rect" id="node4" href="$classJoystickDialog.html" title=" " alt="" coords="125,107,232,133"/>
+<area shape="rect" id="node5" href="$classMapDialog.html" title=" " alt="" coords="137,157,220,184"/>
+<area shape="rect" id="node6" href="$classRobotInfoDialog.html" title=" " alt="" coords="121,208,236,235"/>
 </map>

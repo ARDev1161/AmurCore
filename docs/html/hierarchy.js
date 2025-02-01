@@ -1,6 +1,5 @@
 var hierarchy =
 [
-    [ "anytype_s", "unionanytype__s.html", null ],
     [ "CamSettingsHolder", "classCamSettingsHolder.html", null ],
     [ "ConfigProcessor", "classConfigProcessor.html", null ],
     [ "grpcClient", "classgrpcClient.html", null ],
@@ -9,11 +8,13 @@ var hierarchy =
     [ "Logic", "classLogic.html", null ],
     [ "Movements", "classMovements.html", null ],
     [ "MoveSettings", "structMoveSettings.html", null ],
+    [ "PoseQuaternion", "structPoseQuaternion.html", null ],
     [ "QDialog", null, [
       [ "CamCalibrate", "classCamCalibrate.html", null ],
       [ "ConnectDialog", "classConnectDialog.html", null ],
       [ "JoystickDialog", "classJoystickDialog.html", null ],
-      [ "SpeechDialog", "classSpeechDialog.html", null ]
+      [ "MapDialog", "classMapDialog.html", null ],
+      [ "RobotInfoDialog", "classRobotInfoDialog.html", null ]
     ] ],
     [ "QMainWindow", null, [
       [ "AmurCore", "classAmurCore.html", null ]
@@ -32,11 +33,14 @@ var hierarchy =
     [ "QThread", null, [
       [ "VJoystickAdapter::VJoystickThread", "classVJoystickAdapter_1_1VJoystickThread.html", null ]
     ] ],
+    [ "QWidget", null, [
+      [ "MapWidget", "classMapWidget.html", null ],
+      [ "MapWidget", "classMapWidget.html", null ]
+    ] ],
     [ "RobotEntry", "classRobotEntry.html", null ],
     [ "RobotRepository", "classRobotRepository.html", null ],
-    [ "AMUR::ClientOnRobot::Service", null, [
+    [ "ClientOnRobot::Service", null, [
       [ "grpcServer", "classgrpcServer.html", null ]
     ] ],
-    [ "SphinxRecognizer", "classSphinxRecognizer.html", null ],
     [ "System", "classSystem.html", null ]
 ];

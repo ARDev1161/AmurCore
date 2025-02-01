@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['knownrobots_769',['knownRobots',['../classConnectDialog.html#aa11384b9da0f1d0636291c8a9a87f44f',1,'ConnectDialog']]]
+  ['lastjoystate_764',['lastJoyState',['../classMovements.html#a7d5940eea7fa127cefba6eb6407f71e9',1,'Movements']]],
+  ['lightbutton_765',['lightButton',['../structMoveSettings_1_1JoyBindings.html#a9934491caaf8dba9bef14633f1ad159b',1,'MoveSettings::JoyBindings']]],
+  ['loopflag_766',['loopFlag',['../classGetStateByJoystick.html#a08fa6edd1c3fa4011cff3f0c283e4e0f',1,'GetStateByJoystick']]],
+  ['looptime_767',['loopTime',['../classAmurCore.html#a00dec7ab81c485c19cc9b4bfdaed9a90',1,'AmurCore']]],
+  ['looptime_768',['LoopTime',['../classGetStateByJoystick.html#a66d31e9706c734994f9d0f39c7fb435a',1,'GetStateByJoystick']]]
 ];

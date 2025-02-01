@@ -1,4 +1,4 @@
-.TH "grpcClient" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "grpcClient" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,13 +12,16 @@ grpcClient
 
 .in +1c
 .ti -1c
-.RI "\fBgrpcClient\fP (std::shared_ptr< grpc::Channel > channel, AMUR::AmurSensors *\fBsensors\fP, AMUR::AmurControls *const \fBcontrols\fP)"
+.RI "\fBgrpcClient\fP (std::shared_ptr< grpc::Channel > channel, std::shared_ptr< Controls > controlsPtr, std::shared_ptr< Sensors > sensorsPtr, std::shared_ptr< map_service::GetMapResponse > mapPtr)"
 .br
 .ti -1c
 .RI "grpc::Status \fBDataExchange\fP ()"
 .br
 .ti -1c
 .RI "grpc::Status \fBDataStreamExchange\fP ()"
+.br
+.ti -1c
+.RI "grpc::Status \fBMapStream\fP ()"
 .br
 .ti -1c
 .RI "void \fBstopStream\fP ()"
@@ -28,16 +31,19 @@ grpcClient
 
 .in +1c
 .ti -1c
-.RI "std::unique_ptr< AMUR::ServerOnRobot::Stub > \fBstub_\fP"
+.RI "std::unique_ptr< ServerOnRobot::Stub > \fBstub_\fP"
 .br
 .ti -1c
 .RI "std::shared_ptr< grpc::Channel > \fBclientChannel\fP"
 .br
 .ti -1c
-.RI "AMUR::AmurSensors * \fBsensors\fP"
+.RI "std::shared_ptr< Controls > \fBcontrols\fP"
 .br
 .ti -1c
-.RI "AMUR::AmurControls * \fBcontrols\fP"
+.RI "std::shared_ptr< Sensors > \fBsensors\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< map_service::GetMapResponse > \fBmap\fP"
 .br
 .ti -1c
 .RI "bool \fBstoppedStream\fP = true"
@@ -48,7 +54,7 @@ grpcClient
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "grpcClient::grpcClient (std::shared_ptr< grpc::Channel > channel, AMUR::AmurSensors * sensors, AMUR::AmurControls *const controls)"
+.SS "grpcClient::grpcClient (std::shared_ptr< grpc::Channel > channel, std::shared_ptr< Controls > controlsPtr, std::shared_ptr< Sensors > sensorsPtr, std::shared_ptr< map_service::GetMapResponse > mapPtr)"
 
 .SH "Member Function Documentation"
 .PP 
@@ -56,21 +62,25 @@ grpcClient
 
 .SS "grpc::Status grpcClient::DataStreamExchange ()"
 
+.SS "grpc::Status grpcClient::MapStream ()"
+
 .SS "void grpcClient::stopStream ()"
 
 .SH "Member Data Documentation"
 .PP 
 .SS "std::shared_ptr<grpc::Channel> grpcClient::clientChannel\fC [private]\fP"
 
-.SS "AMUR::AmurControls* grpcClient::controls\fC [private]\fP"
+.SS "std::shared_ptr<Controls> grpcClient::controls\fC [private]\fP"
+
+.SS "std::shared_ptr<map_service::GetMapResponse> grpcClient::map\fC [private]\fP"
 
 .SS "std::mutex grpcClient::muClient\fC [private]\fP"
 
-.SS "AMUR::AmurSensors* grpcClient::sensors\fC [private]\fP"
+.SS "std::shared_ptr<Sensors> grpcClient::sensors\fC [private]\fP"
 
 .SS "bool grpcClient::stoppedStream = true\fC [private]\fP"
 
-.SS "std::unique_ptr<AMUR::ServerOnRobot::Stub> grpcClient::stub_\fC [private]\fP"
+.SS "std::unique_ptr<ServerOnRobot::Stub> grpcClient::stub_\fC [private]\fP"
 
 
 .SH "Author"

@@ -1,4 +1,4 @@
-.TH "AmurCore" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "AmurCore" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -41,25 +41,28 @@ Inherits QMainWindow\&.
 .RI "void \fBframeUpdate\fP ()"
 .br
 .ti -1c
-.RI "void \fBcalibDialogOpen\fP ()"
-.br
-.ti -1c
-.RI "void \fBspeechDialogOpen\fP ()"
-.br
-.ti -1c
 .RI "void \fBconnectDialogOpen\fP ()"
 .br
 .ti -1c
 .RI "void \fBjoystickDialogOpen\fP ()"
 .br
 .ti -1c
+.RI "void \fBcalibDialogOpen\fP ()"
+.br
+.ti -1c
+.RI "void \fBmapDialogOpen\fP ()"
+.br
+.ti -1c
+.RI "void \fBrobotInfoDialogOpen\fP ()"
+.br
+.ti -1c
 .RI "void \fBfetchJoystickId\fP ()"
 .br
 .ti -1c
-.RI "void \fBamurHalt\fP ()"
+.RI "void \fBrobotHalt\fP ()"
 .br
 .ti -1c
-.RI "void \fBamurReboot\fP ()"
+.RI "void \fBrobotReboot\fP ()"
 .br
 .in -1c
 .SS "Private Member Functions"
@@ -130,25 +133,31 @@ Inherits QMainWindow\&.
 .RI "std::shared_ptr< \fBRobotRepository\fP > \fBrepo\fP"
 .br
 .ti -1c
-.RI "\fBSpeechDialog\fP * \fBspeechDialog\fP"
-.br
-.ti -1c
 .RI "\fBConnectDialog\fP * \fBconnectDialog\fP"
 .br
 .ti -1c
 .RI "\fBJoystickDialog\fP * \fBjoystickDialog\fP"
 .br
 .ti -1c
-.RI "AMUR::AmurControls * \fBcontrols\fP"
+.RI "\fBMapDialog\fP * \fBmapDialog\fP"
 .br
 .ti -1c
-.RI "AMUR::AmurSensors * \fBsensors\fP"
+.RI "\fBRobotInfoDialog\fP * \fBrobotInfoDialog\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< Controls > \fBcontrols\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< Sensors > \fBsensors\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< map_service::GetMapResponse > \fBmap\fP"
 .br
 .ti -1c
 .RI "\fBJoystick\fP * \fBjoyThread\fP"
 .br
 .ti -1c
-.RI "\fBJoyState\fP * \fBjoyState\fP"
+.RI "std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP"
 .br
 .ti -1c
 .RI "\fBLogic\fP * \fBamurLogic\fP"
@@ -180,10 +189,6 @@ Inherits QMainWindow\&.
 
 .SH "Member Function Documentation"
 .PP 
-.SS "void AmurCore::amurHalt ()\fC [private]\fP, \fC [slot]\fP"
-
-.SS "void AmurCore::amurReboot ()\fC [private]\fP, \fC [slot]\fP"
-
 .SS "void AmurCore::calibDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
 
 .SS "void AmurCore::connectDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
@@ -200,11 +205,17 @@ Inherits QMainWindow\&.
 
 .SS "void AmurCore::joystickDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
 
+.SS "void AmurCore::mapDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
+
 .SS "void AmurCore::outMat (Mat & toOut)\fC [private]\fP"
 
 .SS "void AmurCore::resizeEvent (QResizeEvent * e)\fC [override]\fP, \fC [protected]\fP"
 
-.SS "void AmurCore::speechDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
+.SS "void AmurCore::robotHalt ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::robotInfoDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void AmurCore::robotReboot ()\fC [private]\fP, \fC [slot]\fP"
 
 .SS "void AmurCore::startCap ()\fC [private]\fP"
 
@@ -236,13 +247,13 @@ Inherits QMainWindow\&.
 
 .SS "\fBConnectDialog\fP* AmurCore::connectDialog\fC [private]\fP"
 
-.SS "AMUR::AmurControls* AmurCore::controls\fC [private]\fP"
+.SS "std::shared_ptr<Controls> AmurCore::controls\fC [private]\fP"
 
 .SS "int AmurCore::grpcPort = 7777\fC [private]\fP"
 
 .SS "QString* AmurCore::hostName\fC [private]\fP"
 
-.SS "\fBJoyState\fP* AmurCore::joyState\fC [private]\fP"
+.SS "std::shared_ptr<\fBJoyState\fP> AmurCore::joyState\fC [private]\fP"
 
 .SS "\fBJoystickDialog\fP* AmurCore::joystickDialog\fC [private]\fP"
 
@@ -250,17 +261,21 @@ Inherits QMainWindow\&.
 
 .SS "int AmurCore::loopTime = 50\fC [private]\fP"
 
+.SS "std::shared_ptr<map_service::GetMapResponse> AmurCore::map\fC [private]\fP"
+
+.SS "\fBMapDialog\fP* AmurCore::mapDialog\fC [private]\fP"
+
 .SS "std::shared_ptr<\fBNetworkController\fP> AmurCore::network\fC [private]\fP"
 
 .SS "Mat AmurCore::outputMat\fC [private]\fP"
 
 .SS "std::shared_ptr<\fBRobotRepository\fP> AmurCore::repo\fC [private]\fP"
 
-.SS "AMUR::AmurSensors* AmurCore::sensors\fC [private]\fP"
+.SS "\fBRobotInfoDialog\fP* AmurCore::robotInfoDialog\fC [private]\fP"
+
+.SS "std::shared_ptr<Sensors> AmurCore::sensors\fC [private]\fP"
 
 .SS "Mat AmurCore::sourceMat\fC [private]\fP"
-
-.SS "\fBSpeechDialog\fP* AmurCore::speechDialog\fC [private]\fP"
 
 .SS "QString AmurCore::statusMessage = 'No robot connected'\fC [private]\fP"
 

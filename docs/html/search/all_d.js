@@ -1,17 +1,14 @@
 var searchData=
 [
-  ['languages_186',['languages',['../classSpeechDialog.html#ac4bb6a24c69a45f193fd3bfdadf9d1af',1,'SpeechDialog']]],
-  ['languageselected_187',['languageSelected',['../classSpeechDialog.html#a85a7b42ce268136d179266304f7dfe7d',1,'SpeechDialog']]],
-  ['lastjoystate_188',['lastJoyState',['../classMovements.html#a7d5940eea7fa127cefba6eb6407f71e9',1,'Movements']]],
-  ['lightbutton_189',['lightButton',['../structMoveSettings_1_1JoyBindings.html#a9934491caaf8dba9bef14633f1ad159b',1,'MoveSettings::JoyBindings']]],
-  ['listrows_190',['listRows',['../classSpeechDialog.html#a8819403330b2506c7cff319b19de369f',1,'SpeechDialog']]],
-  ['loadjoy_191',['loadJoy',['../classJoystickDialog.html#a38b5d0436ddd21ef48762db6e00115b8',1,'JoystickDialog']]],
-  ['loadrobots_192',['loadRobots',['../classRobotRepository.html#a1679d5d2ba4fa10c32d8d97760dff9dd',1,'RobotRepository']]],
-  ['localechanged_193',['localeChanged',['../classSpeechDialog.html#aca5a62735ff52bcd699cb2bb1effe54e',1,'SpeechDialog']]],
-  ['logic_194',['Logic',['../classLogic.html',1,'Logic'],['../classLogic.html#ae6dec1cf0791fa6a301cd302c59db68f',1,'Logic::Logic()']]],
-  ['logic_2ecpp_195',['logic.cpp',['../logic_8cpp.html',1,'']]],
-  ['logic_2eh_196',['logic.h',['../logic_8h.html',1,'']]],
-  ['loopflag_197',['loopFlag',['../classGetStateByJoystick.html#a08fa6edd1c3fa4011cff3f0c283e4e0f',1,'GetStateByJoystick']]],
-  ['looptime_198',['LoopTime',['../classGetStateByJoystick.html#a66d31e9706c734994f9d0f39c7fb435a',1,'GetStateByJoystick']]],
-  ['looptime_199',['loopTime',['../classAmurCore.html#a00dec7ab81c485c19cc9b4bfdaed9a90',1,'AmurCore']]]
+  ['name_238',['name',['../classRobotEntry.html#a3167380fa3f9c42cfbca60265458eb16',1,'RobotEntry']]],
+  ['network_239',['network',['../classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1',1,'AmurCore']]],
+  ['networkcontroller_240',['NetworkController',['../classNetworkController.html',1,'']]],
+  ['networkcontroller_241',['networkController',['../classConnectDialog.html#ad7a913aea611bc1669f72ca41cf6bf0c',1,'ConnectDialog']]],
+  ['networkcontroller_242',['NetworkController',['../classNetworkController.html#aafda65e278e9ed985e4ebff8af3df932',1,'NetworkController']]],
+  ['networkcontroller_2ecpp_243',['networkcontroller.cpp',['../networkcontroller_8cpp.html',1,'']]],
+  ['networkcontroller_2eh_244',['networkcontroller.h',['../networkcontroller_8h.html',1,'']]],
+  ['no_5fpicture_245',['NO_PICTURE',['../amurcore_8h.html#a6b11015f693203e20fe2b246179bdd7c',1,'amurcore.h']]],
+  ['numcornershor_246',['numCornersHor',['../classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc',1,'CamCalibrate']]],
+  ['numcornersver_247',['numCornersVer',['../classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c',1,'CamCalibrate']]],
+  ['numsquares_248',['numSquares',['../classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199',1,'CamCalibrate']]]
 ];

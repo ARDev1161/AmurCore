@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['objectcorners_802',['objectCorners',['../classCamCalibrate.html#af9ff2fc8e37a872d13b6d111e6dbd55e',1,'CamCalibrate']]],
-  ['objectpoints_803',['objectPoints',['../classCamCalibrate.html#ad5bbf7e76fdda3ca330eceb4b23f2285',1,'CamCalibrate::objectPoints()'],['../classCamSettingsHolder.html#ad989789907e392ced3d330868c179180',1,'CamSettingsHolder::objectPoints()']]],
-  ['out_804',['out',['../classCamCalibrate.html#a0aed46c36ec46bafc440fca4898d5719',1,'CamCalibrate']]],
-  ['outmat_805',['outMat',['../classLogic.html#a2597d0e03cefdf4953e26e0aa073fc16',1,'Logic']]],
-  ['outputmat_806',['outputMat',['../classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10',1,'AmurCore']]]
+  ['pauseforchangeposition_819',['pauseForChangePosition',['../classCamCalibrate.html#aea222818dedc18fe7feeefbd5d6c4b35',1,'CamCalibrate']]],
+  ['previousdata_820',['previousData',['../classMapDialog.html#a9e39fbb614e7ae57227b5d74cca04134',1,'MapDialog']]],
+  ['previousheight_821',['previousHeight',['../classMapDialog.html#a4d6911bbff179c8ebfbe4ad551b12f73',1,'MapDialog']]],
+  ['previouswidth_822',['previousWidth',['../classMapDialog.html#aab17c235ab75f56c6d5e074648b5b3e4',1,'MapDialog']]]
 ];

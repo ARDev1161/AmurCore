@@ -1,4 +1,4 @@
-.TH "Movements" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "Movements" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,7 +12,7 @@ Movements
 
 .in +1c
 .ti -1c
-.RI "\fBMovements\fP (\fBJoyState\fP *\fBjoyState\fP, AMUR::AmurControls *\fBcontrols\fP)"
+.RI "\fBMovements\fP (std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP, std::shared_ptr< Controls > \fBcontrols\fP)"
 .br
 .ti -1c
 .RI "int \fBupdate\fP ()"
@@ -38,13 +38,13 @@ Movements
 
 .in +1c
 .ti -1c
-.RI "AMUR::AmurControls * \fBcontrols\fP"
+.RI "std::shared_ptr< Controls > \fBcontrols\fP"
 .br
 .ti -1c
 .RI "\fBMoveSettings\fP \fBmoveSettings\fP"
 .br
 .ti -1c
-.RI "\fBJoyState\fP * \fBjoyState\fP"
+.RI "std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP"
 .br
 .ti -1c
 .RI "\fBJoyState\fP \fBlastJoyState\fP"
@@ -52,7 +52,7 @@ Movements
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "Movements::Movements (\fBJoyState\fP * joyState, AMUR::AmurControls * controls)"
+.SS "Movements::Movements (std::shared_ptr< \fBJoyState\fP > joyState, std::shared_ptr< Controls > controls)"
 
 .SH "Member Function Documentation"
 .PP 
@@ -68,9 +68,9 @@ Movements
 
 .SH "Member Data Documentation"
 .PP 
-.SS "AMUR::AmurControls* Movements::controls\fC [private]\fP"
+.SS "std::shared_ptr<Controls> Movements::controls\fC [private]\fP"
 
-.SS "\fBJoyState\fP* Movements::joyState\fC [private]\fP"
+.SS "std::shared_ptr<\fBJoyState\fP> Movements::joyState\fC [private]\fP"
 
 .SS "\fBJoyState\fP Movements::lastJoyState\fC [private]\fP"
 

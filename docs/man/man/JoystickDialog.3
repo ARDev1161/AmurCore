@@ -1,4 +1,4 @@
-.TH "JoystickDialog" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "JoystickDialog" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,7 +14,7 @@ Inherits QDialog\&.
 
 .in +1c
 .ti -1c
-.RI "\fBJoystickDialog\fP (\fBJoyState\fP *const state, QWidget *parent=0)"
+.RI "\fBJoystickDialog\fP (const std::shared_ptr< \fBJoyState\fP > state, QWidget *parent=0)"
 .br
 .ti -1c
 .RI "\fB~JoystickDialog\fP ()"
@@ -87,7 +87,7 @@ Inherits QDialog\&.
 .RI "QVector< bool > \fBbuttonVector\fP"
 .br
 .ti -1c
-.RI "\fBJoyState\fP * \fBjoyState\fP"
+.RI "std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP"
 .br
 .ti -1c
 .RI "\fBVJoystickAdapter\fP * \fBjoyAdapter\fP"
@@ -107,7 +107,7 @@ Inherits QDialog\&.
 \fB\fIMAX_JOYSTICK_BUTTONS \fP\fP
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "JoystickDialog::JoystickDialog (\fBJoyState\fP *const state, QWidget * parent = \fC0\fP)\fC [explicit]\fP"
+.SS "JoystickDialog::JoystickDialog (const std::shared_ptr< \fBJoyState\fP > state, QWidget * parent = \fC0\fP)\fC [explicit]\fP"
 
 .SS "JoystickDialog::~JoystickDialog ()"
 
@@ -149,7 +149,7 @@ Inherits QDialog\&.
 
 .SS "int JoystickDialog::joyId\fC [private]\fP"
 
-.SS "\fBJoyState\fP* JoystickDialog::joyState\fC [private]\fP"
+.SS "std::shared_ptr<\fBJoyState\fP> JoystickDialog::joyState\fC [private]\fP"
 
 .SS "Ui::JoystickDialog* JoystickDialog::ui\fC [private]\fP"
 

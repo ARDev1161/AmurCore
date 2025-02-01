@@ -108,11 +108,11 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 : <a class="el" href="classRobotEntry.html#ae45e3bac74fe21d082662ca132697762">RobotEntry</a>
 </li>
 <li>sensors
-: <a class="el" href="classAmurCore.html#a6e387e8148e9744771a90fd95c7b4e91">AmurCore</a>
-, <a class="el" href="classgrpcClient.html#a3a7bbd6ad088f69dded69c60d6d7ac28">grpcClient</a>
-, <a class="el" href="classgrpcServer.html#ad47392a833a201d6f3e52fa71d9d88c4">grpcServer</a>
-, <a class="el" href="classLogic.html#a548199d9e193e1b76bfb71ee262d3920">Logic</a>
-, <a class="el" href="classNetworkController.html#a25fe34c706f86efb85fd7cd3e7cabcca">NetworkController</a>
+: <a class="el" href="classAmurCore.html#a86eed6a04ad8f8a270be1c28fbddd28d">AmurCore</a>
+, <a class="el" href="classgrpcClient.html#af96cf7a9d8d35b362daadb7e1f16a977">grpcClient</a>
+, <a class="el" href="classgrpcServer.html#a3c7d2446b6393bec78f344b5cdd93451">grpcServer</a>
+, <a class="el" href="classLogic.html#aec11ee65057e2453cda9dcf6f0fb35a5">Logic</a>
+, <a class="el" href="classNetworkController.html#af44f45ca22288ad10f3c140aab4e0044">NetworkController</a>
 </li>
 <li>service
 : <a class="el" href="classNetworkController.html#a2182e367e953a8634b64e69817e8a37b">NetworkController</a>
@@ -156,6 +156,9 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 <li>setMachineID()
 : <a class="el" href="classRobotEntry.html#a4d6c87032c589bc7c2758e861dbec8dd">RobotEntry</a>
 </li>
+<li>setMapData()
+: <a class="el" href="classMapWidget.html#a817b78e8f547736fabf7a1dc4217d28f">MapWidget</a>
+</li>
 <li>setName()
 : <a class="el" href="classRobotEntry.html#ab60144f48d849efd0d796b88388fed7a">RobotEntry</a>
 </li>
@@ -168,9 +171,6 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 <li>setOutMat()
 : <a class="el" href="classLogic.html#a689017b6c02bab059df24cbd9285987e">Logic</a>
 </li>
-<li>setPitch()
-: <a class="el" href="classSpeechDialog.html#a3800aa60d710d63e65779e1a08bf649a">SpeechDialog</a>
-</li>
 <li>setPort()
 : <a class="el" href="classRobotEntry.html#ae2b07e507d1f5df5b6ab6e997b3255e7">RobotEntry</a>
 </li>
@@ -178,13 +178,19 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 : <a class="el" href="classRobotEntry.html#af1d3ab25ce64889c812ed52483ce6c1c">RobotEntry</a>
 </li>
 <li>setProtosPointers()
-: <a class="el" href="classgrpcServer.html#a4405721eaa6197b2a37c0ec825f77cab">grpcServer</a>
-</li>
-<li>setRate()
-: <a class="el" href="classSpeechDialog.html#ac0660a9595fbb4c95336d82e0de17063">SpeechDialog</a>
+: <a class="el" href="classgrpcServer.html#a7f759c95f648a9eef7a345767f216129">grpcServer</a>
 </li>
 <li>setReady()
 : <a class="el" href="classCamSettingsHolder.html#a8883903902b659f271674d188e57a5b3">CamSettingsHolder</a>
+</li>
+<li>setRobotLocation()
+: <a class="el" href="classMapWidget.html#a8e1fe74f8bac2c1ff762176cde0c4491">MapWidget</a>
+</li>
+<li>setRobotOrientation()
+: <a class="el" href="classMapWidget.html#aed42872d8881c6767aec8c34db383f72">MapWidget</a>
+</li>
+<li>setRobotPose()
+: <a class="el" href="classMapWidget.html#ac7d5fd360d3fa7e265be96d2fa3615a8">MapWidget</a>
 </li>
 <li>setRvecs()
 : <a class="el" href="classCamSettingsHolder.html#a0f6d9537cdb428c1ae4faa62ce4d0d16">CamSettingsHolder</a>
@@ -197,9 +203,6 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 </li>
 <li>setupTableHeaders()
 : <a class="el" href="classConnectDialog.html#a67bc4aa2621cf18b7f4220657dfa5639">ConnectDialog</a>
-</li>
-<li>setVolume()
-: <a class="el" href="classSpeechDialog.html#a16948e0e24dada81b6a9159b34698a1c">SpeechDialog</a>
 </li>
 <li>sigAxisChanged()
 : <a class="el" href="classVJoystickAdapter.html#ac5fdf2ec5aaa116dd21b991ccf0c744b">VJoystickAdapter</a>
@@ -217,24 +220,6 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 : <a class="el" href="classAmurCore.html#a66c9bcc7556e86aab98f23ffb499c280">AmurCore</a>
 , <a class="el" href="classCamCalibrate.html#aa5169369b8ea859911ade698730fd9f2">CamCalibrate</a>
 </li>
-<li>speak()
-: <a class="el" href="classSpeechDialog.html#afb358f7835833b2e913ba78fc8c6b4a0">SpeechDialog</a>
-</li>
-<li>speech
-: <a class="el" href="classSpeechDialog.html#a69177ec9fccae83af9bad4483c445fb1">SpeechDialog</a>
-</li>
-<li>speechDialog
-: <a class="el" href="classAmurCore.html#a314685484ecfd4a32f4ee87818ec5f90">AmurCore</a>
-</li>
-<li>SpeechDialog()
-: <a class="el" href="classSpeechDialog.html#ac0f5383a9cd3d80bcc0e0a94425e0596">SpeechDialog</a>
-</li>
-<li>speechDialogOpen()
-: <a class="el" href="classAmurCore.html#ae06e78560193b22e9386c4a4fde4cd71">AmurCore</a>
-</li>
-<li>SphinxRecognizer()
-: <a class="el" href="classSphinxRecognizer.html#ace6f42b43744fbd83b43ec96d7b06cd3">SphinxRecognizer</a>
-</li>
 <li>splitPath()
 : <a class="el" href="classConfigProcessor.html#a61fbdb5e1a2733c5ea3509fc9ae3d574">ConfigProcessor</a>
 </li>
@@ -246,13 +231,9 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 </li>
 <li>started
 : <a class="el" href="classCamCalibrate.html#ac53ea186e7a4d63e4d7fa6457a164d1c">CamCalibrate</a>
-, <a class="el" href="classSpeechDialog.html#a17f1f91f33dd3e894ff4ffe2c313cea3">SpeechDialog</a>
 </li>
 <li>startTimer()
 : <a class="el" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e">AmurCore</a>
-</li>
-<li>stateChanged()
-: <a class="el" href="classSpeechDialog.html#a91c7a9f99f8e1394a613ee275c2233e0">SpeechDialog</a>
 </li>
 <li>statusMessage
 : <a class="el" href="classAmurCore.html#ac54cc87ff9f9861f2eaa8c9765378089">AmurCore</a>
@@ -261,7 +242,6 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 : <a class="el" href="classCalibratorWorker.html#af372ba9566d762603606525d1f5b4cbf">CalibratorWorker</a>
 , <a class="el" href="classGetStateByJoystick.html#ab7a34557b201e25046ba69cb208f59dc">GetStateByJoystick</a>
 , <a class="el" href="classJoystickStateWorker.html#af97eeb090e5ffaf2f42f72fa1969e521">JoystickStateWorker</a>
-, <a class="el" href="classSpeechDialog.html#ac7a28234ff64c53f33d063abd36d7f7a">SpeechDialog</a>
 , <a class="el" href="classWorker.html#a273235a8775ff030dda42b53e2b3a895">Worker</a>
 </li>
 <li>stopAll()
@@ -281,7 +261,7 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 , <a class="el" href="classSession.html#ae031ca6e2ecb8e3dc9acb3ff1edd56d4">Session</a>
 </li>
 <li>stub_
-: <a class="el" href="classgrpcClient.html#a8b49063085fb2889d43dcc916604af1b">grpcClient</a>
+: <a class="el" href="classgrpcClient.html#a219ec11936de3dde4ed59917c65aeed2">grpcClient</a>
 </li>
 <li>successes
 : <a class="el" href="classCamCalibrate.html#ae402fd66023c671b4a1d32f9f2cebb36">CamCalibrate</a>

@@ -1,4 +1,4 @@
-.TH "JoystickStateWorker" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "JoystickStateWorker" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -31,7 +31,7 @@ Inherits QObject\&.
 
 .in +1c
 .ti -1c
-.RI "\fBJoystickStateWorker\fP (\fBJoyState\fP *const state)"
+.RI "\fBJoystickStateWorker\fP (const std::shared_ptr< \fBJoyState\fP > state)"
 .br
 .ti -1c
 .RI "\fB~JoystickStateWorker\fP ()"
@@ -41,7 +41,7 @@ Inherits QObject\&.
 
 .in +1c
 .ti -1c
-.RI "\fBJoyState\fP * \fBjoyState\fP"
+.RI "std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP"
 .br
 .ti -1c
 .RI "\fBGetStateByJoystick\fP * \fBjoyStateController\fP"
@@ -49,7 +49,7 @@ Inherits QObject\&.
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "JoystickStateWorker::JoystickStateWorker (\fBJoyState\fP *const state)"
+.SS "JoystickStateWorker::JoystickStateWorker (const std::shared_ptr< \fBJoyState\fP > state)"
 
 .SS "JoystickStateWorker::~JoystickStateWorker ()"
 
@@ -63,7 +63,7 @@ Inherits QObject\&.
 
 .SH "Member Data Documentation"
 .PP 
-.SS "\fBJoyState\fP* JoystickStateWorker::joyState\fC [private]\fP"
+.SS "std::shared_ptr<\fBJoyState\fP> JoystickStateWorker::joyState\fC [private]\fP"
 
 .SS "\fBGetStateByJoystick\fP* JoystickStateWorker::joyStateController\fC [private]\fP"
 

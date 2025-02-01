@@ -1,0 +1,5 @@
+<map id="MapWidget::updateScaleOnResize" name="MapWidget::updateScaleOnResize">
+<area shape="rect" id="node1" title="Обновляет масштаб и сдвиг при изменении размера виджета." alt="" coords="216,23,399,65"/>
+<area shape="rect" id="node2" href="$classMapWidget.html#ab592d95fedf75d119f24d735cee48731" title="Обработчик события изменения размера виджета." alt="" coords="7,5,167,32"/>
+<area shape="rect" id="node3" href="$classMapWidget.html#af42eb1e6c341c75dceaa40620d741e88" title="Устанавливает данные карты и инициирует перерисовку." alt="" coords="5,56,168,83"/>
+</map>

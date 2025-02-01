@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['robotentry_457',['RobotEntry',['../classRobotEntry.html',1,'']]],
-  ['robotrepository_458',['RobotRepository',['../classRobotRepository.html',1,'']]]
+  ['posequaternion_446',['PoseQuaternion',['../structPoseQuaternion.html',1,'']]]
 ];

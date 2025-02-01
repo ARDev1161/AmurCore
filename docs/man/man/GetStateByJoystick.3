@@ -1,4 +1,4 @@
-.TH "GetStateByJoystick" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "GetStateByJoystick" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,7 +14,7 @@ Inherits QObject\&.
 
 .in +1c
 .ti -1c
-.RI "\fBGetStateByJoystick\fP (\fBJoyState\fP *const state, QObject *parent=nullptr)"
+.RI "\fBGetStateByJoystick\fP (const std::shared_ptr< \fBJoyState\fP > state, QObject *parent=nullptr)"
 .br
 .ti -1c
 .RI "\fB~GetStateByJoystick\fP ()"
@@ -72,7 +72,7 @@ Inherits QObject\&.
 .RI "bool \fBloopFlag\fP"
 .br
 .ti -1c
-.RI "\fBJoyState\fP * \fBjoyState\fP"
+.RI "std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP"
 .br
 .in -1c
 .SH "Member Enumeration Documentation"
@@ -86,7 +86,7 @@ Inherits QObject\&.
 \fB\fIMAX_JOYSTICK_BUTTONS \fP\fP
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "GetStateByJoystick::GetStateByJoystick (\fBJoyState\fP *const state, QObject * parent = \fCnullptr\fP)"
+.SS "GetStateByJoystick::GetStateByJoystick (const std::shared_ptr< \fBJoyState\fP > state, QObject * parent = \fCnullptr\fP)"
 
 .SS "GetStateByJoystick::~GetStateByJoystick ()"
 
@@ -112,7 +112,7 @@ Inherits QObject\&.
 .PP 
 .SS "\fBVJoystickAdapter\fP* GetStateByJoystick::joyAdapter\fC [private]\fP"
 
-.SS "\fBJoyState\fP* GetStateByJoystick::joyState\fC [private]\fP"
+.SS "std::shared_ptr<\fBJoyState\fP> GetStateByJoystick::joyState\fC [private]\fP"
 
 .SS "bool GetStateByJoystick::loopFlag\fC [private]\fP"
 

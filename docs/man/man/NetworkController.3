@@ -1,4 +1,4 @@
-.TH "NetworkController" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "NetworkController" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,7 +14,7 @@ Inherits QObject\&.
 
 .in +1c
 .ti -1c
-.RI "\fBNetworkController\fP (AMUR::AmurControls *const \fBcontrols\fP, AMUR::AmurSensors *const \fBsensors\fP)"
+.RI "\fBNetworkController\fP (std::shared_ptr< Controls > controlsPtr, std::shared_ptr< Sensors > sensorsPtr, std::shared_ptr< map_service::GetMapResponse > mapPtr)"
 .br
 .ti -1c
 .RI "\fB~NetworkController\fP ()"
@@ -36,10 +36,13 @@ Inherits QObject\&.
 
 .in +1c
 .ti -1c
-.RI "AMUR::AmurSensors * \fBsensors\fP"
+.RI "std::shared_ptr< Controls > \fBcontrols\fP"
 .br
 .ti -1c
-.RI "AMUR::AmurControls * \fBcontrols\fP"
+.RI "std::shared_ptr< Sensors > \fBsensors\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< map_service::GetMapResponse > \fBmap\fP"
 .br
 .ti -1c
 .RI "grpc::Status \fBclientStatus\fP"
@@ -65,7 +68,7 @@ Inherits QObject\&.
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "NetworkController::NetworkController (AMUR::AmurControls *const controls, AMUR::AmurSensors *const sensors)"
+.SS "NetworkController::NetworkController (std::shared_ptr< Controls > controlsPtr, std::shared_ptr< Sensors > sensorsPtr, std::shared_ptr< map_service::GetMapResponse > mapPtr)"
 
 .SS "NetworkController::~NetworkController ()"
 
@@ -87,13 +90,15 @@ Inherits QObject\&.
 
 .SS "grpc::Status NetworkController::clientStatus\fC [private]\fP"
 
-.SS "AMUR::AmurControls* NetworkController::controls\fC [private]\fP"
+.SS "std::shared_ptr<Controls> NetworkController::controls\fC [private]\fP"
+
+.SS "std::shared_ptr<map_service::GetMapResponse> NetworkController::map\fC [private]\fP"
 
 .SS "int NetworkController::messageNo = 1\fC [private]\fP"
 
 .SS "QList< std::shared_ptr<\fBRobotEntry\fP> > NetworkController::robots\fC [private]\fP"
 
-.SS "AMUR::AmurSensors* NetworkController::sensors\fC [private]\fP"
+.SS "std::shared_ptr<Sensors> NetworkController::sensors\fC [private]\fP"
 
 .SS "\fBgrpcServer\fP NetworkController::service\fC [private]\fP"
 

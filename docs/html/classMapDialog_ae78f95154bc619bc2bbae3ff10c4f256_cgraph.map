@@ -1,0 +1,4 @@
+<map id="MapDialog::hasPoseChanged" name="MapDialog::hasPoseChanged">
+<area shape="rect" id="node1" title="Проверяет, изменились ли данные положения робота." alt="" coords="5,5,196,32"/>
+<area shape="rect" id="node2" href="$classMapDialog.html#a4486cb12a37aae798bb04e70f646fa9b" title=" " alt="" coords="244,5,439,32"/>
+</map>

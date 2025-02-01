@@ -1,0 +1,129 @@
+.TH "MapDialog" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MapDialog
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <mapdialog\&.h>\fP
+.PP
+Inherits QDialog\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMapDialog\fP (std::shared_ptr< map_service::GetMapResponse > \fBmapPtr\fP, QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~MapDialog\fP ()"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBonMapUpdated\fP ()"
+.br
+.RI "Слот для обновления отображаемой карты\&. "
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBhasMapChanged\fP () const"
+.br
+.RI "Проверяет, изменились ли данные карты\&. "
+.ti -1c
+.RI "bool \fBhasPoseChanged\fP () const"
+.br
+.RI "Проверяет, изменились ли данные положения робота\&. "
+.ti -1c
+.RI "\fBPoseQuaternion\fP \fBposeToQuaternion\fP (map_service::Pose pose) const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::MapDialog * \fBui\fP"
+.br
+.ti -1c
+.RI "\fBMapWidget\fP * \fBmapWidget\fP"
+.br
+.ti -1c
+.RI "QTimer * \fBtimer\fP"
+.br
+.RI "Таймер для периодической проверки обновлений "
+.ti -1c
+.RI "std::shared_ptr< map_service::GetMapResponse > \fBmapPtr\fP"
+.br
+.ti -1c
+.RI "std::vector< int8_t > \fBpreviousData\fP"
+.br
+.ti -1c
+.RI "int \fBpreviousWidth\fP"
+.br
+.ti -1c
+.RI "int \fBpreviousHeight\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "MapDialog::MapDialog (std::shared_ptr< map_service::GetMapResponse > mapPtr, QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "MapDialog::~MapDialog ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool MapDialog::hasMapChanged () const\fC [private]\fP"
+
+.PP
+Проверяет, изменились ли данные карты\&. 
+.PP
+\fBReturns\fP
+.RS 4
+true, если карта изменилась; иначе false\&. 
+.RE
+.PP
+
+.SS "bool MapDialog::hasPoseChanged () const\fC [private]\fP"
+
+.PP
+Проверяет, изменились ли данные положения робота\&. 
+.PP
+\fBReturns\fP
+.RS 4
+true, если положение изменилось; иначе false\&. 
+.RE
+.PP
+
+.SS "void MapDialog::onMapUpdated ()\fC [private]\fP, \fC [slot]\fP"
+
+.PP
+Слот для обновления отображаемой карты\&. 
+.SS "\fBPoseQuaternion\fP MapDialog::poseToQuaternion (map_service::Pose pose) const\fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::shared_ptr<map_service::GetMapResponse> MapDialog::mapPtr\fC [private]\fP"
+
+.SS "\fBMapWidget\fP* MapDialog::mapWidget\fC [private]\fP"
+
+.SS "std::vector<int8_t> MapDialog::previousData\fC [private]\fP"
+
+.SS "int MapDialog::previousHeight\fC [private]\fP"
+
+.SS "int MapDialog::previousWidth\fC [private]\fP"
+
+.SS "QTimer* MapDialog::timer\fC [private]\fP"
+
+.PP
+Таймер для периодической проверки обновлений 
+.SS "Ui::MapDialog* MapDialog::ui\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

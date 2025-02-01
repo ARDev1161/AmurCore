@@ -1,4 +1,4 @@
-.TH "Logic" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "Logic" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,7 +12,7 @@ Logic
 
 .in +1c
 .ti -1c
-.RI "\fBLogic\fP (\fBJoyState\fP *\fBjoyState\fP, AMUR::AmurControls *\fBcontrols\fP, AMUR::AmurSensors *\fBsensors\fP)"
+.RI "\fBLogic\fP (std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP, std::shared_ptr< Controls > \fBcontrols\fP, std::shared_ptr< Sensors > \fBsensors\fP)"
 .br
 .ti -1c
 .RI "void \fBprocess\fP ()"
@@ -44,21 +44,24 @@ Logic
 .RI "Mat * \fBoutMat\fP"
 .br
 .ti -1c
-.RI "\fBJoyState\fP * \fBjoyState\fP"
+.RI "std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP"
 .br
 .ti -1c
 .RI "\fBMovements\fP * \fBmove\fP"
 .br
 .ti -1c
-.RI "AMUR::AmurControls * \fBcontrols\fP"
+.RI "std::shared_ptr< Controls > \fBcontrols\fP"
 .br
 .ti -1c
-.RI "AMUR::AmurSensors * \fBsensors\fP"
+.RI "std::shared_ptr< Sensors > \fBsensors\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< map_service::OccupancyGrid > \fBmap\fP"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "Logic::Logic (\fBJoyState\fP * joyState, AMUR::AmurControls * controls, AMUR::AmurSensors * sensors)"
+.SS "Logic::Logic (std::shared_ptr< \fBJoyState\fP > joyState, std::shared_ptr< Controls > controls, std::shared_ptr< Sensors > sensors)"
 
 .SH "Member Function Documentation"
 .PP 
@@ -74,15 +77,17 @@ Logic
 
 .SH "Member Data Documentation"
 .PP 
-.SS "AMUR::AmurControls* Logic::controls\fC [private]\fP"
+.SS "std::shared_ptr<Controls> Logic::controls\fC [private]\fP"
 
-.SS "\fBJoyState\fP* Logic::joyState\fC [private]\fP"
+.SS "std::shared_ptr<\fBJoyState\fP> Logic::joyState\fC [private]\fP"
+
+.SS "std::shared_ptr<map_service::OccupancyGrid> Logic::map\fC [private]\fP"
 
 .SS "\fBMovements\fP* Logic::move\fC [private]\fP"
 
 .SS "Mat* Logic::outMat\fC [private]\fP"
 
-.SS "AMUR::AmurSensors* Logic::sensors\fC [private]\fP"
+.SS "std::shared_ptr<Sensors> Logic::sensors\fC [private]\fP"
 
 .SS "Mat* Logic::srcMat\fC [private]\fP"
 

@@ -99,8 +99,8 @@ Inheritance diagram for grpcServer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgrpcServer__inherit__graph.png" border="0" usemap="#agrpcServer_inherit__map" alt="Inheritance graph"/></div>
 <map name="agrpcServer_inherit__map" id="agrpcServer_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,145,168,296"/>
-<area shape="rect" title=" " alt="" coords="11,5,162,97"/>
+<area shape="rect" title=" " alt="" coords="5,131,168,325"/>
+<area shape="rect" title=" " alt="" coords="9,5,165,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -108,33 +108,39 @@ Collaboration diagram for grpcServer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgrpcServer__coll__graph.png" border="0" usemap="#agrpcServer_coll__map" alt="Collaboration graph"/></div>
 <map name="agrpcServer_coll__map" id="agrpcServer_coll__map">
-<area shape="rect" title=" " alt="" coords="5,145,168,296"/>
-<area shape="rect" title=" " alt="" coords="11,5,162,97"/>
+<area shape="rect" title=" " alt="" coords="5,131,168,325"/>
+<area shape="rect" title=" " alt="" coords="9,5,165,83"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4405721eaa6197b2a37c0ec825f77cab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a4405721eaa6197b2a37c0ec825f77cab">setProtosPointers</a> (AMUR::AmurControls *const <a class="el" href="classgrpcServer.html#abb919e27332b808d51f03a8585b34791">controls</a>, AMUR::AmurSensors *const <a class="el" href="classgrpcServer.html#ad47392a833a201d6f3e52fa71d9d88c4">sensors</a>)</td></tr>
-<tr class="separator:a4405721eaa6197b2a37c0ec825f77cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f759c95f648a9eef7a345767f216129"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a7f759c95f648a9eef7a345767f216129">setProtosPointers</a> (std::shared_ptr&lt; Controls &gt; controlsPtr, std::shared_ptr&lt; Sensors &gt; sensorsPtr, std::shared_ptr&lt; map_service::GetMapResponse &gt; mapPtr)</td></tr>
+<tr class="separator:a7f759c95f648a9eef7a345767f216129"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d29d1294fbe427f27a44e9fd3a671bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a7d29d1294fbe427f27a44e9fd3a671bb">checkConn</a> ()</td></tr>
 <tr class="separator:a7d29d1294fbe427f27a44e9fd3a671bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a693626c982dc9c3d46ac863149371667"><td class="memItemLeft" align="right" valign="top">grpc::Status&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a693626c982dc9c3d46ac863149371667">DataExchange</a> ([[maybe_unused]] grpc::ServerContext *context, const AMUR::AmurSensors *request, AMUR::AmurControls *reply) override</td></tr>
-<tr class="separator:a693626c982dc9c3d46ac863149371667"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d123abc7a9431a0bdbc27d0bfa957c0"><td class="memItemLeft" align="right" valign="top">grpc::Status&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a5d123abc7a9431a0bdbc27d0bfa957c0">DataStreamExchange</a> ([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter&lt; AMUR::AmurControls, AMUR::AmurSensors &gt; *stream) override</td></tr>
-<tr class="separator:a5d123abc7a9431a0bdbc27d0bfa957c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eefb95b15451cbf826561d3ff7c98ab"><td class="memItemLeft" align="right" valign="top">grpc::Status&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a7eefb95b15451cbf826561d3ff7c98ab">DataExchange</a> ([[maybe_unused]] grpc::ServerContext *context, const Sensors *request, Controls *reply) override</td></tr>
+<tr class="separator:a7eefb95b15451cbf826561d3ff7c98ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a1091120919fbd7a482fcbd41a5023a"><td class="memItemLeft" align="right" valign="top">grpc::Status&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a1a1091120919fbd7a482fcbd41a5023a">DataStreamExchange</a> ([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter&lt; Controls, Sensors &gt; *stream) override</td></tr>
+<tr class="separator:a1a1091120919fbd7a482fcbd41a5023a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273ec0e03b66d16435a26d96d8c4c6a0"><td class="memItemLeft" align="right" valign="top">grpc::Status&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a273ec0e03b66d16435a26d96d8c4c6a0">MapStream</a> ([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter&lt; map_service::GetMapRequest, map_service::GetMapResponse &gt; *stream) override</td></tr>
+<tr class="separator:a273ec0e03b66d16435a26d96d8c4c6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:abb919e27332b808d51f03a8585b34791"><td class="memItemLeft" align="right" valign="top">AMUR::AmurControls *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#abb919e27332b808d51f03a8585b34791">controls</a></td></tr>
-<tr class="separator:abb919e27332b808d51f03a8585b34791"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad47392a833a201d6f3e52fa71d9d88c4"><td class="memItemLeft" align="right" valign="top">AMUR::AmurSensors *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#ad47392a833a201d6f3e52fa71d9d88c4">sensors</a></td></tr>
-<tr class="separator:ad47392a833a201d6f3e52fa71d9d88c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cf5d5dae1804adc13e5a11b7508abac"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; Controls &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a5cf5d5dae1804adc13e5a11b7508abac">controls</a></td></tr>
+<tr class="separator:a5cf5d5dae1804adc13e5a11b7508abac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c7d2446b6393bec78f344b5cdd93451"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; Sensors &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a3c7d2446b6393bec78f344b5cdd93451">sensors</a></td></tr>
+<tr class="separator:a3c7d2446b6393bec78f344b5cdd93451"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79e4dc9ecc47ff59177a2705555fd15c"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; map_service::GetMapResponse &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a79e4dc9ecc47ff59177a2705555fd15c">map</a></td></tr>
+<tr class="separator:a79e4dc9ecc47ff59177a2705555fd15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33fdb8b89a90a900af52918b676704be"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a33fdb8b89a90a900af52918b676704be">muServer</a></td></tr>
 <tr class="separator:a33fdb8b89a90a900af52918b676704be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad17696157afb9d49a1005c4a3f144afe"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">muMap</a></td></tr>
+<tr class="separator:ad17696157afb9d49a1005c4a3f144afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7d29d1294fbe427f27a44e9fd3a671bb"></a>
@@ -154,8 +160,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a693626c982dc9c3d46ac863149371667"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a693626c982dc9c3d46ac863149371667">&#9670;&nbsp;</a></span>DataExchange()</h2>
+<a id="a7eefb95b15451cbf826561d3ff7c98ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eefb95b15451cbf826561d3ff7c98ab">&#9670;&nbsp;</a></span>DataExchange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,13 +178,13 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const AMUR::AmurSensors *&#160;</td>
+          <td class="paramtype">const Sensors *&#160;</td>
           <td class="paramname"><em>request</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">AMUR::AmurControls *&#160;</td>
+          <td class="paramtype">Controls *&#160;</td>
           <td class="paramname"><em>reply</em>&#160;</td>
         </tr>
         <tr>
@@ -196,8 +202,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d123abc7a9431a0bdbc27d0bfa957c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d123abc7a9431a0bdbc27d0bfa957c0">&#9670;&nbsp;</a></span>DataStreamExchange()</h2>
+<a id="a1a1091120919fbd7a482fcbd41a5023a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a1091120919fbd7a482fcbd41a5023a">&#9670;&nbsp;</a></span>DataStreamExchange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -214,7 +220,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">grpc::ServerReaderWriter&lt; AMUR::AmurControls, AMUR::AmurSensors &gt; *&#160;</td>
+          <td class="paramtype">grpc::ServerReaderWriter&lt; Controls, Sensors &gt; *&#160;</td>
           <td class="paramname"><em>stream</em>&#160;</td>
         </tr>
         <tr>
@@ -232,8 +238,44 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a4405721eaa6197b2a37c0ec825f77cab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4405721eaa6197b2a37c0ec825f77cab">&#9670;&nbsp;</a></span>setProtosPointers()</h2>
+<a id="a273ec0e03b66d16435a26d96d8c4c6a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a273ec0e03b66d16435a26d96d8c4c6a0">&#9670;&nbsp;</a></span>MapStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">grpc::Status grpcServer::MapStream </td>
+          <td>(</td>
+          <td class="paramtype">[[maybe_unused] ] grpc::ServerContext *&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">grpc::ServerReaderWriter&lt; map_service::GetMapRequest, map_service::GetMapResponse &gt; *&#160;</td>
+          <td class="paramname"><em>stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f759c95f648a9eef7a345767f216129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f759c95f648a9eef7a345767f216129">&#9670;&nbsp;</a></span>setProtosPointers()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -241,14 +283,20 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void grpcServer::setProtosPointers </td>
           <td>(</td>
-          <td class="paramtype">AMUR::AmurControls *const&#160;</td>
-          <td class="paramname"><em>controls</em>, </td>
+          <td class="paramtype">std::shared_ptr&lt; Controls &gt;&#160;</td>
+          <td class="paramname"><em>controlsPtr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">AMUR::AmurSensors *const&#160;</td>
-          <td class="paramname"><em>sensors</em>&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; Sensors &gt;&#160;</td>
+          <td class="paramname"><em>sensorsPtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; map_service::GetMapResponse &gt;&#160;</td>
+          <td class="paramname"><em>mapPtr</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -260,8 +308,8 @@ Private Attributes</h2></td></tr>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classgrpcServer_a4405721eaa6197b2a37c0ec825f77cab_icgraph.png" border="0" usemap="#aclassgrpcServer_a4405721eaa6197b2a37c0ec825f77cab_icgraph" alt=""/></div>
-<map name="aclassgrpcServer_a4405721eaa6197b2a37c0ec825f77cab_icgraph" id="aclassgrpcServer_a4405721eaa6197b2a37c0ec825f77cab_icgraph">
+<div class="center"><img src="classgrpcServer_a7f759c95f648a9eef7a345767f216129_icgraph.png" border="0" usemap="#aclassgrpcServer_a7f759c95f648a9eef7a345767f216129_icgraph" alt=""/></div>
+<map name="aclassgrpcServer_a7f759c95f648a9eef7a345767f216129_icgraph" id="aclassgrpcServer_a7f759c95f648a9eef7a345767f216129_icgraph">
 <area shape="rect" title=" " alt="" coords="185,13,380,39"/>
 <area shape="rect" href="classNetworkController.html#a65637245c5c3a4f3e07a1507232340cf" title=" " alt="" coords="5,5,137,47"/>
 </map>
@@ -270,8 +318,8 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="abb919e27332b808d51f03a8585b34791"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb919e27332b808d51f03a8585b34791">&#9670;&nbsp;</a></span>controls</h2>
+<a id="a5cf5d5dae1804adc13e5a11b7508abac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cf5d5dae1804adc13e5a11b7508abac">&#9670;&nbsp;</a></span>controls</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +328,51 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">AMUR::AmurControls* grpcServer::controls</td>
+          <td class="memname">std::shared_ptr&lt;Controls&gt; grpcServer::controls</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79e4dc9ecc47ff59177a2705555fd15c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79e4dc9ecc47ff59177a2705555fd15c">&#9670;&nbsp;</a></span>map</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;map_service::GetMapResponse&gt; grpcServer::map</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad17696157afb9d49a1005c4a3f144afe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad17696157afb9d49a1005c4a3f144afe">&#9670;&nbsp;</a></span>muMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex grpcServer::muMap</td>
         </tr>
       </table>
   </td>
@@ -314,8 +406,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ad47392a833a201d6f3e52fa71d9d88c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad47392a833a201d6f3e52fa71d9d88c4">&#9670;&nbsp;</a></span>sensors</h2>
+<a id="a3c7d2446b6393bec78f344b5cdd93451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c7d2446b6393bec78f344b5cdd93451">&#9670;&nbsp;</a></span>sensors</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -324,7 +416,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">AMUR::AmurSensors* grpcServer::sensors</td>
+          <td class="memname">std::shared_ptr&lt;Sensors&gt; grpcServer::sensors</td>
         </tr>
       </table>
   </td>

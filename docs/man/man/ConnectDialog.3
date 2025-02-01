@@ -1,4 +1,4 @@
-.TH "ConnectDialog" 3 "Wed Jan 8 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "ConnectDialog" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -34,6 +34,9 @@ Inherits QDialog\&.
 .br
 .ti -1c
 .RI "void \fBon_buttonBox_accepted\fP ()"
+.br
+.ti -1c
+.RI "void \fBon_connectButton_clicked\fP ()"
 .br
 .in -1c
 .SS "Private Member Functions"
@@ -86,6 +89,8 @@ Inherits QDialog\&.
 .SS "\fBRobotEntryPtr\fP ConnectDialog::findRobotByMachineId (const \fBRobotList\fP & robots, const QString & machineId)\fC [private]\fP"
 
 .SS "void ConnectDialog::on_buttonBox_accepted ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void ConnectDialog::on_connectButton_clicked ()\fC [private]\fP, \fC [slot]\fP"
 
 .SS "void ConnectDialog::onRobotNameChanged (QTableWidgetItem * item)\fC [private]\fP, \fC [slot]\fP"
 

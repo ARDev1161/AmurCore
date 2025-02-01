@@ -1,7 +1,6 @@
 var annotated_dup =
 [
     [ "AmurCore", "classAmurCore.html", "classAmurCore" ],
-    [ "anytype_s", "unionanytype__s.html", "unionanytype__s" ],
     [ "Calibrator", "classCalibrator.html", "classCalibrator" ],
     [ "CalibratorWorker", "classCalibratorWorker.html", "classCalibratorWorker" ],
     [ "CamCalibrate", "classCamCalibrate.html", "classCamCalibrate" ],
@@ -16,14 +15,16 @@ var annotated_dup =
     [ "JoystickDialog", "classJoystickDialog.html", "classJoystickDialog" ],
     [ "JoystickStateWorker", "classJoystickStateWorker.html", "classJoystickStateWorker" ],
     [ "Logic", "classLogic.html", "classLogic" ],
+    [ "MapDialog", "classMapDialog.html", "classMapDialog" ],
+    [ "MapWidget", "classMapWidget.html", "classMapWidget" ],
     [ "Movements", "classMovements.html", "classMovements" ],
     [ "MoveSettings", "structMoveSettings.html", "structMoveSettings" ],
     [ "NetworkController", "classNetworkController.html", "classNetworkController" ],
+    [ "PoseQuaternion", "structPoseQuaternion.html", "structPoseQuaternion" ],
     [ "RobotEntry", "classRobotEntry.html", "classRobotEntry" ],
+    [ "RobotInfoDialog", "classRobotInfoDialog.html", "classRobotInfoDialog" ],
     [ "RobotRepository", "classRobotRepository.html", "classRobotRepository" ],
     [ "Session", "classSession.html", "classSession" ],
-    [ "SpeechDialog", "classSpeechDialog.html", "classSpeechDialog" ],
-    [ "SphinxRecognizer", "classSphinxRecognizer.html", "classSphinxRecognizer" ],
     [ "System", "classSystem.html", "classSystem" ],
     [ "VJoystickAdapter", "classVJoystickAdapter.html", "classVJoystickAdapter" ],
     [ "Worker", "classWorker.html", "classWorker" ]

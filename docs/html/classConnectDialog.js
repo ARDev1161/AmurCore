@@ -6,6 +6,7 @@ var classConnectDialog =
     [ "fillTableWithRobots", "classConnectDialog.html#a12c49a6c7e809ab12b18bf63602e1112", null ],
     [ "findRobotByMachineId", "classConnectDialog.html#ac36e5a896bfbbdebefb2261275567a53", null ],
     [ "on_buttonBox_accepted", "classConnectDialog.html#a36992293b76ee8201e3949c4ec2a3791", null ],
+    [ "on_connectButton_clicked", "classConnectDialog.html#a361729aa761d6bf83b056e1e092f9a9d", null ],
     [ "onRobotNameChanged", "classConnectDialog.html#aa14738c3c8223689695ff00b303cdf64", null ],
     [ "onTableRowDoubleClicked", "classConnectDialog.html#ab21b60992a9dda8211f2aec54cc42430", null ],
     [ "setupTableHeaders", "classConnectDialog.html#a67bc4aa2621cf18b7f4220657dfa5639", null ],

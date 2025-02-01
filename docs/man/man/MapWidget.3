@@ -1,0 +1,281 @@
+.TH "MapWidget" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MapWidget
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <mapwidget\&.h>\fP
+.PP
+Inherits QWidget, and QWidget\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMapWidget\fP (QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "void \fBsetMapData\fP (const std::vector< int8_t > &data, int width, int height)"
+.br
+.ti -1c
+.RI "\fBMapWidget\fP (QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~MapWidget\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetMapData\fP (const std::vector< int8_t > &data, int width, int height, double resolution, double originX, double originY)"
+.br
+.RI "Устанавливает данные карты и инициирует перерисовку\&. "
+.ti -1c
+.RI "void \fBsetRobotLocation\fP (double posX, double posY)"
+.br
+.ti -1c
+.RI "void \fBsetRobotOrientation\fP (\fBPoseQuaternion\fP quaternion)"
+.br
+.ti -1c
+.RI "void \fBsetRobotOrientation\fP (double yaw)"
+.br
+.ti -1c
+.RI "void \fBsetRobotPose\fP (double posX, double posY, \fBPoseQuaternion\fP quaternion)"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBpaintEvent\fP (QPaintEvent *event) override"
+.br
+.ti -1c
+.RI "void \fBpaintEvent\fP (QPaintEvent *event) override"
+.br
+.RI "Обработчик события перерисовки виджета\&. "
+.ti -1c
+.RI "void \fBresizeEvent\fP (QResizeEvent *event) override"
+.br
+.RI "Обработчик события изменения размера виджета\&. "
+.ti -1c
+.RI "void \fBwheelEvent\fP (QWheelEvent *event) override"
+.br
+.RI "Обработчик события прокрутки колесиком мыши\&. "
+.ti -1c
+.RI "void \fBmousePressEvent\fP (QMouseEvent *event) override"
+.br
+.RI "Обработчик события нажатия кнопки мыши\&. "
+.ti -1c
+.RI "void \fBmouseMoveEvent\fP (QMouseEvent *event) override"
+.br
+.RI "Обработчик события перемещения мыши\&. "
+.ti -1c
+.RI "void \fBmouseReleaseEvent\fP (QMouseEvent *event) override"
+.br
+.RI "Обработчик события отпускания кнопки мыши\&. "
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBupdateScaleOnResize\fP (int widgetWidth, int widgetHeight)"
+.br
+.RI "Обновляет масштаб и сдвиг при изменении размера виджета\&. "
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QImage \fBm_mapImage\fP"
+.br
+.ti -1c
+.RI "std::mutex \fBm_mutex\fP"
+.br
+.ti -1c
+.RI "double \fBm_originX\fP"
+.br
+.ti -1c
+.RI "double \fBm_originY\fP"
+.br
+.ti -1c
+.RI "double \fBm_mapResolution\fP"
+.br
+.ti -1c
+.RI "double \fBm_scaleFactor\fP"
+.br
+.ti -1c
+.RI "double \fBm_minScale\fP"
+.br
+.ti -1c
+.RI "double \fBm_maxScale\fP"
+.br
+.ti -1c
+.RI "QPoint \fBm_lastMousePos\fP"
+.br
+.ti -1c
+.RI "QPoint \fBm_offset\fP"
+.br
+.ti -1c
+.RI "bool \fBm_panning\fP"
+.br
+.ti -1c
+.RI "QPixmap \fBm_robotPixmap\fP"
+.br
+.ti -1c
+.RI "float \fBm_robot_x\fP"
+.br
+.ti -1c
+.RI "float \fBm_robot_y\fP"
+.br
+.ti -1c
+.RI "double \fBm_robot_theta\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "MapWidget::MapWidget (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "MapWidget::MapWidget (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "MapWidget::~MapWidget ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void MapWidget::mouseMoveEvent (QMouseEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.PP
+Обработчик события перемещения мыши\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP Событие перемещения мыши\&. 
+.RE
+.PP
+
+.SS "void MapWidget::mousePressEvent (QMouseEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.PP
+Обработчик события нажатия кнопки мыши\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP Событие нажатия кнопки мыши\&. 
+.RE
+.PP
+
+.SS "void MapWidget::mouseReleaseEvent (QMouseEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.PP
+Обработчик события отпускания кнопки мыши\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP Событие отпускания кнопки мыши\&. 
+.RE
+.PP
+
+.SS "void MapWidget::paintEvent (QPaintEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.SS "void MapWidget::paintEvent (QPaintEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.PP
+Обработчик события перерисовки виджета\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP Событие перерисовки\&. 
+.RE
+.PP
+
+.SS "void MapWidget::resizeEvent (QResizeEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.PP
+Обработчик события изменения размера виджета\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP Событие изменения размера\&. 
+.RE
+.PP
+
+.SS "void MapWidget::setMapData (const std::vector< int8_t > & data, int width, int height)"
+
+.SS "void MapWidget::setMapData (const std::vector< int8_t > & data, int width, int height, double resolution, double originX, double originY)"
+
+.PP
+Устанавливает данные карты и инициирует перерисовку\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Вектор данных карты (OccupancyGrid\&.data)\&. 
+.br
+\fIwidth\fP Ширина карты\&. 
+.br
+\fIheight\fP Высота карты\&. 
+.br
+\fIresolution\fP Разрешение карты\&. Метр/пиксел 
+.br
+\fIoriginX\fP Координата X начала координат\&. 
+.br
+\fIoriginY\fP Координата Y начала координат\&. 
+.RE
+.PP
+
+.SS "void MapWidget::setRobotLocation (double posX, double posY)"
+
+.SS "void MapWidget::setRobotOrientation (double yaw)"
+
+.SS "void MapWidget::setRobotOrientation (\fBPoseQuaternion\fP quaternion)"
+
+.SS "void MapWidget::setRobotPose (double posX, double posY, \fBPoseQuaternion\fP quaternion)"
+
+.SS "void MapWidget::updateScaleOnResize (int widgetWidth, int widgetHeight)\fC [private]\fP"
+
+.PP
+Обновляет масштаб и сдвиг при изменении размера виджета\&. 
+.SS "void MapWidget::wheelEvent (QWheelEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.PP
+Обработчик события прокрутки колесиком мыши\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP Событие прокрутки колесиком\&. 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QPoint MapWidget::m_lastMousePos\fC [private]\fP"
+
+.SS "QImage MapWidget::m_mapImage\fC [private]\fP"
+
+.SS "double MapWidget::m_mapResolution\fC [private]\fP"
+
+.SS "double MapWidget::m_maxScale\fC [private]\fP"
+
+.SS "double MapWidget::m_minScale\fC [private]\fP"
+
+.SS "std::mutex MapWidget::m_mutex\fC [private]\fP"
+
+.SS "QPoint MapWidget::m_offset\fC [private]\fP"
+
+.SS "double MapWidget::m_originX\fC [private]\fP"
+
+.SS "double MapWidget::m_originY\fC [private]\fP"
+
+.SS "bool MapWidget::m_panning\fC [private]\fP"
+
+.SS "double MapWidget::m_robot_theta\fC [private]\fP"
+
+.SS "float MapWidget::m_robot_x\fC [private]\fP"
+
+.SS "float MapWidget::m_robot_y\fC [private]\fP"
+
+.SS "QPixmap MapWidget::m_robotPixmap\fC [private]\fP"
+
+.SS "double MapWidget::m_scaleFactor\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

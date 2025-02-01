@@ -1,0 +1,10 @@
+<map id="MapDialog::onMapUpdated" name="MapDialog::onMapUpdated">
+<area shape="rect" id="node1" title="Слот для обновления отображаемой карты." alt="" coords="5,107,183,133"/>
+<area shape="rect" id="node2" href="$classMapDialog.html#a73662cc60511fadda91cdd03d62d057f" title="Проверяет, изменились ли данные карты." alt="" coords="233,5,419,32"/>
+<area shape="rect" id="node3" href="$classMapDialog.html#ae78f95154bc619bc2bbae3ff10c4f256" title="Проверяет, изменились ли данные положения робота." alt="" coords="231,56,421,83"/>
+<area shape="rect" id="node4" href="$classMapDialog.html#a4486cb12a37aae798bb04e70f646fa9b" title=" " alt="" coords="476,81,671,108"/>
+<area shape="rect" id="node5" href="$classMapWidget.html#a817b78e8f547736fabf7a1dc4217d28f" title=" " alt="" coords="245,157,407,184"/>
+<area shape="rect" id="node6" href="$classMapWidget.html#ac7d5fd360d3fa7e265be96d2fa3615a8" title=" " alt="" coords="239,208,413,235"/>
+<area shape="rect" id="node7" href="$classMapWidget.html#a8e1fe74f8bac2c1ff762176cde0c4491" title=" " alt="" coords="476,183,671,209"/>
+<area shape="rect" id="node8" href="$classMapWidget.html#aed42872d8881c6767aec8c34db383f72" title=" " alt="" coords="469,233,677,260"/>
+</map>

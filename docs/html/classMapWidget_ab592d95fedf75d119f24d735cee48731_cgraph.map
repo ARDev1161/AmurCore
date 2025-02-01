@@ -1,0 +1,4 @@
+<map id="MapWidget::resizeEvent" name="MapWidget::resizeEvent">
+<area shape="rect" id="node1" title="Обработчик события изменения размера виджета." alt="" coords="5,13,165,39"/>
+<area shape="rect" id="node2" href="$classMapWidget.html#ae336a87acbdcd0dd58401275a7d02ea0" title="Обновляет масштаб и сдвиг при изменении размера виджета." alt="" coords="213,5,396,47"/>
+</map>
