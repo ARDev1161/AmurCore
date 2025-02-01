@@ -5,86 +5,82 @@
     <name>AmurCore</name>
     <message>
         <location filename="AmurCore.ui" line="26"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="129"/>
         <source>AmurCore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="60"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="139"/>
+        <location filename="AmurCore.ui" line="64"/>
         <source>Capture not opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="80"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="140"/>
+        <location filename="AmurCore.ui" line="84"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="88"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="141"/>
-        <source>&amp;Amur</source>
+        <location filename="AmurCore.ui" line="92"/>
+        <source>&amp;Robot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="101"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="142"/>
+        <location filename="AmurCore.ui" line="106"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="112"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="130"/>
+        <location filename="AmurCore.ui" line="117"/>
         <source>&amp;Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="117"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="131"/>
+        <location filename="AmurCore.ui" line="122"/>
         <source>&amp;Joystick</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="122"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="132"/>
+        <location filename="AmurCore.ui" line="127"/>
         <source>E&amp;xit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="127"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="133"/>
+        <location filename="AmurCore.ui" line="132"/>
         <source>&amp;Move</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="132"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="134"/>
+        <location filename="AmurCore.ui" line="137"/>
         <source>&amp;Reboot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="137"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="135"/>
+        <location filename="AmurCore.ui" line="142"/>
         <source>&amp;Halt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AmurCore.ui" line="142"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="136"/>
-        <source>Camera</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="AmurCore.ui" line="147"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="137"/>
-        <source>&amp;Speech</source>
+        <source>Camera calibration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="AmurCore.ui" line="152"/>
-        <location filename="bin/AmurCore_autogen/include/ui_AmurCore.h" line="138"/>
+        <source>&amp;Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="AmurCore.ui" line="157"/>
         <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="AmurCore.ui" line="162"/>
+        <source>&amp;Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="AmurCore.ui" line="167"/>
+        <source>Robot &amp;Info</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -92,43 +88,36 @@
     <name>CamCalibrate</name>
     <message>
         <location filename="camera/camcalibrate.ui" line="20"/>
-        <location filename="bin/camera/CameraSetup_autogen/include/ui_camcalibrate.h" line="87"/>
         <source>Camera calibration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="camera/camcalibrate.ui" line="54"/>
-        <location filename="bin/camera/CameraSetup_autogen/include/ui_camcalibrate.h" line="88"/>
         <source>Capture not opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="camera/camcalibrate.ui" line="70"/>
-        <location filename="bin/camera/CameraSetup_autogen/include/ui_camcalibrate.h" line="89"/>
         <source>Chessboard numbers:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="camera/camcalibrate.ui" line="98"/>
-        <location filename="bin/camera/CameraSetup_autogen/include/ui_camcalibrate.h" line="90"/>
         <source>Corners horizontal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="camera/camcalibrate.ui" line="127"/>
-        <location filename="bin/camera/CameraSetup_autogen/include/ui_camcalibrate.h" line="91"/>
         <source>Corners vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="camera/camcalibrate.ui" line="140"/>
-        <location filename="bin/camera/CameraSetup_autogen/include/ui_camcalibrate.h" line="92"/>
         <source>Calibrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="camera/camcalibrate.ui" line="154"/>
-        <location filename="bin/camera/CameraSetup_autogen/include/ui_camcalibrate.h" line="93"/>
         <source>Get up to 20 frames chessboard for calibration.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -137,20 +126,108 @@
     <name>ConnectDialog</name>
     <message>
         <location filename="network/connectdialog.ui" line="14"/>
-        <location filename="bin/network/NetworkController_autogen/include/ui_connectdialog.h" line="55"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="network/connectdialog.ui" line="42"/>
-        <location filename="bin/network/NetworkController_autogen/include/ui_connectdialog.h" line="56"/>
+        <location filename="network/connectdialog.ui" line="26"/>
+        <source>Here you can search &amp; connect to all robots that you saved and currently available in LAN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="29"/>
+        <source>Available robots</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="47"/>
+        <source>Give name for saving, delete name for delete robot </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="60"/>
+        <source>Show all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="76"/>
+        <source>Green fields for active, gray - inactive, from DataBase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="79"/>
+        <source>Show known</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="92"/>
+        <source>From network lookup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="95"/>
+        <source>Show unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="109"/>
+        <source>Custom robot connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="121"/>
+        <source>IP address :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="134"/>
+        <source>Enter IP address &amp; port for connecting tocustom robot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="137"/>
         <source>10.10.10.10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="network/connectdialog.ui" line="58"/>
-        <location filename="bin/network/NetworkController_autogen/include/ui_connectdialog.h" line="57"/>
-        <source>Input the ip address :</source>
+        <location filename="network/connectdialog.ui" line="153"/>
+        <source>Connect to custom robot or to robot from table below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="156"/>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="186"/>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="198"/>
+        <location filename="network/connectdialog.ui" line="214"/>
+        <source>Run this App as Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="201"/>
+        <source>Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.ui" line="217"/>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.cpp" line="120"/>
+        <source>Delete Robot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network/connectdialog.cpp" line="121"/>
+        <source>Do you really want to delete the robot: %1?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -178,49 +255,41 @@
     <name>JoystickDialog</name>
     <message>
         <location filename="joystick/joystickdialog.ui" line="14"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="522"/>
         <source>Joystick</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="42"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="523"/>
         <source>Selection and info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="48"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="524"/>
         <source>Choose Joystick:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="58"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="525"/>
         <source>&amp;Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="65"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="526"/>
         <source>&amp;Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="72"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="527"/>
         <source>&amp;Rescan device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="97"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="528"/>
         <source>Joystick States</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="107"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="529"/>
         <source>X Axis:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -232,13 +301,6 @@
         <location filename="joystick/joystickdialog.ui" line="307"/>
         <location filename="joystick/joystickdialog.ui" line="357"/>
         <location filename="joystick/joystickdialog.ui" line="394"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="530"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="532"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="534"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="536"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="538"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="540"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="542"/>
         <location filename="joystick/joystickdialog.cpp" line="91"/>
         <location filename="joystick/joystickdialog.cpp" line="92"/>
         <location filename="joystick/joystickdialog.cpp" line="93"/>
@@ -251,67 +313,56 @@
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="157"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="531"/>
         <source>X Rotation:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="194"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="533"/>
         <source>Y Axis:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="244"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="535"/>
         <source>Y Rotation:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="281"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="537"/>
         <source>Z LT Axis:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="331"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="539"/>
         <source>POV0:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="368"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="541"/>
         <source>Z RT Axis:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="433"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="543"/>
         <source>Buttons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="484"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="545"/>
         <source>Joystick Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="492"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="546"/>
         <source>Joystick Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="512"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="547"/>
         <source>Not connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="536"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="548"/>
         <source>Joystick Id:                                     </source>
         <translation type="unfinished"></translation>
     </message>
@@ -321,11 +372,6 @@
         <location filename="joystick/joystickdialog.ui" line="647"/>
         <location filename="joystick/joystickdialog.ui" line="694"/>
         <location filename="joystick/joystickdialog.ui" line="741"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="549"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="551"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="553"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="555"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="557"/>
         <location filename="joystick/joystickdialog.cpp" line="85"/>
         <location filename="joystick/joystickdialog.cpp" line="86"/>
         <location filename="joystick/joystickdialog.cpp" line="87"/>
@@ -336,25 +382,21 @@
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="580"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="550"/>
         <source>Number of Buttons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="627"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="552"/>
         <source>Number of Axis:            </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="674"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="554"/>
         <source>Number of Hats:     </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="joystick/joystickdialog.ui" line="721"/>
-        <location filename="bin/joystick/JoystickHandler_autogen/include/ui_joystickdialog.h" line="556"/>
         <source>Number of Balls:    </source>
         <translation type="unfinished"></translation>
     </message>
@@ -382,81 +424,38 @@
     </message>
 </context>
 <context>
-    <name>SpeechDialog</name>
+    <name>MapDialog</name>
     <message>
-        <location filename="logic/speech/speechdialog.ui" line="14"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="234"/>
+        <location filename="logic/mapdialog.ui" line="16"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RobotInfoDialog</name>
+    <message>
+        <location filename="logic/robotinfodialog.ui" line="14"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="logic/speech/speechdialog.ui" line="51"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="235"/>
-        <source>Hello QtTextToSpeechUi,
-this is an example text in English.
-
-QtSpeechUi is a library that makes text to SpeechUi easy with Qt.
-Done, over and out.</source>
+        <location filename="logic/robotinfodialog.ui" line="42"/>
+        <source>Show at main screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="logic/speech/speechdialog.ui" line="80"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="240"/>
-        <source>Volume:</source>
+        <location filename="logic/robotinfodialog.ui" line="54"/>
+        <source>battery charge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="logic/speech/speechdialog.ui" line="96"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="241"/>
-        <source>Engine</source>
+        <location filename="logic/robotinfodialog.ui" line="68"/>
+        <source>Show current info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="logic/speech/speechdialog.ui" line="125"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="242"/>
-        <source>Pitch:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="logic/speech/speechdialog.ui" line="144"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="243"/>
-        <source>Rate:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="logic/speech/speechdialog.ui" line="180"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="244"/>
-        <source>Voice name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="logic/speech/speechdialog.ui" line="215"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="245"/>
-        <source>&amp;Language:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="logic/speech/speechdialog.ui" line="232"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="246"/>
-        <source>Speak</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="logic/speech/speechdialog.ui" line="242"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="247"/>
-        <source>Pause</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="logic/speech/speechdialog.ui" line="252"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="248"/>
-        <source>Resume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="logic/speech/speechdialog.ui" line="259"/>
-        <location filename="bin/logic/speech/SpeechProccessor_autogen/include/ui_speechdialog.h" line="249"/>
-        <source>Stop</source>
+        <location filename="logic/robotinfodialog.ui" line="81"/>
+        <source>Map</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

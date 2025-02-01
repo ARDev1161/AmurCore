@@ -75,8 +75,8 @@ configure_file(
         AmurCore.cfg
         )
 
-set(GRPC_FETCHCONTENT true CACHE BOOL "Use FetchContent for download gRPC, or use system gRPC? YES/no.")
-include(cmake/grpc.cmake)
+#set(GRPC_FETCHCONTENT true CACHE BOOL "Use FetchContent for download gRPC, or use system gRPC? YES/no.")
+#include(cmake/grpc.cmake)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/grpc-src/include/")
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/grpc-src/third_party/protobuf/src/")
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/grpc-src/third_party/abseil-cpp/")
@@ -84,8 +84,8 @@ include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/grpc-src/third_party/abse
 # for generated pb files
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql LinguistTools TextToSpeech)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql LinguistTools TextToSpeech)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql LinguistTools)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql LinguistTools)
 
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
@@ -160,12 +160,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
                         ThreadsHandler
                         JoystickHandler
                         NetworkController
-                        SpeechProccessor
 
                         config++
                         ${SDL2_LIBRARIES}
-                        ${OpenCV_LIBS}
-                        Qt${QT_VERSION_MAJOR}::TextToSpeech
                         Qt${QT_VERSION_MAJOR}::Widgets
 )
 
@@ -181,31 +178,26 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(${PROJECT_NAME})
 endif()
 
-if(CMAKE_BUILD_TYPE STREQUAL Release)
-    if (NOT DEFINED CMAKE_SYSTEM_PROCESSOR)
-        set(CMAKE_SYSTEM_PROCESSOR ${CMAKE_HOST_SYSTEM_PROCESSOR} CACHE INTERNAL "")
-    endif()
-    if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL ${CMAKE_HOST_SYSTEM_PROCESSOR})
-        set(IS_CROSSCOMP OFF CACHE INTERNAL "")
-    else()
-        set(IS_CROSSCOMP ON CACHE INTERNAL "")
-    endif()
+# Optionally add an option to enable/disable AppImage build
+option(BUILD_APPIMAGE "Generate .AppImage using linuxdeploy" ON)
 
-    set(DATA_PATH ${CMAKE_SOURCE_DIR}/data)
-    set(LOGO_PATH ${DATA_PATH}/images/logo.png)
-    INSTALL(CODE
-        "include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/appimage.cmake)
-            make_appimage(
-                EXE \"${CMAKE_BINARY_DIR}/${PROJECT_NAME}\"
-                NAME \"${PROJECT_NAME}\"
-                ICON \"${LOGO_PATH}\"
-                DIR_ICON \"${LOGO_PATH}\"
-                OUTPUT_NAME \"${CMAKE_BINARY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}.AppImage\"
-                OUTPUT_ARCH \"${CMAKE_SYSTEM_PROCESSOR}\"
-                CROSSCOMP ${IS_CROSSCOMP}
-                ASSETS \"${DATA_PATH}\"
-            )
-            "
-            COMPONENT Runtime
-        )
+if(CMAKE_BUILD_TYPE STREQUAL Release)
+    include("${CMAKE_SOURCE_DIR}/cmake/linuxdeploy.cmake")
+
+    file(WRITE "${CMAKE_BINARY_DIR}/appimage_invoke.cmake" "
+include(\"${CMAKE_SOURCE_DIR}/cmake/linuxdeploy.cmake\")
+
+build_appimage(
+    APP_NAME         \"${PROJECT_NAME}\"
+    APP_VERSION      \"${PROJECT_VERSION}\"
+    EXECUTABLE       \"${PROJECT_NAME}\"
+    ICON             \"${CMAKE_SOURCE_DIR}/data/images/logo.png\"
+    APP_ARCH         \"${CMAKE_SYSTEM_PROCESSOR}\"
+)
+")
+    add_custom_target(appimage ALL
+        COMMAND ${CMAKE_COMMAND} -E echo "Building AppImage..."
+        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_BINARY_DIR}/appimage_invoke.cmake"
+        DEPENDS ${PROJECT_NAME}
+    )
 endif()
