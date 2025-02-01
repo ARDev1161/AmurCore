@@ -2,8 +2,9 @@
 #define LOGIC_H
 
 #include "opencv2/opencv.hpp"
-#include "speech/speechdialog.h"
 #include "movements.h"
+
+using namespace Robot;
 
 using namespace cv;
 class Logic
@@ -11,15 +12,16 @@ class Logic
     Mat *srcMat;
     Mat *outMat;
 
-    JoyState *joyState;
+    std::shared_ptr<JoyState> joyState;
     Movements *move;
 
-    AMUR::AmurControls *controls;
-    AMUR::AmurSensors *sensors;
+    std::shared_ptr<Controls> controls;
+    std::shared_ptr<Sensors> sensors;
+    std::shared_ptr<map_service::OccupancyGrid> map;
 
     void initLogic();
 public:
-    Logic(JoyState *joyState, AMUR::AmurControls *controls, AMUR::AmurSensors *sensors);
+    Logic(std::shared_ptr<JoyState> joyState, std::shared_ptr<Controls> controls, std::shared_ptr<Sensors> sensors);
 
     void process();
 

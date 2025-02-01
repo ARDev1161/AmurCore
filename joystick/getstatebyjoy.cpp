@@ -1,6 +1,6 @@
 #include "getstatebyjoy.h"
 
-GetStateByJoystick::GetStateByJoystick(JoyState * const state, QObject *parent) :
+GetStateByJoystick::GetStateByJoystick(const std::shared_ptr<JoyState> state, QObject *parent) :
     QObject(parent),
     loopFlag(true),
     joyState(state)

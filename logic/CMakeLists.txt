@@ -4,14 +4,17 @@ project(LogicCore LANGUAGES CXX)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
-add_subdirectory(speech)
-
 set(LOGIC_SOURCES
     movements.cpp movements.h
     system.cpp    system.h
     logic.cpp     logic.h
 
-    ${SPEECH_SOURCES}
+    mapwidget.h mapwidget.cpp
+    mapdialog.h   mapdialog.cpp
+    mapdialog.ui
+
+    robotinfodialog.h   robotinfodialog.cpp
+    robotinfodialog.ui
 )
 
 add_library(${PROJECT_NAME}
@@ -21,7 +24,7 @@ add_library(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
                     JoystickHandler
-                    SpeechProccessor
+                    AMURProtos
                     ${OpenCV_LIBS}
                     Qt${QT_VERSION_MAJOR}::Widgets
                 )

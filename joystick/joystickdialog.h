@@ -16,7 +16,7 @@ class JoystickDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit JoystickDialog(JoyState * const state, QWidget *parent = 0);
+    explicit JoystickDialog(const std::shared_ptr<JoyState> state, QWidget *parent = 0);
     ~JoystickDialog();
 
 private:
@@ -24,7 +24,7 @@ private:
     QVector<bool> buttonVector;
     enum { MAX_JOYSTICK_BUTTONS = 30 };
 
-    JoyState *joyState;
+    std::shared_ptr<JoyState> joyState;
     VJoystickAdapter* joyAdapter;
 
     int joyId;

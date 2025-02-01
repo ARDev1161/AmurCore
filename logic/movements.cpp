@@ -1,6 +1,6 @@
 #include "movements.h"
 
-Movements::Movements(JoyState *joyState, AMUR::AmurControls *controls):
+Movements::Movements(std::shared_ptr<JoyState> joyState, std::shared_ptr<Controls> controls):
     controls(controls),
     joyState(joyState)
 {

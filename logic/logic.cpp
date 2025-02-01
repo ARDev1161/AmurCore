@@ -1,10 +1,12 @@
 #include "logic.h"
 
 
-Logic::Logic(JoyState *joyState, AMUR::AmurControls *controls, AMUR::AmurSensors *sensors):
-    joyState(joyState),
-    controls(controls),
-    sensors(sensors)
+Logic::Logic(std::shared_ptr<JoyState> joyState,
+             std::shared_ptr<Controls> controls,
+             std::shared_ptr<Sensors> sensors)
+    : joyState(joyState),
+      controls(controls),
+      sensors(sensors)
 {
     initLogic();
 }

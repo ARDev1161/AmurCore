@@ -7,10 +7,10 @@ class JoystickStateWorker : public QObject
 {
     Q_OBJECT
 
-    JoyState *joyState;
+    std::shared_ptr<JoyState> joyState;
     GetStateByJoystick *joyStateController;
 public:
-    JoystickStateWorker(JoyState * const state);
+    JoystickStateWorker(const std::shared_ptr<JoyState> state);
     ~JoystickStateWorker();
 
 public slots:

@@ -6,7 +6,7 @@
 #include <QTimer>
 #include <QDebug>
 #include "v_joystick_adapter.h"
-#include "network/protobuf/amur.pb.h"
+#include "network/protobuf/robot.pb.h"
 
 struct JoyState{
     int joyId = -1;
@@ -34,9 +34,9 @@ class GetStateByJoystick : public QObject
     int LoopTime=50;
     bool loopFlag;
 
-    JoyState *joyState;
+    std::shared_ptr<JoyState> joyState;
 public:
-    GetStateByJoystick(JoyState * const state, QObject *parent = nullptr);
+    GetStateByJoystick(const std::shared_ptr<JoyState> state, QObject *parent = nullptr);
     ~GetStateByJoystick();
     void stop();
 

@@ -32,14 +32,16 @@ void AmurCore::fillFieldsByConfig()
 
 void AmurCore::initialize()
 {
-    controls = new AMUR::AmurControls();
-    sensors = new AMUR::AmurSensors();
+    controls = std::make_shared<Controls>();
+    sensors = std::make_shared<Sensors>();
+    map = std::make_shared<map_service::GetMapResponse>();
 
     camHolder = new CamSettingsHolder();
-    joyState = new JoyState();
+    joyState = std::make_shared<JoyState>();
 
     joystickDialog = new JoystickDialog(joyState, this);
-    speechDialog = new SpeechDialog(this);
+    mapDialog = new MapDialog(map, this);
+    robotInfoDialog = new RobotInfoDialog();
 
     amurLogic = new Logic(joyState, controls, sensors);
 
@@ -48,7 +50,7 @@ void AmurCore::initialize()
         qDebug() << "Cannot open database!";
     }
 
-    network = std::make_shared<NetworkController>(controls, sensors); // TODO - add robot id & &<vector> of robots id
+    network = std::make_shared<NetworkController>(controls, sensors, map); // TODO - add robot id & &<vector> of robots id
     network->runArpingService(arpPort, grpcPort, arpHeader); // Start listening for initial arp message from robots
     network->runServer(address_mask); // Start AmurCore gRPC server
     connectDialog = new ConnectDialog(this, network, repo);
@@ -66,14 +68,13 @@ void AmurCore::connMenu()
     connect(ui->action_Joystick, SIGNAL(triggered()), this, SLOT(joystickDialogOpen()));
     connect(ui->actionE_xit, SIGNAL(triggered(bool)), this, SLOT(close()));
 
-    // Zanya menu
+    // Robot menu
     connect(ui->action_Connect, SIGNAL(triggered()), this, SLOT(connectDialogOpen()));
-    connect(ui->action_Halt, SIGNAL(triggered()), this, SLOT(amurHalt()));
-    connect(ui->action_Reboot, SIGNAL(triggered()), this, SLOT(amurReboot()));
+    connect(ui->action_Reboot, SIGNAL(triggered()), this, SLOT(robotReboot()));
+    connect(ui->action_Halt, SIGNAL(triggered()), this, SLOT(robotHalt()));
     connect(ui->actionCamera, SIGNAL(triggered()), this, SLOT(calibDialogOpen()));
-
-    // Speech dialog
-    connect(ui->action_Speech, SIGNAL(triggered()), this, SLOT(speechDialogOpen()));
+    connect(ui->action_Map, SIGNAL(triggered()), this, SLOT(mapDialogOpen()));
+    connect(ui->actionRobot_Info, SIGNAL(triggered()), this, SLOT(robotInfoDialogOpen()));
 }
 
 void AmurCore::joystickDialogOpen()
@@ -105,6 +106,16 @@ void AmurCore::calibDialogOpen()
     calibDialog->exec();
 }
 
+void AmurCore::mapDialogOpen()
+{
+    mapDialog->exec();
+}
+
+void AmurCore::robotInfoDialogOpen()
+{
+    robotInfoDialog->exec();
+}
+
 void AmurCore::resizeEvent(QResizeEvent *event)
 {    
     Q_UNUSED(event);
@@ -115,17 +126,12 @@ void AmurCore::resizeEvent(QResizeEvent *event)
                     ));
 }
 
-void AmurCore::speechDialogOpen()
-{
-    speechDialog->exec();
-}
-
-void AmurCore::amurHalt()
+void AmurCore::robotHalt()
 {
     controls->mutable_system()->set_haltflag(true);
 }
 
-void AmurCore::amurReboot()
+void AmurCore::robotReboot()
 {
     controls->mutable_system()->set_restartflag(true);
 }

@@ -1,7 +1,7 @@
 #include "joystickdialog.h"
 #include "ui_joystickdialog.h"
 
-JoystickDialog::JoystickDialog(JoyState * const state, QWidget *parent) :
+JoystickDialog::JoystickDialog(const std::shared_ptr<JoyState> state, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::JoystickDialog),
     joyState(state)

@@ -1,6 +1,6 @@
 #include "joystick.h"
 
-Joystick::Joystick(JoyState * const state):
+Joystick::Joystick(const std::shared_ptr<JoyState> state):
     joyState(state)
 {
 

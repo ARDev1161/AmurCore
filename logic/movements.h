@@ -3,6 +3,8 @@
 
 #include "../joystick/joystick.h"
 
+using namespace Robot;
+
 struct MoveSettings
 {
     struct JoyBindings
@@ -25,9 +27,9 @@ struct MoveSettings
 
 class Movements
 {
-    AMUR::AmurControls *controls;
+    std::shared_ptr<Controls> controls;
     MoveSettings moveSettings;
-    JoyState *joyState;
+    std::shared_ptr<JoyState> joyState;
     JoyState lastJoyState;
 
     void checkChangeRelayButton(int buttonNumber);
@@ -36,7 +38,7 @@ class Movements
     int wheelProcess(int xAxis, int yAxis);
     int moveCameraProcess(int xAxis, int yAxis);
 public:
-    Movements(JoyState *joyState, AMUR::AmurControls *controls);
+    Movements(std::shared_ptr<JoyState> joyState, std::shared_ptr<Controls> controls);
     int update();
 };
 

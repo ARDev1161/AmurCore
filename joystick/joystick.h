@@ -8,9 +8,9 @@ class Joystick: public QObject
 {
     Q_OBJECT
 
-    JoyState *joyState;
+    std::shared_ptr<JoyState> joyState;
 public:
-    Joystick(JoyState * const state);
+    Joystick(const std::shared_ptr<JoyState> state);
     ~Joystick();
 
     void addThread();

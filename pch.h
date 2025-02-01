@@ -11,7 +11,7 @@
 #include <opencv4/opencv2/opencv.hpp>
 
 #include "network/robotrepository.h"
-#include "network/protobuf/amur.grpc.pb.h"
+#include "network/protobuf/robot.grpc.pb.h"
 #include "network/networkcontroller.h"
 
 #include "network/connectdialog.h"
@@ -22,6 +22,8 @@
 #include "camera/camsettingsholder.h"
 
 #include "logic/logic.h"
+#include "logic/mapdialog.h"
+#include "logic/robotinfodialog.h"
 
 #include "config/configprocessor.h"
 

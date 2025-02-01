@@ -26,6 +26,8 @@
 #define SOURCE_STREAM 0
 //#define SOURCE_STREAM "udpsrc port=1488 ! application/x-rtp, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! appsink"
 
+using namespace Robot;
+
 namespace Ui {
     class AmurCore;
 }
@@ -51,16 +53,17 @@ class AmurCore : public QMainWindow
     std::shared_ptr<NetworkController> network;
     std::shared_ptr<RobotRepository> repo;
 
-    SpeechDialog *speechDialog;
     ConnectDialog *connectDialog;
     JoystickDialog *joystickDialog;
+    MapDialog *mapDialog;
+    RobotInfoDialog *robotInfoDialog;
 
-
-    AMUR::AmurControls *controls;
-    AMUR::AmurSensors *sensors;
+    std::shared_ptr<Controls> controls;
+    std::shared_ptr<Sensors> sensors;
+    std::shared_ptr<map_service::GetMapResponse> map;
 
     Joystick *joyThread;
-    JoyState *joyState;
+    std::shared_ptr<JoyState> joyState;
     Logic *amurLogic;
 
     CamSettingsHolder *camHolder;
@@ -80,14 +83,17 @@ protected:
 
 private slots:
     void frameUpdate();
-    void calibDialogOpen();
-    void speechDialogOpen();
+
     void connectDialogOpen();
     void joystickDialogOpen();
+    void calibDialogOpen();
+    void mapDialogOpen();
+    void robotInfoDialogOpen();
+
     void fetchJoystickId();
 
-    void amurHalt();
-    void amurReboot();
+    void robotHalt();
+    void robotReboot();
 
 private:
     void fillFieldsByConfig();

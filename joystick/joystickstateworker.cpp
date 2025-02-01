@@ -1,6 +1,6 @@
 #include "joystickstateworker.h"
 
-JoystickStateWorker::JoystickStateWorker(JoyState * const state):
+JoystickStateWorker::JoystickStateWorker(const std::shared_ptr<JoyState> state):
     joyState(state)
 {
 }

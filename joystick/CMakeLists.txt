@@ -23,6 +23,7 @@ add_library(${PROJECT_NAME}
            )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
+            AMURProtos
             Qt${QT_VERSION_MAJOR}::Core
             Qt${QT_VERSION_MAJOR}::Widgets
            )
