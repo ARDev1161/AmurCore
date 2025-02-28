@@ -99,7 +99,7 @@ Inheritance diagram for grpcServer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgrpcServer__inherit__graph.png" border="0" usemap="#agrpcServer_inherit__map" alt="Inheritance graph"/></div>
 <map name="agrpcServer_inherit__map" id="agrpcServer_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,131,168,325"/>
+<area shape="rect" title=" " alt="" coords="5,131,168,355"/>
 <area shape="rect" title=" " alt="" coords="9,5,165,83"/>
 </map>
 </div>
@@ -108,7 +108,7 @@ Collaboration diagram for grpcServer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgrpcServer__coll__graph.png" border="0" usemap="#agrpcServer_coll__map" alt="Collaboration graph"/></div>
 <map name="agrpcServer_coll__map" id="agrpcServer_coll__map">
-<area shape="rect" title=" " alt="" coords="5,131,168,325"/>
+<area shape="rect" title=" " alt="" coords="5,131,168,355"/>
 <area shape="rect" title=" " alt="" coords="9,5,165,83"/>
 </map>
 </div>
@@ -119,6 +119,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7f759c95f648a9eef7a345767f216129"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d29d1294fbe427f27a44e9fd3a671bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a7d29d1294fbe427f27a44e9fd3a671bb">checkConn</a> ()</td></tr>
 <tr class="separator:a7d29d1294fbe427f27a44e9fd3a671bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35ff9770dcf6b7df51d61d7af92a027d"><td class="memItemLeft" align="right" valign="top">std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a35ff9770dcf6b7df51d61d7af92a027d">getMutex</a> ()</td></tr>
+<tr class="separator:a35ff9770dcf6b7df51d61d7af92a027d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac1e786584f26086427c642de17b1311"><td class="memItemLeft" align="right" valign="top">std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#aac1e786584f26086427c642de17b1311">getMapMutex</a> ()</td></tr>
+<tr class="separator:aac1e786584f26086427c642de17b1311"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -238,6 +242,56 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aac1e786584f26086427c642de17b1311"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac1e786584f26086427c642de17b1311">&#9670;&nbsp;</a></span>getMapMutex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex&amp; grpcServer::getMapMutex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35ff9770dcf6b7df51d61d7af92a027d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35ff9770dcf6b7df51d61d7af92a027d">&#9670;&nbsp;</a></span>getMutex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex&amp; grpcServer::getMutex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a273ec0e03b66d16435a26d96d8c4c6a0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a273ec0e03b66d16435a26d96d8c4c6a0">&#9670;&nbsp;</a></span>MapStream()</h2>
 
@@ -305,15 +359,6 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classgrpcServer_a7f759c95f648a9eef7a345767f216129_icgraph.png" border="0" usemap="#aclassgrpcServer_a7f759c95f648a9eef7a345767f216129_icgraph" alt=""/></div>
-<map name="aclassgrpcServer_a7f759c95f648a9eef7a345767f216129_icgraph" id="aclassgrpcServer_a7f759c95f648a9eef7a345767f216129_icgraph">
-<area shape="rect" title=" " alt="" coords="185,13,380,39"/>
-<area shape="rect" href="classNetworkController.html#a65637245c5c3a4f3e07a1507232340cf" title=" " alt="" coords="5,5,137,47"/>
-</map>
-</div>
 
 </div>
 </div>

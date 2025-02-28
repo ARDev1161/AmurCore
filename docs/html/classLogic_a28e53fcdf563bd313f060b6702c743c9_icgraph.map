@@ -1,9 +1,8 @@
 <map id="Logic::setSrcMat" name="Logic::setSrcMat">
-<area shape="rect" id="node1" title=" " alt="" coords="953,31,1073,57"/>
-<area shape="rect" id="node2" href="$classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,31,905,57"/>
-<area shape="rect" id="node3" href="$classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
-<area shape="rect" id="node4" href="$classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
-<area shape="rect" id="node7" href="$classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
-<area shape="rect" id="node5" href="$classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,31,329,57"/>
-<area shape="rect" id="node6" href="$classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,31,149,57"/>
+<area shape="rect" id="node1" title=" " alt="" coords="780,31,900,57"/>
+<area shape="rect" id="node2" href="$classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
+<area shape="rect" id="node3" href="$classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
+<area shape="rect" id="node6" href="$classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
+<area shape="rect" id="node4" href="$classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,31,329,57"/>
+<area shape="rect" id="node5" href="$classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,31,149,57"/>
 </map>

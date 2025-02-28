@@ -1,0 +1,196 @@
+.TH "NavDialog" 3 "Fri Feb 28 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+NavDialog
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <navdialog\&.h>\fP
+.PP
+Inherits QDialog\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBmouseMoved\fP (double x, double y)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNavDialog\fP (std::shared_ptr< Controls > controlsPtr, std::shared_ptr< Sensors > sensorsPtr, std::shared_ptr< map_service::GetMapResponse > \fBmapPtr\fP, std::mutex &grpcMutex, std::mutex &mapMutex, QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~NavDialog\fP ()"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBonMapUpdated\fP ()"
+.br
+.RI "Слот для обновления отображаемой карты\&. "
+.ti -1c
+.RI "void \fBclearWaypoints\fP ()"
+.br
+.ti -1c
+.RI "void \fBfollowWaypoints\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBhasMapChanged\fP () const"
+.br
+.RI "Проверяет, изменились ли данные карты\&. "
+.ti -1c
+.RI "bool \fBhasPoseChanged\fP () const"
+.br
+.RI "Проверяет, изменились ли данные положения робота\&. "
+.ti -1c
+.RI "\fBPoseQuaternion\fP \fBposeToQuaternion\fP (map_service::Pose pose) const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::NavDialog * \fBui\fP"
+.br
+.ti -1c
+.RI "QWidget * \fBnavContainer\fP"
+.br
+.RI "Главный контейнер всего интерфейса "
+.ti -1c
+.RI "std::shared_ptr< \fBMapWidget\fP > \fBmapWidget\fP"
+.br
+.ti -1c
+.RI "QTimer * \fBtimer\fP"
+.br
+.RI "Таймер для периодической проверки обновлений "
+.ti -1c
+.RI "std::shared_ptr< Controls > \fBcontrols\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< Sensors > \fBsensors\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< map_service::GetMapResponse > \fBmapPtr\fP"
+.br
+.ti -1c
+.RI "std::mutex & \fBgrpcMutex_\fP"
+.br
+.ti -1c
+.RI "std::mutex & \fBmapMutex_\fP"
+.br
+.ti -1c
+.RI "QGroupBox * \fBwaypointsGroupBox\fP"
+.br
+.ti -1c
+.RI "QGroupBox * \fBcommandsGroupBox\fP"
+.br
+.ti -1c
+.RI "QListWidget * \fBgoalListWidget\fP"
+.br
+.ti -1c
+.RI "std::vector< int8_t > \fBpreviousData\fP"
+.br
+.ti -1c
+.RI "int \fBpreviousWidth\fP"
+.br
+.ti -1c
+.RI "int \fBpreviousHeight\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< std::vector< QPointF > > \fBnavigationGoalsList\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "NavDialog::NavDialog (std::shared_ptr< Controls > controlsPtr, std::shared_ptr< Sensors > sensorsPtr, std::shared_ptr< map_service::GetMapResponse > mapPtr, std::mutex & grpcMutex, std::mutex & mapMutex, QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+< Сlosed route of waypoints
+.SS "NavDialog::~NavDialog ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void NavDialog::clearWaypoints ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void NavDialog::followWaypoints ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "bool NavDialog::hasMapChanged () const\fC [private]\fP"
+
+.PP
+Проверяет, изменились ли данные карты\&. 
+.PP
+\fBReturns\fP
+.RS 4
+true, если карта изменилась; иначе false\&. 
+.RE
+.PP
+
+.SS "bool NavDialog::hasPoseChanged () const\fC [private]\fP"
+
+.PP
+Проверяет, изменились ли данные положения робота\&. 
+.PP
+\fBReturns\fP
+.RS 4
+true, если положение изменилось; иначе false\&. 
+.RE
+.PP
+
+.SS "void NavDialog::mouseMoved (double x, double y)\fC [signal]\fP"
+
+.SS "void NavDialog::onMapUpdated ()\fC [private]\fP, \fC [slot]\fP"
+
+.PP
+Слот для обновления отображаемой карты\&. 
+.SS "\fBPoseQuaternion\fP NavDialog::poseToQuaternion (map_service::Pose pose) const\fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QGroupBox* NavDialog::commandsGroupBox\fC [private]\fP"
+
+.SS "std::shared_ptr<Controls> NavDialog::controls\fC [private]\fP"
+
+.SS "QListWidget* NavDialog::goalListWidget\fC [private]\fP"
+
+.SS "std::mutex& NavDialog::grpcMutex_\fC [private]\fP"
+
+.SS "std::mutex& NavDialog::mapMutex_\fC [private]\fP"
+
+.SS "std::shared_ptr<map_service::GetMapResponse> NavDialog::mapPtr\fC [private]\fP"
+
+.SS "std::shared_ptr<\fBMapWidget\fP> NavDialog::mapWidget\fC [private]\fP"
+
+.SS "QWidget* NavDialog::navContainer\fC [private]\fP"
+
+.PP
+Главный контейнер всего интерфейса 
+.SS "std::shared_ptr<std::vector<QPointF> > NavDialog::navigationGoalsList\fC [private]\fP"
+
+.SS "std::vector<int8_t> NavDialog::previousData\fC [private]\fP"
+
+.SS "int NavDialog::previousHeight\fC [private]\fP"
+
+.SS "int NavDialog::previousWidth\fC [private]\fP"
+
+.SS "std::shared_ptr<Sensors> NavDialog::sensors\fC [private]\fP"
+
+.SS "QTimer* NavDialog::timer\fC [private]\fP"
+
+.PP
+Таймер для периодической проверки обновлений 
+.SS "Ui::NavDialog* NavDialog::ui\fC [private]\fP"
+
+.SS "QGroupBox* NavDialog::waypointsGroupBox\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

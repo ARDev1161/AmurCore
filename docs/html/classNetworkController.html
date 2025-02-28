@@ -98,7 +98,7 @@ Inheritance diagram for NetworkController:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNetworkController__inherit__graph.png" border="0" usemap="#aNetworkController_inherit__map" alt="Inheritance graph"/></div>
 <map name="aNetworkController_inherit__map" id="aNetworkController_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,131,157,413"/>
+<area shape="rect" title=" " alt="" coords="5,131,157,457"/>
 <area shape="rect" title=" " alt="" coords="46,5,117,83"/>
 </map>
 </div>
@@ -107,10 +107,8 @@ Collaboration diagram for NetworkController:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNetworkController__coll__graph.png" border="0" usemap="#aNetworkController_coll__map" alt="Collaboration graph"/></div>
 <map name="aNetworkController_coll__map" id="aNetworkController_coll__map">
-<area shape="rect" title=" " alt="" coords="5,389,157,657"/>
-<area shape="rect" title=" " alt="" coords="25,191,95,268"/>
-<area shape="rect" href="classgrpcServer.html" title=" " alt="" coords="120,132,283,327"/>
-<area shape="rect" title=" " alt="" coords="123,5,279,83"/>
+<area shape="rect" title=" " alt="" coords="5,131,157,457"/>
+<area shape="rect" title=" " alt="" coords="46,5,117,83"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -128,6 +126,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3cbc14b694c4207c4758d85444c63aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a445123b5cd86a4be48e79b54b4689a4c"><td class="memItemLeft" align="right" valign="top">QList&lt; std::shared_ptr&lt; <a class="el" href="classRobotEntry.html">RobotEntry</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a445123b5cd86a4be48e79b54b4689a4c">getRobots</a> () const</td></tr>
 <tr class="separator:a445123b5cd86a4be48e79b54b4689a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeb1232d4f1d38fb41ff276823161520"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classgrpcClient.html">grpcClient</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#adeb1232d4f1d38fb41ff276823161520">getClientInstance</a> ()</td></tr>
+<tr class="separator:adeb1232d4f1d38fb41ff276823161520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5871e5647f587d5b90e8d47a70b52cd2"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classgrpcServer.html">grpcServer</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a5871e5647f587d5b90e8d47a70b52cd2">getServerInstance</a> ()</td></tr>
+<tr class="separator:a5871e5647f587d5b90e8d47a70b52cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -141,8 +143,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a359fa99529c7cae60f37c9fab7c66080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a030fa2be52a5be3d9fbeaa2344003726"><td class="memItemLeft" align="right" valign="top">grpc::ServerBuilder&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a030fa2be52a5be3d9fbeaa2344003726">builder</a></td></tr>
 <tr class="separator:a030fa2be52a5be3d9fbeaa2344003726"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2182e367e953a8634b64e69817e8a37b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgrpcServer.html">grpcServer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a2182e367e953a8634b64e69817e8a37b">service</a></td></tr>
-<tr class="separator:a2182e367e953a8634b64e69817e8a37b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac566f1fd44423bf6130033778f67212f"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classgrpcServer.html">grpcServer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#ac566f1fd44423bf6130033778f67212f">serverPtr</a></td></tr>
+<tr class="separator:ac566f1fd44423bf6130033778f67212f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa644d37cd33138973499d161c1e354b"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classgrpcClient.html">grpcClient</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#afa644d37cd33138973499d161c1e354b">clientPtr</a></td></tr>
+<tr class="separator:afa644d37cd33138973499d161c1e354b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35a7e64255858c0df2b0cd59ac555f75"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a35a7e64255858c0df2b0cd59ac555f75">messageNo</a> = 1</td></tr>
 <tr class="separator:a35a7e64255858c0df2b0cd59ac555f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5455fa1812a3625678bb0b8fad93997d"><td class="memItemLeft" align="right" valign="top">QUdpSocket *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworkController.html#a5455fa1812a3625678bb0b8fad93997d">udpSocket</a> = nullptr</td></tr>
@@ -205,6 +209,31 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="adeb1232d4f1d38fb41ff276823161520"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adeb1232d4f1d38fb41ff276823161520">&#9670;&nbsp;</a></span>getClientInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classgrpcClient.html">grpcClient</a>&gt;&amp; NetworkController::getClientInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a445123b5cd86a4be48e79b54b4689a4c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a445123b5cd86a4be48e79b54b4689a4c">&#9670;&nbsp;</a></span>getRobots()</h2>
 
@@ -218,6 +247,31 @@ Private Attributes</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5871e5647f587d5b90e8d47a70b52cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5871e5647f587d5b90e8d47a70b52cd2">&#9670;&nbsp;</a></span>getServerInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classgrpcServer.html">grpcServer</a>&gt;&amp; NetworkController::getServerInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -271,15 +325,6 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classNetworkController_a0a23911025a48814505b4f9abcacd839_cgraph.png" border="0" usemap="#aclassNetworkController_a0a23911025a48814505b4f9abcacd839_cgraph" alt=""/></div>
-<map name="aclassNetworkController_a0a23911025a48814505b4f9abcacd839_cgraph" id="aclassNetworkController_a0a23911025a48814505b4f9abcacd839_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,137,47"/>
-<area shape="rect" href="classgrpcClient.html#a7a569dfe1c1968b7ee3f40c351c19f51" title=" " alt="" coords="185,13,396,39"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -298,15 +343,6 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classNetworkController_a65637245c5c3a4f3e07a1507232340cf_cgraph.png" border="0" usemap="#aclassNetworkController_a65637245c5c3a4f3e07a1507232340cf_cgraph" alt=""/></div>
-<map name="aclassNetworkController_a65637245c5c3a4f3e07a1507232340cf_cgraph" id="aclassNetworkController_a65637245c5c3a4f3e07a1507232340cf_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,137,47"/>
-<area shape="rect" href="classgrpcServer.html#a7f759c95f648a9eef7a345767f216129" title=" " alt="" coords="185,13,380,39"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -322,6 +358,28 @@ Here is the call graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">grpc::ServerBuilder NetworkController::builder</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa644d37cd33138973499d161c1e354b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa644d37cd33138973499d161c1e354b">&#9670;&nbsp;</a></span>clientPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classgrpcClient.html">grpcClient</a>&gt; NetworkController::clientPtr</td>
         </tr>
       </table>
   </td>
@@ -487,8 +545,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a2182e367e953a8634b64e69817e8a37b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2182e367e953a8634b64e69817e8a37b">&#9670;&nbsp;</a></span>service</h2>
+<a id="ac566f1fd44423bf6130033778f67212f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac566f1fd44423bf6130033778f67212f">&#9670;&nbsp;</a></span>serverPtr</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -497,7 +555,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgrpcServer.html">grpcServer</a> NetworkController::service</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classgrpcServer.html">grpcServer</a>&gt; NetworkController::serverPtr</td>
         </tr>
       </table>
   </td>

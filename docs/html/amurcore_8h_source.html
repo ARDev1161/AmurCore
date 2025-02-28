@@ -110,128 +110,129 @@ $(document).ready(function(){initNavTree('amurcore_8h_source.html',''); initResi
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#undef main</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pch_8h.html">pch.h</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="amurcore_8h.html#a6b11015f693203e20fe2b246179bdd7c">   25</a></span>&#160;<span class="preprocessor">#define NO_PICTURE &quot;./data/images/no_picture.jpeg&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="amurcore_8h.html#a1eea9bc58ca34634a822a3b0eb58c39a">   26</a></span>&#160;<span class="preprocessor">#define SOURCE_STREAM 0</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//#define SOURCE_STREAM &quot;udpsrc port=1488 ! application/x-rtp, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! appsink&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using namespace </span>Robot;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespaceUi.html">   31</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceUi.html">Ui</a> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">class </span><a class="code" href="classAmurCore.html">AmurCore</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classAmurCore.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAmurCore.html">AmurCore</a> : <span class="keyword">public</span> QMainWindow</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classAmurCore.html#afddb783940265bcf0d639e262e5e954d">   39</a></span>&#160;    Ui::AmurCore *<a class="code" href="classAmurCore.html#afddb783940265bcf0d639e262e5e954d">ui</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classAmurCore.html#a583dc21e69c49f636232b7c08dcb644c">   41</a></span>&#160;    QTimer *<a class="code" href="classAmurCore.html#a583dc21e69c49f636232b7c08dcb644c">tmrTimer</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classAmurCore.html#aa8b4ad0fd01573043031463d011dd55b">   42</a></span>&#160;    QString *<a class="code" href="classAmurCore.html#aa8b4ad0fd01573043031463d011dd55b">hostName</a>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classAmurCore.html#ac54cc87ff9f9861f2eaa8c9765378089">   43</a></span>&#160;    QString statusMessage = <span class="stringliteral">&quot;No robot connected&quot;</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classAmurCore.html#a05a740dfbc5aa63dca556cabde8bfe4c">   45</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *configName = <span class="stringliteral">&quot;AmurCore.cfg&quot;</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classAmurCore.html#adb878c20566c0220febb8cffcbd7f364">   46</a></span>&#160;    <a class="code" href="classConfigProcessor.html">ConfigProcessor</a> *<a class="code" href="classAmurCore.html#adb878c20566c0220febb8cffcbd7f364">config</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classAmurCore.html#a9fafed7c88f76e0a62d791fbc6bd418f">   48</a></span>&#160;    <span class="keywordtype">int</span> arpPort = 11111;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classAmurCore.html#a7c8e4ccefd46a31a0c68c9b8e44dc23b">   49</a></span>&#160;    <span class="keywordtype">int</span> grpcPort = 7777;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classAmurCore.html#a637e058f2975bfc99b84a7e9407bde8c">   50</a></span>&#160;    QString arpHeader = <span class="stringliteral">&quot;AMUR&quot;</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classAmurCore.html#a2eebff0af61511154124112f755ff7cf">   51</a></span>&#160;    std::string address_mask = <span class="stringliteral">&quot;0.0.0.0:&quot;</span> + std::to_string(grpcPort);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// TODO - add vector with robots id</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1">   53</a></span>&#160;    std::shared_ptr&lt;NetworkController&gt; <a class="code" href="classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1">network</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classAmurCore.html#a18b665869f40e1fd1e08efc46aec9090">   54</a></span>&#160;    std::shared_ptr&lt;RobotRepository&gt; <a class="code" href="classAmurCore.html#a18b665869f40e1fd1e08efc46aec9090">repo</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classAmurCore.html#a977618f6f5947eb054547e6156f3944f">   56</a></span>&#160;    <a class="code" href="classConnectDialog.html">ConnectDialog</a> *<a class="code" href="classAmurCore.html#a977618f6f5947eb054547e6156f3944f">connectDialog</a>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classAmurCore.html#a71c71fe03dd931b200d655fe58ba2277">   57</a></span>&#160;    <a class="code" href="classJoystickDialog.html">JoystickDialog</a> *<a class="code" href="classAmurCore.html#a71c71fe03dd931b200d655fe58ba2277">joystickDialog</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classAmurCore.html#a4fa2631e12b1c358bb108ccef0ecb4cb">   58</a></span>&#160;    <a class="code" href="classMapDialog.html">MapDialog</a> *<a class="code" href="classAmurCore.html#a4fa2631e12b1c358bb108ccef0ecb4cb">mapDialog</a>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classAmurCore.html#ae6cf65c6e8fd42f1d69279dff7c580d6">   59</a></span>&#160;    <a class="code" href="classRobotInfoDialog.html">RobotInfoDialog</a> *<a class="code" href="classAmurCore.html#ae6cf65c6e8fd42f1d69279dff7c580d6">robotInfoDialog</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classAmurCore.html#a5ef31b7f249433161ec574b69069c01a">   61</a></span>&#160;    std::shared_ptr&lt;Controls&gt; <a class="code" href="classAmurCore.html#a5ef31b7f249433161ec574b69069c01a">controls</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classAmurCore.html#a86eed6a04ad8f8a270be1c28fbddd28d">   62</a></span>&#160;    std::shared_ptr&lt;Sensors&gt; <a class="code" href="classAmurCore.html#a86eed6a04ad8f8a270be1c28fbddd28d">sensors</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classAmurCore.html#ac52bcd3b8daec8fcc8f82384f63859ec">   63</a></span>&#160;    std::shared_ptr&lt;map_service::GetMapResponse&gt; <a class="code" href="classAmurCore.html#ac52bcd3b8daec8fcc8f82384f63859ec">map</a>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classAmurCore.html#a5a9951d70a30a42573780e04e7c4fa49">   65</a></span>&#160;    <a class="code" href="classJoystick.html">Joystick</a> *<a class="code" href="classAmurCore.html#a5a9951d70a30a42573780e04e7c4fa49">joyThread</a>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classAmurCore.html#ade2f3eed41b4c7d91d120a862b5ee57e">   66</a></span>&#160;    std::shared_ptr&lt;JoyState&gt; <a class="code" href="classAmurCore.html#ade2f3eed41b4c7d91d120a862b5ee57e">joyState</a>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classAmurCore.html#ab3ea9ac7fd6a71df66f0ee511e32abfd">   67</a></span>&#160;    <a class="code" href="classLogic.html">Logic</a> *<a class="code" href="classAmurCore.html#ab3ea9ac7fd6a71df66f0ee511e32abfd">amurLogic</a>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classAmurCore.html#a28cedb61eb702d105b452289b5a62316">   69</a></span>&#160;    <a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *<a class="code" href="classAmurCore.html#a28cedb61eb702d105b452289b5a62316">camHolder</a>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classAmurCore.html#a4e35099d245057345af1dac0cada969b">   70</a></span>&#160;    VideoCapture <a class="code" href="classAmurCore.html#a4e35099d245057345af1dac0cada969b">capture</a>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classAmurCore.html#a66c9bcc7556e86aab98f23ffb499c280">   72</a></span>&#160;    Mat <a class="code" href="classAmurCore.html#a66c9bcc7556e86aab98f23ffb499c280">sourceMat</a>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classAmurCore.html#aef40aa622233b6f8df42c524bce9273a">   73</a></span>&#160;    Mat <a class="code" href="classAmurCore.html#aef40aa622233b6f8df42c524bce9273a">undistortedMat</a>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10">   74</a></span>&#160;    Mat <a class="code" href="classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10">outputMat</a>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classAmurCore.html#a00dec7ab81c485c19cc9b4bfdaed9a90">   76</a></span>&#160;    <span class="keywordtype">int</span> loopTime = 50;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classAmurCore.html">AmurCore</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    ~<a class="code" href="classAmurCore.html">AmurCore</a>();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> resizeEvent(QResizeEvent *e) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> frameUpdate();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> connectDialogOpen();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> joystickDialogOpen();</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span> calibDialogOpen();</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> mapDialogOpen();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> robotInfoDialogOpen();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> fetchJoystickId();</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">void</span> robotHalt();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> robotReboot();</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> fillFieldsByConfig();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> startCap();</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> startTimer();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> initialize();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> connMenu();</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> worker();</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> outMat(Mat &amp;toOut);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> undistortMat(Mat &amp;inMat, Mat &amp;outMat);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;signals:</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classAmurCore.html#a4a9d3974fd8f7f13b123f8340fbddf1c">  109</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAmurCore.html#a4a9d3974fd8f7f13b123f8340fbddf1c">timeout</a>();</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// AmurCore_H</span></div>
-<div class="ttc" id="aclassAmurCore_html"><div class="ttname"><a href="classAmurCore.html">AmurCore</a></div><div class="ttdef"><b>Definition:</b> amurcore.h:36</div></div>
-<div class="ttc" id="aclassAmurCore_html_a18b665869f40e1fd1e08efc46aec9090"><div class="ttname"><a href="classAmurCore.html#a18b665869f40e1fd1e08efc46aec9090">AmurCore::repo</a></div><div class="ttdeci">std::shared_ptr&lt; RobotRepository &gt; repo</div><div class="ttdef"><b>Definition:</b> amurcore.h:54</div></div>
-<div class="ttc" id="aclassAmurCore_html_a28cedb61eb702d105b452289b5a62316"><div class="ttname"><a href="classAmurCore.html#a28cedb61eb702d105b452289b5a62316">AmurCore::camHolder</a></div><div class="ttdeci">CamSettingsHolder * camHolder</div><div class="ttdef"><b>Definition:</b> amurcore.h:69</div></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="amurcore_8h.html#a6b11015f693203e20fe2b246179bdd7c">   26</a></span>&#160;<span class="preprocessor">#define NO_PICTURE &quot;./data/images/no_picture.jpeg&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="amurcore_8h.html#a1eea9bc58ca34634a822a3b0eb58c39a">   27</a></span>&#160;<span class="preprocessor">#define SOURCE_STREAM 0</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//#define SOURCE_STREAM &quot;udpsrc port=1488 ! application/x-rtp, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! appsink&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">using namespace </span>Robot;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="namespaceUi.html">   32</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceUi.html">Ui</a> {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">class </span><a class="code" href="classAmurCore.html">AmurCore</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classAmurCore.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAmurCore.html">AmurCore</a> : <span class="keyword">public</span> QMainWindow</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classAmurCore.html#afddb783940265bcf0d639e262e5e954d">   40</a></span>&#160;    Ui::AmurCore *<a class="code" href="classAmurCore.html#afddb783940265bcf0d639e262e5e954d">ui</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classAmurCore.html#a583dc21e69c49f636232b7c08dcb644c">   42</a></span>&#160;    QTimer *<a class="code" href="classAmurCore.html#a583dc21e69c49f636232b7c08dcb644c">tmrTimer</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classAmurCore.html#aa8b4ad0fd01573043031463d011dd55b">   43</a></span>&#160;    QString *<a class="code" href="classAmurCore.html#aa8b4ad0fd01573043031463d011dd55b">hostName</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classAmurCore.html#ac54cc87ff9f9861f2eaa8c9765378089">   44</a></span>&#160;    QString statusMessage = <span class="stringliteral">&quot;No robot connected&quot;</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classAmurCore.html#a05a740dfbc5aa63dca556cabde8bfe4c">   46</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *configName = <span class="stringliteral">&quot;AmurCore.cfg&quot;</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classAmurCore.html#adb878c20566c0220febb8cffcbd7f364">   47</a></span>&#160;    <a class="code" href="classConfigProcessor.html">ConfigProcessor</a> *<a class="code" href="classAmurCore.html#adb878c20566c0220febb8cffcbd7f364">config</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classAmurCore.html#a9fafed7c88f76e0a62d791fbc6bd418f">   49</a></span>&#160;    <span class="keywordtype">int</span> arpPort = 11111;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classAmurCore.html#a7c8e4ccefd46a31a0c68c9b8e44dc23b">   50</a></span>&#160;    <span class="keywordtype">int</span> grpcPort = 7777;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classAmurCore.html#a637e058f2975bfc99b84a7e9407bde8c">   51</a></span>&#160;    QString arpHeader = <span class="stringliteral">&quot;AMUR&quot;</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classAmurCore.html#a2eebff0af61511154124112f755ff7cf">   52</a></span>&#160;    std::string address_mask = <span class="stringliteral">&quot;0.0.0.0:&quot;</span> + std::to_string(grpcPort);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// TODO - add vector with robots id</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1">   54</a></span>&#160;    std::shared_ptr&lt;NetworkController&gt; <a class="code" href="classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1">network</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classAmurCore.html#a18b665869f40e1fd1e08efc46aec9090">   55</a></span>&#160;    std::shared_ptr&lt;RobotRepository&gt; <a class="code" href="classAmurCore.html#a18b665869f40e1fd1e08efc46aec9090">repo</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classAmurCore.html#a977618f6f5947eb054547e6156f3944f">   57</a></span>&#160;    <a class="code" href="classConnectDialog.html">ConnectDialog</a> *<a class="code" href="classAmurCore.html#a977618f6f5947eb054547e6156f3944f">connectDialog</a>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classAmurCore.html#a71c71fe03dd931b200d655fe58ba2277">   58</a></span>&#160;    <a class="code" href="classJoystickDialog.html">JoystickDialog</a> *<a class="code" href="classAmurCore.html#a71c71fe03dd931b200d655fe58ba2277">joystickDialog</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classAmurCore.html#adc3b4c419b6ef2ee615a0de2f2006028">   59</a></span>&#160;    <a class="code" href="classNavDialog.html">NavDialog</a> *<a class="code" href="classAmurCore.html#adc3b4c419b6ef2ee615a0de2f2006028">navigationDialog</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classAmurCore.html#ae6cf65c6e8fd42f1d69279dff7c580d6">   60</a></span>&#160;    <a class="code" href="classRobotInfoDialog.html">RobotInfoDialog</a> *<a class="code" href="classAmurCore.html#ae6cf65c6e8fd42f1d69279dff7c580d6">robotInfoDialog</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classAmurCore.html#a5ef31b7f249433161ec574b69069c01a">   62</a></span>&#160;    std::shared_ptr&lt;Controls&gt; <a class="code" href="classAmurCore.html#a5ef31b7f249433161ec574b69069c01a">controls</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classAmurCore.html#a86eed6a04ad8f8a270be1c28fbddd28d">   63</a></span>&#160;    std::shared_ptr&lt;Sensors&gt; <a class="code" href="classAmurCore.html#a86eed6a04ad8f8a270be1c28fbddd28d">sensors</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classAmurCore.html#ac52bcd3b8daec8fcc8f82384f63859ec">   64</a></span>&#160;    std::shared_ptr&lt;map_service::GetMapResponse&gt; <a class="code" href="classAmurCore.html#ac52bcd3b8daec8fcc8f82384f63859ec">map</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classAmurCore.html#a5a9951d70a30a42573780e04e7c4fa49">   66</a></span>&#160;    <a class="code" href="classJoystick.html">Joystick</a> *<a class="code" href="classAmurCore.html#a5a9951d70a30a42573780e04e7c4fa49">joyThread</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classAmurCore.html#ade2f3eed41b4c7d91d120a862b5ee57e">   67</a></span>&#160;    std::shared_ptr&lt;JoyState&gt; <a class="code" href="classAmurCore.html#ade2f3eed41b4c7d91d120a862b5ee57e">joyState</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classAmurCore.html#ab3ea9ac7fd6a71df66f0ee511e32abfd">   68</a></span>&#160;    <a class="code" href="classLogic.html">Logic</a> *<a class="code" href="classAmurCore.html#ab3ea9ac7fd6a71df66f0ee511e32abfd">amurLogic</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classAmurCore.html#a28cedb61eb702d105b452289b5a62316">   70</a></span>&#160;    <a class="code" href="classCamSettingsHolder.html">CamSettingsHolder</a> *<a class="code" href="classAmurCore.html#a28cedb61eb702d105b452289b5a62316">camHolder</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classAmurCore.html#a4e35099d245057345af1dac0cada969b">   71</a></span>&#160;    VideoCapture <a class="code" href="classAmurCore.html#a4e35099d245057345af1dac0cada969b">capture</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classAmurCore.html#a66c9bcc7556e86aab98f23ffb499c280">   73</a></span>&#160;    Mat <a class="code" href="classAmurCore.html#a66c9bcc7556e86aab98f23ffb499c280">sourceMat</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classAmurCore.html#aef40aa622233b6f8df42c524bce9273a">   74</a></span>&#160;    Mat <a class="code" href="classAmurCore.html#aef40aa622233b6f8df42c524bce9273a">undistortedMat</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10">   75</a></span>&#160;    Mat <a class="code" href="classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10">outputMat</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classAmurCore.html#a00dec7ab81c485c19cc9b4bfdaed9a90">   77</a></span>&#160;    <span class="keywordtype">int</span> loopTime = 50;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classAmurCore.html">AmurCore</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    ~<a class="code" href="classAmurCore.html">AmurCore</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> resizeEvent(QResizeEvent *e) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> frameUpdate();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> connectDialogOpen();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span> joystickDialogOpen();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> calibDialogOpen();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> mapDialogOpen();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">void</span> robotInfoDialogOpen();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> fetchJoystickId();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> robotHalt();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> robotReboot();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> fillFieldsByConfig();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> startCap();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> startTimer();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> initialize();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> connMenu();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> worker();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> outMat(Mat &amp;toOut);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> undistortMat(Mat &amp;inMat, Mat &amp;outMat);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;signals:</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classAmurCore.html#a4a9d3974fd8f7f13b123f8340fbddf1c">  110</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAmurCore.html#a4a9d3974fd8f7f13b123f8340fbddf1c">timeout</a>();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// AmurCore_H</span></div>
+<div class="ttc" id="aclassAmurCore_html"><div class="ttname"><a href="classAmurCore.html">AmurCore</a></div><div class="ttdef"><b>Definition:</b> amurcore.h:37</div></div>
+<div class="ttc" id="aclassAmurCore_html_a18b665869f40e1fd1e08efc46aec9090"><div class="ttname"><a href="classAmurCore.html#a18b665869f40e1fd1e08efc46aec9090">AmurCore::repo</a></div><div class="ttdeci">std::shared_ptr&lt; RobotRepository &gt; repo</div><div class="ttdef"><b>Definition:</b> amurcore.h:55</div></div>
+<div class="ttc" id="aclassAmurCore_html_a28cedb61eb702d105b452289b5a62316"><div class="ttname"><a href="classAmurCore.html#a28cedb61eb702d105b452289b5a62316">AmurCore::camHolder</a></div><div class="ttdeci">CamSettingsHolder * camHolder</div><div class="ttdef"><b>Definition:</b> amurcore.h:70</div></div>
 <div class="ttc" id="aclassAmurCore_html_a4a9d3974fd8f7f13b123f8340fbddf1c"><div class="ttname"><a href="classAmurCore.html#a4a9d3974fd8f7f13b123f8340fbddf1c">AmurCore::timeout</a></div><div class="ttdeci">void timeout()</div></div>
-<div class="ttc" id="aclassAmurCore_html_a4e35099d245057345af1dac0cada969b"><div class="ttname"><a href="classAmurCore.html#a4e35099d245057345af1dac0cada969b">AmurCore::capture</a></div><div class="ttdeci">VideoCapture capture</div><div class="ttdef"><b>Definition:</b> amurcore.h:70</div></div>
-<div class="ttc" id="aclassAmurCore_html_a4fa2631e12b1c358bb108ccef0ecb4cb"><div class="ttname"><a href="classAmurCore.html#a4fa2631e12b1c358bb108ccef0ecb4cb">AmurCore::mapDialog</a></div><div class="ttdeci">MapDialog * mapDialog</div><div class="ttdef"><b>Definition:</b> amurcore.h:58</div></div>
-<div class="ttc" id="aclassAmurCore_html_a583dc21e69c49f636232b7c08dcb644c"><div class="ttname"><a href="classAmurCore.html#a583dc21e69c49f636232b7c08dcb644c">AmurCore::tmrTimer</a></div><div class="ttdeci">QTimer * tmrTimer</div><div class="ttdef"><b>Definition:</b> amurcore.h:41</div></div>
-<div class="ttc" id="aclassAmurCore_html_a5a9951d70a30a42573780e04e7c4fa49"><div class="ttname"><a href="classAmurCore.html#a5a9951d70a30a42573780e04e7c4fa49">AmurCore::joyThread</a></div><div class="ttdeci">Joystick * joyThread</div><div class="ttdef"><b>Definition:</b> amurcore.h:65</div></div>
-<div class="ttc" id="aclassAmurCore_html_a5ef31b7f249433161ec574b69069c01a"><div class="ttname"><a href="classAmurCore.html#a5ef31b7f249433161ec574b69069c01a">AmurCore::controls</a></div><div class="ttdeci">std::shared_ptr&lt; Controls &gt; controls</div><div class="ttdef"><b>Definition:</b> amurcore.h:61</div></div>
-<div class="ttc" id="aclassAmurCore_html_a66c9bcc7556e86aab98f23ffb499c280"><div class="ttname"><a href="classAmurCore.html#a66c9bcc7556e86aab98f23ffb499c280">AmurCore::sourceMat</a></div><div class="ttdeci">Mat sourceMat</div><div class="ttdef"><b>Definition:</b> amurcore.h:72</div></div>
-<div class="ttc" id="aclassAmurCore_html_a71c71fe03dd931b200d655fe58ba2277"><div class="ttname"><a href="classAmurCore.html#a71c71fe03dd931b200d655fe58ba2277">AmurCore::joystickDialog</a></div><div class="ttdeci">JoystickDialog * joystickDialog</div><div class="ttdef"><b>Definition:</b> amurcore.h:57</div></div>
-<div class="ttc" id="aclassAmurCore_html_a869564b9d2bf9ee54476fbf623574e10"><div class="ttname"><a href="classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10">AmurCore::outputMat</a></div><div class="ttdeci">Mat outputMat</div><div class="ttdef"><b>Definition:</b> amurcore.h:74</div></div>
-<div class="ttc" id="aclassAmurCore_html_a86eed6a04ad8f8a270be1c28fbddd28d"><div class="ttname"><a href="classAmurCore.html#a86eed6a04ad8f8a270be1c28fbddd28d">AmurCore::sensors</a></div><div class="ttdeci">std::shared_ptr&lt; Sensors &gt; sensors</div><div class="ttdef"><b>Definition:</b> amurcore.h:62</div></div>
-<div class="ttc" id="aclassAmurCore_html_a977618f6f5947eb054547e6156f3944f"><div class="ttname"><a href="classAmurCore.html#a977618f6f5947eb054547e6156f3944f">AmurCore::connectDialog</a></div><div class="ttdeci">ConnectDialog * connectDialog</div><div class="ttdef"><b>Definition:</b> amurcore.h:56</div></div>
-<div class="ttc" id="aclassAmurCore_html_aa8b4ad0fd01573043031463d011dd55b"><div class="ttname"><a href="classAmurCore.html#aa8b4ad0fd01573043031463d011dd55b">AmurCore::hostName</a></div><div class="ttdeci">QString * hostName</div><div class="ttdef"><b>Definition:</b> amurcore.h:42</div></div>
-<div class="ttc" id="aclassAmurCore_html_ab3ea9ac7fd6a71df66f0ee511e32abfd"><div class="ttname"><a href="classAmurCore.html#ab3ea9ac7fd6a71df66f0ee511e32abfd">AmurCore::amurLogic</a></div><div class="ttdeci">Logic * amurLogic</div><div class="ttdef"><b>Definition:</b> amurcore.h:67</div></div>
-<div class="ttc" id="aclassAmurCore_html_ac52bcd3b8daec8fcc8f82384f63859ec"><div class="ttname"><a href="classAmurCore.html#ac52bcd3b8daec8fcc8f82384f63859ec">AmurCore::map</a></div><div class="ttdeci">std::shared_ptr&lt; map_service::GetMapResponse &gt; map</div><div class="ttdef"><b>Definition:</b> amurcore.h:63</div></div>
-<div class="ttc" id="aclassAmurCore_html_adb878c20566c0220febb8cffcbd7f364"><div class="ttname"><a href="classAmurCore.html#adb878c20566c0220febb8cffcbd7f364">AmurCore::config</a></div><div class="ttdeci">ConfigProcessor * config</div><div class="ttdef"><b>Definition:</b> amurcore.h:46</div></div>
-<div class="ttc" id="aclassAmurCore_html_ade2f3eed41b4c7d91d120a862b5ee57e"><div class="ttname"><a href="classAmurCore.html#ade2f3eed41b4c7d91d120a862b5ee57e">AmurCore::joyState</a></div><div class="ttdeci">std::shared_ptr&lt; JoyState &gt; joyState</div><div class="ttdef"><b>Definition:</b> amurcore.h:66</div></div>
-<div class="ttc" id="aclassAmurCore_html_ae6cf65c6e8fd42f1d69279dff7c580d6"><div class="ttname"><a href="classAmurCore.html#ae6cf65c6e8fd42f1d69279dff7c580d6">AmurCore::robotInfoDialog</a></div><div class="ttdeci">RobotInfoDialog * robotInfoDialog</div><div class="ttdef"><b>Definition:</b> amurcore.h:59</div></div>
-<div class="ttc" id="aclassAmurCore_html_aeab5659f5cc6e6664d69f3ca73254bc1"><div class="ttname"><a href="classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1">AmurCore::network</a></div><div class="ttdeci">std::shared_ptr&lt; NetworkController &gt; network</div><div class="ttdef"><b>Definition:</b> amurcore.h:53</div></div>
-<div class="ttc" id="aclassAmurCore_html_aef40aa622233b6f8df42c524bce9273a"><div class="ttname"><a href="classAmurCore.html#aef40aa622233b6f8df42c524bce9273a">AmurCore::undistortedMat</a></div><div class="ttdeci">Mat undistortedMat</div><div class="ttdef"><b>Definition:</b> amurcore.h:73</div></div>
-<div class="ttc" id="aclassAmurCore_html_afddb783940265bcf0d639e262e5e954d"><div class="ttname"><a href="classAmurCore.html#afddb783940265bcf0d639e262e5e954d">AmurCore::ui</a></div><div class="ttdeci">Ui::AmurCore * ui</div><div class="ttdef"><b>Definition:</b> amurcore.h:39</div></div>
+<div class="ttc" id="aclassAmurCore_html_a4e35099d245057345af1dac0cada969b"><div class="ttname"><a href="classAmurCore.html#a4e35099d245057345af1dac0cada969b">AmurCore::capture</a></div><div class="ttdeci">VideoCapture capture</div><div class="ttdef"><b>Definition:</b> amurcore.h:71</div></div>
+<div class="ttc" id="aclassAmurCore_html_a583dc21e69c49f636232b7c08dcb644c"><div class="ttname"><a href="classAmurCore.html#a583dc21e69c49f636232b7c08dcb644c">AmurCore::tmrTimer</a></div><div class="ttdeci">QTimer * tmrTimer</div><div class="ttdef"><b>Definition:</b> amurcore.h:42</div></div>
+<div class="ttc" id="aclassAmurCore_html_a5a9951d70a30a42573780e04e7c4fa49"><div class="ttname"><a href="classAmurCore.html#a5a9951d70a30a42573780e04e7c4fa49">AmurCore::joyThread</a></div><div class="ttdeci">Joystick * joyThread</div><div class="ttdef"><b>Definition:</b> amurcore.h:66</div></div>
+<div class="ttc" id="aclassAmurCore_html_a5ef31b7f249433161ec574b69069c01a"><div class="ttname"><a href="classAmurCore.html#a5ef31b7f249433161ec574b69069c01a">AmurCore::controls</a></div><div class="ttdeci">std::shared_ptr&lt; Controls &gt; controls</div><div class="ttdef"><b>Definition:</b> amurcore.h:62</div></div>
+<div class="ttc" id="aclassAmurCore_html_a66c9bcc7556e86aab98f23ffb499c280"><div class="ttname"><a href="classAmurCore.html#a66c9bcc7556e86aab98f23ffb499c280">AmurCore::sourceMat</a></div><div class="ttdeci">Mat sourceMat</div><div class="ttdef"><b>Definition:</b> amurcore.h:73</div></div>
+<div class="ttc" id="aclassAmurCore_html_a71c71fe03dd931b200d655fe58ba2277"><div class="ttname"><a href="classAmurCore.html#a71c71fe03dd931b200d655fe58ba2277">AmurCore::joystickDialog</a></div><div class="ttdeci">JoystickDialog * joystickDialog</div><div class="ttdef"><b>Definition:</b> amurcore.h:58</div></div>
+<div class="ttc" id="aclassAmurCore_html_a869564b9d2bf9ee54476fbf623574e10"><div class="ttname"><a href="classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10">AmurCore::outputMat</a></div><div class="ttdeci">Mat outputMat</div><div class="ttdef"><b>Definition:</b> amurcore.h:75</div></div>
+<div class="ttc" id="aclassAmurCore_html_a86eed6a04ad8f8a270be1c28fbddd28d"><div class="ttname"><a href="classAmurCore.html#a86eed6a04ad8f8a270be1c28fbddd28d">AmurCore::sensors</a></div><div class="ttdeci">std::shared_ptr&lt; Sensors &gt; sensors</div><div class="ttdef"><b>Definition:</b> amurcore.h:63</div></div>
+<div class="ttc" id="aclassAmurCore_html_a977618f6f5947eb054547e6156f3944f"><div class="ttname"><a href="classAmurCore.html#a977618f6f5947eb054547e6156f3944f">AmurCore::connectDialog</a></div><div class="ttdeci">ConnectDialog * connectDialog</div><div class="ttdef"><b>Definition:</b> amurcore.h:57</div></div>
+<div class="ttc" id="aclassAmurCore_html_aa8b4ad0fd01573043031463d011dd55b"><div class="ttname"><a href="classAmurCore.html#aa8b4ad0fd01573043031463d011dd55b">AmurCore::hostName</a></div><div class="ttdeci">QString * hostName</div><div class="ttdef"><b>Definition:</b> amurcore.h:43</div></div>
+<div class="ttc" id="aclassAmurCore_html_ab3ea9ac7fd6a71df66f0ee511e32abfd"><div class="ttname"><a href="classAmurCore.html#ab3ea9ac7fd6a71df66f0ee511e32abfd">AmurCore::amurLogic</a></div><div class="ttdeci">Logic * amurLogic</div><div class="ttdef"><b>Definition:</b> amurcore.h:68</div></div>
+<div class="ttc" id="aclassAmurCore_html_ac52bcd3b8daec8fcc8f82384f63859ec"><div class="ttname"><a href="classAmurCore.html#ac52bcd3b8daec8fcc8f82384f63859ec">AmurCore::map</a></div><div class="ttdeci">std::shared_ptr&lt; map_service::GetMapResponse &gt; map</div><div class="ttdef"><b>Definition:</b> amurcore.h:64</div></div>
+<div class="ttc" id="aclassAmurCore_html_adb878c20566c0220febb8cffcbd7f364"><div class="ttname"><a href="classAmurCore.html#adb878c20566c0220febb8cffcbd7f364">AmurCore::config</a></div><div class="ttdeci">ConfigProcessor * config</div><div class="ttdef"><b>Definition:</b> amurcore.h:47</div></div>
+<div class="ttc" id="aclassAmurCore_html_adc3b4c419b6ef2ee615a0de2f2006028"><div class="ttname"><a href="classAmurCore.html#adc3b4c419b6ef2ee615a0de2f2006028">AmurCore::navigationDialog</a></div><div class="ttdeci">NavDialog * navigationDialog</div><div class="ttdef"><b>Definition:</b> amurcore.h:59</div></div>
+<div class="ttc" id="aclassAmurCore_html_ade2f3eed41b4c7d91d120a862b5ee57e"><div class="ttname"><a href="classAmurCore.html#ade2f3eed41b4c7d91d120a862b5ee57e">AmurCore::joyState</a></div><div class="ttdeci">std::shared_ptr&lt; JoyState &gt; joyState</div><div class="ttdef"><b>Definition:</b> amurcore.h:67</div></div>
+<div class="ttc" id="aclassAmurCore_html_ae6cf65c6e8fd42f1d69279dff7c580d6"><div class="ttname"><a href="classAmurCore.html#ae6cf65c6e8fd42f1d69279dff7c580d6">AmurCore::robotInfoDialog</a></div><div class="ttdeci">RobotInfoDialog * robotInfoDialog</div><div class="ttdef"><b>Definition:</b> amurcore.h:60</div></div>
+<div class="ttc" id="aclassAmurCore_html_aeab5659f5cc6e6664d69f3ca73254bc1"><div class="ttname"><a href="classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1">AmurCore::network</a></div><div class="ttdeci">std::shared_ptr&lt; NetworkController &gt; network</div><div class="ttdef"><b>Definition:</b> amurcore.h:54</div></div>
+<div class="ttc" id="aclassAmurCore_html_aef40aa622233b6f8df42c524bce9273a"><div class="ttname"><a href="classAmurCore.html#aef40aa622233b6f8df42c524bce9273a">AmurCore::undistortedMat</a></div><div class="ttdeci">Mat undistortedMat</div><div class="ttdef"><b>Definition:</b> amurcore.h:74</div></div>
+<div class="ttc" id="aclassAmurCore_html_afddb783940265bcf0d639e262e5e954d"><div class="ttname"><a href="classAmurCore.html#afddb783940265bcf0d639e262e5e954d">AmurCore::ui</a></div><div class="ttdeci">Ui::AmurCore * ui</div><div class="ttdef"><b>Definition:</b> amurcore.h:40</div></div>
 <div class="ttc" id="aclassCamSettingsHolder_html"><div class="ttname"><a href="classCamSettingsHolder.html">CamSettingsHolder</a></div><div class="ttdef"><b>Definition:</b> camsettingsholder.h:10</div></div>
 <div class="ttc" id="aclassConfigProcessor_html"><div class="ttname"><a href="classConfigProcessor.html">ConfigProcessor</a></div><div class="ttdef"><b>Definition:</b> configprocessor.h:12</div></div>
 <div class="ttc" id="aclassConnectDialog_html"><div class="ttname"><a href="classConnectDialog.html">ConnectDialog</a></div><div class="ttdef"><b>Definition:</b> connectdialog.h:19</div></div>
 <div class="ttc" id="aclassJoystickDialog_html"><div class="ttname"><a href="classJoystickDialog.html">JoystickDialog</a></div><div class="ttdef"><b>Definition:</b> joystickdialog.h:15</div></div>
 <div class="ttc" id="aclassJoystick_html"><div class="ttname"><a href="classJoystick.html">Joystick</a></div><div class="ttdef"><b>Definition:</b> joystick.h:8</div></div>
 <div class="ttc" id="aclassLogic_html"><div class="ttname"><a href="classLogic.html">Logic</a></div><div class="ttdef"><b>Definition:</b> logic.h:11</div></div>
-<div class="ttc" id="aclassMapDialog_html"><div class="ttname"><a href="classMapDialog.html">MapDialog</a></div><div class="ttdef"><b>Definition:</b> mapdialog.h:15</div></div>
+<div class="ttc" id="aclassNavDialog_html"><div class="ttname"><a href="classNavDialog.html">NavDialog</a></div><div class="ttdef"><b>Definition:</b> navdialog.h:22</div></div>
 <div class="ttc" id="aclassRobotInfoDialog_html"><div class="ttname"><a href="classRobotInfoDialog.html">RobotInfoDialog</a></div><div class="ttdef"><b>Definition:</b> robotinfodialog.h:11</div></div>
-<div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition:</b> amurcore.h:31</div></div>
+<div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition:</b> amurcore.h:32</div></div>
 <div class="ttc" id="apch_8h_html"><div class="ttname"><a href="pch_8h.html">pch.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

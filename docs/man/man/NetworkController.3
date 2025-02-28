@@ -1,4 +1,4 @@
-.TH "NetworkController" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "NetworkController" 3 "Fri Feb 28 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -31,6 +31,12 @@ Inherits QObject\&.
 .ti -1c
 .RI "QList< std::shared_ptr< \fBRobotEntry\fP > > \fBgetRobots\fP () const"
 .br
+.ti -1c
+.RI "std::shared_ptr< \fBgrpcClient\fP > & \fBgetClientInstance\fP ()"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBgrpcServer\fP > & \fBgetServerInstance\fP ()"
+.br
 .in -1c
 .SS "Private Attributes"
 
@@ -51,7 +57,10 @@ Inherits QObject\&.
 .RI "grpc::ServerBuilder \fBbuilder\fP"
 .br
 .ti -1c
-.RI "\fBgrpcServer\fP \fBservice\fP"
+.RI "std::shared_ptr< \fBgrpcServer\fP > \fBserverPtr\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBgrpcClient\fP > \fBclientPtr\fP"
 .br
 .ti -1c
 .RI "int \fBmessageNo\fP = 1"
@@ -74,7 +83,11 @@ Inherits QObject\&.
 
 .SH "Member Function Documentation"
 .PP 
+.SS "std::shared_ptr<\fBgrpcClient\fP>& NetworkController::getClientInstance ()\fC [inline]\fP"
+
 .SS "QList< std::shared_ptr< \fBRobotEntry\fP > > NetworkController::getRobots () const"
+
+.SS "std::shared_ptr<\fBgrpcServer\fP>& NetworkController::getServerInstance ()\fC [inline]\fP"
 
 .SS "int NetworkController::runArpingService (int arpPort, int gRPCPort, QString & arpHeader)"
 
@@ -85,6 +98,8 @@ Inherits QObject\&.
 .SH "Member Data Documentation"
 .PP 
 .SS "grpc::ServerBuilder NetworkController::builder\fC [private]\fP"
+
+.SS "std::shared_ptr<\fBgrpcClient\fP> NetworkController::clientPtr\fC [private]\fP"
 
 .SS "QMap<quint16, QUdpSocket*> NetworkController::clientSockets\fC [private]\fP"
 
@@ -100,7 +115,7 @@ Inherits QObject\&.
 
 .SS "std::shared_ptr<Sensors> NetworkController::sensors\fC [private]\fP"
 
-.SS "\fBgrpcServer\fP NetworkController::service\fC [private]\fP"
+.SS "std::shared_ptr<\fBgrpcServer\fP> NetworkController::serverPtr\fC [private]\fP"
 
 .SS "QUdpSocket* NetworkController::udpSocket = nullptr\fC [private]\fP"
 

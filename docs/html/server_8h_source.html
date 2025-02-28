@@ -106,31 +106,39 @@ $(document).ready(function(){initNavTree('server_8h_source.html',''); initResiza
 <div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classgrpcServer.html#a5cf5d5dae1804adc13e5a11b7508abac">   17</a></span>&#160;  std::shared_ptr&lt;Controls&gt; <a class="code" href="classgrpcServer.html#a5cf5d5dae1804adc13e5a11b7508abac">controls</a>;</div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classgrpcServer.html#a3c7d2446b6393bec78f344b5cdd93451">   18</a></span>&#160;  std::shared_ptr&lt;Sensors&gt; <a class="code" href="classgrpcServer.html#a3c7d2446b6393bec78f344b5cdd93451">sensors</a>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classgrpcServer.html#a79e4dc9ecc47ff59177a2705555fd15c">   19</a></span>&#160;  std::shared_ptr&lt;map_service::GetMapResponse&gt; <a class="code" href="classgrpcServer.html#a79e4dc9ecc47ff59177a2705555fd15c">map</a>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">   20</a></span>&#160;  std::mutex muServer, <a class="code" href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">muMap</a>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  grpc::Status DataExchange([[maybe_unused]] grpc::ServerContext* context,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                            <span class="keyword">const</span> Sensors* request, Controls* reply) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  grpc::Status DataStreamExchange([[maybe_unused]] grpc::ServerContext* context,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                                  grpc::ServerReaderWriter&lt;Controls, Sensors&gt;* stream) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  grpc::Status MapStream([[maybe_unused]] grpc::ServerContext* context,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                            grpc::ServerReaderWriter&lt;map_service::GetMapRequest, map_service::GetMapResponse&gt;* stream) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> setProtosPointers(std::shared_ptr&lt;Controls&gt; controlsPtr,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                           std::shared_ptr&lt;Sensors&gt; sensorsPtr,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                           std::shared_ptr&lt;map_service::GetMapResponse&gt; mapPtr);</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classgrpcServer.html#a7d29d1294fbe427f27a44e9fd3a671bb">   35</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgrpcServer.html#a7d29d1294fbe427f27a44e9fd3a671bb">checkConn</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// GSERVER_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classgrpcServer.html#a33fdb8b89a90a900af52918b676704be">   21</a></span>&#160;  std::mutex <a class="code" href="classgrpcServer.html#a33fdb8b89a90a900af52918b676704be">muServer</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">   22</a></span>&#160;  std::mutex <a class="code" href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">muMap</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  grpc::Status DataExchange([[maybe_unused]] grpc::ServerContext* context,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                            <span class="keyword">const</span> Sensors* request, Controls* reply) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  grpc::Status DataStreamExchange([[maybe_unused]] grpc::ServerContext* context,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                  grpc::ServerReaderWriter&lt;Controls, Sensors&gt;* stream) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  grpc::Status MapStream([[maybe_unused]] grpc::ServerContext* context,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                            grpc::ServerReaderWriter&lt;map_service::GetMapRequest, map_service::GetMapResponse&gt;* stream) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> setProtosPointers(std::shared_ptr&lt;Controls&gt; controlsPtr,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                           std::shared_ptr&lt;Sensors&gt; sensorsPtr,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                           std::shared_ptr&lt;map_service::GetMapResponse&gt; mapPtr);</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classgrpcServer.html#a7d29d1294fbe427f27a44e9fd3a671bb">   37</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgrpcServer.html#a7d29d1294fbe427f27a44e9fd3a671bb">checkConn</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classgrpcServer.html#a35ff9770dcf6b7df51d61d7af92a027d">   39</a></span>&#160;    std::mutex&amp; <a class="code" href="classgrpcServer.html#a35ff9770dcf6b7df51d61d7af92a027d">getMutex</a>() { <span class="keywordflow">return</span> muServer; }</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classgrpcServer.html#aac1e786584f26086427c642de17b1311">   40</a></span>&#160;    std::mutex&amp; <a class="code" href="classgrpcServer.html#aac1e786584f26086427c642de17b1311">getMapMutex</a>() { <span class="keywordflow">return</span> muMap; }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// GSERVER_H</span></div>
 <div class="ttc" id="aclassgrpcServer_html"><div class="ttname"><a href="classgrpcServer.html">grpcServer</a></div><div class="ttdef"><b>Definition:</b> server.h:16</div></div>
+<div class="ttc" id="aclassgrpcServer_html_a33fdb8b89a90a900af52918b676704be"><div class="ttname"><a href="classgrpcServer.html#a33fdb8b89a90a900af52918b676704be">grpcServer::muServer</a></div><div class="ttdeci">std::mutex muServer</div><div class="ttdef"><b>Definition:</b> server.h:21</div></div>
+<div class="ttc" id="aclassgrpcServer_html_a35ff9770dcf6b7df51d61d7af92a027d"><div class="ttname"><a href="classgrpcServer.html#a35ff9770dcf6b7df51d61d7af92a027d">grpcServer::getMutex</a></div><div class="ttdeci">std::mutex &amp; getMutex()</div><div class="ttdef"><b>Definition:</b> server.h:39</div></div>
 <div class="ttc" id="aclassgrpcServer_html_a3c7d2446b6393bec78f344b5cdd93451"><div class="ttname"><a href="classgrpcServer.html#a3c7d2446b6393bec78f344b5cdd93451">grpcServer::sensors</a></div><div class="ttdeci">std::shared_ptr&lt; Sensors &gt; sensors</div><div class="ttdef"><b>Definition:</b> server.h:18</div></div>
 <div class="ttc" id="aclassgrpcServer_html_a5cf5d5dae1804adc13e5a11b7508abac"><div class="ttname"><a href="classgrpcServer.html#a5cf5d5dae1804adc13e5a11b7508abac">grpcServer::controls</a></div><div class="ttdeci">std::shared_ptr&lt; Controls &gt; controls</div><div class="ttdef"><b>Definition:</b> server.h:17</div></div>
 <div class="ttc" id="aclassgrpcServer_html_a79e4dc9ecc47ff59177a2705555fd15c"><div class="ttname"><a href="classgrpcServer.html#a79e4dc9ecc47ff59177a2705555fd15c">grpcServer::map</a></div><div class="ttdeci">std::shared_ptr&lt; map_service::GetMapResponse &gt; map</div><div class="ttdef"><b>Definition:</b> server.h:19</div></div>
 <div class="ttc" id="aclassgrpcServer_html_a7d29d1294fbe427f27a44e9fd3a671bb"><div class="ttname"><a href="classgrpcServer.html#a7d29d1294fbe427f27a44e9fd3a671bb">grpcServer::checkConn</a></div><div class="ttdeci">int checkConn()</div></div>
-<div class="ttc" id="aclassgrpcServer_html_ad17696157afb9d49a1005c4a3f144afe"><div class="ttname"><a href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">grpcServer::muMap</a></div><div class="ttdeci">std::mutex muMap</div><div class="ttdef"><b>Definition:</b> server.h:20</div></div>
+<div class="ttc" id="aclassgrpcServer_html_aac1e786584f26086427c642de17b1311"><div class="ttname"><a href="classgrpcServer.html#aac1e786584f26086427c642de17b1311">grpcServer::getMapMutex</a></div><div class="ttdeci">std::mutex &amp; getMapMutex()</div><div class="ttdef"><b>Definition:</b> server.h:40</div></div>
+<div class="ttc" id="aclassgrpcServer_html_ad17696157afb9d49a1005c4a3f144afe"><div class="ttname"><a href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">grpcServer::muMap</a></div><div class="ttdeci">std::mutex muMap</div><div class="ttdef"><b>Definition:</b> server.h:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

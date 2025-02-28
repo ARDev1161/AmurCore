@@ -1,8 +1,18 @@
 var classMapWidget =
 [
     [ "MapWidget", "classMapWidget.html#a3e20d58dec0f6a0cdc28378dd87e17c7", null ],
-    [ "MapWidget", "classMapWidget.html#a3e20d58dec0f6a0cdc28378dd87e17c7", null ],
+    [ "MapWidget", "classMapWidget.html#a51cac3fe4c85e4f2f1f875599e8f4c23", null ],
     [ "~MapWidget", "classMapWidget.html#a2be5ffdc125d85aa0ccdb4f552e393cc", null ],
+    [ "centerOnRobot", "classMapWidget.html#af3a2367f392f330defab953d64787eb8", null ],
+    [ "drawAxis", "classMapWidget.html#ab4238ead547aef7d309c463e663c2e88", null ],
+    [ "drawGrid", "classMapWidget.html#a3a84d75fae44d076dde34c41c0f24451", null ],
+    [ "drawRobot", "classMapWidget.html#ad59eb80bfcbdd6dac538a7742a37cdfd", null ],
+    [ "drawWaypoints", "classMapWidget.html#a0d650aa191c33250f379c2697b8163fe", null ],
+    [ "fitMapToWidget", "classMapWidget.html#a1097285808335a3b917f2068adbd9020", null ],
+    [ "getGoals", "classMapWidget.html#ad505c4c2ed086080eb9ea499f196379c", null ],
+    [ "goalAdded", "classMapWidget.html#ac6682a1866597a788f222695b8ba49a2", null ],
+    [ "mapToWidget", "classMapWidget.html#a8518fbf06decc676044f9d30a28230b9", null ],
+    [ "mouseMoved", "classMapWidget.html#a8cc3d00414393e42886d551697c8d261", null ],
     [ "mouseMoveEvent", "classMapWidget.html#ac4fa5570db0c7035e90f990ae9c0ea27", null ],
     [ "mousePressEvent", "classMapWidget.html#aa48e5f8c7c771113afef4c63d8c0f6c4", null ],
     [ "mouseReleaseEvent", "classMapWidget.html#a88af0745f1ebbbdd1b5d48518dbcd4d9", null ],
@@ -15,8 +25,14 @@ var classMapWidget =
     [ "setRobotOrientation", "classMapWidget.html#a63c3b47302864974a27656f254f6063e", null ],
     [ "setRobotOrientation", "classMapWidget.html#aed42872d8881c6767aec8c34db383f72", null ],
     [ "setRobotPose", "classMapWidget.html#ac7d5fd360d3fa7e265be96d2fa3615a8", null ],
+    [ "setShowAxis", "classMapWidget.html#a1909565052ad72d7fd261bba3e38ae4f", null ],
+    [ "setShowGrid", "classMapWidget.html#ab02719eb8968c3dcadd112e81117c186", null ],
     [ "updateScaleOnResize", "classMapWidget.html#ae336a87acbdcd0dd58401275a7d02ea0", null ],
     [ "wheelEvent", "classMapWidget.html#a417abfa08f513ccdb2d205145891985d", null ],
+    [ "widgetToMap", "classMapWidget.html#a01fb2243496a043621b7b42f7d034441", null ],
+    [ "widgetToWorld", "classMapWidget.html#a16e804ddbaddebd3f86e867c69c2afd0", null ],
+    [ "m_firstMapLoaded", "classMapWidget.html#ae4d31a59e214c535a37a425c71762b29", null ],
+    [ "m_goalsWorld", "classMapWidget.html#a5d3bd78610fe7f1c235ba7ea2514d39b", null ],
     [ "m_lastMousePos", "classMapWidget.html#a348bc4d7e750bd0823ec6366d5acdd48", null ],
     [ "m_mapImage", "classMapWidget.html#a114cb9ad0a1f8d8406ca0cee3c9d52f9", null ],
     [ "m_mapResolution", "classMapWidget.html#a5cdff6a8e0707cda82bf518738ac5461", null ],
@@ -31,5 +47,7 @@ var classMapWidget =
     [ "m_robot_x", "classMapWidget.html#ab2b6b5a7908ef29769bc10b34747aaa8", null ],
     [ "m_robot_y", "classMapWidget.html#a5fe49ca9e3fe2fc4737fbf03a4901349", null ],
     [ "m_robotPixmap", "classMapWidget.html#a5d5151367b5c2dfac7398e3df7017a09", null ],
-    [ "m_scaleFactor", "classMapWidget.html#ab769801b5d2fc477a18fed83c5ca5bf8", null ]
+    [ "m_scaleFactor", "classMapWidget.html#ab769801b5d2fc477a18fed83c5ca5bf8", null ],
+    [ "m_showAxis", "classMapWidget.html#a3d1ce6601669895c605d71166fbb45a2", null ],
+    [ "m_showGrid", "classMapWidget.html#abdbd1e2d81feb6527757dd21abc8b19f", null ]
 ];

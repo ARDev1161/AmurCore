@@ -1,15 +1,10 @@
 <map id="AmurCore::worker" name="AmurCore::worker">
-<area shape="rect" id="node1" title=" " alt="" coords="5,158,131,185"/>
-<area shape="rect" id="node2" href="$classLogic.html#a82ac96bf427006f77ee9238f022a9472" title=" " alt="" coords="197,57,319,83"/>
-<area shape="rect" id="node3" href="$classAmurCore.html#a6c7d5af7322ad0586428dc70fa1f8df2" title=" " alt="" coords="393,169,519,195"/>
-<area shape="rect" id="node4" href="$classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="205,107,311,134"/>
-<area shape="rect" id="node10" href="$classLogic.html#a28e53fcdf563bd313f060b6702c743c9" title=" " alt="" coords="198,209,318,235"/>
-<area shape="rect" id="node11" href="$classAmurCore.html#a7f29997a8d1cd0cefc312b4a2a3bd660" title=" " alt="" coords="179,259,337,286"/>
-<area shape="rect" id="node5" href="$classMovements.html#a92357438ace26e6258b150e34a75b6ca" title=" " alt="" coords="389,107,523,134"/>
-<area shape="rect" id="node6" href="$classMovements.html#afe1fbaab4f9cd9fb41409274cabc9b8c" title=" " alt="" coords="583,5,787,47"/>
-<area shape="rect" id="node7" href="$classMovements.html#ae2885a769fe8b59e1e0d11b5b154bbed" title=" " alt="" coords="582,71,789,112"/>
-<area shape="rect" id="node8" href="$classMovements.html#a9abf18d457bd1734761cbc21c6d33313" title=" " alt="" coords="575,137,796,163"/>
-<area shape="rect" id="node9" href="$classMovements.html#afd30b04d9afd0d8bd39315258896666f" title=" " alt="" coords="596,187,775,214"/>
-<area shape="rect" id="node12" href="$classCamSettingsHolder.html#a610944047b872a01281a187b60daef0d" title=" " alt="" coords="385,241,527,283"/>
-<area shape="rect" id="node13" href="$classCamSettingsHolder.html#ab515ea2e2c6a6e3e913f6ac540a591bc" title=" " alt="" coords="385,307,527,348"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,143,131,170"/>
+<area shape="rect" id="node2" href="$classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="179,143,285,170"/>
+<area shape="rect" id="node3" href="$classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="333,143,484,170"/>
+<area shape="rect" id="node4" href="$classManualControl.html#a312b8b5ba45b63e4e8f403b7d49d5237" title=" " alt="" coords="551,5,731,47"/>
+<area shape="rect" id="node5" href="$classManualControl.html#aa4a96f837624198177e3386583dafdd4" title=" " alt="" coords="546,71,737,112"/>
+<area shape="rect" id="node6" href="$classManualControl.html#a50789f43ceffaedf4d13b2040483124f" title=" " alt="" coords="546,136,737,177"/>
+<area shape="rect" id="node7" href="$classManualControl.html#a1f4fafd9bd86396cad2868d6b51de2be" title=" " alt="" coords="547,201,735,243"/>
+<area shape="rect" id="node8" href="$classManualControl.html#afa373688174e8ba403f8c83f8cf486da" title=" " alt="" coords="532,267,751,294"/>
 </map>

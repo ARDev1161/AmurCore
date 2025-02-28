@@ -6,14 +6,14 @@ var hierarchy =
     [ "MoveSettings::JoyBindings", "structMoveSettings_1_1JoyBindings.html", null ],
     [ "JoyState", "structJoyState.html", null ],
     [ "Logic", "classLogic.html", null ],
-    [ "Movements", "classMovements.html", null ],
+    [ "ManualControl", "classManualControl.html", null ],
     [ "MoveSettings", "structMoveSettings.html", null ],
     [ "PoseQuaternion", "structPoseQuaternion.html", null ],
     [ "QDialog", null, [
       [ "CamCalibrate", "classCamCalibrate.html", null ],
       [ "ConnectDialog", "classConnectDialog.html", null ],
       [ "JoystickDialog", "classJoystickDialog.html", null ],
-      [ "MapDialog", "classMapDialog.html", null ],
+      [ "NavDialog", "classNavDialog.html", null ],
       [ "RobotInfoDialog", "classRobotInfoDialog.html", null ]
     ] ],
     [ "QMainWindow", null, [

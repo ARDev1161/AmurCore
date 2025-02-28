@@ -1,4 +1,0 @@
-<map id="MapDialog::onMapUpdated" name="MapDialog::onMapUpdated">
-<area shape="rect" id="node1" title="Слот для обновления отображаемой карты." alt="" coords="204,5,381,32"/>
-<area shape="rect" id="node2" href="$classMapDialog.html#a7c1deea303dcae75fef29869f85e140c" title=" " alt="" coords="5,5,156,32"/>
-</map>

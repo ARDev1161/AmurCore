@@ -1,4 +1,4 @@
-.TH "grpcServer" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "grpcServer" 3 "Fri Feb 28 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,6 +18,12 @@ Inherits ClientOnRobot::Service\&.
 .br
 .ti -1c
 .RI "int \fBcheckConn\fP ()"
+.br
+.ti -1c
+.RI "std::mutex & \fBgetMutex\fP ()"
+.br
+.ti -1c
+.RI "std::mutex & \fBgetMapMutex\fP ()"
 .br
 .in -1c
 .SS "Private Member Functions"
@@ -59,6 +65,10 @@ Inherits ClientOnRobot::Service\&.
 .SS "grpc::Status grpcServer::DataExchange ([[maybe_unused] ] grpc::ServerContext * context, const Sensors * request, Controls * reply)\fC [override]\fP, \fC [private]\fP"
 
 .SS "grpc::Status grpcServer::DataStreamExchange ([[maybe_unused] ] grpc::ServerContext * context, grpc::ServerReaderWriter< Controls, Sensors > * stream)\fC [override]\fP, \fC [private]\fP"
+
+.SS "std::mutex& grpcServer::getMapMutex ()\fC [inline]\fP"
+
+.SS "std::mutex& grpcServer::getMutex ()\fC [inline]\fP"
 
 .SS "grpc::Status grpcServer::MapStream ([[maybe_unused] ] grpc::ServerContext * context, grpc::ServerReaderWriter< map_service::GetMapRequest, map_service::GetMapResponse > * stream)\fC [override]\fP, \fC [private]\fP"
 

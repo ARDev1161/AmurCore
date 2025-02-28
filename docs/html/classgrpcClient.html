@@ -98,7 +98,7 @@ Collaboration diagram for grpcClient:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgrpcClient__coll__graph.png" border="0" usemap="#agrpcClient_coll__map" alt="Collaboration graph"/></div>
 <map name="agrpcClient_coll__map" id="agrpcClient_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,172,229"/>
+<area shape="rect" title=" " alt="" coords="5,5,172,273"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -114,6 +114,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab877928b42b2e13b1d2953826072777d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a791265a5d7a0615281f250d1f0c8877a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcClient.html#a791265a5d7a0615281f250d1f0c8877a">stopStream</a> ()</td></tr>
 <tr class="separator:a791265a5d7a0615281f250d1f0c8877a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cb6076dc439cf31d55750e178f6319f"><td class="memItemLeft" align="right" valign="top">std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcClient.html#a1cb6076dc439cf31d55750e178f6319f">getMutex</a> ()</td></tr>
+<tr class="separator:a1cb6076dc439cf31d55750e178f6319f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eebc26e06a3d858a1e5c0975a204b89"><td class="memItemLeft" align="right" valign="top">std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcClient.html#a9eebc26e06a3d858a1e5c0975a204b89">getMapMutex</a> ()</td></tr>
+<tr class="separator:a9eebc26e06a3d858a1e5c0975a204b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -131,6 +135,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a9ae335b34c0043d59d3c04881c1ababc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a8a26f672c439bd439b62f6f648f882"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcClient.html#a9a8a26f672c439bd439b62f6f648f882">muClient</a></td></tr>
 <tr class="separator:a9a8a26f672c439bd439b62f6f648f882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedccee3eeb9acb56879a98839adfa4e"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcClient.html#adedccee3eeb9acb56879a98839adfa4e">muMap</a></td></tr>
+<tr class="separator:adedccee3eeb9acb56879a98839adfa4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab0a8a98c82a6923ed8a0dcfd7a145469"></a>
@@ -205,15 +211,56 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classgrpcClient_a7a569dfe1c1968b7ee3f40c351c19f51_icgraph.png" border="0" usemap="#aclassgrpcClient_a7a569dfe1c1968b7ee3f40c351c19f51_icgraph" alt=""/></div>
-<map name="aclassgrpcClient_a7a569dfe1c1968b7ee3f40c351c19f51_icgraph" id="aclassgrpcClient_a7a569dfe1c1968b7ee3f40c351c19f51_icgraph">
-<area shape="rect" title=" " alt="" coords="185,13,396,39"/>
-<area shape="rect" href="classNetworkController.html#a0a23911025a48814505b4f9abcacd839" title=" " alt="" coords="5,5,137,47"/>
-</map>
+
 </div>
+</div>
+<a id="a9eebc26e06a3d858a1e5c0975a204b89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eebc26e06a3d858a1e5c0975a204b89">&#9670;&nbsp;</a></span>getMapMutex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex&amp; grpcClient::getMapMutex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1cb6076dc439cf31d55750e178f6319f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cb6076dc439cf31d55750e178f6319f">&#9670;&nbsp;</a></span>getMutex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex&amp; grpcClient::getMutex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -329,6 +376,28 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">std::mutex grpcClient::muClient</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adedccee3eeb9acb56879a98839adfa4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adedccee3eeb9acb56879a98839adfa4e">&#9670;&nbsp;</a></span>muMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex grpcClient::muMap</td>
         </tr>
       </table>
   </td>

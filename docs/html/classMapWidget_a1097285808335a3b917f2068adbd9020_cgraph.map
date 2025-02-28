@@ -1,0 +1,4 @@
+<map id="MapWidget::fitMapToWidget" name="MapWidget::fitMapToWidget">
+<area shape="rect" id="node1" title=" " alt="" coords="5,13,188,39"/>
+<area shape="rect" id="node2" href="$classMapWidget.html#ae336a87acbdcd0dd58401275a7d02ea0" title="Обновляет масштаб и сдвиг при изменении размера виджета." alt="" coords="236,5,419,47"/>
+</map>

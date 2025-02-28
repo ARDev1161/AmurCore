@@ -99,8 +99,8 @@ Collaboration diagram for Logic:</div>
 <div class="dyncontent">
 <div class="center"><img src="classLogic__coll__graph.png" border="0" usemap="#aLogic_coll__map" alt="Collaboration graph"/></div>
 <map name="aLogic_coll__map" id="aLogic_coll__map">
-<area shape="rect" title=" " alt="" coords="123,645,226,869"/>
-<area shape="rect" href="classMovements.html" title=" " alt="" coords="81,417,268,583"/>
+<area shape="rect" title=" " alt="" coords="123,704,226,928"/>
+<area shape="rect" href="classManualControl.html" title=" " alt="" coords="81,417,268,641"/>
 <area shape="rect" href="structMoveSettings.html" title=" " alt="" coords="43,219,146,296"/>
 <area shape="rect" href="structMoveSettings_1_1JoyBindings.html" title=" " alt="" coords="5,5,184,97"/>
 <area shape="rect" href="structJoyState.html" title=" " alt="" coords="170,160,299,355"/>
@@ -109,8 +109,8 @@ Collaboration diagram for Logic:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae29f12bd01c0fccc87d1628e28a1a04a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#ae29f12bd01c0fccc87d1628e28a1a04a">Logic</a> (std::shared_ptr&lt; <a class="el" href="structJoyState.html">JoyState</a> &gt; <a class="el" href="classLogic.html#a02d3bd893cae5db5f9264e71e6b16720">joyState</a>, std::shared_ptr&lt; Controls &gt; <a class="el" href="classLogic.html#aca3063e6343646567d631ef09312fa26">controls</a>, std::shared_ptr&lt; Sensors &gt; <a class="el" href="classLogic.html#aec11ee65057e2453cda9dcf6f0fb35a5">sensors</a>)</td></tr>
-<tr class="separator:ae29f12bd01c0fccc87d1628e28a1a04a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb97a62c1b719375cecbe46602f0a284"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#aeb97a62c1b719375cecbe46602f0a284">Logic</a> (std::shared_ptr&lt; <a class="el" href="structJoyState.html">JoyState</a> &gt; <a class="el" href="classLogic.html#a02d3bd893cae5db5f9264e71e6b16720">joyState</a>, std::shared_ptr&lt; Controls &gt; <a class="el" href="classLogic.html#aca3063e6343646567d631ef09312fa26">controls</a>, std::shared_ptr&lt; Sensors &gt; <a class="el" href="classLogic.html#aec11ee65057e2453cda9dcf6f0fb35a5">sensors</a>, std::mutex &amp;grpcMutex)</td></tr>
+<tr class="separator:aeb97a62c1b719375cecbe46602f0a284"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae18f024fe3a3a6822c2d068552293c8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a">process</a> ()</td></tr>
 <tr class="separator:ae18f024fe3a3a6822c2d068552293c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82ac96bf427006f77ee9238f022a9472"><td class="memItemLeft" align="right" valign="top">Mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#a82ac96bf427006f77ee9238f022a9472">getOutMat</a> () const</td></tr>
@@ -133,18 +133,18 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a2597d0e03cefdf4953e26e0aa073fc16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02d3bd893cae5db5f9264e71e6b16720"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="structJoyState.html">JoyState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#a02d3bd893cae5db5f9264e71e6b16720">joyState</a></td></tr>
 <tr class="separator:a02d3bd893cae5db5f9264e71e6b16720"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a4f42508182243ba32cd65596ca35a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMovements.html">Movements</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#a0a4f42508182243ba32cd65596ca35a1">move</a></td></tr>
-<tr class="separator:a0a4f42508182243ba32cd65596ca35a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af25d19301087e58c97114890798c974f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classManualControl.html">ManualControl</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#af25d19301087e58c97114890798c974f">move</a></td></tr>
+<tr class="separator:af25d19301087e58c97114890798c974f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca3063e6343646567d631ef09312fa26"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; Controls &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#aca3063e6343646567d631ef09312fa26">controls</a></td></tr>
 <tr class="separator:aca3063e6343646567d631ef09312fa26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec11ee65057e2453cda9dcf6f0fb35a5"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; Sensors &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#aec11ee65057e2453cda9dcf6f0fb35a5">sensors</a></td></tr>
 <tr class="separator:aec11ee65057e2453cda9dcf6f0fb35a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8db64056b1d48126be842cfab1dc6f6e"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; map_service::OccupancyGrid &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#a8db64056b1d48126be842cfab1dc6f6e">map</a></td></tr>
-<tr class="separator:a8db64056b1d48126be842cfab1dc6f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5071559d47550c4652ce1a1c4ebbe4ba"><td class="memItemLeft" align="right" valign="top">std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogic.html#a5071559d47550c4652ce1a1c4ebbe4ba">grpcMutex_</a></td></tr>
+<tr class="separator:a5071559d47550c4652ce1a1c4ebbe4ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae29f12bd01c0fccc87d1628e28a1a04a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae29f12bd01c0fccc87d1628e28a1a04a">&#9670;&nbsp;</a></span>Logic()</h2>
+<a id="aeb97a62c1b719375cecbe46602f0a284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb97a62c1b719375cecbe46602f0a284">&#9670;&nbsp;</a></span>Logic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,7 +165,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::shared_ptr&lt; Sensors &gt;&#160;</td>
-          <td class="paramname"><em>sensors</em>&#160;</td>
+          <td class="paramname"><em>sensors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::mutex &amp;&#160;</td>
+          <td class="paramname"><em>grpcMutex</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -177,8 +183,8 @@ Private Attributes</h2></td></tr>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classLogic_ae29f12bd01c0fccc87d1628e28a1a04a_cgraph.png" border="0" usemap="#aclassLogic_ae29f12bd01c0fccc87d1628e28a1a04a_cgraph" alt=""/></div>
-<map name="aclassLogic_ae29f12bd01c0fccc87d1628e28a1a04a_cgraph" id="aclassLogic_ae29f12bd01c0fccc87d1628e28a1a04a_cgraph">
+<div class="center"><img src="classLogic_aeb97a62c1b719375cecbe46602f0a284_cgraph.png" border="0" usemap="#aclassLogic_aeb97a62c1b719375cecbe46602f0a284_cgraph" alt=""/></div>
+<map name="aclassLogic_aeb97a62c1b719375cecbe46602f0a284_cgraph" id="aclassLogic_aeb97a62c1b719375cecbe46602f0a284_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,97,32"/>
 <area shape="rect" href="classLogic.html#ae40fbd8f3e394e554159b558c8ab1ea3" title=" " alt="" coords="145,5,255,32"/>
 </map>
@@ -206,8 +212,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classLogic_a82ac96bf427006f77ee9238f022a9472_icgraph.png" border="0" usemap="#aclassLogic_a82ac96bf427006f77ee9238f022a9472_icgraph" alt=""/></div>
 <map name="aclassLogic_a82ac96bf427006f77ee9238f022a9472_icgraph" id="aclassLogic_a82ac96bf427006f77ee9238f022a9472_icgraph">
-<area shape="rect" title=" " alt="" coords="953,31,1075,57"/>
-<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,31,905,57"/>
+<area shape="rect" title=" " alt="" coords="780,31,901,57"/>
 <area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
 <area shape="rect" href="classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
 <area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
@@ -246,7 +251,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="classLogic_ae40fbd8f3e394e554159b558c8ab1ea3_icgraph.png" border="0" usemap="#aclassLogic_ae40fbd8f3e394e554159b558c8ab1ea3_icgraph" alt=""/></div>
 <map name="aclassLogic_ae40fbd8f3e394e554159b558c8ab1ea3_icgraph" id="aclassLogic_ae40fbd8f3e394e554159b558c8ab1ea3_icgraph">
 <area shape="rect" title=" " alt="" coords="145,5,255,32"/>
-<area shape="rect" href="classLogic.html#ae29f12bd01c0fccc87d1628e28a1a04a" title=" " alt="" coords="5,5,97,32"/>
+<area shape="rect" href="classLogic.html#aeb97a62c1b719375cecbe46602f0a284" title=" " alt="" coords="5,5,97,32"/>
 </map>
 </div>
 
@@ -271,12 +276,13 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classLogic_ae18f024fe3a3a6822c2d068552293c8a_cgraph.png" border="0" usemap="#aclassLogic_ae18f024fe3a3a6822c2d068552293c8a_cgraph" alt=""/></div>
 <map name="aclassLogic_ae18f024fe3a3a6822c2d068552293c8a_cgraph" id="aclassLogic_ae18f024fe3a3a6822c2d068552293c8a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,107,112,134"/>
-<area shape="rect" href="classMovements.html#a92357438ace26e6258b150e34a75b6ca" title=" " alt="" coords="160,107,295,134"/>
-<area shape="rect" href="classMovements.html#afe1fbaab4f9cd9fb41409274cabc9b8c" title=" " alt="" coords="351,5,555,47"/>
-<area shape="rect" href="classMovements.html#ae2885a769fe8b59e1e0d11b5b154bbed" title=" " alt="" coords="350,71,557,112"/>
-<area shape="rect" href="classMovements.html#a9abf18d457bd1734761cbc21c6d33313" title=" " alt="" coords="343,137,564,163"/>
-<area shape="rect" href="classMovements.html#afd30b04d9afd0d8bd39315258896666f" title=" " alt="" coords="364,187,543,214"/>
+<area shape="rect" title=" " alt="" coords="5,143,112,170"/>
+<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="160,143,311,170"/>
+<area shape="rect" href="classManualControl.html#a312b8b5ba45b63e4e8f403b7d49d5237" title=" " alt="" coords="378,5,558,47"/>
+<area shape="rect" href="classManualControl.html#aa4a96f837624198177e3386583dafdd4" title=" " alt="" coords="373,71,563,112"/>
+<area shape="rect" href="classManualControl.html#a50789f43ceffaedf4d13b2040483124f" title=" " alt="" coords="373,136,563,177"/>
+<area shape="rect" href="classManualControl.html#a1f4fafd9bd86396cad2868d6b51de2be" title=" " alt="" coords="374,201,562,243"/>
+<area shape="rect" href="classManualControl.html#afa373688174e8ba403f8c83f8cf486da" title=" " alt="" coords="359,267,577,294"/>
 </map>
 </div>
 <div class="dynheader">
@@ -334,8 +340,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classLogic_a28e53fcdf563bd313f060b6702c743c9_icgraph.png" border="0" usemap="#aclassLogic_a28e53fcdf563bd313f060b6702c743c9_icgraph" alt=""/></div>
 <map name="aclassLogic_a28e53fcdf563bd313f060b6702c743c9_icgraph" id="aclassLogic_a28e53fcdf563bd313f060b6702c743c9_icgraph">
-<area shape="rect" title=" " alt="" coords="953,31,1073,57"/>
-<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,31,905,57"/>
+<area shape="rect" title=" " alt="" coords="780,31,900,57"/>
 <area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
 <area shape="rect" href="classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
 <area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
@@ -369,6 +374,28 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a5071559d47550c4652ce1a1c4ebbe4ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5071559d47550c4652ce1a1c4ebbe4ba">&#9670;&nbsp;</a></span>grpcMutex_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex&amp; Logic::grpcMutex_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a02d3bd893cae5db5f9264e71e6b16720"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a02d3bd893cae5db5f9264e71e6b16720">&#9670;&nbsp;</a></span>joyState</h2>
 
@@ -391,8 +418,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a8db64056b1d48126be842cfab1dc6f6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8db64056b1d48126be842cfab1dc6f6e">&#9670;&nbsp;</a></span>map</h2>
+<a id="af25d19301087e58c97114890798c974f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af25d19301087e58c97114890798c974f">&#9670;&nbsp;</a></span>move</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -401,29 +428,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;map_service::OccupancyGrid&gt; Logic::map</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0a4f42508182243ba32cd65596ca35a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a4f42508182243ba32cd65596ca35a1">&#9670;&nbsp;</a></span>move</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classMovements.html">Movements</a>* Logic::move</td>
+          <td class="memname"><a class="el" href="classManualControl.html">ManualControl</a>* Logic::move</td>
         </tr>
       </table>
   </td>

@@ -1,6 +1,4 @@
 <map id="MapWidget::setRobotLocation" name="MapWidget::setRobotLocation">
-<area shape="rect" id="node1" title=" " alt="" coords="652,5,847,32"/>
-<area shape="rect" id="node2" href="$classMapWidget.html#ac7d5fd360d3fa7e265be96d2fa3615a8" title=" " alt="" coords="429,5,604,32"/>
-<area shape="rect" id="node3" href="$classMapDialog.html#a6f78c9c4a3a9c828f5a98132ad41fa7e" title="Слот для обновления отображаемой карты." alt="" coords="204,5,381,32"/>
-<area shape="rect" id="node4" href="$classMapDialog.html#a7c1deea303dcae75fef29869f85e140c" title=" " alt="" coords="5,5,156,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="228,5,423,32"/>
+<area shape="rect" id="node2" href="$classMapWidget.html#ac7d5fd360d3fa7e265be96d2fa3615a8" title=" " alt="" coords="5,5,180,32"/>
 </map>

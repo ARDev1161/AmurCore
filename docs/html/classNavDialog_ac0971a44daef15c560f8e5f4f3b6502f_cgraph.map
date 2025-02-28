@@ -1,0 +1,6 @@
+<map id="NavDialog::onMapUpdated" name="NavDialog::onMapUpdated">
+<area shape="rect" id="node1" title="Слот для обновления отображаемой карты." alt="" coords="5,56,181,83"/>
+<area shape="rect" id="node2" href="$classNavDialog.html#aec120c5c4c400531b613d746db9427f1" title="Проверяет, изменились ли данные карты." alt="" coords="232,5,417,32"/>
+<area shape="rect" id="node3" href="$classNavDialog.html#ab98567d957d65272dde340557c837d75" title="Проверяет, изменились ли данные положения робота." alt="" coords="229,56,420,83"/>
+<area shape="rect" id="node4" href="$classNavDialog.html#a0dcf645a3424c6d489ec3444ebc801fc" title=" " alt="" coords="468,81,663,108"/>
+</map>

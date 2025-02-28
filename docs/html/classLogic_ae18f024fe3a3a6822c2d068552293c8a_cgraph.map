@@ -1,8 +1,9 @@
 <map id="Logic::process" name="Logic::process">
-<area shape="rect" id="node1" title=" " alt="" coords="5,107,112,134"/>
-<area shape="rect" id="node2" href="$classMovements.html#a92357438ace26e6258b150e34a75b6ca" title=" " alt="" coords="160,107,295,134"/>
-<area shape="rect" id="node3" href="$classMovements.html#afe1fbaab4f9cd9fb41409274cabc9b8c" title=" " alt="" coords="351,5,555,47"/>
-<area shape="rect" id="node4" href="$classMovements.html#ae2885a769fe8b59e1e0d11b5b154bbed" title=" " alt="" coords="350,71,557,112"/>
-<area shape="rect" id="node5" href="$classMovements.html#a9abf18d457bd1734761cbc21c6d33313" title=" " alt="" coords="343,137,564,163"/>
-<area shape="rect" id="node6" href="$classMovements.html#afd30b04d9afd0d8bd39315258896666f" title=" " alt="" coords="364,187,543,214"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,143,112,170"/>
+<area shape="rect" id="node2" href="$classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="160,143,311,170"/>
+<area shape="rect" id="node3" href="$classManualControl.html#a312b8b5ba45b63e4e8f403b7d49d5237" title=" " alt="" coords="378,5,558,47"/>
+<area shape="rect" id="node4" href="$classManualControl.html#aa4a96f837624198177e3386583dafdd4" title=" " alt="" coords="373,71,563,112"/>
+<area shape="rect" id="node5" href="$classManualControl.html#a50789f43ceffaedf4d13b2040483124f" title=" " alt="" coords="373,136,563,177"/>
+<area shape="rect" id="node6" href="$classManualControl.html#a1f4fafd9bd86396cad2868d6b51de2be" title=" " alt="" coords="374,201,562,243"/>
+<area shape="rect" id="node7" href="$classManualControl.html#afa373688174e8ba403f8c83f8cf486da" title=" " alt="" coords="359,267,577,294"/>
 </map>

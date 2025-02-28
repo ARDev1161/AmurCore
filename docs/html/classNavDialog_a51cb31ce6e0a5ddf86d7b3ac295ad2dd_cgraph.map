@@ -1,0 +1,12 @@
+<map id="NavDialog::NavDialog" name="NavDialog::NavDialog">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,153,159"/>
+<area shape="rect" id="node2" href="$classMapWidget.html#af3a2367f392f330defab953d64787eb8" title=" " alt="" coords="203,5,383,32"/>
+<area shape="rect" id="node3" href="$classNavDialog.html#ad8672ae33870923e70cf0aa8720e049e" title=" " alt="" coords="205,56,381,83"/>
+<area shape="rect" id="node4" href="$classNavDialog.html#ae1f965b0e785a2cf08c33341a7165570" title=" " alt="" coords="201,107,384,133"/>
+<area shape="rect" id="node5" href="$classNavDialog.html#ac0971a44daef15c560f8e5f4f3b6502f" title="Слот для обновления отображаемой карты." alt="" coords="205,157,381,184"/>
+<area shape="rect" id="node9" href="$classMapWidget.html#a1909565052ad72d7fd261bba3e38ae4f" title=" " alt="" coords="208,208,377,235"/>
+<area shape="rect" id="node10" href="$classMapWidget.html#ab02719eb8968c3dcadd112e81117c186" title=" " alt="" coords="209,259,377,285"/>
+<area shape="rect" id="node6" href="$classNavDialog.html#aec120c5c4c400531b613d746db9427f1" title="Проверяет, изменились ли данные карты." alt="" coords="435,107,620,133"/>
+<area shape="rect" id="node7" href="$classNavDialog.html#ab98567d957d65272dde340557c837d75" title="Проверяет, изменились ли данные положения робота." alt="" coords="432,157,623,184"/>
+<area shape="rect" id="node8" href="$classNavDialog.html#a0dcf645a3424c6d489ec3444ebc801fc" title=" " alt="" coords="671,183,865,209"/>
+</map>

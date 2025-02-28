@@ -1,4 +1,4 @@
-.TH "Logic" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "Logic" 3 "Fri Feb 28 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,7 +12,7 @@ Logic
 
 .in +1c
 .ti -1c
-.RI "\fBLogic\fP (std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP, std::shared_ptr< Controls > \fBcontrols\fP, std::shared_ptr< Sensors > \fBsensors\fP)"
+.RI "\fBLogic\fP (std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP, std::shared_ptr< Controls > \fBcontrols\fP, std::shared_ptr< Sensors > \fBsensors\fP, std::mutex &grpcMutex)"
 .br
 .ti -1c
 .RI "void \fBprocess\fP ()"
@@ -47,7 +47,7 @@ Logic
 .RI "std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP"
 .br
 .ti -1c
-.RI "\fBMovements\fP * \fBmove\fP"
+.RI "\fBManualControl\fP * \fBmove\fP"
 .br
 .ti -1c
 .RI "std::shared_ptr< Controls > \fBcontrols\fP"
@@ -56,12 +56,12 @@ Logic
 .RI "std::shared_ptr< Sensors > \fBsensors\fP"
 .br
 .ti -1c
-.RI "std::shared_ptr< map_service::OccupancyGrid > \fBmap\fP"
+.RI "std::mutex & \fBgrpcMutex_\fP"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "Logic::Logic (std::shared_ptr< \fBJoyState\fP > joyState, std::shared_ptr< Controls > controls, std::shared_ptr< Sensors > sensors)"
+.SS "Logic::Logic (std::shared_ptr< \fBJoyState\fP > joyState, std::shared_ptr< Controls > controls, std::shared_ptr< Sensors > sensors, std::mutex & grpcMutex)"
 
 .SH "Member Function Documentation"
 .PP 
@@ -79,11 +79,11 @@ Logic
 .PP 
 .SS "std::shared_ptr<Controls> Logic::controls\fC [private]\fP"
 
+.SS "std::mutex& Logic::grpcMutex_\fC [private]\fP"
+
 .SS "std::shared_ptr<\fBJoyState\fP> Logic::joyState\fC [private]\fP"
 
-.SS "std::shared_ptr<map_service::OccupancyGrid> Logic::map\fC [private]\fP"
-
-.SS "\fBMovements\fP* Logic::move\fC [private]\fP"
+.SS "\fBManualControl\fP* Logic::move\fC [private]\fP"
 
 .SS "Mat* Logic::outMat\fC [private]\fP"
 

@@ -102,34 +102,37 @@ $(document).ready(function(){initNavTree('logic_8h_source.html',''); initResizab
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classLogic.html#a2597d0e03cefdf4953e26e0aa073fc16">   13</a></span>&#160;    Mat *<a class="code" href="classLogic.html#a2597d0e03cefdf4953e26e0aa073fc16">outMat</a>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classLogic.html#a02d3bd893cae5db5f9264e71e6b16720">   15</a></span>&#160;    std::shared_ptr&lt;JoyState&gt; <a class="code" href="classLogic.html#a02d3bd893cae5db5f9264e71e6b16720">joyState</a>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classLogic.html#a0a4f42508182243ba32cd65596ca35a1">   16</a></span>&#160;    <a class="code" href="classMovements.html">Movements</a> *<a class="code" href="classLogic.html#a0a4f42508182243ba32cd65596ca35a1">move</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classLogic.html#af25d19301087e58c97114890798c974f">   16</a></span>&#160;    <a class="code" href="classManualControl.html">ManualControl</a> *<a class="code" href="classLogic.html#af25d19301087e58c97114890798c974f">move</a>;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classLogic.html#aca3063e6343646567d631ef09312fa26">   18</a></span>&#160;    std::shared_ptr&lt;Controls&gt; <a class="code" href="classLogic.html#aca3063e6343646567d631ef09312fa26">controls</a>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classLogic.html#aec11ee65057e2453cda9dcf6f0fb35a5">   19</a></span>&#160;    std::shared_ptr&lt;Sensors&gt; <a class="code" href="classLogic.html#aec11ee65057e2453cda9dcf6f0fb35a5">sensors</a>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classLogic.html#a8db64056b1d48126be842cfab1dc6f6e">   20</a></span>&#160;    std::shared_ptr&lt;map_service::OccupancyGrid&gt; <a class="code" href="classLogic.html#a8db64056b1d48126be842cfab1dc6f6e">map</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classLogic.html#a5071559d47550c4652ce1a1c4ebbe4ba">   20</a></span>&#160;    std::mutex &amp;<a class="code" href="classLogic.html#a5071559d47550c4652ce1a1c4ebbe4ba">grpcMutex_</a>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> initLogic();</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classLogic.html">Logic</a>(std::shared_ptr&lt;JoyState&gt; joyState, std::shared_ptr&lt;Controls&gt; controls, std::shared_ptr&lt;Sensors&gt; sensors);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> process();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    Mat getOutMat() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> setOutMat(Mat &amp;value);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classLogic.html">Logic</a>(std::shared_ptr&lt;JoyState&gt; joyState,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;          std::shared_ptr&lt;Controls&gt; controls,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;          std::shared_ptr&lt;Sensors&gt; sensors,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;          std::mutex &amp;grpcMutex);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> process();</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> setSrcMat(Mat *<span class="keyword">const</span> value);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    Mat getOutMat() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> setOutMat(Mat &amp;value);</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// LOGIC_H</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> setSrcMat(Mat *<span class="keyword">const</span> value);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// LOGIC_H</span></div>
 <div class="ttc" id="aclassLogic_html"><div class="ttname"><a href="classLogic.html">Logic</a></div><div class="ttdef"><b>Definition:</b> logic.h:11</div></div>
 <div class="ttc" id="aclassLogic_html_a02d3bd893cae5db5f9264e71e6b16720"><div class="ttname"><a href="classLogic.html#a02d3bd893cae5db5f9264e71e6b16720">Logic::joyState</a></div><div class="ttdeci">std::shared_ptr&lt; JoyState &gt; joyState</div><div class="ttdef"><b>Definition:</b> logic.h:15</div></div>
-<div class="ttc" id="aclassLogic_html_a0a4f42508182243ba32cd65596ca35a1"><div class="ttname"><a href="classLogic.html#a0a4f42508182243ba32cd65596ca35a1">Logic::move</a></div><div class="ttdeci">Movements * move</div><div class="ttdef"><b>Definition:</b> logic.h:16</div></div>
 <div class="ttc" id="aclassLogic_html_a2597d0e03cefdf4953e26e0aa073fc16"><div class="ttname"><a href="classLogic.html#a2597d0e03cefdf4953e26e0aa073fc16">Logic::outMat</a></div><div class="ttdeci">Mat * outMat</div><div class="ttdef"><b>Definition:</b> logic.h:13</div></div>
 <div class="ttc" id="aclassLogic_html_a352394ea40e7d017ce276f9bf066380b"><div class="ttname"><a href="classLogic.html#a352394ea40e7d017ce276f9bf066380b">Logic::srcMat</a></div><div class="ttdeci">Mat * srcMat</div><div class="ttdef"><b>Definition:</b> logic.h:12</div></div>
-<div class="ttc" id="aclassLogic_html_a8db64056b1d48126be842cfab1dc6f6e"><div class="ttname"><a href="classLogic.html#a8db64056b1d48126be842cfab1dc6f6e">Logic::map</a></div><div class="ttdeci">std::shared_ptr&lt; map_service::OccupancyGrid &gt; map</div><div class="ttdef"><b>Definition:</b> logic.h:20</div></div>
+<div class="ttc" id="aclassLogic_html_a5071559d47550c4652ce1a1c4ebbe4ba"><div class="ttname"><a href="classLogic.html#a5071559d47550c4652ce1a1c4ebbe4ba">Logic::grpcMutex_</a></div><div class="ttdeci">std::mutex &amp; grpcMutex_</div><div class="ttdef"><b>Definition:</b> logic.h:20</div></div>
 <div class="ttc" id="aclassLogic_html_aca3063e6343646567d631ef09312fa26"><div class="ttname"><a href="classLogic.html#aca3063e6343646567d631ef09312fa26">Logic::controls</a></div><div class="ttdeci">std::shared_ptr&lt; Controls &gt; controls</div><div class="ttdef"><b>Definition:</b> logic.h:18</div></div>
 <div class="ttc" id="aclassLogic_html_aec11ee65057e2453cda9dcf6f0fb35a5"><div class="ttname"><a href="classLogic.html#aec11ee65057e2453cda9dcf6f0fb35a5">Logic::sensors</a></div><div class="ttdeci">std::shared_ptr&lt; Sensors &gt; sensors</div><div class="ttdef"><b>Definition:</b> logic.h:19</div></div>
-<div class="ttc" id="aclassMovements_html"><div class="ttname"><a href="classMovements.html">Movements</a></div><div class="ttdef"><b>Definition:</b> movements.h:29</div></div>
+<div class="ttc" id="aclassLogic_html_af25d19301087e58c97114890798c974f"><div class="ttname"><a href="classLogic.html#af25d19301087e58c97114890798c974f">Logic::move</a></div><div class="ttdeci">ManualControl * move</div><div class="ttdef"><b>Definition:</b> logic.h:16</div></div>
+<div class="ttc" id="aclassManualControl_html"><div class="ttname"><a href="classManualControl.html">ManualControl</a></div><div class="ttdef"><b>Definition:</b> movements.h:29</div></div>
 <div class="ttc" id="amovements_8h_html"><div class="ttname"><a href="movements_8h.html">movements.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

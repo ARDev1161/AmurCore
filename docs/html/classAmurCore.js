@@ -38,7 +38,7 @@ var classAmurCore =
     [ "joyThread", "classAmurCore.html#a5a9951d70a30a42573780e04e7c4fa49", null ],
     [ "loopTime", "classAmurCore.html#a00dec7ab81c485c19cc9b4bfdaed9a90", null ],
     [ "map", "classAmurCore.html#ac52bcd3b8daec8fcc8f82384f63859ec", null ],
-    [ "mapDialog", "classAmurCore.html#a4fa2631e12b1c358bb108ccef0ecb4cb", null ],
+    [ "navigationDialog", "classAmurCore.html#adc3b4c419b6ef2ee615a0de2f2006028", null ],
     [ "network", "classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1", null ],
     [ "outputMat", "classAmurCore.html#a869564b9d2bf9ee54476fbf623574e10", null ],
     [ "repo", "classAmurCore.html#a18b665869f40e1fd1e08efc46aec9090", null ],

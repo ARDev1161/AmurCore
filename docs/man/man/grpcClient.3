@@ -1,4 +1,4 @@
-.TH "grpcClient" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "grpcClient" 3 "Fri Feb 28 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -26,6 +26,12 @@ grpcClient
 .ti -1c
 .RI "void \fBstopStream\fP ()"
 .br
+.ti -1c
+.RI "std::mutex & \fBgetMutex\fP ()"
+.br
+.ti -1c
+.RI "std::mutex & \fBgetMapMutex\fP ()"
+.br
 .in -1c
 .SS "Private Attributes"
 
@@ -51,6 +57,9 @@ grpcClient
 .ti -1c
 .RI "std::mutex \fBmuClient\fP"
 .br
+.ti -1c
+.RI "std::mutex \fBmuMap\fP"
+.br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
@@ -61,6 +70,10 @@ grpcClient
 .SS "grpc::Status grpcClient::DataExchange ()"
 
 .SS "grpc::Status grpcClient::DataStreamExchange ()"
+
+.SS "std::mutex& grpcClient::getMapMutex ()\fC [inline]\fP"
+
+.SS "std::mutex& grpcClient::getMutex ()\fC [inline]\fP"
 
 .SS "grpc::Status grpcClient::MapStream ()"
 
@@ -75,6 +88,8 @@ grpcClient
 .SS "std::shared_ptr<map_service::GetMapResponse> grpcClient::map\fC [private]\fP"
 
 .SS "std::mutex grpcClient::muClient\fC [private]\fP"
+
+.SS "std::mutex grpcClient::muMap\fC [private]\fP"
 
 .SS "std::shared_ptr<Sensors> grpcClient::sensors\fC [private]\fP"
 

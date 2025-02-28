@@ -1,0 +1,4 @@
+<map id="NavDialog::hasPoseChanged" name="NavDialog::hasPoseChanged">
+<area shape="rect" id="node1" title="Проверяет, изменились ли данные положения робота." alt="" coords="5,5,196,32"/>
+<area shape="rect" id="node2" href="$classNavDialog.html#a0dcf645a3424c6d489ec3444ebc801fc" title=" " alt="" coords="244,5,439,32"/>
+</map>

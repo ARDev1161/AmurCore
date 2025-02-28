@@ -1,14 +1,20 @@
 var searchData=
 [
-  ['name_238',['name',['../classRobotEntry.html#a3167380fa3f9c42cfbca60265458eb16',1,'RobotEntry']]],
-  ['network_239',['network',['../classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1',1,'AmurCore']]],
-  ['networkcontroller_240',['NetworkController',['../classNetworkController.html',1,'']]],
-  ['networkcontroller_241',['networkController',['../classConnectDialog.html#ad7a913aea611bc1669f72ca41cf6bf0c',1,'ConnectDialog']]],
-  ['networkcontroller_242',['NetworkController',['../classNetworkController.html#aafda65e278e9ed985e4ebff8af3df932',1,'NetworkController']]],
-  ['networkcontroller_2ecpp_243',['networkcontroller.cpp',['../networkcontroller_8cpp.html',1,'']]],
-  ['networkcontroller_2eh_244',['networkcontroller.h',['../networkcontroller_8h.html',1,'']]],
-  ['no_5fpicture_245',['NO_PICTURE',['../amurcore_8h.html#a6b11015f693203e20fe2b246179bdd7c',1,'amurcore.h']]],
-  ['numcornershor_246',['numCornersHor',['../classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc',1,'CamCalibrate']]],
-  ['numcornersver_247',['numCornersVer',['../classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c',1,'CamCalibrate']]],
-  ['numsquares_248',['numSquares',['../classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199',1,'CamCalibrate']]]
+  ['name_263',['name',['../classRobotEntry.html#a3167380fa3f9c42cfbca60265458eb16',1,'RobotEntry']]],
+  ['navcontainer_264',['navContainer',['../classNavDialog.html#abc607255ee8deedf11d57285b50eabff',1,'NavDialog']]],
+  ['navdialog_265',['NavDialog',['../classNavDialog.html',1,'NavDialog'],['../classNavDialog.html#a51cb31ce6e0a5ddf86d7b3ac295ad2dd',1,'NavDialog::NavDialog()']]],
+  ['navdialog_2ecpp_266',['navdialog.cpp',['../navdialog_8cpp.html',1,'']]],
+  ['navdialog_2eh_267',['navdialog.h',['../navdialog_8h.html',1,'']]],
+  ['navigationdialog_268',['navigationDialog',['../classAmurCore.html#adc3b4c419b6ef2ee615a0de2f2006028',1,'AmurCore']]],
+  ['navigationgoalslist_269',['navigationGoalsList',['../classNavDialog.html#a5aea439b64af544a88ddaf6f41b5117d',1,'NavDialog']]],
+  ['network_270',['network',['../classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1',1,'AmurCore']]],
+  ['networkcontroller_271',['NetworkController',['../classNetworkController.html',1,'']]],
+  ['networkcontroller_272',['networkController',['../classConnectDialog.html#ad7a913aea611bc1669f72ca41cf6bf0c',1,'ConnectDialog']]],
+  ['networkcontroller_273',['NetworkController',['../classNetworkController.html#aafda65e278e9ed985e4ebff8af3df932',1,'NetworkController']]],
+  ['networkcontroller_2ecpp_274',['networkcontroller.cpp',['../networkcontroller_8cpp.html',1,'']]],
+  ['networkcontroller_2eh_275',['networkcontroller.h',['../networkcontroller_8h.html',1,'']]],
+  ['no_5fpicture_276',['NO_PICTURE',['../amurcore_8h.html#a6b11015f693203e20fe2b246179bdd7c',1,'amurcore.h']]],
+  ['numcornershor_277',['numCornersHor',['../classCamCalibrate.html#af97aff3438ecb75e57b181c7d51182cc',1,'CamCalibrate']]],
+  ['numcornersver_278',['numCornersVer',['../classCamCalibrate.html#a6964f38cb5e3360697390e8a767a367c',1,'CamCalibrate']]],
+  ['numsquares_279',['numSquares',['../classCamCalibrate.html#a3de0b8fe4b8015f1d155f21212968199',1,'CamCalibrate']]]
 ];

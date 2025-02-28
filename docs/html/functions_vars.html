@@ -102,6 +102,9 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 
 
 <h3><a id="index_b"></a>- b -</h3><ul>
+<li>baseControlLevel
+: <a class="el" href="classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5">ManualControl</a>
+</li>
 <li>boardSize
 : <a class="el" href="classCamCalibrate.html#a84c8da5b3c38cb733173b54adf8736c6">CamCalibrate</a>
 </li>
@@ -135,11 +138,17 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 <li>clientChannel
 : <a class="el" href="classgrpcClient.html#ac52219f3b5cc9b95c359cd4aaf03ab90">grpcClient</a>
 </li>
+<li>clientPtr
+: <a class="el" href="classNetworkController.html#afa644d37cd33138973499d161c1e354b">NetworkController</a>
+</li>
 <li>clientSockets
 : <a class="el" href="classNetworkController.html#a642e05aa5cf6a6d5aa9b79047c403e04">NetworkController</a>
 </li>
 <li>clientStatus
 : <a class="el" href="classNetworkController.html#a359fa99529c7cae60f37c9fab7c66080">NetworkController</a>
+</li>
+<li>commandsGroupBox
+: <a class="el" href="classNavDialog.html#a06111c8ae6e5fa430acf24dc9a55c835">NavDialog</a>
 </li>
 <li>config
 : <a class="el" href="classAmurCore.html#adb878c20566c0220febb8cffcbd7f364">AmurCore</a>
@@ -157,7 +166,8 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 , <a class="el" href="classgrpcClient.html#ac475afdea22873b98a1a08fc0132ed6c">grpcClient</a>
 , <a class="el" href="classgrpcServer.html#a5cf5d5dae1804adc13e5a11b7508abac">grpcServer</a>
 , <a class="el" href="classLogic.html#aca3063e6343646567d631ef09312fa26">Logic</a>
-, <a class="el" href="classMovements.html#a8c02ce958815da0319e275f50d779ff9">Movements</a>
+, <a class="el" href="classManualControl.html#a95021e840dcae68629f898d6c4e2a7d6">ManualControl</a>
+, <a class="el" href="classNavDialog.html#a73bc0d768c2e19e5082e815b54af15d0">NavDialog</a>
 , <a class="el" href="classNetworkController.html#a621a1f461710c7e4cd8e113c585c4453">NetworkController</a>
 </li>
 </ul>
@@ -180,11 +190,19 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
+<li>goalListWidget
+: <a class="el" href="classNavDialog.html#a6d7f96e1771a7f7100dc574b60e071c9">NavDialog</a>
+</li>
 <li>gray
 : <a class="el" href="classCamCalibrate.html#a9d91db29356055366b012ef708c219fc">CamCalibrate</a>
 </li>
 <li>graySaved
 : <a class="el" href="classCamCalibrate.html#a449a4b4f91e4bdceb07fff277b6402cf">CamCalibrate</a>
+</li>
+<li>grpcMutex_
+: <a class="el" href="classLogic.html#a5071559d47550c4652ce1a1c4ebbe4ba">Logic</a>
+, <a class="el" href="classManualControl.html#a3476cce0a91e39980f28071028e504a6">ManualControl</a>
+, <a class="el" href="classNavDialog.html#af15d3875580fa47e0c070e8ad4286fd7">NavDialog</a>
 </li>
 <li>grpcPort
 : <a class="el" href="classAmurCore.html#a7c8e4ccefd46a31a0c68c9b8e44dc23b">AmurCore</a>
@@ -232,7 +250,7 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 , <a class="el" href="classJoystickDialog.html#a40b7102758de472628b1dbbbd6e4e9b2">JoystickDialog</a>
 , <a class="el" href="classJoystickStateWorker.html#a62f5fb3b2e3746ac4e33bd7a7e799eb7">JoystickStateWorker</a>
 , <a class="el" href="classLogic.html#a02d3bd893cae5db5f9264e71e6b16720">Logic</a>
-, <a class="el" href="classMovements.html#a8d996cc07fcacc1c6c3fe8d3795e45e6">Movements</a>
+, <a class="el" href="classManualControl.html#a4a32de198c23f14a3759acee653938f3">ManualControl</a>
 </li>
 <li>joyStateController
 : <a class="el" href="classJoystickStateWorker.html#a666ba89b677470c404545776be264c9b">JoystickStateWorker</a>
@@ -276,7 +294,7 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 
 <h3><a id="index_l"></a>- l -</h3><ul>
 <li>lastJoyState
-: <a class="el" href="classMovements.html#a7d5940eea7fa127cefba6eb6407f71e9">Movements</a>
+: <a class="el" href="classManualControl.html#a46de0772e24ea35b54f12af2ddb05ac7">ManualControl</a>
 </li>
 <li>lightButton
 : <a class="el" href="structMoveSettings_1_1JoyBindings.html#a9934491caaf8dba9bef14633f1ad159b">MoveSettings::JoyBindings</a>
@@ -305,6 +323,12 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 </li>
 <li>m_dbName
 : <a class="el" href="classRobotRepository.html#adbb88d64e21224db8a3b5ea264e1ce30">RobotRepository</a>
+</li>
+<li>m_firstMapLoaded
+: <a class="el" href="classMapWidget.html#ae4d31a59e214c535a37a425c71762b29">MapWidget</a>
+</li>
+<li>m_goalsWorld
+: <a class="el" href="classMapWidget.html#a5d3bd78610fe7f1c235ba7ea2514d39b">MapWidget</a>
 </li>
 <li>m_joystick
 : <a class="el" href="classVJoystickAdapter.html#a1339ae98c1a5910868fcf3e381fbd5d4">VJoystickAdapter</a>
@@ -372,6 +396,12 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 <li>m_scaleFactor
 : <a class="el" href="classMapWidget.html#ab769801b5d2fc477a18fed83c5ca5bf8">MapWidget</a>
 </li>
+<li>m_showAxis
+: <a class="el" href="classMapWidget.html#a3d1ce6601669895c605d71166fbb45a2">MapWidget</a>
+</li>
+<li>m_showGrid
+: <a class="el" href="classMapWidget.html#abdbd1e2d81feb6527757dd21abc8b19f">MapWidget</a>
+</li>
 <li>m_socket
 : <a class="el" href="classRobotEntry.html#a292c0be196c39bd03dd68c6eaf04e2a6">RobotEntry</a>
 </li>
@@ -379,7 +409,6 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 : <a class="el" href="classAmurCore.html#ac52bcd3b8daec8fcc8f82384f63859ec">AmurCore</a>
 , <a class="el" href="classgrpcClient.html#a33f703d126aca0d2d05e924691a7979d">grpcClient</a>
 , <a class="el" href="classgrpcServer.html#a79e4dc9ecc47ff59177a2705555fd15c">grpcServer</a>
-, <a class="el" href="classLogic.html#a8db64056b1d48126be842cfab1dc6f6e">Logic</a>
 , <a class="el" href="classNetworkController.html#a907844d12effc1a347eaedccd9d2babb">NetworkController</a>
 </li>
 <li>map1
@@ -388,29 +417,30 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 <li>map2
 : <a class="el" href="classCamSettingsHolder.html#aed6e6719d20cbc1b129a433bff632f00">CamSettingsHolder</a>
 </li>
-<li>mapDialog
-: <a class="el" href="classAmurCore.html#a4fa2631e12b1c358bb108ccef0ecb4cb">AmurCore</a>
+<li>mapMutex_
+: <a class="el" href="classNavDialog.html#aa54317f5cbf312c66c9429ae8e65981f">NavDialog</a>
 </li>
 <li>mapPtr
-: <a class="el" href="classMapDialog.html#a1eb3e7e964fcb36f5c900267d0100225">MapDialog</a>
+: <a class="el" href="classNavDialog.html#afd6ce282836b4075d121103fdcd6b6e6">NavDialog</a>
 </li>
 <li>mapWidget
-: <a class="el" href="classMapDialog.html#a3e5fffde56c218eaaaa26d720f41d2c7">MapDialog</a>
+: <a class="el" href="classNavDialog.html#ad6467c8838101b3c76cdbee91941bb40">NavDialog</a>
 </li>
 <li>messageNo
 : <a class="el" href="classNetworkController.html#a35a7e64255858c0df2b0cd59ac555f75">NetworkController</a>
 </li>
 <li>move
-: <a class="el" href="classLogic.html#a0a4f42508182243ba32cd65596ca35a1">Logic</a>
+: <a class="el" href="classLogic.html#af25d19301087e58c97114890798c974f">Logic</a>
 </li>
 <li>moveSettings
-: <a class="el" href="classMovements.html#adc311612dd0ce3b753e1439d53353675">Movements</a>
+: <a class="el" href="classManualControl.html#a2bb585173bb491233c7431165f035c86">ManualControl</a>
 </li>
 <li>muClient
 : <a class="el" href="classgrpcClient.html#a9a8a26f672c439bd439b62f6f648f882">grpcClient</a>
 </li>
 <li>muMap
-: <a class="el" href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">grpcServer</a>
+: <a class="el" href="classgrpcClient.html#adedccee3eeb9acb56879a98839adfa4e">grpcClient</a>
+, <a class="el" href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">grpcServer</a>
 </li>
 <li>muServer
 : <a class="el" href="classgrpcServer.html#a33fdb8b89a90a900af52918b676704be">grpcServer</a>
@@ -422,6 +452,15 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 
 
 <h3><a id="index_n"></a>- n -</h3><ul>
+<li>navContainer
+: <a class="el" href="classNavDialog.html#abc607255ee8deedf11d57285b50eabff">NavDialog</a>
+</li>
+<li>navigationDialog
+: <a class="el" href="classAmurCore.html#adc3b4c419b6ef2ee615a0de2f2006028">AmurCore</a>
+</li>
+<li>navigationGoalsList
+: <a class="el" href="classNavDialog.html#a5aea439b64af544a88ddaf6f41b5117d">NavDialog</a>
+</li>
 <li>network
 : <a class="el" href="classAmurCore.html#aeab5659f5cc6e6664d69f3ca73254bc1">AmurCore</a>
 </li>
@@ -465,13 +504,13 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 : <a class="el" href="classCamCalibrate.html#aea222818dedc18fe7feeefbd5d6c4b35">CamCalibrate</a>
 </li>
 <li>previousData
-: <a class="el" href="classMapDialog.html#a9e39fbb614e7ae57227b5d74cca04134">MapDialog</a>
+: <a class="el" href="classNavDialog.html#a7026d69bd44b3fbc57fdeae5283fc2de">NavDialog</a>
 </li>
 <li>previousHeight
-: <a class="el" href="classMapDialog.html#a4d6911bbff179c8ebfbe4ad551b12f73">MapDialog</a>
+: <a class="el" href="classNavDialog.html#a85813f32e307a2f3785c9ad46714db7b">NavDialog</a>
 </li>
 <li>previousWidth
-: <a class="el" href="classMapDialog.html#aab17c235ab75f56c6d5e074648b5b3e4">MapDialog</a>
+: <a class="el" href="classNavDialog.html#a8817ef1d96a4af41b999e5a27de4d1e9">NavDialog</a>
 </li>
 </ul>
 
@@ -506,10 +545,11 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 , <a class="el" href="classgrpcClient.html#af96cf7a9d8d35b362daadb7e1f16a977">grpcClient</a>
 , <a class="el" href="classgrpcServer.html#a3c7d2446b6393bec78f344b5cdd93451">grpcServer</a>
 , <a class="el" href="classLogic.html#aec11ee65057e2453cda9dcf6f0fb35a5">Logic</a>
+, <a class="el" href="classNavDialog.html#a6b603b8ac0c7e5d81ddf5560ec89d8c4">NavDialog</a>
 , <a class="el" href="classNetworkController.html#af44f45ca22288ad10f3c140aab4e0044">NetworkController</a>
 </li>
-<li>service
-: <a class="el" href="classNetworkController.html#a2182e367e953a8634b64e69817e8a37b">NetworkController</a>
+<li>serverPtr
+: <a class="el" href="classNetworkController.html#ac566f1fd44423bf6130033778f67212f">NetworkController</a>
 </li>
 <li>sourceMat
 : <a class="el" href="classAmurCore.html#a66c9bcc7556e86aab98f23ffb499c280">AmurCore</a>
@@ -541,7 +581,7 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 : <a class="el" href="classCamCalibrate.html#a5a8ae788de2054d2c020297a6810adc2">CamCalibrate</a>
 </li>
 <li>timer
-: <a class="el" href="classMapDialog.html#af8e5a9fabf43eca6df849f1ddad21085">MapDialog</a>
+: <a class="el" href="classNavDialog.html#a7f81a1db5fb1dcecde63a1e406d3d4b4">NavDialog</a>
 </li>
 <li>tmrTimer
 : <a class="el" href="classAmurCore.html#a583dc21e69c49f636232b7c08dcb644c">AmurCore</a>
@@ -562,7 +602,7 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 , <a class="el" href="classCamCalibrate.html#a6a2cccc29a46f11c71cb0cdfedd9ce4b">CamCalibrate</a>
 , <a class="el" href="classConnectDialog.html#aed99c6af142a9ac3824a4360bee47dd5">ConnectDialog</a>
 , <a class="el" href="classJoystickDialog.html#a12abc9b92206c4c6a7a05b8db0ae6336">JoystickDialog</a>
-, <a class="el" href="classMapDialog.html#a3e2b8b187ed2f570caca8356c4039b8f">MapDialog</a>
+, <a class="el" href="classNavDialog.html#aaacfb5ac9bef10d64fcb029c33fc67a5">NavDialog</a>
 , <a class="el" href="classRobotInfoDialog.html#a6701a007085e195f541a404865c7857b">RobotInfoDialog</a>
 </li>
 <li>undistortedMat
@@ -577,6 +617,9 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 <h3><a id="index_w"></a>- w -</h3><ul>
 <li>w
 : <a class="el" href="structPoseQuaternion.html#a185c250cd8ed3d9e157bf92abb521338">PoseQuaternion</a>
+</li>
+<li>waypointsGroupBox
+: <a class="el" href="classNavDialog.html#a7ad9bef545e02ac74fc621e3c12b4c12">NavDialog</a>
 </li>
 </ul>
 

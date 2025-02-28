@@ -1,0 +1,28 @@
+var classNavDialog =
+[
+    [ "NavDialog", "classNavDialog.html#a51cb31ce6e0a5ddf86d7b3ac295ad2dd", null ],
+    [ "~NavDialog", "classNavDialog.html#a332b09972d45325ce05b7648e64111bc", null ],
+    [ "clearWaypoints", "classNavDialog.html#ad8672ae33870923e70cf0aa8720e049e", null ],
+    [ "followWaypoints", "classNavDialog.html#ae1f965b0e785a2cf08c33341a7165570", null ],
+    [ "hasMapChanged", "classNavDialog.html#aec120c5c4c400531b613d746db9427f1", null ],
+    [ "hasPoseChanged", "classNavDialog.html#ab98567d957d65272dde340557c837d75", null ],
+    [ "mouseMoved", "classNavDialog.html#a60450d6f49af01e7e5dc69d0097b254a", null ],
+    [ "onMapUpdated", "classNavDialog.html#ac0971a44daef15c560f8e5f4f3b6502f", null ],
+    [ "poseToQuaternion", "classNavDialog.html#a0dcf645a3424c6d489ec3444ebc801fc", null ],
+    [ "commandsGroupBox", "classNavDialog.html#a06111c8ae6e5fa430acf24dc9a55c835", null ],
+    [ "controls", "classNavDialog.html#a73bc0d768c2e19e5082e815b54af15d0", null ],
+    [ "goalListWidget", "classNavDialog.html#a6d7f96e1771a7f7100dc574b60e071c9", null ],
+    [ "grpcMutex_", "classNavDialog.html#af15d3875580fa47e0c070e8ad4286fd7", null ],
+    [ "mapMutex_", "classNavDialog.html#aa54317f5cbf312c66c9429ae8e65981f", null ],
+    [ "mapPtr", "classNavDialog.html#afd6ce282836b4075d121103fdcd6b6e6", null ],
+    [ "mapWidget", "classNavDialog.html#ad6467c8838101b3c76cdbee91941bb40", null ],
+    [ "navContainer", "classNavDialog.html#abc607255ee8deedf11d57285b50eabff", null ],
+    [ "navigationGoalsList", "classNavDialog.html#a5aea439b64af544a88ddaf6f41b5117d", null ],
+    [ "previousData", "classNavDialog.html#a7026d69bd44b3fbc57fdeae5283fc2de", null ],
+    [ "previousHeight", "classNavDialog.html#a85813f32e307a2f3785c9ad46714db7b", null ],
+    [ "previousWidth", "classNavDialog.html#a8817ef1d96a4af41b999e5a27de4d1e9", null ],
+    [ "sensors", "classNavDialog.html#a6b603b8ac0c7e5d81ddf5560ec89d8c4", null ],
+    [ "timer", "classNavDialog.html#a7f81a1db5fb1dcecde63a1e406d3d4b4", null ],
+    [ "ui", "classNavDialog.html#aaacfb5ac9bef10d64fcb029c33fc67a5", null ],
+    [ "waypointsGroupBox", "classNavDialog.html#a7ad9bef545e02ac74fc621e3c12b4c12", null ]
+];

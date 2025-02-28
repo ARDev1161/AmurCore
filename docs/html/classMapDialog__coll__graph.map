@@ -1,6 +1,0 @@
-<map id="MapDialog" name="MapDialog">
-<area shape="rect" id="node1" title=" " alt="" coords="13,712,156,936"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,352,73,429"/>
-<area shape="rect" id="node3" href="$classMapWidget.html" title=" " alt="" coords="97,132,262,649"/>
-<area shape="rect" id="node4" title=" " alt="" coords="143,5,215,83"/>
-</map>

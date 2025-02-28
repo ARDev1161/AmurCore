@@ -1,4 +1,4 @@
-.TH "MapWidget" 3 "Sat Feb 1 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "MapWidget" 3 "Fri Feb 28 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,6 +10,29 @@ MapWidget
 \fC#include <mapwidget\&.h>\fP
 .PP
 Inherits QWidget, and QWidget\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBcenterOnRobot\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetShowGrid\fP (bool enable)"
+.br
+.ti -1c
+.RI "void \fBsetShowAxis\fP (bool enable)"
+.br
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBgoalAdded\fP (const QPointF &goalWorld, int goalIndex)"
+.br
+.ti -1c
+.RI "void \fBmouseMoved\fP (double x, double y)"
+.br
+.in -1c
 .SS "Public Member Functions"
 
 .in +1c
@@ -20,7 +43,7 @@ Inherits QWidget, and QWidget\&.
 .RI "void \fBsetMapData\fP (const std::vector< int8_t > &data, int width, int height)"
 .br
 .ti -1c
-.RI "\fBMapWidget\fP (QWidget *parent=nullptr)"
+.RI "\fBMapWidget\fP (std::shared_ptr< std::vector< QPointF >> navListGoals, QWidget *parent=nullptr)"
 .br
 .ti -1c
 .RI "\fB~MapWidget\fP ()"
@@ -40,6 +63,9 @@ Inherits QWidget, and QWidget\&.
 .br
 .ti -1c
 .RI "void \fBsetRobotPose\fP (double posX, double posY, \fBPoseQuaternion\fP quaternion)"
+.br
+.ti -1c
+.RI "const std::shared_ptr< std::vector< QPointF > > & \fBgetGoals\fP () const"
 .br
 .in -1c
 .SS "Protected Member Functions"
@@ -80,6 +106,30 @@ Inherits QWidget, and QWidget\&.
 .RI "void \fBupdateScaleOnResize\fP (int widgetWidth, int widgetHeight)"
 .br
 .RI "Обновляет масштаб и сдвиг при изменении размера виджета\&. "
+.ti -1c
+.RI "QPointF \fBwidgetToWorld\fP (const QPointF &point) const"
+.br
+.ti -1c
+.RI "QPointF \fBwidgetToMap\fP (const QPointF &p) const"
+.br
+.ti -1c
+.RI "QPointF \fBmapToWidget\fP (const QPointF &mapPt) const"
+.br
+.ti -1c
+.RI "void \fBdrawGrid\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawAxis\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawRobot\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawWaypoints\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBfitMapToWidget\fP ()"
+.br
 .in -1c
 .SS "Private Attributes"
 
@@ -88,7 +138,16 @@ Inherits QWidget, and QWidget\&.
 .RI "QImage \fBm_mapImage\fP"
 .br
 .ti -1c
+.RI "bool \fBm_showGrid\fP = true"
+.br
+.ti -1c
+.RI "bool \fBm_showAxis\fP = true"
+.br
+.ti -1c
 .RI "std::mutex \fBm_mutex\fP"
+.br
+.ti -1c
+.RI "bool \fBm_firstMapLoaded\fP = false"
 .br
 .ti -1c
 .RI "double \fBm_originX\fP"
@@ -129,17 +188,40 @@ Inherits QWidget, and QWidget\&.
 .ti -1c
 .RI "double \fBm_robot_theta\fP"
 .br
+.ti -1c
+.RI "std::shared_ptr< std::vector< QPointF > > \fBm_goalsWorld\fP"
+.br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "MapWidget::MapWidget (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
 
-.SS "MapWidget::MapWidget (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+.SS "MapWidget::MapWidget (std::shared_ptr< std::vector< QPointF >> navListGoals, QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
 
 .SS "MapWidget::~MapWidget ()"
 
 .SH "Member Function Documentation"
 .PP 
+.SS "void MapWidget::centerOnRobot ()\fC [slot]\fP"
+
+.SS "void MapWidget::drawAxis (QPainter & painter)\fC [private]\fP"
+
+.SS "void MapWidget::drawGrid (QPainter & painter)\fC [private]\fP"
+
+.SS "void MapWidget::drawRobot (QPainter & painter)\fC [private]\fP"
+
+.SS "void MapWidget::drawWaypoints (QPainter & painter)\fC [private]\fP"
+
+.SS "void MapWidget::fitMapToWidget ()\fC [private]\fP"
+
+.SS "const std::shared_ptr< std::vector< QPointF > > & MapWidget::getGoals () const"
+
+.SS "void MapWidget::goalAdded (const QPointF & goalWorld, int goalIndex)\fC [signal]\fP"
+
+.SS "QPointF MapWidget::mapToWidget (const QPointF & mapPt) const\fC [private]\fP"
+
+.SS "void MapWidget::mouseMoved (double x, double y)\fC [signal]\fP"
+
 .SS "void MapWidget::mouseMoveEvent (QMouseEvent * event)\fC [override]\fP, \fC [protected]\fP"
 
 .PP
@@ -228,6 +310,10 @@ Inherits QWidget, and QWidget\&.
 
 .SS "void MapWidget::setRobotPose (double posX, double posY, \fBPoseQuaternion\fP quaternion)"
 
+.SS "void MapWidget::setShowAxis (bool enable)\fC [slot]\fP"
+
+.SS "void MapWidget::setShowGrid (bool enable)\fC [slot]\fP"
+
 .SS "void MapWidget::updateScaleOnResize (int widgetWidth, int widgetHeight)\fC [private]\fP"
 
 .PP
@@ -243,8 +329,16 @@ Inherits QWidget, and QWidget\&.
 .RE
 .PP
 
+.SS "QPointF MapWidget::widgetToMap (const QPointF & p) const\fC [private]\fP"
+
+.SS "QPointF MapWidget::widgetToWorld (const QPointF & point) const\fC [private]\fP"
+
 .SH "Member Data Documentation"
 .PP 
+.SS "bool MapWidget::m_firstMapLoaded = false\fC [private]\fP"
+
+.SS "std::shared_ptr<std::vector<QPointF> > MapWidget::m_goalsWorld\fC [private]\fP"
+
 .SS "QPoint MapWidget::m_lastMousePos\fC [private]\fP"
 
 .SS "QImage MapWidget::m_mapImage\fC [private]\fP"
@@ -274,6 +368,10 @@ Inherits QWidget, and QWidget\&.
 .SS "QPixmap MapWidget::m_robotPixmap\fC [private]\fP"
 
 .SS "double MapWidget::m_scaleFactor\fC [private]\fP"
+
+.SS "bool MapWidget::m_showAxis = true\fC [private]\fP"
+
+.SS "bool MapWidget::m_showGrid = true\fC [private]\fP"
 
 
 .SH "Author"

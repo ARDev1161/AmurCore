@@ -1,0 +1,102 @@
+.TH "ManualControl" 3 "Fri Feb 28 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ManualControl
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <movements\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBManualControl\fP (std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP, std::shared_ptr< Controls > \fBcontrols\fP, std::mutex &grpcMutex, Base::BaseControl::ControlLevel \fBbaseControlLevel\fP=Base::BaseControl_ControlLevel_RAW)"
+.br
+.ti -1c
+.RI "int \fBupdate\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetBaseControlLevel\fP (Base::BaseControl::ControlLevel newBaseControlLevel)"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcheckChangeRelayButton\fP (int buttonNumber)"
+.br
+.ti -1c
+.RI "void \fBcheckChangeLightButton\fP (int buttonNumber)"
+.br
+.ti -1c
+.RI "int \fBwheelRawProcess\fP (int xAxis, int yAxis)"
+.br
+.ti -1c
+.RI "int \fBbaseControlProcess\fP (int xAxis, int yAxis)"
+.br
+.ti -1c
+.RI "int \fBmoveCameraProcess\fP (int xAxis, int yAxis)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::shared_ptr< Controls > \fBcontrols\fP"
+.br
+.ti -1c
+.RI "std::mutex & \fBgrpcMutex_\fP"
+.br
+.ti -1c
+.RI "\fBMoveSettings\fP \fBmoveSettings\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBJoyState\fP > \fBjoyState\fP"
+.br
+.ti -1c
+.RI "\fBJoyState\fP \fBlastJoyState\fP"
+.br
+.ti -1c
+.RI "Base::BaseControl::ControlLevel \fBbaseControlLevel\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ManualControl::ManualControl (std::shared_ptr< \fBJoyState\fP > joyState, std::shared_ptr< Controls > controls, std::mutex & grpcMutex, Base::BaseControl::ControlLevel baseControlLevel = \fCBase::BaseControl_ControlLevel_RAW\fP)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "int ManualControl::baseControlProcess (int xAxis, int yAxis)\fC [private]\fP"
+
+.SS "void ManualControl::checkChangeLightButton (int buttonNumber)\fC [private]\fP"
+
+.SS "void ManualControl::checkChangeRelayButton (int buttonNumber)\fC [private]\fP"
+
+.SS "int ManualControl::moveCameraProcess (int xAxis, int yAxis)\fC [private]\fP"
+
+.SS "void ManualControl::setBaseControlLevel (Base::BaseControl::ControlLevel newBaseControlLevel)"
+
+.SS "int ManualControl::update ()"
+
+.SS "int ManualControl::wheelRawProcess (int xAxis, int yAxis)\fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "Base::BaseControl::ControlLevel ManualControl::baseControlLevel\fC [private]\fP"
+
+.SS "std::shared_ptr<Controls> ManualControl::controls\fC [private]\fP"
+
+.SS "std::mutex& ManualControl::grpcMutex_\fC [private]\fP"
+
+.SS "std::shared_ptr<\fBJoyState\fP> ManualControl::joyState\fC [private]\fP"
+
+.SS "\fBJoyState\fP ManualControl::lastJoyState\fC [private]\fP"
+
+.SS "\fBMoveSettings\fP ManualControl::moveSettings\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

@@ -1,6 +1,6 @@
 <map id="Logic" name="Logic">
-<area shape="rect" id="node1" title=" " alt="" coords="123,645,226,869"/>
-<area shape="rect" id="node2" href="$classMovements.html" title=" " alt="" coords="81,417,268,583"/>
+<area shape="rect" id="node1" title=" " alt="" coords="123,704,226,928"/>
+<area shape="rect" id="node2" href="$classManualControl.html" title=" " alt="" coords="81,417,268,641"/>
 <area shape="rect" id="node3" href="$structMoveSettings.html" title=" " alt="" coords="43,219,146,296"/>
 <area shape="rect" id="node4" href="$structMoveSettings_1_1JoyBindings.html" title=" " alt="" coords="5,5,184,97"/>
 <area shape="rect" id="node5" href="$structJoyState.html" title=" " alt="" coords="170,160,299,355"/>

@@ -2,7 +2,7 @@ var movements_8h =
 [
     [ "MoveSettings", "structMoveSettings.html", "structMoveSettings" ],
     [ "JoyBindings", "structMoveSettings_1_1JoyBindings.html", "structMoveSettings_1_1JoyBindings" ],
-    [ "Movements", "classMovements.html", "classMovements" ],
+    [ "ManualControl", "classManualControl.html", "classManualControl" ],
     [ "CAM_X_AXIS", "movements_8h.html#a36987dadc2e2f30bb614099b868db646", null ],
     [ "CAM_Y_AXIS", "movements_8h.html#a014649cf4df593a13d54c7592eb57f86", null ],
     [ "DIVIDER", "movements_8h.html#aec38b9acf8f1f6ba185e5cefb8bd06a3", null ],

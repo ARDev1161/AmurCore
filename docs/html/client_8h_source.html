@@ -112,26 +112,33 @@ $(document).ready(function(){initNavTree('client_8h_source.html',''); initResiza
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classgrpcClient.html#a9ae335b34c0043d59d3c04881c1ababc">   23</a></span>&#160;    <span class="keywordtype">bool</span> stoppedStream = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classgrpcClient.html#a9a8a26f672c439bd439b62f6f648f882">   25</a></span>&#160;    std::mutex <a class="code" href="classgrpcClient.html#a9a8a26f672c439bd439b62f6f648f882">muClient</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classgrpcClient.html">grpcClient</a>(std::shared_ptr&lt;grpc::Channel&gt; channel,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;               std::shared_ptr&lt;Controls&gt; controlsPtr,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;               std::shared_ptr&lt;Sensors&gt; sensorsPtr,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;               std::shared_ptr&lt;map_service::GetMapResponse&gt; mapPtr);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    grpc::Status DataExchange();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    grpc::Status DataStreamExchange();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    grpc::Status MapStream();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> stopStream();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classgrpcClient.html#adedccee3eeb9acb56879a98839adfa4e">   26</a></span>&#160;    std::mutex <a class="code" href="classgrpcClient.html#adedccee3eeb9acb56879a98839adfa4e">muMap</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classgrpcClient.html">grpcClient</a>(std::shared_ptr&lt;grpc::Channel&gt; channel,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;               std::shared_ptr&lt;Controls&gt; controlsPtr,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;               std::shared_ptr&lt;Sensors&gt; sensorsPtr,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;               std::shared_ptr&lt;map_service::GetMapResponse&gt; mapPtr);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    grpc::Status DataExchange();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    grpc::Status DataStreamExchange();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    grpc::Status MapStream();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> stopStream();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// GCLIENT_H</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classgrpcClient.html#a1cb6076dc439cf31d55750e178f6319f">   39</a></span>&#160;    std::mutex&amp; <a class="code" href="classgrpcClient.html#a1cb6076dc439cf31d55750e178f6319f">getMutex</a>() { <span class="keywordflow">return</span> muClient; }</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classgrpcClient.html#a9eebc26e06a3d858a1e5c0975a204b89">   40</a></span>&#160;    std::mutex&amp; <a class="code" href="classgrpcClient.html#a9eebc26e06a3d858a1e5c0975a204b89">getMapMutex</a>() { <span class="keywordflow">return</span> muMap; }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// GCLIENT_H</span></div>
 <div class="ttc" id="aclassgrpcClient_html"><div class="ttname"><a href="classgrpcClient.html">grpcClient</a></div><div class="ttdef"><b>Definition:</b> client.h:15</div></div>
+<div class="ttc" id="aclassgrpcClient_html_a1cb6076dc439cf31d55750e178f6319f"><div class="ttname"><a href="classgrpcClient.html#a1cb6076dc439cf31d55750e178f6319f">grpcClient::getMutex</a></div><div class="ttdeci">std::mutex &amp; getMutex()</div><div class="ttdef"><b>Definition:</b> client.h:39</div></div>
 <div class="ttc" id="aclassgrpcClient_html_a219ec11936de3dde4ed59917c65aeed2"><div class="ttname"><a href="classgrpcClient.html#a219ec11936de3dde4ed59917c65aeed2">grpcClient::stub_</a></div><div class="ttdeci">std::unique_ptr&lt; ServerOnRobot::Stub &gt; stub_</div><div class="ttdef"><b>Definition:</b> client.h:16</div></div>
 <div class="ttc" id="aclassgrpcClient_html_a33f703d126aca0d2d05e924691a7979d"><div class="ttname"><a href="classgrpcClient.html#a33f703d126aca0d2d05e924691a7979d">grpcClient::map</a></div><div class="ttdeci">std::shared_ptr&lt; map_service::GetMapResponse &gt; map</div><div class="ttdef"><b>Definition:</b> client.h:21</div></div>
 <div class="ttc" id="aclassgrpcClient_html_a9a8a26f672c439bd439b62f6f648f882"><div class="ttname"><a href="classgrpcClient.html#a9a8a26f672c439bd439b62f6f648f882">grpcClient::muClient</a></div><div class="ttdeci">std::mutex muClient</div><div class="ttdef"><b>Definition:</b> client.h:25</div></div>
+<div class="ttc" id="aclassgrpcClient_html_a9eebc26e06a3d858a1e5c0975a204b89"><div class="ttname"><a href="classgrpcClient.html#a9eebc26e06a3d858a1e5c0975a204b89">grpcClient::getMapMutex</a></div><div class="ttdeci">std::mutex &amp; getMapMutex()</div><div class="ttdef"><b>Definition:</b> client.h:40</div></div>
 <div class="ttc" id="aclassgrpcClient_html_ac475afdea22873b98a1a08fc0132ed6c"><div class="ttname"><a href="classgrpcClient.html#ac475afdea22873b98a1a08fc0132ed6c">grpcClient::controls</a></div><div class="ttdeci">std::shared_ptr&lt; Controls &gt; controls</div><div class="ttdef"><b>Definition:</b> client.h:19</div></div>
 <div class="ttc" id="aclassgrpcClient_html_ac52219f3b5cc9b95c359cd4aaf03ab90"><div class="ttname"><a href="classgrpcClient.html#ac52219f3b5cc9b95c359cd4aaf03ab90">grpcClient::clientChannel</a></div><div class="ttdeci">std::shared_ptr&lt; grpc::Channel &gt; clientChannel</div><div class="ttdef"><b>Definition:</b> client.h:17</div></div>
+<div class="ttc" id="aclassgrpcClient_html_adedccee3eeb9acb56879a98839adfa4e"><div class="ttname"><a href="classgrpcClient.html#adedccee3eeb9acb56879a98839adfa4e">grpcClient::muMap</a></div><div class="ttdeci">std::mutex muMap</div><div class="ttdef"><b>Definition:</b> client.h:26</div></div>
 <div class="ttc" id="aclassgrpcClient_html_af96cf7a9d8d35b362daadb7e1f16a977"><div class="ttname"><a href="classgrpcClient.html#af96cf7a9d8d35b362daadb7e1f16a977">grpcClient::sensors</a></div><div class="ttdeci">std::shared_ptr&lt; Sensors &gt; sensors</div><div class="ttdef"><b>Definition:</b> client.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
