@@ -34,7 +34,7 @@ static bool operator==(const PoseQuaternion& lhs, const PoseQuaternion& rhs) {
 class MapWidget : public QWidget {
   Q_OBJECT
 public:
-  explicit MapWidget(QWidget* parent = nullptr);
+  explicit MapWidget(std::shared_ptr<std::vector<QPointF>> navListGoals, QWidget* parent = nullptr);
     ~MapWidget();
 
     /**
@@ -56,6 +56,19 @@ public:
     void setRobotOrientation(double yaw);
 
     void setRobotPose(double posX, double posY, PoseQuaternion quaternion);
+
+    // Возвращает список целей (в мировых координатах)
+    const std::shared_ptr<std::vector<QPointF> > &getGoals() const;
+
+signals:
+    // Можно, например, сигнализировать о добавлении цели
+    void goalAdded(const QPointF &goalWorld, int goalIndex);    
+    void mouseMoved(double x, double y);
+
+public slots:
+    void centerOnRobot();
+    void setShowGrid(bool enable);
+    void setShowAxis(bool enable);
 
 protected:
     /**
@@ -100,8 +113,22 @@ private:
      */
     void updateScaleOnResize(int widgetWidth, int widgetHeight);
 
+    QPointF widgetToWorld(const QPointF &point) const;
+    QPointF widgetToMap(const QPointF &p) const;
+    QPointF mapToWidget(const QPointF &mapPt) const;
+    bool m_showGrid = true;
+    bool m_showAxis = true;
+
+    void drawGrid(QPainter &painter);
+    void drawAxis(QPainter &painter);
+    void drawRobot(QPainter &painter);
+    void drawWaypoints(QPainter &painter);
+
+    void fitMapToWidget();
+
     QImage m_mapImage;      // Изображение карты
     std::mutex m_mutex;     // Мьютекс для защиты данных карты
+    bool m_firstMapLoaded = false;  // Флаг, была ли карта уже загружена
 
     double m_originX;
     double m_originY;
@@ -120,6 +147,9 @@ private:
     float m_robot_x;
     float m_robot_y;
     double m_robot_theta; // Ориентация в радианах
+
+    // Список целей (world coordinates)
+    std::shared_ptr<std::vector<QPointF>> m_goalsWorld;
 };
 
 #endif // MAPWIDGET_H

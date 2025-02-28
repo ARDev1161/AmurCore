@@ -54,10 +54,10 @@ grpc::Status grpcClient::DataStreamExchange()
 
     while(!stoppedStream && (clientChannel->GetState(true) == 2) )
     {
+        std::unique_lock<std::mutex> lock(muClient);
+
         // Write controls
         stream->Write(*controls);
-
-        std::unique_lock<std::mutex> lock(muClient);
 
         // Read sensors & write to protos
         stream->Read(sensors.get());
@@ -90,10 +90,10 @@ grpc::Status grpcClient::MapStream()
 
     while(!stoppedStream && (clientChannel->GetState(true) == 2) )
     {
+        std::unique_lock<std::mutex> lock(muMap);
+
         // Request map
         stream->Write(request);
-
-        std::unique_lock<std::mutex> lock(muClient);
 
         // Read map
         stream->Read(map.get());
@@ -104,7 +104,7 @@ grpc::Status grpcClient::MapStream()
     grpc::Status status = stream->Finish();
     if (!status.ok()) {
       std::cout << "Error " << status.error_code() << " : " << status.error_message() << std::endl;
-      std::cout << "DataStreamExchange rpc failed." << std::endl;
+      std::cout << "MapStream rpc failed." << std::endl;
     }
 
     stoppedStream = false;

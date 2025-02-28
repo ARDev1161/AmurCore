@@ -38,12 +38,7 @@ void AmurCore::initialize()
 
     camHolder = new CamSettingsHolder();
     joyState = std::make_shared<JoyState>();
-
     joystickDialog = new JoystickDialog(joyState, this);
-    mapDialog = new MapDialog(map, this);
-    robotInfoDialog = new RobotInfoDialog();
-
-    amurLogic = new Logic(joyState, controls, sensors);
 
     repo = std::make_shared<RobotRepository>("myRobots.db");
     if (!repo->openDatabase()) {
@@ -54,6 +49,13 @@ void AmurCore::initialize()
     network->runArpingService(arpPort, grpcPort, arpHeader); // Start listening for initial arp message from robots
     network->runServer(address_mask); // Start AmurCore gRPC server
     connectDialog = new ConnectDialog(this, network, repo);
+
+    std::mutex& mapMutex = network->getServerInstance()->getMapMutex(); // MapStream mutex
+    std::mutex& grpcMutex = network->getServerInstance()->getMutex(); // DataStreamExchange mutex
+
+    amurLogic = new Logic(joyState, controls, sensors, grpcMutex);
+    navigationDialog = new NavDialog(controls, sensors, map, mapMutex, grpcMutex, this);
+    robotInfoDialog = new RobotInfoDialog();
 
     connMenu();
     startTimer();
@@ -73,7 +75,7 @@ void AmurCore::connMenu()
     connect(ui->action_Reboot, SIGNAL(triggered()), this, SLOT(robotReboot()));
     connect(ui->action_Halt, SIGNAL(triggered()), this, SLOT(robotHalt()));
     connect(ui->actionCamera, SIGNAL(triggered()), this, SLOT(calibDialogOpen()));
-    connect(ui->action_Map, SIGNAL(triggered()), this, SLOT(mapDialogOpen()));
+    connect(ui->action_Navigation, SIGNAL(triggered()), this, SLOT(mapDialogOpen()));
     connect(ui->actionRobot_Info, SIGNAL(triggered()), this, SLOT(robotInfoDialogOpen()));
 }
 
@@ -108,12 +110,12 @@ void AmurCore::calibDialogOpen()
 
 void AmurCore::mapDialogOpen()
 {
-    mapDialog->exec();
+    navigationDialog->show(); // Немодальное открытие
 }
 
 void AmurCore::robotInfoDialogOpen()
 {
-    robotInfoDialog->exec();
+    robotInfoDialog->show(); // Немодальное открытие
 }
 
 void AmurCore::resizeEvent(QResizeEvent *event)
@@ -163,9 +165,15 @@ void AmurCore::startCap()
 void AmurCore::frameUpdate()
 {
     if(capture.read(sourceMat)){
-        worker();
+        cv::flip(sourceMat, sourceMat, 1);
+    //    cv::resize(sourceMat, sourceMat, Size(320, 240));
+        undistortMat(sourceMat, undistortedMat);
+        amurLogic->setSrcMat(&undistortedMat);
+        outputMat = amurLogic->getOutMat();
+        outMat(sourceMat);
     }
 
+    worker();
     ui->statusbar->showMessage(statusMessage);
 }
 
@@ -189,15 +197,5 @@ void AmurCore::undistortMat(Mat &inMat, Mat &outMat)
 
 void AmurCore::worker()
 {
-    cv::flip(sourceMat, sourceMat, 1);
-//    cv::resize(sourceMat, sourceMat, Size(320, 240));
-
-    undistortMat(sourceMat, undistortedMat);
-
-    amurLogic->setSrcMat(&undistortedMat);
-    outputMat = amurLogic->getOutMat();
-
-    outMat(sourceMat);
-
     amurLogic->process();
 }

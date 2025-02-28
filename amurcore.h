@@ -21,6 +21,7 @@
 
 #undef main
 #include "pch.h"
+#include <mutex>
 
 #define NO_PICTURE "./data/images/no_picture.jpeg"
 #define SOURCE_STREAM 0
@@ -55,7 +56,7 @@ class AmurCore : public QMainWindow
 
     ConnectDialog *connectDialog;
     JoystickDialog *joystickDialog;
-    MapDialog *mapDialog;
+    NavDialog *navigationDialog;
     RobotInfoDialog *robotInfoDialog;
 
     std::shared_ptr<Controls> controls;

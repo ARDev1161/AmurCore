@@ -13,15 +13,18 @@ class Logic
     Mat *outMat;
 
     std::shared_ptr<JoyState> joyState;
-    Movements *move;
+    ManualControl *move;
 
     std::shared_ptr<Controls> controls;
     std::shared_ptr<Sensors> sensors;
-    std::shared_ptr<map_service::OccupancyGrid> map;
+    std::mutex &grpcMutex_;
 
     void initLogic();
 public:
-    Logic(std::shared_ptr<JoyState> joyState, std::shared_ptr<Controls> controls, std::shared_ptr<Sensors> sensors);
+    Logic(std::shared_ptr<JoyState> joyState,
+          std::shared_ptr<Controls> controls,
+          std::shared_ptr<Sensors> sensors,
+          std::mutex &grpcMutex);
 
     void process();
 

@@ -98,7 +98,7 @@
     <addaction name="action_Halt"/>
     <addaction name="separator"/>
     <addaction name="actionCamera"/>
-    <addaction name="action_Map"/>
+    <addaction name="action_Navigation"/>
     <addaction name="actionRobot_Info"/>
    </widget>
    <widget class="QMenu" name="menu_About">
@@ -157,9 +157,9 @@
     <string>&amp;About</string>
    </property>
   </action>
-  <action name="action_Map">
+  <action name="action_Navigation">
    <property name="text">
-    <string>&amp;Map</string>
+    <string>&amp;Navigation</string>
    </property>
   </action>
   <action name="actionRobot_Info">

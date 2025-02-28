@@ -1,13 +1,18 @@
 #include "movements.h"
 
-Movements::Movements(std::shared_ptr<JoyState> joyState, std::shared_ptr<Controls> controls):
+ManualControl::ManualControl(std::shared_ptr<JoyState> joyState,
+                     std::shared_ptr<Controls> controls,
+                     std::mutex &grpcMutex,
+                     Base::BaseControl::ControlLevel baseControlLevel):
     controls(controls),
-    joyState(joyState)
+    joyState(joyState),
+    grpcMutex_(grpcMutex),
+    baseControlLevel(baseControlLevel)
 {
 
 }
 
-int Movements::update()
+int ManualControl::update()
 {
     if(joyState->joyId < 0)
          return joyState->joyId;
@@ -18,14 +23,20 @@ int Movements::update()
     checkChangeRelayButton( moveSettings.joyBindings.relayButton );
     checkChangeLightButton( moveSettings.joyBindings.lightButton );
 
-    wheelProcess( (WHEEL_X_AXIS / DIVIDER) , (WHEEL_Y_AXIS / DIVIDER) );
+    baseControlProcess( (WHEEL_X_AXIS / DIVIDER) , (WHEEL_Y_AXIS / DIVIDER) );
+    wheelRawProcess( (WHEEL_X_AXIS / DIVIDER) , (WHEEL_Y_AXIS / DIVIDER) );
     moveCameraProcess( (CAM_X_AXIS / DIVIDER) , (CAM_Y_AXIS / DIVIDER) );
 
     lastJoyState = *joyState;
     return 0;
 }
 
-void Movements::checkChangeRelayButton(int buttonNumber)
+void ManualControl::setBaseControlLevel(Base::BaseControl::ControlLevel newBaseControlLevel)
+{
+    baseControlLevel = newBaseControlLevel;
+}
+
+void ManualControl::checkChangeRelayButton(int buttonNumber)
 {
     bool state = joyState->buttonVector[buttonNumber];
 
@@ -36,7 +47,7 @@ void Movements::checkChangeRelayButton(int buttonNumber)
     }
 }
 
-void Movements::checkChangeLightButton(int buttonNumber)
+void ManualControl::checkChangeLightButton(int buttonNumber)
 {
     bool state = joyState->buttonVector[buttonNumber];
 
@@ -47,7 +58,16 @@ void Movements::checkChangeLightButton(int buttonNumber)
     }
 }
 
-int Movements::wheelProcess(int xAxis, int yAxis)
+int ManualControl::baseControlProcess(int xAxis, int yAxis)
+{
+    controls->mutable_basecontrol()->set_linearvelocity(xAxis);
+    controls->mutable_basecontrol()->set_angularvelocity(yAxis);
+    controls->mutable_basecontrol()->set_controllevel(baseControlLevel);
+
+    return 0;
+}
+
+int ManualControl::wheelRawProcess(int xAxis, int yAxis)
 {
 //    controls->mutable_wheelmotors()->set_leftpower( (xAxis+yAxis)/2 );
 //    controls->mutable_wheelmotors()->set_rightpower( (-xAxis+yAxis)/2 );
@@ -70,7 +90,7 @@ int Movements::wheelProcess(int xAxis, int yAxis)
     return 0;
 }
 
-int Movements::moveCameraProcess(int xAxis, int yAxis)
+int ManualControl::moveCameraProcess(int xAxis, int yAxis)
 {
     controls->mutable_cameraservos()->set_xangle( xAxis );
     controls->mutable_cameraservos()->set_yangle( yAxis );

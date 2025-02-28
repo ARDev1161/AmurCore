@@ -23,6 +23,7 @@ class grpcClient
     bool stoppedStream = true;
 
     std::mutex muClient;
+    std::mutex muMap;
 
  public:
     grpcClient(std::shared_ptr<grpc::Channel> channel,
@@ -34,6 +35,9 @@ class grpcClient
     grpc::Status DataStreamExchange();
     grpc::Status MapStream();
     void stopStream();
+
+    std::mutex& getMutex() { return muClient; }
+    std::mutex& getMapMutex() { return muMap; }
 };
 
 #endif // GCLIENT_H

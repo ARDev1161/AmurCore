@@ -22,7 +22,7 @@
 #include "camera/camsettingsholder.h"
 
 #include "logic/logic.h"
-#include "logic/mapdialog.h"
+#include "logic/navdialog.h"
 #include "logic/robotinfodialog.h"
 
 #include "config/configprocessor.h"

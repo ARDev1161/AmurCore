@@ -14,9 +14,8 @@ grpc::Status grpcServer::DataExchange ([[maybe_unused]] grpc::ServerContext* con
 {
   std::unique_lock<std::mutex> ul(muServer);
   *sensors = *request;
-  ul.unlock();
-
   *reply = *controls;
+  ul.unlock();
 
   return grpc::Status::OK;
 }
@@ -31,10 +30,9 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
       ul.lock();
       if(!(stream->Read(sensors.get())))
           return grpc::Status::OK;
-      ul.unlock();
-
       // Write controls
       stream->Write(*controls);
+      ul.unlock();
     }
 }
 
@@ -49,10 +47,10 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
       ul.lock();
       if(!(stream->Read(map.get())))
           return grpc::Status::OK;
-      ul.unlock();
 
       // Write controls
       stream->Write(request);
+      ul.unlock();
     }
 
     return grpc::Status::OK;

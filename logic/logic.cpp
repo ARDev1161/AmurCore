@@ -3,10 +3,12 @@
 
 Logic::Logic(std::shared_ptr<JoyState> joyState,
              std::shared_ptr<Controls> controls,
-             std::shared_ptr<Sensors> sensors)
+             std::shared_ptr<Sensors> sensors,
+             std::mutex &grpcMutex)
     : joyState(joyState),
       controls(controls),
-      sensors(sensors)
+      sensors(sensors),
+      grpcMutex_(grpcMutex)
 {
     initLogic();
 }
@@ -16,7 +18,7 @@ void Logic::initLogic()
     srcMat = new Mat();
     outMat = new Mat();
 
-    move = new Movements(joyState, controls);
+    move = new ManualControl(joyState, controls, grpcMutex_);
 }
 
 void Logic::setSrcMat(Mat *const value)

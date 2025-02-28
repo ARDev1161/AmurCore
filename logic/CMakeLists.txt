@@ -10,8 +10,8 @@ set(LOGIC_SOURCES
     logic.cpp     logic.h
 
     mapwidget.h mapwidget.cpp
-    mapdialog.h   mapdialog.cpp
-    mapdialog.ui
+    navdialog.h   navdialog.cpp
+    navdialog.ui
 
     robotinfodialog.h   robotinfodialog.cpp
     robotinfodialog.ui

@@ -17,7 +17,9 @@ class grpcServer final : public ClientOnRobot::Service
   std::shared_ptr<Controls> controls;
   std::shared_ptr<Sensors> sensors;
   std::shared_ptr<map_service::GetMapResponse> map;
-  std::mutex muServer, muMap;
+
+  std::mutex muServer;
+  std::mutex muMap;
 
   grpc::Status DataExchange([[maybe_unused]] grpc::ServerContext* context,
                             const Sensors* request, Controls* reply) override;
@@ -33,6 +35,9 @@ public:
                            std::shared_ptr<Sensors> sensorsPtr,
                            std::shared_ptr<map_service::GetMapResponse> mapPtr);
     int checkConn();
+
+    std::mutex& getMutex() { return muServer; }
+    std::mutex& getMapMutex() { return muMap; }
 };
 
 #endif // GSERVER_H

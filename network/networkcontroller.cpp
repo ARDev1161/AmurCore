@@ -8,6 +8,7 @@ NetworkController::NetworkController(std::shared_ptr<Controls> controlsPtr,
       map(mapPtr)
 {
     udpSocket = new QUdpSocket(this);
+    serverPtr = std::make_shared<grpcServer>();
 }
 
 NetworkController::~NetworkController()
@@ -24,12 +25,13 @@ int NetworkController::runClient(std::string &server_address) // TODO - send con
     // We indicate that the channel isn't authenticated (use of
     // InsecureChannelCredentials()).
 
-    std::thread thr([&]()
-     {
-        grpcClient client(grpc::CreateChannel(
-            server_address, grpc::InsecureChannelCredentials()), controls, sensors, map);
+    clientPtr = std::make_shared<grpcClient>(grpc::CreateChannel(
+        server_address, grpc::InsecureChannelCredentials()), controls, sensors, map);
 
-        clientStatus = client.DataStreamExchange();
+    std::thread thr([&, this]()
+     {
+
+        clientStatus = this->clientPtr->DataStreamExchange();
         std::cout << "State is OK?: " << clientStatus.ok() << std::endl;
      }
     );
@@ -46,14 +48,14 @@ int NetworkController::runServer(std::string &address_mask) // TODO - send const
       grpc::reflection::InitProtoReflectionServerBuilderPlugin();
 
       // Send protos pointers to server
-      service.setProtosPointers(controls, sensors, map);
+      serverPtr->setProtosPointers(controls, sensors, map);
 
       // Listen on the given address without any authentication mechanism.
       builder.AddListeningPort(address_mask, grpc::InsecureServerCredentials());
 
       // Register "service" as the instance through which we'll communicate with
       // clients. In this case it corresponds to an *synchronous* service.
-      builder.RegisterService(&service);
+      builder.RegisterService(serverPtr.get());
 
       // Finally assemble the server.
       std::unique_ptr<grpc::Server> server(builder.BuildAndStart());

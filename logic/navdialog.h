@@ -1,37 +1,62 @@
-#ifndef MAPDIALOG_H
-#define MAPDIALOG_H
+#ifndef NAVDIALOG_H
+#define NAVDIALOG_H
 
 #include <QDialog>
 #include <QTimer>
 #include <QVBoxLayout>
+#include <QGroupBox>
+#include <QCheckBox>
+#include <QLabel>
+#include <QPushButton>
+#include <QListWidget>
 #include "mapwidget.h"
-#include "network/protobuf/map.grpc.pb.h"
+#include "network/protobuf/robot.pb.h"
+
+using namespace Robot;
 
 namespace Ui {
-class MapDialog;
+class NavDialog;
 }
 
-class MapDialog : public QDialog
+class NavDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit MapDialog(std::shared_ptr<map_service::GetMapResponse> mapPtr,
+    explicit NavDialog(std::shared_ptr<Controls> controlsPtr,
+                       std::shared_ptr<Sensors> sensorsPtr,
+                       std::shared_ptr<map_service::GetMapResponse> mapPtr,
+                       std::mutex &grpcMutex,
+                       std::mutex &mapMutex,
                        QWidget *parent = nullptr);
-    ~MapDialog();
+    ~NavDialog();
+
+signals:
+    void mouseMoved(double x, double y);
 
 private slots:
     /**
      * @brief Слот для обновления отображаемой карты.
      */
     void onMapUpdated();
+    void clearWaypoints();
+    void followWaypoints();
 
 private:
-    Ui::MapDialog *ui;
-    MapWidget *mapWidget;
+    Ui::NavDialog *ui;
+    QWidget *navContainer; ///< Главный контейнер всего интерфейса
+    std::shared_ptr<MapWidget> mapWidget;
     QTimer *timer; ///< Таймер для периодической проверки обновлений
 
+    std::shared_ptr<Controls> controls;
+    std::shared_ptr<Sensors> sensors;
     std::shared_ptr<map_service::GetMapResponse> mapPtr;
+    std::mutex &grpcMutex_;
+    std::mutex &mapMutex_;
+
+    QGroupBox *waypointsGroupBox;
+    QGroupBox *commandsGroupBox;
+    QListWidget *goalListWidget;
 
     // Предыдущие данные карты для проверки изменений
     std::vector<int8_t> previousData;
@@ -50,6 +75,8 @@ private:
     bool hasPoseChanged() const;
 
     PoseQuaternion poseToQuaternion(map_service::Pose pose) const;
+
+    std::shared_ptr<std::vector<QPointF>> navigationGoalsList;
 };
 
-#endif // MAPDIALOG_H
+#endif // NAVDIALOG_H

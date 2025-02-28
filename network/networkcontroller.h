@@ -28,7 +28,8 @@ class NetworkController : QObject
     grpc::Status clientStatus;
 
     grpc::ServerBuilder builder;
-    grpcServer service;
+    std::shared_ptr<grpcServer> serverPtr;
+    std::shared_ptr<grpcClient> clientPtr;
 
     int messageNo = 1;
 
@@ -48,6 +49,14 @@ public:
 
     int runArpingService(int arpPort, int gRPCPort, QString &arpHeader);
     QList< std::shared_ptr<RobotEntry> > getRobots() const;
+
+    std::shared_ptr<grpcClient>& getClientInstance() {
+        return clientPtr;
+    }
+
+    std::shared_ptr<grpcServer>& getServerInstance() {
+        return serverPtr;
+    }
 };
 
 #endif // NETWORKCONTROLLER_H

@@ -75,7 +75,7 @@
     </message>
     <message>
         <location filename="AmurCore.ui" line="162"/>
-        <source>&amp;Map</source>
+        <source>&amp;Navigation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -424,10 +424,20 @@
     </message>
 </context>
 <context>
-    <name>MapDialog</name>
+    <name>NavDialog</name>
     <message>
-        <location filename="logic/mapdialog.ui" line="16"/>
-        <source>Dialog</source>
+        <location filename="logic/navdialog.ui" line="14"/>
+        <source>Navigation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="logic/navdialog.cpp" line="86"/>
+        <source>Waypoints list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="logic/navdialog.cpp" line="97"/>
+        <source>Commands</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -435,7 +445,7 @@
     <name>RobotInfoDialog</name>
     <message>
         <location filename="logic/robotinfodialog.ui" line="14"/>
-        <source>Dialog</source>
+        <source>Robot info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

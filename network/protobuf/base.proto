@@ -5,9 +5,9 @@ package Base;
 message BaseControl {
 
     enum ControlLevel {
-        BASE_CONTROL = 0; // cmd_vel before smoothed
-        BASE_CONTROL_SMOOTHED = 1; // cmd_vel after smoothed
-        BASE_CONTROL_UNSAFETY = 2; // cmd_vel after collision detection
+        RAW = 0; // cmd_vel before smoothed
+        SMOOTHED = 1; // cmd_vel after smoothed
+        UNSAFETY = 2; // cmd_vel after collision detection
     }
     ControlLevel controlLevel = 1;
     double linearVelocity = 2; // by X axis
@@ -24,5 +24,5 @@ message BaseControlStatus {
         ERROR = 4;
     }
 
-    Status controlstatus = 1;
+    Status controlStatus = 1;
 }

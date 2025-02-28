@@ -25,21 +25,29 @@ struct MoveSettings
     joyBindings;
 };
 
-class Movements
+class ManualControl
 {
     std::shared_ptr<Controls> controls;
+    std::mutex &grpcMutex_;
+
     MoveSettings moveSettings;
     std::shared_ptr<JoyState> joyState;
     JoyState lastJoyState;
+    Base::BaseControl::ControlLevel baseControlLevel;
 
     void checkChangeRelayButton(int buttonNumber);
     void checkChangeLightButton(int buttonNumber);
 
-    int wheelProcess(int xAxis, int yAxis);
+    int wheelRawProcess(int xAxis, int yAxis);
+    int baseControlProcess(int xAxis, int yAxis);
     int moveCameraProcess(int xAxis, int yAxis);
 public:
-    Movements(std::shared_ptr<JoyState> joyState, std::shared_ptr<Controls> controls);
+    ManualControl(std::shared_ptr<JoyState> joyState,
+                  std::shared_ptr<Controls> controls,
+                  std::mutex &grpcMutex,
+                  Base::BaseControl::ControlLevel baseControlLevel = Base::BaseControl_ControlLevel_RAW);
     int update();
+    void setBaseControlLevel(Base::BaseControl::ControlLevel newBaseControlLevel);
 };
 
 #endif // MOVEMENTS_H
