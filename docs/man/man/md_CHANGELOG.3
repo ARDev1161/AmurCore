@@ -2,8 +2,34 @@
 .ad l
 .nh
 .SH NAME
-md_CHANGELOG \- 0\&.2\&.0 (2023-04-30) 
+md_CHANGELOG \- 1\&.0\&.0 (2025-02-28) 
 
+.SS "BREAKING CHANGE"
+.IP "\(bu" 2
+changed proto file
+.IP "\(bu" 2
+Many changes at \fBNetworkController\fP
+.PP
+.SS "Feat"
+.IP "\(bu" 2
+version with follow waypoints & show pose and map
+.IP "\(bu" 2
+\fBGUI\fP: added logo, removed speech from menu & added map, robot info entries
+.IP "\(bu" 2
+added dialog & widget for showing global map & robot\&. added robot info dialog
+.IP "\(bu" 2
+\fBprotos\fP: splitted proto files & added global map recieving with robot pose
+.IP "\(bu" 2
+added lookup table for robots with storing in database, grpc build related fixes & added config controller
+.PP
+.SS "Fix"
+.IP "\(bu" 2
+changed raw pointers to shared_ptr
+.IP "\(bu" 2
+\fBspeech\fP: removed unused speech processor
+.PP
+.SH "0\&.2\&.0 (2023-04-30)"
+.PP
 .SS "Feat"
 .IP "\(bu" 2
 \fB\fBNetworkController\fP\fP: Add finding robots by broadcast request
@@ -20,8 +46,6 @@ md_CHANGELOG \- 0\&.2\&.0 (2023-04-30)
 .IP "\(bu" 2
 \fB\fBCamCalibrate\fP\fP: Fixed waiting new frame with chessboard, changed to std::chrono lib
 .IP "\(bu" 2
-\fBJSONWorker\fP: Disable JSONWorker, for possible building
-.PP
-.SH "0\&.1 (2022-06-01)"
+\fBJSONWorker\fP: Disable JSONWorker, for possible building 
 .PP
 

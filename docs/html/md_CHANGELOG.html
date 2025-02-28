@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AmurCore: 0.2.0 (2023-04-30)</title>
+<title>AmurCore: 1.0.0 (2025-02-28)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,26 +84,47 @@ $(document).ready(function(){initNavTree('md_CHANGELOG.html',''); initResizable(
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">0.2.0 (2023-04-30) </div>  </div>
+<div class="title">1.0.0 (2025-02-28) </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h2><a class="anchor" id="autotoc_md1"></a>
+BREAKING CHANGE</h2>
+<ul>
+<li>changed proto file</li>
+<li>Many changes at <a class="el" href="classNetworkController.html">NetworkController</a></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Feat</h2>
+<ul>
+<li>version with follow waypoints &amp; show pose and map</li>
+<li><b>GUI</b>: added logo, removed speech from menu &amp; added map, robot info entries</li>
+<li>added dialog &amp; widget for showing global map &amp; robot. added robot info dialog</li>
+<li><b>protos</b>: splitted proto files &amp; added global map recieving with robot pose</li>
+<li>added lookup table for robots with storing in database, grpc build related fixes &amp; added config controller</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Fix</h2>
+<ul>
+<li>changed raw pointers to shared_ptr</li>
+<li><b>speech</b>: removed unused speech processor</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
+0.2.0 (2023-04-30)</h1>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Feat</h2>
 <ul>
 <li><b><a class="el" href="classNetworkController.html">NetworkController</a></b>: Add finding robots by broadcast request</li>
 <li><b><a class="el" href="classNetworkController.html">NetworkController</a></b>: Added first arp message via JSON</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Fix</h2>
 <ul>
 <li><b>CMakeLists</b>: Fix some problems with compiling SpeechProccessor</li>
 <li><b><a class="el" href="classNetworkController.html">NetworkController</a></b>: Removed forgotten include to nonexisted file</li>
 <li><b>AmurCore.pro</b>: Fix gRPC linking error &amp; add commitizen config</li>
 <li><b><a class="el" href="classCamCalibrate.html">CamCalibrate</a></b>: Fixed waiting new frame with chessboard, changed to std::chrono lib</li>
-<li><b>JSONWorker</b>: Disable JSONWorker, for possible building</li>
+<li><b>JSONWorker</b>: Disable JSONWorker, for possible building </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md3"></a>
-0.1 (2022-06-01)</h1>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -25,13 +25,19 @@
 var NAVTREE =
 [
   [ "AmurCore", "index.html", [
-    [ "0.2.0 (2023-04-30)", "md_CHANGELOG.html", [
-      [ "0.1 (2022-06-01)", "md_CHANGELOG.html#autotoc_md3", null ]
+    [ "1.0.0 (2025-02-28)", "md_CHANGELOG.html", [
+      [ "0.2.0 (2023-04-30)", "md_CHANGELOG.html#autotoc_md4", [
+        [ "BREAKING CHANGE", "md_CHANGELOG.html#autotoc_md1", null ],
+        [ "Feat", "md_CHANGELOG.html#autotoc_md2", null ],
+        [ "Fix", "md_CHANGELOG.html#autotoc_md3", null ],
+        [ "Feat", "md_CHANGELOG.html#autotoc_md5", null ],
+        [ "Fix", "md_CHANGELOG.html#autotoc_md6", null ]
+      ] ]
     ] ],
     [ "Amur Core", "md_README.html", [
-      [ "Requirements:", "md_README.html#autotoc_md5", null ],
-      [ "Sensors of robot:", "md_README.html#autotoc_md6", null ],
-      [ "Controls of Robot:", "md_README.html#autotoc_md7", null ]
+      [ "Requirements:", "md_README.html#autotoc_md8", null ],
+      [ "Sensors of robot:", "md_README.html#autotoc_md9", null ],
+      [ "Controls of Robot:", "md_README.html#autotoc_md10", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
