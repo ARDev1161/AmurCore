@@ -44,16 +44,14 @@ endif()
 # Сохраняем PARSED_VERSION в переменной PROJECT_VERSION_SEMVER (SemVer)
 set(PROJECT_VERSION_SEMVER "${PARSED_VERSION}" CACHE INTERNAL "Semver version X.Y.Z")
 
-# -------------------------------------------------------------------------
-# Дальше: используйте PROJECT_VERSION_SEMVER и PROJECT_VERSION_FULL
-#         в своем основном CMakeLists (или прямо тут).
-#
-# Например, можно прямо здесь объявить проект с нужной версией:
-#
-#   project(MyProject VERSION ${PROJECT_VERSION_SEMVER} LANGUAGES CXX)
-#
-# Но иногда это делают в главном CMakeLists, чтобы была гибкость.
-# -------------------------------------------------------------------------
+# Извлекаем Major и Minor версии
+string(REGEX MATCH "^[0-9]+" PROJECT_VERSION_SEMVER_MAJOR "${PROJECT_VERSION_SEMVER}")
+string(REGEX MATCH "^[0-9]+\\.[0-9]+" PROJECT_VERSION_SEMVER_MINOR_TMP "${PROJECT_VERSION_SEMVER}")
+string(REGEX MATCH "[0-9]+$" PROJECT_VERSION_SEMVER_MINOR "${PROJECT_VERSION_SEMVER_MINOR_TMP}")
 
+# Сохраняем их в кэше
+set(PROJECT_VERSION_SEMVER_MAJOR "${PROJECT_VERSION_SEMVER_MAJOR}" CACHE INTERNAL "Major version")
+set(PROJECT_VERSION_SEMVER_MINOR "${PROJECT_VERSION_SEMVER_MINOR}" CACHE INTERNAL "Minor version")
+
+# Выводим в консоль
 message(STATUS "Project semver parsed: ${PROJECT_VERSION_SEMVER}")
-message(STATUS "Project full version : ${PROJECT_VERSION_FULL}")
