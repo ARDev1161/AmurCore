@@ -192,6 +192,7 @@ build_appimage(
     APP_VERSION      \"${PROJECT_VERSION_SEMVER}\"
     EXECUTABLE       \"${PROJECT_NAME}\"
     ICON             \"${CMAKE_SOURCE_DIR}/data/images/logo.png\"
+    APPRUN           \"${CMAKE_SOURCE_DIR}/cmake/apprun.sh\"
     APP_ARCH         \"${CMAKE_SYSTEM_PROCESSOR}\"
 )
 ")

@@ -31,6 +31,7 @@ function(build_appimage)
         APP_VERSION
         EXECUTABLE
         ICON
+        APPRUN
         DESKTOP_NAME
         DESKTOP_CATEGORIES
         APP_ARCH
@@ -57,6 +58,9 @@ function(build_appimage)
     endif()
     if(NOT APPIMG_ICON)
         message(FATAL_ERROR "build_appimage: ICON is not specified!")
+    endif()
+    if(NOT APPIMG_APPRUN)
+        message(FATAL_ERROR "build_appimage: APPRUN is not specified!")
     endif()
     if(NOT EXISTS "${APPIMG_ICON}")
         message(FATAL_ERROR "build_appimage: ICON does not exist: ${APPIMG_ICON}")
@@ -85,18 +89,38 @@ function(build_appimage)
     endif()
 
     # Download linuxdeploy if needed
-    # We'll fetch the <ARCH> version from official releases
     set(LINUXDEPLOY_BIN   "${CMAKE_BINARY_DIR}/linuxdeploy-${APPIMG_APP_ARCH}.AppImage")
     if(NOT EXISTS "${LINUXDEPLOY_BIN}")
         set(LINUXDEPLOY_URL "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-${APPIMG_APP_ARCH}.AppImage")
         message(STATUS "Downloading linuxdeploy from: ${LINUXDEPLOY_URL}")
         message(STATUS "into: ${LINUXDEPLOY_BIN}")
-        file(DOWNLOAD
-            "${LINUXDEPLOY_URL}"
-            "${LINUXDEPLOY_BIN}"
-            SHOW_PROGRESS
-        )
+        file(DOWNLOAD "${LINUXDEPLOY_URL}" "${LINUXDEPLOY_BIN}" SHOW_PROGRESS )
         execute_process(COMMAND chmod +x "${LINUXDEPLOY_BIN}")
+    endif()
+
+    # Download linuxdeploy Qt plugin if needed
+    set(LINUXDEPLOY_QT_BIN   "${CMAKE_BINARY_DIR}/linuxdeploy-plugin-qt-${APPIMG_APP_ARCH}.AppImage")
+    set(LINUXDEPLOY_QT_URL   "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-${APPIMG_APP_ARCH}.AppImage")
+    if(NOT EXISTS "${LINUXDEPLOY_QT_BIN}")
+        message(STATUS "Downloading linuxdeploy-plugin-qt from: ${LINUXDEPLOY_QT_URL}")
+        message(STATUS "Saving to: ${LINUXDEPLOY_QT_BIN}")
+        file(DOWNLOAD "${LINUXDEPLOY_QT_URL}" "${LINUXDEPLOY_QT_BIN}" SHOW_PROGRESS)
+        execute_process(COMMAND chmod +x "${LINUXDEPLOY_QT_BIN}")
+    endif()
+
+    # Download linuxdeploy Gstreamer plugin if needed
+    set(LINUXDEPLOY_GSTREAMER_BIN "${CMAKE_BINARY_DIR}/linuxdeploy-plugin-gstreamer.sh")
+    set(LINUXDEPLOY_GSTREAMER_URL "https://raw.githubusercontent.com/linuxdeploy/linuxdeploy-plugin-gstreamer/master/linuxdeploy-plugin-gstreamer.sh")
+    if(NOT EXISTS "${LINUXDEPLOY_GSTREAMER_BIN}")
+        message(STATUS "Downloading linuxdeploy-plugin-gstreamer from: ${LINUXDEPLOY_GSTREAMER_URL}")
+        file(DOWNLOAD "${LINUXDEPLOY_GSTREAMER_URL}" "${LINUXDEPLOY_GSTREAMER_BIN}" SHOW_PROGRESS)
+        execute_process(COMMAND chmod +x "${LINUXDEPLOY_GSTREAMER_BIN}")
+    endif()
+
+    # Checking if patchelf installed. Need for linuxdeploy Gstreamer plugin
+    find_program(PATCHELF_EXECUTABLE patchelf)
+    if(NOT PATCHELF_EXECUTABLE)
+        message(FATAL_ERROR "Error: patchelf not found. Please install patchelf (e.g., sudo apt-get install patchelf) before building the AppImage.")
     endif()
 
     # Create an AppDir folder in the build directory
@@ -126,11 +150,12 @@ Categories=${APPIMG_DESKTOP_CATEGORIES}
 
     # Copy the icon (PNG)
     file(COPY "${APPIMG_ICON}" DESTINATION "${APPDIR}/usr/share/icons/hicolor/256x256/apps/")
+    set(ICON_FILEPATH "${APPDIR}/usr/share/icons/hicolor/256x256/apps/${APPIMG_APP_NAME}.png")
     # Rename it so that it matches the Icon= name in the .desktop
     get_filename_component(ICON_BASENAME "${APPIMG_ICON}" NAME)
     file(RENAME
         "${APPDIR}/usr/share/icons/hicolor/256x256/apps/${ICON_BASENAME}"
-        "${APPDIR}/usr/share/icons/hicolor/256x256/apps/${APPIMG_APP_NAME}.png"
+        "${ICON_FILEPATH}"
     )
 
     # Now call linuxdeploy to bundle everything into AppImage
@@ -141,9 +166,11 @@ Categories=${APPIMG_DESKTOP_CATEGORIES}
         COMMAND "${LINUXDEPLOY_BIN}"
             --appdir  "${APPDIR}"
             --desktop-file  "${DESKTOP_PATH}"
-            --icon-file     "${APPDIR}/usr/share/icons/hicolor/256x256/apps/${APPIMG_APP_NAME}.png"
+            --icon-file     "${ICON_FILEPATH}"
+            --custom-apprun  "${APPIMG_APPRUN}"
+            --plugin qt
+            --plugin gstreamer
             --output appimage
-            --verbosity=0
         WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
     )
 
@@ -167,6 +194,8 @@ Categories=${APPIMG_DESKTOP_CATEGORIES}
             )
         endif()
     endif()
+
+    execute_process(COMMAND chmod +x "${CMAKE_BINARY_DIR}/${APPIMAGE_NAME}")
 
     message(STATUS "AppImage created at: ${CMAKE_BINARY_DIR}/${APPIMAGE_NAME}")
 endfunction()
