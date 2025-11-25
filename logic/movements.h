@@ -2,6 +2,7 @@
 #define MOVEMENTS_H
 
 #include "../joystick/joystick.h"
+#include <stdlib.h>     /* abs */
 
 using namespace Robot;
 
@@ -33,6 +34,8 @@ class ManualControl
     MoveSettings moveSettings;
     std::shared_ptr<JoyState> joyState;
     JoyState lastJoyState;
+    int joyDriftZone = 7;
+
     Base::BaseControl::ControlLevel baseControlLevel;
 
     void checkChangeRelayButton(int buttonNumber);

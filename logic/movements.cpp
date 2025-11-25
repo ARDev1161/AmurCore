@@ -60,8 +60,12 @@ void ManualControl::checkChangeLightButton(int buttonNumber)
 
 int ManualControl::baseControlProcess(int xAxis, int yAxis)
 {
-    controls->mutable_basecontrol()->set_linearvelocity(xAxis);
-    controls->mutable_basecontrol()->set_angularvelocity(yAxis);
+    double linear = (abs(yAxis)>joyDriftZone)?yAxis:0;
+    double angular = (abs(xAxis)>joyDriftZone)?xAxis:0;
+
+    controls->mutable_basecontrol()->set_linearvelocity(linear);
+    controls->mutable_basecontrol()->set_angularvelocity(angular);
+
     controls->mutable_basecontrol()->set_controllevel(baseControlLevel);
 
     return 0;
