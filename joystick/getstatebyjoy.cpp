@@ -1,4 +1,5 @@
 #include "getstatebyjoy.h"
+#include "joystick_factory.h"
 
 GetStateByJoystick::GetStateByJoystick(const std::shared_ptr<JoyState> state, QObject *parent) :
     QObject(parent),
@@ -6,7 +7,7 @@ GetStateByJoystick::GetStateByJoystick(const std::shared_ptr<JoyState> state, QO
     joyState(state)
 {
     joyState->buttonVector = QVector<bool>(MAX_JOYSTICK_BUTTONS);
-    joyAdapter = new VJoystickAdapter();
+    joyAdapter = JoystickFactory::createAdapter();
     connectToJoystick();
 }
 
@@ -23,24 +24,24 @@ void GetStateByJoystick::stop()
 void GetStateByJoystick::connectToJoystick()
 {
     if(joyState->joyId != -1)
-        if(joyAdapter->open(joyState->joyId))
+        if(joyAdapter && joyAdapter->open(joyState->joyId))
         {
-            connect(joyAdapter, SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
-            connect(joyAdapter, SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
-            connect(joyAdapter, SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
-            connect(joyAdapter, SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
+            connect(joyAdapter.get(), SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
+            connect(joyAdapter.get(), SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
+            connect(joyAdapter.get(), SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
+            connect(joyAdapter.get(), SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
         }
 }
 
 void GetStateByJoystick::disconnectFromJoystick()
 {
-    if(joyAdapter->isConnected())
+    if(joyAdapter && joyAdapter->isConnected())
     {
         joyAdapter->close();
-        disconnect(joyAdapter, SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
-        disconnect(joyAdapter, SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
-        disconnect(joyAdapter, SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
-        disconnect(joyAdapter, SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
+        disconnect(joyAdapter.get(), SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
+        disconnect(joyAdapter.get(), SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
+        disconnect(joyAdapter.get(), SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
+        disconnect(joyAdapter.get(), SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
     }
     joyState->joyId = -1;
 }

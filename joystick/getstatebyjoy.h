@@ -6,6 +6,8 @@
 #include <QTimer>
 #include <QDebug>
 #include "v_joystick_adapter.h"
+#include "joystick_factory.h"
+#include <memory>
 #include "network/protobuf/robot.pb.h"
 
 struct JoyState{
@@ -28,7 +30,7 @@ class GetStateByJoystick : public QObject
 {
     Q_OBJECT
 
-    VJoystickAdapter* joyAdapter;
+    std::unique_ptr<VJoystickAdapter> joyAdapter;
     enum { MAX_JOYSTICK_BUTTONS = 30 };
 
     int LoopTime=50;
