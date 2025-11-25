@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QTimer>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QGroupBox>
 #include <QLabel>
 #include <QCheckBox>
@@ -12,6 +13,7 @@
 #include <QPushButton>
 #include <QListWidget>
 #include <memory>
+#include <vector>
 #include "mapwidget.h"
 #include "network/protobuf/robot.pb.h"
 
@@ -22,6 +24,7 @@ namespace Ui {
 }
 
 class NavCommandBuilder;
+class NavGoalsHistory;
 
 class NavDialog : public QDialog
 {
@@ -46,6 +49,8 @@ private slots:
     void onMapUpdated();
     void clearGoals();
     void sendGoals();
+    void undoGoals();
+    void redoGoals();
 
 private:
     Ui::NavDialog *ui;
@@ -59,6 +64,7 @@ private:
     std::mutex &grpcMutex_;
     std::mutex &mapMutex_;
     std::unique_ptr<NavCommandBuilder> navCmdBuilder;
+    std::unique_ptr<NavGoalsHistory> navGoalsHistory;
 
     bool isFollowWaypoints {true};
     QGroupBox *waypointsGroupBox;
@@ -85,6 +91,8 @@ private:
 
     void followWaypoints();
     void goThroughPoses();
+    void refreshGoalList();
+    void recordGoalsSnapshot();
 
     std::shared_ptr<std::vector<QPointF>> navigationGoalsList;
     QString taskStatusAsString();

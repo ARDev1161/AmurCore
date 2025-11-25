@@ -1,5 +1,6 @@
 #include "navdialog.h"
 #include "ui_navdialog.h"
+#include <vector>
 
 namespace {
 
@@ -75,6 +76,61 @@ private:
     std::shared_ptr<Controls> controls_;
 };
 
+class NavGoalsHistory
+{
+public:
+    explicit NavGoalsHistory(std::shared_ptr<std::vector<QPointF>> goals)
+        : goals_(std::move(goals))
+    {
+        if(goals_)
+            history_.push_back(*goals_);
+    }
+
+    void record()
+    {
+        if(!goals_)
+            return;
+
+        if(currentIndex_ + 1 < history_.size())
+            history_.erase(history_.begin() + static_cast<long>(currentIndex_ + 1), history_.end());
+
+        history_.push_back(*goals_);
+        currentIndex_ = history_.size() - 1;
+    }
+
+    bool canUndo() const { return currentIndex_ > 0; }
+    bool canRedo() const { return currentIndex_ + 1 < history_.size(); }
+
+    bool undo()
+    {
+        if(!canUndo())
+            return false;
+        --currentIndex_;
+        restore();
+        return true;
+    }
+
+    bool redo()
+    {
+        if(!canRedo())
+            return false;
+        ++currentIndex_;
+        restore();
+        return true;
+    }
+
+private:
+    void restore()
+    {
+        if(goals_ && currentIndex_ < history_.size())
+            *goals_ = history_[currentIndex_];
+    }
+
+    std::shared_ptr<std::vector<QPointF>> goals_;
+    std::vector<std::vector<QPointF>> history_;
+    std::size_t currentIndex_ {0};
+};
+
 } // namespace
 
 NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
@@ -101,8 +157,9 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     QVBoxLayout *dialogLayout = new QVBoxLayout(this);
     setLayout(dialogLayout);
 
-    // Создаём список целей
+    // Создаём список целей и историю изменений
     navigationGoalsList = std::make_shared<std::vector<QPointF>>();
+    navGoalsHistory = std::make_unique<NavGoalsHistory>(navigationGoalsList);
 
     // 2) Создаём контейнер, который можно скрывать/задизейблить.
     navContainer = new QWidget(this);
@@ -146,6 +203,12 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     connect(drawGridCheckBox, &QCheckBox::toggled,
             mapWidget.get(), &MapWidget::setShowGrid);
 
+    connect(mapWidget.get(), &MapWidget::goalAdded,
+            this, [this](const QPointF &, int){
+                recordGoalsSnapshot();
+                refreshGoalList();
+            });
+
     connect(mapWidget.get(), &MapWidget::mouseMoved,
                 this, [labelCoords](double x, double y){
                     // Показываем, что это координаты ROS
@@ -167,6 +230,15 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     QPushButton *clearWaypoints = new QPushButton("Clear waypoints", this);
     groupLayout->addWidget(clearWaypoints);
     connect(clearWaypoints, &QPushButton::clicked, this, &NavDialog::clearGoals);
+
+    QHBoxLayout *historyLayout = new QHBoxLayout;
+    QPushButton *undoGoalsButton = new QPushButton("Undo", this);
+    QPushButton *redoGoalsButton = new QPushButton("Redo", this);
+    historyLayout->addWidget(undoGoalsButton);
+    historyLayout->addWidget(redoGoalsButton);
+    groupLayout->addLayout(historyLayout);
+    connect(undoGoalsButton, &QPushButton::clicked, this, &NavDialog::undoGoals);
+    connect(redoGoalsButton, &QPushButton::clicked, this, &NavDialog::redoGoals);
 
 
     commandsGroupBox = new QGroupBox(tr("Commands"), this);
@@ -238,6 +310,8 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
 
     // Запускаем таймер для проверки обновлений буферов
     timer->start(42);
+
+    refreshGoalList();
 }
 
 NavDialog::~NavDialog()
@@ -303,6 +377,9 @@ PoseQuaternion NavDialog::poseToQuaternion(map_service::Pose pose) const
 void NavDialog::clearGoals()
 {
     navigationGoalsList->clear();
+    recordGoalsSnapshot();
+    refreshGoalList();
+    mapWidget->update();
 }
 
 void NavDialog::sendGoals()
@@ -311,6 +388,22 @@ void NavDialog::sendGoals()
         followWaypoints();
     else
         goThroughPoses();
+}
+
+void NavDialog::undoGoals()
+{
+    if(navGoalsHistory && navGoalsHistory->undo()) {
+        refreshGoalList();
+        mapWidget->update();
+    }
+}
+
+void NavDialog::redoGoals()
+{
+    if(navGoalsHistory && navGoalsHistory->redo()) {
+        refreshGoalList();
+        mapWidget->update();
+    }
 }
 
 void NavDialog::followWaypoints()
@@ -338,6 +431,31 @@ QString NavDialog::taskStatusAsString()
         }
     }
     return QString("Unknown status");
+}
+
+void NavDialog::recordGoalsSnapshot()
+{
+    if(navGoalsHistory)
+        navGoalsHistory->record();
+}
+
+void NavDialog::refreshGoalList()
+{
+    if(!goalListWidget)
+        return;
+
+    goalListWidget->clear();
+
+    if(!navigationGoalsList)
+        return;
+
+    int index = 1;
+    for (const QPointF &point : *navigationGoalsList) {
+        goalListWidget->addItem(QString("%1: X=%2 Y=%3")
+                                .arg(index++)
+                                .arg(point.x(), 0, 'f', 3)
+                                .arg(point.y(), 0, 'f', 3));
+    }
 }
 
 void NavDialog::onMapUpdated()
