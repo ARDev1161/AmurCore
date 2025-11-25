@@ -1,6 +1,82 @@
 #include "navdialog.h"
 #include "ui_navdialog.h"
 
+namespace {
+
+Navigation::Pose* fillPose(Navigation::Pose* pose, const QPointF& point)
+{
+    if (!pose)
+        return nullptr;
+
+    pose->set_x(point.x());
+    pose->set_y(point.y());
+    pose->set_z(0.0);
+
+    pose->set_orientation_w(1.0);
+    pose->set_orientation_x(0.0);
+    pose->set_orientation_y(0.0);
+    pose->set_orientation_z(0.0);
+
+    return pose;
+}
+
+class NavCommandBuilder
+{
+public:
+    explicit NavCommandBuilder(std::shared_ptr<Controls> controls) : controls_(std::move(controls)) {}
+
+    void buildFollowWaypoints(const std::vector<QPointF> &goals) const
+    {
+        auto* navCmd = resetNavCommand();
+        if(!navCmd)
+            return;
+
+        Navigation::FollowWaypoints* followWaypointsCmd = navCmd->mutable_follow_waypoints();
+        auto* waypoints = followWaypointsCmd->mutable_waypoints();
+        waypoints->Clear();
+        waypoints->Reserve(static_cast<int>(goals.size()));
+
+        for (const QPointF &point : goals) {
+            fillPose(followWaypointsCmd->add_waypoints(), point);
+        }
+
+        navCmd->set_request_feedback(true);
+    }
+
+    void buildGoThroughPoses(const std::vector<QPointF> &goals) const
+    {
+        auto* navCmd = resetNavCommand();
+        if(!navCmd)
+            return;
+
+        Navigation::GoThroughPoses* goThroughPosesCmd = navCmd->mutable_go_through_poses();
+        auto* poses = goThroughPosesCmd->mutable_poses();
+        poses->Clear();
+        poses->Reserve(static_cast<int>(goals.size()));
+
+        for (const QPointF &point : goals) {
+            fillPose(goThroughPosesCmd->add_poses(), point);
+        }
+
+        navCmd->set_request_feedback(true);
+    }
+
+private:
+    Navigation::NavCommandRequest* resetNavCommand() const
+    {
+        if(!controls_)
+            return nullptr;
+
+        auto* navCmd = controls_->mutable_navcontrol();
+        navCmd->Clear();
+        return navCmd;
+    }
+
+    std::shared_ptr<Controls> controls_;
+};
+
+} // namespace
+
 NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
                      std::shared_ptr<Sensors> sensorsPtr,
                      std::shared_ptr<map_service::GetMapResponse> mapPtr,
@@ -14,6 +90,7 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     mapPtr(mapPtr),
     mapMutex_(mapMutex),
     grpcMutex_(grpcMutex),
+    navCmdBuilder(std::make_unique<NavCommandBuilder>(controlsPtr)),
     timer(new QTimer(this)),
     previousWidth(0),
     previousHeight(0)
@@ -238,68 +315,14 @@ void NavDialog::sendGoals()
 
 void NavDialog::followWaypoints()
 {
-    // Получаем изменяемое сообщение NavCommandRequest.
-    Navigation::NavCommandRequest* navCmd = controls->mutable_navcontrol();
-
-    // Устанавливаем активным поле follow_waypoints в oneof.
-    Navigation::FollowWaypoints* followWaypointsCmd = navCmd->mutable_follow_waypoints();
-
-    // Очистим предыдущие waypoints, если они были заданы
-    followWaypointsCmd->clear_waypoints();
-    // Получаем указатель на повторяемое поле.
-    auto* waypoints = followWaypointsCmd->mutable_waypoints();
-    // Предварительно резервируем память для всех точек.
-    waypoints->Reserve(navigationGoalsList->size());
-
-    // Итерируемся по списку точек и добавляем каждую точку как новый Pose.
-    for (const QPointF &point : *navigationGoalsList) {
-         Navigation::Pose* pose = followWaypointsCmd->add_waypoints();
-         pose->set_x(point.x());
-         pose->set_y(point.y());
-         pose->set_z(0.0);  // Предполагаем, что навигация ведется в 2D, z = 0.
-
-         // Устанавливаем ориентацию по умолчанию: идентичный поворот (единичный кватернион).
-         pose->set_orientation_w(1.0);
-         pose->set_orientation_x(0.0);
-         pose->set_orientation_y(0.0);
-         pose->set_orientation_z(0.0);
-    }
-
-    // Если требуется, устанавливаем запрос обратной связи.
-    navCmd->set_request_feedback(true);
+    if(navCmdBuilder)
+        navCmdBuilder->buildFollowWaypoints(*navigationGoalsList);
 }
 
 void NavDialog::goThroughPoses()
 {
-    // Получаем изменяемое сообщение NavCommandRequest.
-    Navigation::NavCommandRequest* navCmd = controls->mutable_navcontrol();
-
-    // Устанавливаем активным поле follow_waypoints в oneof.
-    Navigation::GoThroughPoses* goThroughPosesCmd = navCmd->mutable_go_through_poses();
-
-    // Очистим предыдущие waypoints, если они были заданы
-    goThroughPosesCmd->clear_poses();
-    // Получаем указатель на повторяемое поле.
-    auto* poses = goThroughPosesCmd->mutable_poses();
-    // Предварительно резервируем память для всех точек.
-    poses->Reserve(navigationGoalsList->size());
-
-    // Итерируемся по списку точек и добавляем каждую точку как новый Pose.
-    for (const QPointF &point : *navigationGoalsList) {
-         Navigation::Pose* pose = goThroughPosesCmd->add_poses();
-         pose->set_x(point.x());
-         pose->set_y(point.y());
-         pose->set_z(0.0);  // Предполагаем, что навигация ведется в 2D, z = 0.
-
-         // Устанавливаем ориентацию по умолчанию: идентичный поворот (единичный кватернион).
-         pose->set_orientation_w(1.0);
-         pose->set_orientation_x(0.0);
-         pose->set_orientation_y(0.0);
-         pose->set_orientation_z(0.0);
-    }
-
-    // Если требуется, устанавливаем запрос обратной связи.
-    navCmd->set_request_feedback(true);
+    if(navCmdBuilder)
+        navCmdBuilder->buildGoThroughPoses(*navigationGoalsList);
 }
 
 QString NavDialog::taskStatusAsString()

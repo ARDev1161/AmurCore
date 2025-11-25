@@ -11,6 +11,7 @@
 #include <QButtonGroup>
 #include <QPushButton>
 #include <QListWidget>
+#include <memory>
 #include "mapwidget.h"
 #include "network/protobuf/robot.pb.h"
 
@@ -19,6 +20,8 @@ using namespace Robot;
 namespace Ui {
     class NavDialog;
 }
+
+class NavCommandBuilder;
 
 class NavDialog : public QDialog
 {
@@ -55,6 +58,7 @@ private:
     std::shared_ptr<map_service::GetMapResponse> mapPtr;
     std::mutex &grpcMutex_;
     std::mutex &mapMutex_;
+    std::unique_ptr<NavCommandBuilder> navCmdBuilder;
 
     bool isFollowWaypoints {true};
     QGroupBox *waypointsGroupBox;
