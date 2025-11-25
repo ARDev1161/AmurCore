@@ -25,7 +25,9 @@
 
 #define NO_PICTURE "./data/images/no_picture.jpeg"
 #define SOURCE_STREAM 0
-//#define SOURCE_STREAM "udpsrc port=1488 ! application/x-rtp, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! appsink"
+//#define SOURCE_STREAM "udpsrc port=5000 ! application/x-rtp, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! appsink"
+//#define SOURCE_STREAM "udpsrc port=5000 ! application/x-rtp, encoding-name=H265 ! rtph265depay ! queue ! avdec_h265 ! videoconvert ! appsink"
+
 
 using namespace Robot;
 
