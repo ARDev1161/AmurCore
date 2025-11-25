@@ -11,6 +11,7 @@ var classManualControl =
     [ "baseControlLevel", "classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5", null ],
     [ "controls", "classManualControl.html#a95021e840dcae68629f898d6c4e2a7d6", null ],
     [ "grpcMutex_", "classManualControl.html#a3476cce0a91e39980f28071028e504a6", null ],
+    [ "joyDriftZone", "classManualControl.html#a070bdcf51edd4fca578837eec5c8f0a3", null ],
     [ "joyState", "classManualControl.html#a4a32de198c23f14a3759acee653938f3", null ],
     [ "lastJoyState", "classManualControl.html#a46de0772e24ea35b54f12af2ddb05ac7", null ],
     [ "moveSettings", "classManualControl.html#a2bb585173bb491233c7431165f035c86", null ]

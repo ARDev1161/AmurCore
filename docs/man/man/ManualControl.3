@@ -1,4 +1,4 @@
-.TH "ManualControl" 3 "Wed Apr 9 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "ManualControl" 3 "Tue Nov 25 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -59,6 +59,9 @@ ManualControl
 .RI "\fBJoyState\fP \fBlastJoyState\fP"
 .br
 .ti -1c
+.RI "int \fBjoyDriftZone\fP = 7"
+.br
+.ti -1c
 .RI "Base::BaseControl::ControlLevel \fBbaseControlLevel\fP"
 .br
 .in -1c
@@ -89,6 +92,8 @@ ManualControl
 .SS "std::shared_ptr<Controls> ManualControl::controls\fC [private]\fP"
 
 .SS "std::mutex& ManualControl::grpcMutex_\fC [private]\fP"
+
+.SS "int ManualControl::joyDriftZone = 7\fC [private]\fP"
 
 .SS "std::shared_ptr<\fBJoyState\fP> ManualControl::joyState\fC [private]\fP"
 

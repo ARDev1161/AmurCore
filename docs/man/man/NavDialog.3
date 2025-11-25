@@ -1,4 +1,4 @@
-.TH "NavDialog" 3 "Wed Apr 9 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "NavDialog" 3 "Tue Nov 25 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -35,10 +35,10 @@ Inherits QDialog\&.
 .br
 .RI "Слот для обновления отображаемой карты\&. "
 .ti -1c
-.RI "void \fBclearWaypoints\fP ()"
+.RI "void \fBclearGoals\fP ()"
 .br
 .ti -1c
-.RI "void \fBfollowWaypoints\fP ()"
+.RI "void \fBsendGoals\fP ()"
 .br
 .in -1c
 .SS "Private Member Functions"
@@ -54,6 +54,15 @@ Inherits QDialog\&.
 .RI "Проверяет, изменились ли данные положения робота\&. "
 .ti -1c
 .RI "\fBPoseQuaternion\fP \fBposeToQuaternion\fP (map_service::Pose pose) const"
+.br
+.ti -1c
+.RI "void \fBfollowWaypoints\fP ()"
+.br
+.ti -1c
+.RI "void \fBgoThroughPoses\fP ()"
+.br
+.ti -1c
+.RI "QString \fBtaskStatusAsString\fP ()"
 .br
 .in -1c
 .SS "Private Attributes"
@@ -89,6 +98,9 @@ Inherits QDialog\&.
 .RI "std::mutex & \fBmapMutex_\fP"
 .br
 .ti -1c
+.RI "bool \fBisFollowWaypoints\fP {true}"
+.br
+.ti -1c
 .RI "QGroupBox * \fBwaypointsGroupBox\fP"
 .br
 .ti -1c
@@ -118,9 +130,11 @@ Inherits QDialog\&.
 
 .SH "Member Function Documentation"
 .PP 
-.SS "void NavDialog::clearWaypoints ()\fC [private]\fP, \fC [slot]\fP"
+.SS "void NavDialog::clearGoals ()\fC [private]\fP, \fC [slot]\fP"
 
-.SS "void NavDialog::followWaypoints ()\fC [private]\fP, \fC [slot]\fP"
+.SS "void NavDialog::followWaypoints ()\fC [private]\fP"
+
+.SS "void NavDialog::goThroughPoses ()\fC [private]\fP"
 
 .SS "bool NavDialog::hasMapChanged () const\fC [private]\fP"
 
@@ -152,6 +166,10 @@ true, если положение изменилось; иначе false\&.
 Слот для обновления отображаемой карты\&. 
 .SS "\fBPoseQuaternion\fP NavDialog::poseToQuaternion (map_service::Pose pose) const\fC [private]\fP"
 
+.SS "void NavDialog::sendGoals ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "QString NavDialog::taskStatusAsString ()\fC [private]\fP"
+
 .SH "Member Data Documentation"
 .PP 
 .SS "QGroupBox* NavDialog::commandsGroupBox\fC [private]\fP"
@@ -161,6 +179,8 @@ true, если положение изменилось; иначе false\&.
 .SS "QListWidget* NavDialog::goalListWidget\fC [private]\fP"
 
 .SS "std::mutex& NavDialog::grpcMutex_\fC [private]\fP"
+
+.SS "bool NavDialog::isFollowWaypoints {true}\fC [private]\fP"
 
 .SS "std::mutex& NavDialog::mapMutex_\fC [private]\fP"
 

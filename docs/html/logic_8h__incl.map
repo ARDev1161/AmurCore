@@ -1,8 +1,9 @@
 <map id="logic/logic.h" name="logic/logic.h">
-<area shape="rect" id="node1" title=" " alt="" coords="382,5,473,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="285,80,426,107"/>
-<area shape="rect" id="node3" href="$movements_8h.html" title=" " alt="" coords="449,80,549,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="443,5,534,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="346,80,487,107"/>
+<area shape="rect" id="node3" href="$movements_8h.html" title=" " alt="" coords="511,80,611,107"/>
 <area shape="rect" id="node4" href="$joystick_8h.html" title=" " alt="" coords="432,155,567,181"/>
+<area shape="rect" id="node21" title=" " alt="" coords="591,155,653,181"/>
 <area shape="rect" id="node5" href="$joystickstateworker_8h.html" title=" " alt="" coords="351,229,495,256"/>
 <area shape="rect" id="node19" href="$joystickdialog_8h.html" title=" " alt="" coords="520,229,631,256"/>
 <area shape="rect" id="node6" href="$getstatebyjoy_8h.html" title=" " alt="" coords="372,304,480,331"/>

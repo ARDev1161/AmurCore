@@ -1,6 +1,7 @@
 <map id="logic/movements.h" name="logic/movements.h">
-<area shape="rect" id="node1" title=" " alt="" coords="434,5,565,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="495,5,626,32"/>
 <area shape="rect" id="node2" href="$joystick_8h.html" title=" " alt="" coords="432,80,567,107"/>
+<area shape="rect" id="node19" title=" " alt="" coords="591,80,653,107"/>
 <area shape="rect" id="node3" href="$joystickstateworker_8h.html" title=" " alt="" coords="351,155,495,181"/>
 <area shape="rect" id="node17" href="$joystickdialog_8h.html" title=" " alt="" coords="520,155,631,181"/>
 <area shape="rect" id="node4" href="$getstatebyjoy_8h.html" title=" " alt="" coords="372,229,480,256"/>

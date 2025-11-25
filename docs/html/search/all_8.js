@@ -8,6 +8,7 @@ var searchData=
   ['initlogic_147',['initLogic',['../classLogic.html#ae40fbd8f3e394e554159b558c8ab1ea3',1,'Logic']]],
   ['isaggregate_148',['isAggregate',['../classConfigProcessor.html#ab70706e4366f2210116ba0514282d2ba',1,'ConfigProcessor']]],
   ['isconnected_149',['isConnected',['../classVJoystickAdapter.html#adb85711b6b4ea7c19657564c0640fc98',1,'VJoystickAdapter']]],
-  ['isnumber_150',['isNumber',['../classConfigProcessor.html#a3a1a91f6ccb3301bada85030d0b60b52',1,'ConfigProcessor']]],
-  ['isscalar_151',['isScalar',['../classConfigProcessor.html#a997ab7abe3a0f0df3d9a0bcb55eb7c8f',1,'ConfigProcessor']]]
+  ['isfollowwaypoints_150',['isFollowWaypoints',['../classNavDialog.html#abafbd8af8802e6f5b485e4a835af2ed1',1,'NavDialog']]],
+  ['isnumber_151',['isNumber',['../classConfigProcessor.html#a3a1a91f6ccb3301bada85030d0b60b52',1,'ConfigProcessor']]],
+  ['isscalar_152',['isScalar',['../classConfigProcessor.html#a997ab7abe3a0f0df3d9a0bcb55eb7c8f',1,'ConfigProcessor']]]
 ];

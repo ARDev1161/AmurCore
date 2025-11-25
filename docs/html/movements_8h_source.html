@@ -91,65 +91,68 @@ $(document).ready(function(){initNavTree('movements_8h_source.html',''); initRes
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MOVEMENTS_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;../joystick/joystick.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using namespace </span>Robot;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structMoveSettings.html">    8</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structMoveSettings.html">MoveSettings</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structMoveSettings_1_1JoyBindings.html">   10</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structMoveSettings_1_1JoyBindings.html">JoyBindings</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structMoveSettings_1_1JoyBindings.html#a72fcd6928d5fb0442feecea7df4be03c">   12</a></span>&#160;        <span class="keywordtype">int</span> relayButton = 5;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structMoveSettings_1_1JoyBindings.html#a9934491caaf8dba9bef14633f1ad159b">   13</a></span>&#160;        <span class="keywordtype">int</span> lightButton = 0;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="movements_8h.html#ae0c13bda321617f0e448e20e25964243">   15</a></span>&#160;<span class="preprocessor">        #define WHEEL_X_AXIS joyState-&gt;joystickXaxis</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="movements_8h.html#a90ff90523fcd4d3322b0849a468b6112">   16</a></span>&#160;<span class="preprocessor">        #define WHEEL_Y_AXIS joyState-&gt;joystickYaxis</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="movements_8h.html#a36987dadc2e2f30bb614099b868db646">   18</a></span>&#160;<span class="preprocessor">        #define CAM_X_AXIS joyState-&gt;joystickZLTaxis</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="movements_8h.html#a014649cf4df593a13d54c7592eb57f86">   19</a></span>&#160;<span class="preprocessor">        #define CAM_Y_AXIS joyState-&gt;joystickXrotation</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="movements_8h.html#a22d55b7de658a3b18311d3406d325f46">   21</a></span>&#160;<span class="preprocessor">        #define HAND_AXIS joyState-&gt;joystickXrotation</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="movements_8h.html#aec38b9acf8f1f6ba185e5cefb8bd06a3">   23</a></span>&#160;<span class="preprocessor">        #define DIVIDER 129</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structMoveSettings.html#a485468e6ca3770f831061452acc618c4">   25</a></span>&#160;    <a class="code" href="structMoveSettings.html#a485468e6ca3770f831061452acc618c4">joyBindings</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classManualControl.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classManualControl.html">ManualControl</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classManualControl.html#a95021e840dcae68629f898d6c4e2a7d6">   30</a></span>&#160;    std::shared_ptr&lt;Controls&gt; <a class="code" href="classManualControl.html#a95021e840dcae68629f898d6c4e2a7d6">controls</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classManualControl.html#a3476cce0a91e39980f28071028e504a6">   31</a></span>&#160;    std::mutex &amp;<a class="code" href="classManualControl.html#a3476cce0a91e39980f28071028e504a6">grpcMutex_</a>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classManualControl.html#a2bb585173bb491233c7431165f035c86">   33</a></span>&#160;    <a class="code" href="structMoveSettings.html">MoveSettings</a> <a class="code" href="classManualControl.html#a2bb585173bb491233c7431165f035c86">moveSettings</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classManualControl.html#a4a32de198c23f14a3759acee653938f3">   34</a></span>&#160;    std::shared_ptr&lt;JoyState&gt; <a class="code" href="classManualControl.html#a4a32de198c23f14a3759acee653938f3">joyState</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classManualControl.html#a46de0772e24ea35b54f12af2ddb05ac7">   35</a></span>&#160;    <a class="code" href="structJoyState.html">JoyState</a> <a class="code" href="classManualControl.html#a46de0772e24ea35b54f12af2ddb05ac7">lastJoyState</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5">   36</a></span>&#160;    Base::BaseControl::ControlLevel <a class="code" href="classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5">baseControlLevel</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> checkChangeRelayButton(<span class="keywordtype">int</span> buttonNumber);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> checkChangeLightButton(<span class="keywordtype">int</span> buttonNumber);</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span>     <span class="comment">/* abs */</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using namespace </span>Robot;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="structMoveSettings.html">    9</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structMoveSettings.html">MoveSettings</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structMoveSettings_1_1JoyBindings.html">   11</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structMoveSettings_1_1JoyBindings.html">JoyBindings</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structMoveSettings_1_1JoyBindings.html#a72fcd6928d5fb0442feecea7df4be03c">   13</a></span>&#160;        <span class="keywordtype">int</span> relayButton = 5;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structMoveSettings_1_1JoyBindings.html#a9934491caaf8dba9bef14633f1ad159b">   14</a></span>&#160;        <span class="keywordtype">int</span> lightButton = 0;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="movements_8h.html#ae0c13bda321617f0e448e20e25964243">   16</a></span>&#160;<span class="preprocessor">        #define WHEEL_X_AXIS joyState-&gt;joystickXaxis</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="movements_8h.html#a90ff90523fcd4d3322b0849a468b6112">   17</a></span>&#160;<span class="preprocessor">        #define WHEEL_Y_AXIS joyState-&gt;joystickYaxis</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="movements_8h.html#a36987dadc2e2f30bb614099b868db646">   19</a></span>&#160;<span class="preprocessor">        #define CAM_X_AXIS joyState-&gt;joystickZLTaxis</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="movements_8h.html#a014649cf4df593a13d54c7592eb57f86">   20</a></span>&#160;<span class="preprocessor">        #define CAM_Y_AXIS joyState-&gt;joystickXrotation</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="movements_8h.html#a22d55b7de658a3b18311d3406d325f46">   22</a></span>&#160;<span class="preprocessor">        #define HAND_AXIS joyState-&gt;joystickXrotation</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="movements_8h.html#aec38b9acf8f1f6ba185e5cefb8bd06a3">   24</a></span>&#160;<span class="preprocessor">        #define DIVIDER 129</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structMoveSettings.html#a485468e6ca3770f831061452acc618c4">   26</a></span>&#160;    <a class="code" href="structMoveSettings.html#a485468e6ca3770f831061452acc618c4">joyBindings</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classManualControl.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classManualControl.html">ManualControl</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classManualControl.html#a95021e840dcae68629f898d6c4e2a7d6">   31</a></span>&#160;    std::shared_ptr&lt;Controls&gt; <a class="code" href="classManualControl.html#a95021e840dcae68629f898d6c4e2a7d6">controls</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classManualControl.html#a3476cce0a91e39980f28071028e504a6">   32</a></span>&#160;    std::mutex &amp;<a class="code" href="classManualControl.html#a3476cce0a91e39980f28071028e504a6">grpcMutex_</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classManualControl.html#a2bb585173bb491233c7431165f035c86">   34</a></span>&#160;    <a class="code" href="structMoveSettings.html">MoveSettings</a> <a class="code" href="classManualControl.html#a2bb585173bb491233c7431165f035c86">moveSettings</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classManualControl.html#a4a32de198c23f14a3759acee653938f3">   35</a></span>&#160;    std::shared_ptr&lt;JoyState&gt; <a class="code" href="classManualControl.html#a4a32de198c23f14a3759acee653938f3">joyState</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classManualControl.html#a46de0772e24ea35b54f12af2ddb05ac7">   36</a></span>&#160;    <a class="code" href="structJoyState.html">JoyState</a> <a class="code" href="classManualControl.html#a46de0772e24ea35b54f12af2ddb05ac7">lastJoyState</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classManualControl.html#a070bdcf51edd4fca578837eec5c8f0a3">   37</a></span>&#160;    <span class="keywordtype">int</span> joyDriftZone = 7;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5">   39</a></span>&#160;    Base::BaseControl::ControlLevel <a class="code" href="classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5">baseControlLevel</a>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">int</span> wheelRawProcess(<span class="keywordtype">int</span> xAxis, <span class="keywordtype">int</span> yAxis);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">int</span> baseControlProcess(<span class="keywordtype">int</span> xAxis, <span class="keywordtype">int</span> yAxis);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">int</span> moveCameraProcess(<span class="keywordtype">int</span> xAxis, <span class="keywordtype">int</span> yAxis);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classManualControl.html">ManualControl</a>(std::shared_ptr&lt;JoyState&gt; joyState,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                  std::shared_ptr&lt;Controls&gt; controls,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                  std::mutex &amp;grpcMutex,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                  Base::BaseControl::ControlLevel baseControlLevel = Base::BaseControl_ControlLevel_RAW);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">int</span> update();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> setBaseControlLevel(Base::BaseControl::ControlLevel newBaseControlLevel);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MOVEMENTS_H</span></div>
-<div class="ttc" id="aclassManualControl_html"><div class="ttname"><a href="classManualControl.html">ManualControl</a></div><div class="ttdef"><b>Definition:</b> movements.h:29</div></div>
-<div class="ttc" id="aclassManualControl_html_a2bb585173bb491233c7431165f035c86"><div class="ttname"><a href="classManualControl.html#a2bb585173bb491233c7431165f035c86">ManualControl::moveSettings</a></div><div class="ttdeci">MoveSettings moveSettings</div><div class="ttdef"><b>Definition:</b> movements.h:33</div></div>
-<div class="ttc" id="aclassManualControl_html_a3476cce0a91e39980f28071028e504a6"><div class="ttname"><a href="classManualControl.html#a3476cce0a91e39980f28071028e504a6">ManualControl::grpcMutex_</a></div><div class="ttdeci">std::mutex &amp; grpcMutex_</div><div class="ttdef"><b>Definition:</b> movements.h:31</div></div>
-<div class="ttc" id="aclassManualControl_html_a46de0772e24ea35b54f12af2ddb05ac7"><div class="ttname"><a href="classManualControl.html#a46de0772e24ea35b54f12af2ddb05ac7">ManualControl::lastJoyState</a></div><div class="ttdeci">JoyState lastJoyState</div><div class="ttdef"><b>Definition:</b> movements.h:35</div></div>
-<div class="ttc" id="aclassManualControl_html_a4a32de198c23f14a3759acee653938f3"><div class="ttname"><a href="classManualControl.html#a4a32de198c23f14a3759acee653938f3">ManualControl::joyState</a></div><div class="ttdeci">std::shared_ptr&lt; JoyState &gt; joyState</div><div class="ttdef"><b>Definition:</b> movements.h:34</div></div>
-<div class="ttc" id="aclassManualControl_html_a95021e840dcae68629f898d6c4e2a7d6"><div class="ttname"><a href="classManualControl.html#a95021e840dcae68629f898d6c4e2a7d6">ManualControl::controls</a></div><div class="ttdeci">std::shared_ptr&lt; Controls &gt; controls</div><div class="ttdef"><b>Definition:</b> movements.h:30</div></div>
-<div class="ttc" id="aclassManualControl_html_aa48d45f72acbdd24550752b1e40a0fa5"><div class="ttname"><a href="classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5">ManualControl::baseControlLevel</a></div><div class="ttdeci">Base::BaseControl::ControlLevel baseControlLevel</div><div class="ttdef"><b>Definition:</b> movements.h:36</div></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> checkChangeRelayButton(<span class="keywordtype">int</span> buttonNumber);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> checkChangeLightButton(<span class="keywordtype">int</span> buttonNumber);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">int</span> wheelRawProcess(<span class="keywordtype">int</span> xAxis, <span class="keywordtype">int</span> yAxis);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">int</span> baseControlProcess(<span class="keywordtype">int</span> xAxis, <span class="keywordtype">int</span> yAxis);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> moveCameraProcess(<span class="keywordtype">int</span> xAxis, <span class="keywordtype">int</span> yAxis);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classManualControl.html">ManualControl</a>(std::shared_ptr&lt;JoyState&gt; joyState,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                  std::shared_ptr&lt;Controls&gt; controls,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                  std::mutex &amp;grpcMutex,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                  Base::BaseControl::ControlLevel baseControlLevel = Base::BaseControl_ControlLevel_RAW);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">int</span> update();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> setBaseControlLevel(Base::BaseControl::ControlLevel newBaseControlLevel);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MOVEMENTS_H</span></div>
+<div class="ttc" id="aclassManualControl_html"><div class="ttname"><a href="classManualControl.html">ManualControl</a></div><div class="ttdef"><b>Definition:</b> movements.h:30</div></div>
+<div class="ttc" id="aclassManualControl_html_a2bb585173bb491233c7431165f035c86"><div class="ttname"><a href="classManualControl.html#a2bb585173bb491233c7431165f035c86">ManualControl::moveSettings</a></div><div class="ttdeci">MoveSettings moveSettings</div><div class="ttdef"><b>Definition:</b> movements.h:34</div></div>
+<div class="ttc" id="aclassManualControl_html_a3476cce0a91e39980f28071028e504a6"><div class="ttname"><a href="classManualControl.html#a3476cce0a91e39980f28071028e504a6">ManualControl::grpcMutex_</a></div><div class="ttdeci">std::mutex &amp; grpcMutex_</div><div class="ttdef"><b>Definition:</b> movements.h:32</div></div>
+<div class="ttc" id="aclassManualControl_html_a46de0772e24ea35b54f12af2ddb05ac7"><div class="ttname"><a href="classManualControl.html#a46de0772e24ea35b54f12af2ddb05ac7">ManualControl::lastJoyState</a></div><div class="ttdeci">JoyState lastJoyState</div><div class="ttdef"><b>Definition:</b> movements.h:36</div></div>
+<div class="ttc" id="aclassManualControl_html_a4a32de198c23f14a3759acee653938f3"><div class="ttname"><a href="classManualControl.html#a4a32de198c23f14a3759acee653938f3">ManualControl::joyState</a></div><div class="ttdeci">std::shared_ptr&lt; JoyState &gt; joyState</div><div class="ttdef"><b>Definition:</b> movements.h:35</div></div>
+<div class="ttc" id="aclassManualControl_html_a95021e840dcae68629f898d6c4e2a7d6"><div class="ttname"><a href="classManualControl.html#a95021e840dcae68629f898d6c4e2a7d6">ManualControl::controls</a></div><div class="ttdeci">std::shared_ptr&lt; Controls &gt; controls</div><div class="ttdef"><b>Definition:</b> movements.h:31</div></div>
+<div class="ttc" id="aclassManualControl_html_aa48d45f72acbdd24550752b1e40a0fa5"><div class="ttname"><a href="classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5">ManualControl::baseControlLevel</a></div><div class="ttdeci">Base::BaseControl::ControlLevel baseControlLevel</div><div class="ttdef"><b>Definition:</b> movements.h:39</div></div>
 <div class="ttc" id="astructJoyState_html"><div class="ttname"><a href="structJoyState.html">JoyState</a></div><div class="ttdef"><b>Definition:</b> getstatebyjoy.h:11</div></div>
-<div class="ttc" id="astructMoveSettings_1_1JoyBindings_html"><div class="ttname"><a href="structMoveSettings_1_1JoyBindings.html">MoveSettings::JoyBindings</a></div><div class="ttdef"><b>Definition:</b> movements.h:11</div></div>
-<div class="ttc" id="astructMoveSettings_html"><div class="ttname"><a href="structMoveSettings.html">MoveSettings</a></div><div class="ttdef"><b>Definition:</b> movements.h:9</div></div>
+<div class="ttc" id="astructMoveSettings_1_1JoyBindings_html"><div class="ttname"><a href="structMoveSettings_1_1JoyBindings.html">MoveSettings::JoyBindings</a></div><div class="ttdef"><b>Definition:</b> movements.h:12</div></div>
+<div class="ttc" id="astructMoveSettings_html"><div class="ttname"><a href="structMoveSettings.html">MoveSettings</a></div><div class="ttdef"><b>Definition:</b> movements.h:10</div></div>
 <div class="ttc" id="astructMoveSettings_html_a485468e6ca3770f831061452acc618c4"><div class="ttname"><a href="structMoveSettings.html#a485468e6ca3770f831061452acc618c4">MoveSettings::joyBindings</a></div><div class="ttdeci">struct MoveSettings::JoyBindings joyBindings</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

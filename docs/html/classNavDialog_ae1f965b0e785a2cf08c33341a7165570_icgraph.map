@@ -1,4 +1,5 @@
 <map id="NavDialog::followWaypoints" name="NavDialog::followWaypoints">
-<area shape="rect" id="node1" title=" " alt="" coords="201,5,384,32"/>
-<area shape="rect" id="node2" href="$classNavDialog.html#a51cb31ce6e0a5ddf86d7b3ac295ad2dd" title=" " alt="" coords="5,5,153,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="400,5,583,32"/>
+<area shape="rect" id="node2" href="$classNavDialog.html#ae40ff07bb678d20549b24c582da68251" title=" " alt="" coords="201,5,352,32"/>
+<area shape="rect" id="node3" href="$classNavDialog.html#a51cb31ce6e0a5ddf86d7b3ac295ad2dd" title=" " alt="" coords="5,5,153,32"/>
 </map>
