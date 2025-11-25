@@ -1,6 +1,7 @@
 #include "navdialog.h"
 #include "ui_navdialog.h"
 #include <vector>
+#include <mutex>
 
 namespace {
 
@@ -276,15 +277,17 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     QCheckBox *isPatrolCheckBox = new QCheckBox("Patrol");  ///< Сlosed route of waypoints
     commandsLayout->addWidget(isPatrolCheckBox);
 
-    QPushButton *sendGoalsButton = new QPushButton("Send goals", this);
+    sendGoalsButton = new QPushButton("Send goals", this);
     commandsLayout->addWidget(sendGoalsButton);
     connect(sendGoalsButton, &QPushButton::clicked, this, &NavDialog::sendGoals);
 
-    QLabel *statusTask = new QLabel("", this);
-    commandsLayout->addWidget(statusTask);
+    statusTaskLabel = new QLabel("", this);
+    commandsLayout->addWidget(statusTaskLabel);
     connect(timer, &QTimer::timeout, this, [=]() {
         QString newData = taskStatusAsString();
-        statusTask->setText("Status: " + newData);
+        statusTaskLabel->setText("Status: " + newData);
+        if(navTaskState == NavTaskState::Busy)
+            updateStateFromGoals();
     });
 
     commandsGroupBox->setLayout(commandsLayout);
@@ -312,6 +315,7 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     timer->start(42);
 
     refreshGoalList();
+    updateStateFromGoals();
 }
 
 NavDialog::~NavDialog()
@@ -380,6 +384,7 @@ void NavDialog::clearGoals()
     recordGoalsSnapshot();
     refreshGoalList();
     mapWidget->update();
+    updateStateFromGoals();
 }
 
 void NavDialog::sendGoals()
@@ -388,6 +393,7 @@ void NavDialog::sendGoals()
         followWaypoints();
     else
         goThroughPoses();
+    setTaskState(NavTaskState::Busy);
 }
 
 void NavDialog::undoGoals()
@@ -395,6 +401,7 @@ void NavDialog::undoGoals()
     if(navGoalsHistory && navGoalsHistory->undo()) {
         refreshGoalList();
         mapWidget->update();
+        updateStateFromGoals();
     }
 }
 
@@ -403,6 +410,7 @@ void NavDialog::redoGoals()
     if(navGoalsHistory && navGoalsHistory->redo()) {
         refreshGoalList();
         mapWidget->update();
+        updateStateFromGoals();
     }
 }
 
@@ -458,8 +466,26 @@ void NavDialog::refreshGoalList()
     }
 }
 
+void NavDialog::updateStateFromGoals()
+{
+    if(!navigationGoalsList || navigationGoalsList->empty()) {
+        setTaskState(NavTaskState::Idle);
+    } else {
+        setTaskState(NavTaskState::Ready);
+    }
+}
+
+void NavDialog::setTaskState(NavTaskState state)
+{
+    navTaskState = state;
+    if(sendGoalsButton)
+        sendGoalsButton->setEnabled(state == NavTaskState::Ready);
+}
+
 void NavDialog::onMapUpdated()
 {
+    std::scoped_lock lock(mapMutex_, grpcMutex_);
+
     if (!mapPtr) {
         navContainer->setEnabled(false);
         return;
@@ -495,18 +521,6 @@ void NavDialog::onMapUpdated()
                                 mapPtr->robotpose().position_y(),
                                 poseToQuaternion(mapPtr->robotpose()));
     }
-
-    // Обновление списка целей (если MapWidget отправляет сигнал goalAdded, можно подключить этот сигнал)
-    // Здесь, например, можно получить список целей из mapWidget и обновить goalListWidget.
-    auto goals = mapWidget->getGoals();
-    goalListWidget->clear();
-    int index = 1;
-
-    if(goals)
-        for (auto goal : *goals) {
-            goalListWidget->addItem(QString("Goal %1: (%2, %3)").arg(index).arg(goal.x(), 0, 'f', 2).arg(goal.y(), 0, 'f', 2));
-            index++;
-        }
 
     mapWidget->update();
 }

@@ -30,6 +30,13 @@ class NavDialog : public QDialog
 {
     Q_OBJECT
 
+    enum class NavTaskState
+    {
+        Idle,
+        Ready,
+        Busy
+    };
+
 public:
     explicit NavDialog(std::shared_ptr<Controls> controlsPtr,
                        std::shared_ptr<Sensors> sensorsPtr,
@@ -70,6 +77,8 @@ private:
     QGroupBox *waypointsGroupBox;
     QGroupBox *commandsGroupBox;
     QListWidget *goalListWidget;
+    QPushButton *sendGoalsButton {nullptr};
+    QLabel *statusTaskLabel {nullptr};
 
     // Предыдущие данные карты для проверки изменений
     std::vector<int8_t> previousData;
@@ -93,9 +102,12 @@ private:
     void goThroughPoses();
     void refreshGoalList();
     void recordGoalsSnapshot();
+    void updateStateFromGoals();
+    void setTaskState(NavTaskState state);
 
     std::shared_ptr<std::vector<QPointF>> navigationGoalsList;
     QString taskStatusAsString();
+    NavTaskState navTaskState {NavTaskState::Idle};
 };
 
 #endif // NAVDIALOG_H
