@@ -87,7 +87,7 @@ elseif(GRPC_FETCHCONTENT)
     # v1.25.0, v1.26.0 etc..
     # For the purpose of testing, we override the tag used to the commit
     # that's currently under test.
-    GIT_TAG        v1.69.0)
+    GIT_TAG        v1.76.0)
   FetchContent_MakeAvailable(grpc)
 
   # Restore previous flags
