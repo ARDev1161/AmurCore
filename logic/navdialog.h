@@ -15,6 +15,7 @@
 #include <memory>
 #include <vector>
 #include "mapwidget.h"
+#include "network/networkcontroller.h"
 #include "network/protobuf/robot.pb.h"
 
 using namespace Robot;
@@ -72,6 +73,7 @@ private:
     std::mutex &mapMutex_;
     std::unique_ptr<NavCommandBuilder> navCmdBuilder;
     std::unique_ptr<NavGoalsHistory> navGoalsHistory;
+    std::shared_ptr<NetworkController> networkController;
 
     bool isFollowWaypoints {true};
     QGroupBox *waypointsGroupBox;

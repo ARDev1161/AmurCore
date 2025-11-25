@@ -4,7 +4,8 @@ grpcClient::grpcClient(std::shared_ptr<grpc::Channel> channel,
                std::shared_ptr<Controls> controlsPtr,
                std::shared_ptr<Sensors> sensorsPtr,
                std::shared_ptr<map_service::GetMapResponse> mapPtr)
-      : stub_(ServerOnRobot::NewStub(channel)),
+      : QObject(),
+        stub_(ServerOnRobot::NewStub(channel)),
         controls(controlsPtr),
         sensors(sensorsPtr),
         map(mapPtr)
@@ -61,6 +62,7 @@ grpc::Status grpcClient::DataStreamExchange()
 
         // Read sensors & write to protos
         stream->Read(sensors.get());
+        emit sensorsUpdated();
     }
 
     stream->WritesDone();
@@ -97,6 +99,7 @@ grpc::Status grpcClient::MapStream()
 
         // Read map
         stream->Read(map.get());
+        emit mapUpdated();
     }
 
     stream->WritesDone();

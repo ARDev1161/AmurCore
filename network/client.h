@@ -8,11 +8,13 @@
 #include <grpcpp/grpcpp.h>
 
 #include "network/protobuf/robot.grpc.pb.h"
+#include <QObject>
 
 using namespace Robot;
 
-class grpcClient
+class grpcClient : public QObject
 {
+    Q_OBJECT
     std::unique_ptr<ServerOnRobot::Stub> stub_;
     std::shared_ptr<grpc::Channel> clientChannel;
 
@@ -38,6 +40,10 @@ class grpcClient
 
     std::mutex& getMutex() { return muClient; }
     std::mutex& getMapMutex() { return muMap; }
+
+ signals:
+    void sensorsUpdated();
+    void mapUpdated();
 };
 
 #endif // GCLIENT_H

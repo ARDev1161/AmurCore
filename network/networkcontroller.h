@@ -12,6 +12,7 @@
 
 #include "client.h"
 #include "server.h"
+#include "networkfactory.h"
 
 QT_BEGIN_NAMESPACE
 class QUdpSocket;
@@ -57,6 +58,10 @@ public:
     std::shared_ptr<grpcServer>& getServerInstance() {
         return serverPtr;
     }
+
+signals:
+    void sensorsUpdated();
+    void mapUpdated();
 };
 
 #endif // NETWORKCONTROLLER_H

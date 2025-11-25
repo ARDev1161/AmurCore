@@ -1,26 +1,10 @@
 #include "navdialog.h"
 #include "ui_navdialog.h"
+#include "navigation_adapter.h"
 #include <vector>
 #include <mutex>
 
 namespace {
-
-Navigation::Pose* fillPose(Navigation::Pose* pose, const QPointF& point)
-{
-    if (!pose)
-        return nullptr;
-
-    pose->set_x(point.x());
-    pose->set_y(point.y());
-    pose->set_z(0.0);
-
-    pose->set_orientation_w(1.0);
-    pose->set_orientation_x(0.0);
-    pose->set_orientation_y(0.0);
-    pose->set_orientation_z(0.0);
-
-    return pose;
-}
 
 class NavCommandBuilder
 {
@@ -39,7 +23,7 @@ public:
         waypoints->Reserve(static_cast<int>(goals.size()));
 
         for (const QPointF &point : goals) {
-            fillPose(followWaypointsCmd->add_waypoints(), point);
+            NavigationAdapter::fromPoint(point, followWaypointsCmd->add_waypoints());
         }
 
         navCmd->set_request_feedback(true);
@@ -57,7 +41,7 @@ public:
         poses->Reserve(static_cast<int>(goals.size()));
 
         for (const QPointF &point : goals) {
-            fillPose(goThroughPosesCmd->add_poses(), point);
+            NavigationAdapter::fromPoint(point, goThroughPosesCmd->add_poses());
         }
 
         navCmd->set_request_feedback(true);
@@ -147,6 +131,7 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     mapPtr(mapPtr),
     mapMutex_(mapMutex),
     grpcMutex_(grpcMutex),
+    networkController(std::make_shared<NetworkController>(controlsPtr, sensorsPtr, mapPtr)),
     navCmdBuilder(std::make_unique<NavCommandBuilder>(controlsPtr)),
     timer(new QTimer(this)),
     previousWidth(0),
@@ -310,6 +295,12 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
 
     // Подключаем сигнал таймера к слоту обновления карты
     connect(timer, &QTimer::timeout, this, &NavDialog::onMapUpdated);
+
+    // Реагируем на обновления от сети
+    connect(networkController.get(), &NetworkController::mapUpdated,
+            this, &NavDialog::onMapUpdated);
+    connect(networkController.get(), &NetworkController::sensorsUpdated,
+            this, &NavDialog::onMapUpdated);
 
     // Запускаем таймер для проверки обновлений буферов
     timer->start(42);
