@@ -34,6 +34,8 @@ MapWidget::MapWidget(std::shared_ptr<std::vector<QPointF>> navListGoals, QWidget
         QPoint points[3] = { QPoint(10, 0), QPoint(0, 20), QPoint(20, 20) };
         painter.drawPolygon(points, 3);
     }
+
+    setupLayers();
 }
 
 
@@ -216,6 +218,47 @@ void MapWidget::drawAxis(QPainter &painter)
     painter.drawLine(origin, origin - QPoint(0, 20));
 }
 
+void MapWidget::drawMapLayer(QPainter &painter)
+{
+    if(m_mapImage.isNull())
+        return;
+
+    painter.save();
+    painter.translate(m_offset);
+    painter.scale(m_scaleFactor, m_scaleFactor);
+    painter.drawImage(0, 0, m_mapImage);
+    painter.restore();
+}
+
+void MapWidget::drawGridLayer(QPainter &painter)
+{
+    if(!m_showGrid || m_mapImage.isNull())
+        return;
+
+    painter.save();
+    painter.translate(m_offset);
+    painter.scale(m_scaleFactor, m_scaleFactor);
+    drawGrid(painter);
+    painter.restore();
+}
+
+void MapWidget::drawAxisLayer(QPainter &painter)
+{
+    if(!m_showAxis)
+        return;
+    drawAxis(painter);
+}
+
+void MapWidget::drawRobotLayer(QPainter &painter)
+{
+    drawRobot(painter);
+}
+
+void MapWidget::drawWaypointsLayer(QPainter &painter)
+{
+    drawWaypoints(painter);
+}
+
 void MapWidget::drawRobot(QPainter &painter)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
@@ -317,31 +360,8 @@ void MapWidget::paintEvent(QPaintEvent* /*event*/)
     QPainter painter(this);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
-    if(!m_mapImage.isNull()) {
-        painter.save();
-        // Применяем масштабирование и сдвиг
-        painter.translate(m_offset);
-        painter.scale(m_scaleFactor, m_scaleFactor);
-        // 1) Рисуем карту
-        painter.drawImage(0, 0, m_mapImage);
-
-        // 2) Рисуем сетку поверх карты
-        if (m_showGrid) {
-            drawGrid(painter);
-        }
-
-        painter.restore(); // scale=1
-
-        // 3) Рисуем оси поверх карты
-        if (m_showAxis) {
-            drawAxis(painter);
-        }
-
-        // 4) Рисуем робота фиксированного размера (не масштабируя)
-        drawRobot(painter);
-
-        // 5) Отрисовываем цели (не масштабируемые)
-        drawWaypoints(painter);
+    for(auto &layer : m_layers) {
+        layer(painter);
     }
 }
 
@@ -413,6 +433,16 @@ void MapWidget::setShowAxis(bool enable)
 {
     m_showAxis = enable;
     update();
+}
+
+void MapWidget::setupLayers()
+{
+    m_layers.clear();
+    m_layers.emplace_back([this](QPainter& painter){ drawMapLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawGridLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawAxisLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawRobotLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawWaypointsLayer(painter); });
 }
 
 void MapWidget::wheelEvent(QWheelEvent* event)

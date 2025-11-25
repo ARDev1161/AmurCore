@@ -8,6 +8,7 @@
 #include <QScrollBar>
 #include <vector>
 #include <mutex>
+#include <functional>
 
 struct PoseQuaternion {
     double x;
@@ -123,6 +124,14 @@ private:
     void drawAxis(QPainter &painter);
     void drawRobot(QPainter &painter);
     void drawWaypoints(QPainter &painter);
+    void drawMapLayer(QPainter &painter);
+    void drawGridLayer(QPainter &painter);
+    void drawAxisLayer(QPainter &painter);
+    void drawRobotLayer(QPainter &painter);
+    void drawWaypointsLayer(QPainter &painter);
+
+    void setupLayers();
+    std::vector<std::function<void(QPainter&)>> m_layers;
 
     void fitMapToWidget();
 
