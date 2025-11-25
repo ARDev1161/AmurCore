@@ -5,8 +5,10 @@
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QGroupBox>
-#include <QCheckBox>
 #include <QLabel>
+#include <QCheckBox>
+#include <QRadioButton>
+#include <QButtonGroup>
 #include <QPushButton>
 #include <QListWidget>
 #include "mapwidget.h"
@@ -15,7 +17,7 @@
 using namespace Robot;
 
 namespace Ui {
-class NavDialog;
+    class NavDialog;
 }
 
 class NavDialog : public QDialog
@@ -39,8 +41,8 @@ private slots:
      * @brief Слот для обновления отображаемой карты.
      */
     void onMapUpdated();
-    void clearWaypoints();
-    void followWaypoints();
+    void clearGoals();
+    void sendGoals();
 
 private:
     Ui::NavDialog *ui;
@@ -54,6 +56,7 @@ private:
     std::mutex &grpcMutex_;
     std::mutex &mapMutex_;
 
+    bool isFollowWaypoints {true};
     QGroupBox *waypointsGroupBox;
     QGroupBox *commandsGroupBox;
     QListWidget *goalListWidget;
@@ -76,7 +79,11 @@ private:
 
     PoseQuaternion poseToQuaternion(map_service::Pose pose) const;
 
+    void followWaypoints();
+    void goThroughPoses();
+
     std::shared_ptr<std::vector<QPointF>> navigationGoalsList;
+    QString taskStatusAsString();
 };
 
 #endif // NAVDIALOG_H

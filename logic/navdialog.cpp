@@ -79,8 +79,6 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
                 });
     hLayout->addLayout(mapLayout, 3);  // карта занимает 3/4 пространства
 
-
-
     goalListWidget = new QListWidget(this);
 
     waypointsGroupBox = new QGroupBox(tr("Waypoints list"), this);
@@ -91,19 +89,54 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
 
     QPushButton *clearWaypoints = new QPushButton("Clear waypoints", this);
     groupLayout->addWidget(clearWaypoints);
-    connect(clearWaypoints, &QPushButton::clicked, this, &NavDialog::clearWaypoints);
+    connect(clearWaypoints, &QPushButton::clicked, this, &NavDialog::clearGoals);
 
 
     commandsGroupBox = new QGroupBox(tr("Commands"), this);
     QVBoxLayout *commandsLayout = new QVBoxLayout;
 
+    // Добавляем 2 radiobutton для переключения isFollowWaypoints
+    QRadioButton *radioFollowWaypoints = new QRadioButton(tr("Follow Waypoints"), this);
+    QRadioButton *radioGoThroughPoses = new QRadioButton(tr("Go Through Poses"), this);
+    // Объединяем в группу, чтобы они были взаимоисключающими
+    QButtonGroup *followWaypointsGroup = new QButtonGroup(this);
+    followWaypointsGroup->addButton(radioFollowWaypoints);
+    followWaypointsGroup->addButton(radioGoThroughPoses);
+    // Устанавливаем значение по умолчанию (при необходимости)
+    radioFollowWaypoints->setChecked(true);
+
+    // Добавляем кнопки в layout
+    commandsLayout->addWidget(radioFollowWaypoints);
+    commandsLayout->addWidget(radioGoThroughPoses);
+
+    // Подключаем переключение флага isFollowWaypoints
+    connect(radioFollowWaypoints, &QRadioButton::toggled,
+            this, [this](bool checked) {
+                if (checked) {
+                    isFollowWaypoints = true;
+                }
+            });
+    connect(radioGoThroughPoses, &QRadioButton::toggled,
+            this, [this](bool checked) {
+                if (checked) {
+                    isFollowWaypoints = false;
+                }
+            });
+
     // Patrol mode
     QCheckBox *isPatrolCheckBox = new QCheckBox("Patrol");  ///< Сlosed route of waypoints
     commandsLayout->addWidget(isPatrolCheckBox);
 
-    QPushButton *followWaypoints = new QPushButton("Follow waypoints", this);
-    commandsLayout->addWidget(followWaypoints);
-    connect(followWaypoints, &QPushButton::clicked, this, &NavDialog::followWaypoints);
+    QPushButton *sendGoalsButton = new QPushButton("Send goals", this);
+    commandsLayout->addWidget(sendGoalsButton);
+    connect(sendGoalsButton, &QPushButton::clicked, this, &NavDialog::sendGoals);
+
+    QLabel *statusTask = new QLabel("", this);
+    commandsLayout->addWidget(statusTask);
+    connect(timer, &QTimer::timeout, this, [=]() {
+        QString newData = taskStatusAsString();
+        statusTask->setText("Status: " + newData);
+    });
 
     commandsGroupBox->setLayout(commandsLayout);
 
@@ -126,7 +159,7 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     // Подключаем сигнал таймера к слоту обновления карты
     connect(timer, &QTimer::timeout, this, &NavDialog::onMapUpdated);
 
-    // Запускаем таймер с интервалом 1000 мс (1 секунда)
+    // Запускаем таймер для проверки обновлений буферов
     timer->start(42);
 }
 
@@ -190,9 +223,17 @@ PoseQuaternion NavDialog::poseToQuaternion(map_service::Pose pose) const
 
 }
 
-void NavDialog::clearWaypoints()
+void NavDialog::clearGoals()
 {
     navigationGoalsList->clear();
+}
+
+void NavDialog::sendGoals()
+{
+    if(isFollowWaypoints)
+        followWaypoints();
+    else
+        goThroughPoses();
 }
 
 void NavDialog::followWaypoints()
@@ -205,6 +246,10 @@ void NavDialog::followWaypoints()
 
     // Очистим предыдущие waypoints, если они были заданы
     followWaypointsCmd->clear_waypoints();
+    // Получаем указатель на повторяемое поле.
+    auto* waypoints = followWaypointsCmd->mutable_waypoints();
+    // Предварительно резервируем память для всех точек.
+    waypoints->Reserve(navigationGoalsList->size());
 
     // Итерируемся по списку точек и добавляем каждую точку как новый Pose.
     for (const QPointF &point : *navigationGoalsList) {
@@ -222,6 +267,57 @@ void NavDialog::followWaypoints()
 
     // Если требуется, устанавливаем запрос обратной связи.
     navCmd->set_request_feedback(true);
+}
+
+void NavDialog::goThroughPoses()
+{
+    // Получаем изменяемое сообщение NavCommandRequest.
+    Navigation::NavCommandRequest* navCmd = controls->mutable_navcontrol();
+
+    // Устанавливаем активным поле follow_waypoints в oneof.
+    Navigation::GoThroughPoses* goThroughPosesCmd = navCmd->mutable_go_through_poses();
+
+    // Очистим предыдущие waypoints, если они были заданы
+    goThroughPosesCmd->clear_poses();
+    // Получаем указатель на повторяемое поле.
+    auto* poses = goThroughPosesCmd->mutable_poses();
+    // Предварительно резервируем память для всех точек.
+    poses->Reserve(navigationGoalsList->size());
+
+    // Итерируемся по списку точек и добавляем каждую точку как новый Pose.
+    for (const QPointF &point : *navigationGoalsList) {
+         Navigation::Pose* pose = goThroughPosesCmd->add_poses();
+         pose->set_x(point.x());
+         pose->set_y(point.y());
+         pose->set_z(0.0);  // Предполагаем, что навигация ведется в 2D, z = 0.
+
+         // Устанавливаем ориентацию по умолчанию: идентичный поворот (единичный кватернион).
+         pose->set_orientation_w(1.0);
+         pose->set_orientation_x(0.0);
+         pose->set_orientation_y(0.0);
+         pose->set_orientation_z(0.0);
+    }
+
+    // Если требуется, устанавливаем запрос обратной связи.
+    navCmd->set_request_feedback(true);
+}
+
+QString NavDialog::taskStatusAsString()
+{
+    int statusValue = sensors->mutable_navcontrolstatus()->status();
+    // Получаем дескриптор enum CommandStatus (функция генерируется автоматически)
+    const google::protobuf::EnumDescriptor* descriptor = Navigation::CommandStatus_descriptor();
+    if (descriptor)
+    {
+        // Находим дескриптор конкретного значения по его номеру
+        const google::protobuf::EnumValueDescriptor* enumValue = descriptor->FindValueByNumber(statusValue);
+        if (enumValue)
+        {
+            // Возвращаем строковое представление
+            return QString::fromStdString(enumValue->name());
+        }
+    }
+    return QString("Unknown status");
 }
 
 void NavDialog::onMapUpdated()

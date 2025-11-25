@@ -431,15 +431,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="logic/navdialog.cpp" line="86"/>
+        <location filename="logic/navdialog.cpp" line="84"/>
         <source>Waypoints list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="logic/navdialog.cpp" line="97"/>
+        <location filename="logic/navdialog.cpp" line="95"/>
         <source>Commands</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="logic/navdialog.cpp" line="99"/>
+        <source>Follow Waypoints</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="logic/navdialog.cpp" line="100"/>
+        <source>Go Through Poses</source>
+        <translation type="unfinished"></translation>
+    </message>
+
 </context>
 <context>
     <name>RobotInfoDialog</name>
