@@ -1,21 +1,24 @@
 #include "worker.h"
 
-Worker::Worker()
+WorkerBase::WorkerBase()
 {
-
 }
 
-Worker::~Worker()
+WorkerBase::~WorkerBase()
 {
-
+    stop();
 }
 
-void Worker::process()
+void WorkerBase::process()
 {
-
+    onStart();
+    if(running)
+        onTick();
+    onStop();
+    emit finished();
 }
 
-void Worker::stop()
+void WorkerBase::stop()
 {
-
+    running = false;
 }
