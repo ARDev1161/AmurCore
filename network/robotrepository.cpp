@@ -49,18 +49,34 @@ bool RobotRepository::createTableIfNotExists()
     QString createTableSQL = R"(
         CREATE TABLE IF NOT EXISTS robots (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            machineID TEXT,
+            machineID TEXT NOT NULL,
             name TEXT,
-            address TEXT,
-            port INTEGER,
-            portForAnswer INTEGER,
-            macAddress TEXT
+            address TEXT NOT NULL,
+            port INTEGER NOT NULL,
+            portForAnswer INTEGER DEFAULT 0,
+            macAddress TEXT,
+            UNIQUE(machineID)
         )
     )";
 
     if (!query.exec(createTableSQL)) {
         qDebug() << "Failed to create table 'robots':" << query.lastError().text();
         return false;
+    }
+
+    // Secondary indexes to speed up filtering by frequently used fields.
+    const QStringList indexStatements = {
+        R"(CREATE UNIQUE INDEX IF NOT EXISTS idx_robots_machineID ON robots(machineID))",
+        R"(CREATE INDEX IF NOT EXISTS idx_robots_address ON robots(address))",
+        R"(CREATE INDEX IF NOT EXISTS idx_robots_name ON robots(name))",
+        R"(CREATE INDEX IF NOT EXISTS idx_robots_mac ON robots(macAddress))"
+    };
+
+    for (const QString &statement : indexStatements) {
+        if (!query.exec(statement)) {
+            qDebug() << "Failed to create index:" << query.lastError().text();
+            return false;
+        }
     }
 
     return true;
@@ -148,14 +164,9 @@ bool RobotRepository::addRobot(const RobotEntryPtr robot)
         return false;
     }
 
-    if (robotExists(robot->machineID())) {
-        qDebug() << "Robot with machineID" << robot->machineID() << "already exists. Skipping insertion.";
-        return false;
-    }
-
     QSqlQuery query(m_db);
     query.prepare(R"(
-        INSERT INTO robots
+        INSERT OR IGNORE INTO robots
             (machineID, name, address, port, portForAnswer, macAddress)
         VALUES
             (:machineID, :name, :address, :port, :portForAnswer, :macAddress)
@@ -170,6 +181,10 @@ bool RobotRepository::addRobot(const RobotEntryPtr robot)
 
     if (!query.exec()) {
         qDebug() << "Failed to insert robot:" << query.lastError().text();
+        return false;
+    }
+    if (query.numRowsAffected() == 0) {
+        qDebug() << "Robot with machineID" << robot->machineID() << "already exists. Skipping insertion.";
         return false;
     }
     return true;
@@ -191,7 +206,7 @@ bool RobotRepository::addRobots(const RobotList &robots)
     }
 
     query.prepare(R"(
-        INSERT INTO robots
+        INSERT OR IGNORE INTO robots
             (machineID, name, address, port, portForAnswer, macAddress)
         VALUES
             (:machineID, :name, :address, :port, :portForAnswer, :macAddress)
@@ -199,11 +214,6 @@ bool RobotRepository::addRobots(const RobotList &robots)
 
     for (RobotEntryPtr robot : robots) {
         if (!robot) continue; // пропускаем, если указатель нулевой
-
-        if (robotExists(robot->machineID())) {
-            qDebug() << "Robot with machineID" << robot->machineID() << "already exists. Skipping insertion.";
-            continue;
-        }
 
         query.bindValue(":machineID",     robot->machineID());
         query.bindValue(":name",          robot->name());
@@ -215,6 +225,7 @@ bool RobotRepository::addRobots(const RobotList &robots)
         if (!query.exec()) {
             qDebug() << "Failed to insert robot:" << query.lastError().text();
         }
+        // INSERT OR IGNORE returns 0 affected rows for duplicates; nothing else to do.
     }
 
     if (!m_db.commit()) {
