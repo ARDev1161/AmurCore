@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
-
 project(AMURProtos LANGUAGES CXX)
 
 # Option to decide whether to use FetchContent to download gRPC or use the system-installed version

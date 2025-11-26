@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
-
 project(LogicCore LANGUAGES CXX)
 
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
