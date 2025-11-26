@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['loadjoy_645',['loadJoy',['../classJoystickDialog.html#a38b5d0436ddd21ef48762db6e00115b8',1,'JoystickDialog']]],
-  ['loadrobots_646',['loadRobots',['../classRobotRepository.html#a1679d5d2ba4fa10c32d8d97760dff9dd',1,'RobotRepository']]],
-  ['logic_647',['Logic',['../classLogic.html#aeb97a62c1b719375cecbe46602f0a284',1,'Logic']]]
+  ['loadjoy_646',['loadJoy',['../classJoystickDialog.html#a38b5d0436ddd21ef48762db6e00115b8',1,'JoystickDialog']]],
+  ['loadrobots_647',['loadRobots',['../classRobotRepository.html#a1679d5d2ba4fa10c32d8d97760dff9dd',1,'RobotRepository']]],
+  ['logic_648',['Logic',['../classLogic.html#aeb97a62c1b719375cecbe46602f0a284',1,'Logic']]]
 ];
