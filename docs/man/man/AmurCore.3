@@ -87,6 +87,9 @@ Inherits QMainWindow\&.
 .RI "void \fBworker\fP ()"
 .br
 .ti -1c
+.RI "void \fBupdateStatusMessage\fP ()"
+.br
+.ti -1c
 .RI "void \fBoutMat\fP (Mat &toOut)"
 .br
 .ti -1c
@@ -107,6 +110,9 @@ Inherits QMainWindow\&.
 .br
 .ti -1c
 .RI "QString \fBstatusMessage\fP = 'No robot connected'"
+.br
+.ti -1c
+.RI "QString \fBcurrentRobotId\fP"
 .br
 .ti -1c
 .RI "const char * \fBconfigName\fP = 'AmurCore\&.cfg'"
@@ -143,6 +149,9 @@ Inherits QMainWindow\&.
 .br
 .ti -1c
 .RI "\fBRobotInfoDialog\fP * \fBrobotInfoDialog\fP"
+.br
+.ti -1c
+.RI "QLabel * \fBstatusLabel\fP"
 .br
 .ti -1c
 .RI "std::shared_ptr< Controls > \fBcontrols\fP"
@@ -225,6 +234,8 @@ Inherits QMainWindow\&.
 
 .SS "void AmurCore::undistortMat (Mat & inMat, Mat & outMat)\fC [private]\fP"
 
+.SS "void AmurCore::updateStatusMessage ()\fC [private]\fP"
+
 .SS "void AmurCore::worker ()\fC [private]\fP"
 
 .SH "Member Data Documentation"
@@ -248,6 +259,8 @@ Inherits QMainWindow\&.
 .SS "\fBConnectDialog\fP* AmurCore::connectDialog\fC [private]\fP"
 
 .SS "std::shared_ptr<Controls> AmurCore::controls\fC [private]\fP"
+
+.SS "QString AmurCore::currentRobotId\fC [private]\fP"
 
 .SS "int AmurCore::grpcPort = 7777\fC [private]\fP"
 
@@ -276,6 +289,8 @@ Inherits QMainWindow\&.
 .SS "std::shared_ptr<Sensors> AmurCore::sensors\fC [private]\fP"
 
 .SS "Mat AmurCore::sourceMat\fC [private]\fP"
+
+.SS "QLabel* AmurCore::statusLabel\fC [private]\fP"
 
 .SS "QString AmurCore::statusMessage = 'No robot connected'\fC [private]\fP"
 

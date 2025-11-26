@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['amurcore_466',['AmurCore',['../classAmurCore.html',1,'']]]
+  ['amurcore_468',['AmurCore',['../classAmurCore.html',1,'']]]
 ];

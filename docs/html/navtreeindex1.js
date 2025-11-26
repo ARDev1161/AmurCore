@@ -1,5 +1,8 @@
 var NAVTREEINDEX1 =
 {
+"classLogic.html#a02d3bd893cae5db5f9264e71e6b16720":[3,0,14,8],
+"classLogic.html#a2597d0e03cefdf4953e26e0aa073fc16":[3,0,14,10],
+"classLogic.html#a28e53fcdf563bd313f060b6702c743c9":[3,0,14,5],
 "classLogic.html#a352394ea40e7d017ce276f9bf066380b":[3,0,14,12],
 "classLogic.html#a5071559d47550c4652ce1a1c4ebbe4ba":[3,0,14,7],
 "classLogic.html#a689017b6c02bab059df24cbd9285987e":[3,0,14,4],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "classgrpcServer.html#a79e4dc9ecc47ff59177a2705555fd15c":[3,0,9,8],
 "classgrpcServer.html#a7d29d1294fbe427f27a44e9fd3a671bb":[3,0,9,0],
 "classgrpcServer.html#a7eefb95b15451cbf826561d3ff7c98ab":[3,0,9,1],
-"classgrpcServer.html#a7f759c95f648a9eef7a345767f216129":[3,0,9,6],
-"classgrpcServer.html#aac1e786584f26086427c642de17b1311":[3,0,9,3],
-"classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe":[3,0,9,9],
-"client_8cpp.html":[4,0,4,0]
+"classgrpcServer.html#a7f759c95f648a9eef7a345767f216129":[3,0,9,6]
 };

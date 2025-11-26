@@ -69,8 +69,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "amurcore_8cpp.html",
-"classLogic.html#a352394ea40e7d017ce276f9bf066380b",
-"client_8h.html"
+"classLogic.html#a02d3bd893cae5db5f9264e71e6b16720",
+"classgrpcServer.html#aac1e786584f26086427c642de17b1311"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

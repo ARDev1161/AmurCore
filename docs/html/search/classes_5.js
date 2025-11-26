@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['manualcontrol_482',['ManualControl',['../classManualControl.html',1,'']]],
-  ['mapwidget_483',['MapWidget',['../classMapWidget.html',1,'']]],
-  ['movesettings_484',['MoveSettings',['../structMoveSettings.html',1,'']]]
+  ['manualcontrol_484',['ManualControl',['../classManualControl.html',1,'']]],
+  ['mapwidget_485',['MapWidget',['../classMapWidget.html',1,'']]],
+  ['movesettings_486',['MoveSettings',['../structMoveSettings.html',1,'']]]
 ];

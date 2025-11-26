@@ -1,10 +1,11 @@
 <map id="AmurCore::worker" name="AmurCore::worker">
-<area shape="rect" id="node1" title=" " alt="" coords="5,143,131,170"/>
-<area shape="rect" id="node2" href="$classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="179,143,285,170"/>
-<area shape="rect" id="node3" href="$classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="333,143,484,170"/>
-<area shape="rect" id="node4" href="$classManualControl.html#a312b8b5ba45b63e4e8f403b7d49d5237" title=" " alt="" coords="551,5,731,47"/>
-<area shape="rect" id="node5" href="$classManualControl.html#aa4a96f837624198177e3386583dafdd4" title=" " alt="" coords="546,71,737,112"/>
-<area shape="rect" id="node6" href="$classManualControl.html#a50789f43ceffaedf4d13b2040483124f" title=" " alt="" coords="546,136,737,177"/>
-<area shape="rect" id="node7" href="$classManualControl.html#a1f4fafd9bd86396cad2868d6b51de2be" title=" " alt="" coords="547,201,735,243"/>
-<area shape="rect" id="node8" href="$classManualControl.html#afa373688174e8ba403f8c83f8cf486da" title=" " alt="" coords="532,267,751,294"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,169,131,195"/>
+<area shape="rect" id="node2" href="$classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="233,143,340,170"/>
+<area shape="rect" id="node9" href="$classAmurCore.html#af9db0b362271e264dda9704167cb7b3e" title=" " alt="" coords="179,194,395,221"/>
+<area shape="rect" id="node3" href="$classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="443,143,593,170"/>
+<area shape="rect" id="node4" href="$classManualControl.html#a312b8b5ba45b63e4e8f403b7d49d5237" title=" " alt="" coords="661,5,841,47"/>
+<area shape="rect" id="node5" href="$classManualControl.html#aa4a96f837624198177e3386583dafdd4" title=" " alt="" coords="655,71,846,112"/>
+<area shape="rect" id="node6" href="$classManualControl.html#a50789f43ceffaedf4d13b2040483124f" title=" " alt="" coords="655,136,846,177"/>
+<area shape="rect" id="node7" href="$classManualControl.html#a1f4fafd9bd86396cad2868d6b51de2be" title=" " alt="" coords="657,201,845,243"/>
+<area shape="rect" id="node8" href="$classManualControl.html#afa373688174e8ba403f8c83f8cf486da" title=" " alt="" coords="641,267,860,294"/>
 </map>
