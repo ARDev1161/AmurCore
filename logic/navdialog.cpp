@@ -305,16 +305,13 @@ void NavDialog::goThroughPoses()
 QString NavDialog::taskStatusAsString()
 {
     int statusValue = sensors->mutable_navcontrolstatus()->status();
-    // Получаем дескриптор enum CommandStatus (функция генерируется автоматически)
     const google::protobuf::EnumDescriptor* descriptor = Navigation::CommandStatus_descriptor();
-    if (descriptor)
-    {
-        // Находим дескриптор конкретного значения по его номеру
+    if (descriptor) {
         const google::protobuf::EnumValueDescriptor* enumValue = descriptor->FindValueByNumber(statusValue);
         if (enumValue)
         {
-            // Возвращаем строковое представление
-            return QString::fromStdString(enumValue->name());
+            absl::string_view nameView = enumValue->name();
+            return QString::fromLatin1(nameView.data(), static_cast<int>(nameView.size()));
         }
     }
     return QString("Unknown status");
