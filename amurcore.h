@@ -22,6 +22,7 @@
 #undef main
 #include "pch.h"
 #include <mutex>
+#include <QLabel>
 
 #define NO_PICTURE "./data/images/no_picture.jpeg"
 #define SOURCE_STREAM 0
@@ -44,6 +45,7 @@ class AmurCore : public QMainWindow
     QTimer *tmrTimer;
     QString *hostName;
     QString statusMessage = "No robot connected";
+    QString currentRobotId;
 
     const char *configName = "AmurCore.cfg";
     ConfigProcessor *config;
@@ -60,6 +62,7 @@ class AmurCore : public QMainWindow
     JoystickDialog *joystickDialog;
     NavDialog *navigationDialog;
     RobotInfoDialog *robotInfoDialog;
+    QLabel *statusLabel;
 
     std::shared_ptr<Controls> controls;
     std::shared_ptr<Sensors> sensors;
@@ -105,6 +108,7 @@ private:
     void initialize();
     void connMenu();
     void worker();
+    void updateStatusMessage();
     void outMat(Mat &toOut);
     void undistortMat(Mat &inMat, Mat &outMat);
 

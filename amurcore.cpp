@@ -49,6 +49,8 @@ void AmurCore::initialize()
     network->runArpingService(arpPort, grpcPort, arpHeader); // Start listening for initial arp message from robots
     network->runServer(address_mask); // Start AmurCore gRPC server
     connectDialog = new ConnectDialog(this, network, repo);
+    statusLabel = new QLabel(statusMessage, this);
+    ui->statusbar->addPermanentWidget(statusLabel);
 
     std::mutex& mapMutex = network->getServerInstance()->getMapMutex(); // MapStream mutex
     std::mutex& grpcMutex = network->getServerInstance()->getMutex(); // DataStreamExchange mutex
@@ -174,7 +176,6 @@ void AmurCore::frameUpdate()
     }
 
     worker();
-    ui->statusbar->showMessage(statusMessage);
 }
 
 void AmurCore::outMat(Mat &toOut)
@@ -195,7 +196,73 @@ void AmurCore::undistortMat(Mat &inMat, Mat &outMat)
         outMat = inMat;
 }
 
+void AmurCore::updateStatusMessage()
+{
+    const RobotList robots = network->getRobots();
+    if (robots.isEmpty()) {
+        currentRobotId.clear();
+        if (statusMessage != "No robot connected") {
+            statusMessage = "No robot connected";
+            statusLabel->setText(statusMessage);
+        }
+        return;
+    }
+
+    RobotEntryPtr activeRobot;
+    for (const auto &robot : robots) {
+        if (!robot) {
+            continue;
+        }
+
+        // Prefer robots with a human-friendly name, otherwise use the first available.
+        if (!robot->name().isEmpty()) {
+            activeRobot = robot;
+            break;
+        }
+
+        if (!activeRobot) {
+            activeRobot = robot;
+        }
+    }
+
+    if (!activeRobot) {
+        currentRobotId.clear();
+        if (statusMessage != "No robot connected") {
+            statusMessage = "No robot connected";
+            statusLabel->setText(statusMessage);
+        }
+        return;
+    }
+
+    const QString machineId = activeRobot->machineID();
+
+    // Try to pull a stored name from the repo once per machine ID.
+    if (activeRobot->name().isEmpty() && machineId != currentRobotId && !machineId.isEmpty()) {
+        RobotList known = repo->searchRobots(nullptr, machineId);
+        if (!known.isEmpty() && known.first()) {
+            activeRobot->setName(known.first()->name());
+        }
+    }
+
+    currentRobotId = machineId;
+
+    QString displayName = activeRobot->name();
+    if (displayName.isEmpty()) {
+        displayName = machineId.isEmpty() ? QString("Unknown robot") : machineId;
+    }
+
+    const QString newMessage = QString("Connected to %1 (%2:%3)")
+                                   .arg(displayName, activeRobot->address().toString())
+                                   .arg(activeRobot->port());
+
+    if (newMessage != statusMessage) {
+        statusMessage = newMessage;
+        statusLabel->setText(statusMessage);
+    }
+}
+
 void AmurCore::worker()
 {
+    updateStatusMessage();
     amurLogic->process();
 }
