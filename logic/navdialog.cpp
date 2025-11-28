@@ -4,8 +4,6 @@
 #include <vector>
 #include <mutex>
 
-namespace {
-
 class NavCommandBuilder
 {
 public:
@@ -115,8 +113,6 @@ private:
     std::vector<std::vector<QPointF>> history_;
     std::size_t currentIndex_ {0};
 };
-
-} // namespace
 
 NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
                      std::shared_ptr<Sensors> sensorsPtr,

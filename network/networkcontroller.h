@@ -10,15 +10,15 @@
 
 #include "robotentry.h"
 
-#include "client.h"
-#include "server.h"
+#include "client.h".
 #include "networkfactory.h"
+#include "server.h"
 
 QT_BEGIN_NAMESPACE
 class QUdpSocket;
 QT_END_NAMESPACE
 
-class NetworkController : QObject
+class NetworkController : public QObject
 {
     Q_OBJECT
 
