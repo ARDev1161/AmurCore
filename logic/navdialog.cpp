@@ -298,7 +298,7 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
             this, &NavDialog::onMapUpdated);
 
     // Запускаем таймер для проверки обновлений буферов
-    timer->start(42);
+    startUpdates();
 
     refreshGoalList();
     updateStateFromGoals();
@@ -307,6 +307,18 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
 NavDialog::~NavDialog()
 {
     delete ui;
+}
+
+void NavDialog::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent(event);
+    startUpdates();
+}
+
+void NavDialog::hideEvent(QHideEvent *event)
+{
+    QDialog::hideEvent(event);
+    stopUpdates();
 }
 
 bool NavDialog::hasMapChanged() const
@@ -470,6 +482,10 @@ void NavDialog::setTaskState(NavTaskState state)
 
 void NavDialog::onMapUpdated()
 {
+    if (!isVisible()) {
+        return;
+    }
+
     std::vector<int8_t> dataCopy;
     int width = 0;
     int height = 0;
@@ -532,4 +548,16 @@ void NavDialog::onMapUpdated()
     }
 
     mapWidget->update();
+}
+
+void NavDialog::startUpdates()
+{
+    if(timer && !timer->isActive())
+        timer->start(42);
+}
+
+void NavDialog::stopUpdates()
+{
+    if(timer && timer->isActive())
+        timer->stop();
 }

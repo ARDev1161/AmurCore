@@ -1,22 +1,24 @@
 #ifndef NAVDIALOG_H
 #define NAVDIALOG_H
 
+#include <QButtonGroup>
+#include <QCheckBox>
 #include <QDialog>
+#include <QGroupBox>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QListWidget>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QShowEvent>
+#include <QHideEvent>
 #include <QTimer>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QGroupBox>
-#include <QLabel>
-#include <QCheckBox>
-#include <QRadioButton>
-#include <QButtonGroup>
-#include <QPushButton>
-#include <QListWidget>
-#include <memory>
-#include <vector>
 #include "mapwidget.h"
 #include "network/networkcontroller.h"
 #include "network/protobuf/robot.pb.h"
+#include <memory>
+#include <vector>
 
 using namespace Robot;
 
@@ -59,6 +61,10 @@ private slots:
     void sendGoals();
     void undoGoals();
     void redoGoals();
+
+protected:
+    void showEvent(QShowEvent *event) override;
+    void hideEvent(QHideEvent *event) override;
 
 private:
     Ui::NavDialog *ui;
@@ -106,6 +112,8 @@ private:
     void recordGoalsSnapshot();
     void updateStateFromGoals();
     void setTaskState(NavTaskState state);
+    void startUpdates();
+    void stopUpdates();
 
     std::shared_ptr<std::vector<QPointF>> navigationGoalsList;
     QString taskStatusAsString();
