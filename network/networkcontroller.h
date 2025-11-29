@@ -10,7 +10,7 @@
 
 #include "robotentry.h"
 
-#include "client.h".
+#include "client.h"
 #include "networkfactory.h"
 #include "server.h"
 
