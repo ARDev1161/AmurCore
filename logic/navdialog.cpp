@@ -296,8 +296,6 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     // Реагируем на обновления от сети
     connect(networkController.get(), &NetworkController::mapUpdated,
             this, &NavDialog::onMapUpdated);
-    connect(networkController.get(), &NetworkController::sensorsUpdated,
-            this, &NavDialog::onMapUpdated);
 
     // Запускаем таймер для проверки обновлений буферов
     timer->start(42);
@@ -472,42 +470,65 @@ void NavDialog::setTaskState(NavTaskState state)
 
 void NavDialog::onMapUpdated()
 {
-    std::scoped_lock lock(mapMutex_, grpcMutex_);
+    std::vector<int8_t> dataCopy;
+    int width = 0;
+    int height = 0;
+    double resolution = 0.0;
+    double originX = 0.0;
+    double originY = 0.0;
+    double robotX = 0.0;
+    double robotY = 0.0;
+    PoseQuaternion robotQuat {};
+    bool mapChanged = false;
+    bool poseChanged = false;
 
-    if (!mapPtr) {
-        navContainer->setEnabled(false);
-        return;
+    {
+        std::scoped_lock lock(mapMutex_, grpcMutex_);
+
+        if (!mapPtr) {
+            navContainer->setEnabled(false);
+            return;
+        }
+        if(!navContainer->isEnabled() && !(mapPtr->map().data().empty()))
+            navContainer->setEnabled(true);
+
+        mapChanged = hasMapChanged();
+        poseChanged = hasPoseChanged();
+        if (!mapChanged && !poseChanged) {
+            return;
+        }
+
+        if (mapChanged) {
+            dataCopy.assign(mapPtr->map().data().begin(), mapPtr->map().data().end());
+            width = mapPtr->map().width();
+            height = mapPtr->map().height();
+
+            resolution = mapPtr->map().resolution();
+
+            originX = mapPtr->map().origin().position_x();
+            originY = mapPtr->map().origin().position_y();
+
+            // Обновляем предыдущие данные
+            previousData = dataCopy;
+            previousWidth = width;
+            previousHeight = height;
+        }
+
+        if (poseChanged) {
+            robotX = mapPtr->robotpose().position_x();
+            robotY = mapPtr->robotpose().position_y();
+            robotQuat = poseToQuaternion(mapPtr->robotpose());
+        }
     }
-    if(!navContainer->isEnabled() && !(mapPtr->map().data().empty()))
-        navContainer->setEnabled(true);
 
-    // Проверяем, изменились ли данные карты
-    if (hasMapChanged()) {
-        // Извлекаем данные карты
-        std::vector<int8_t> data(mapPtr->map().data().begin(), mapPtr->map().data().end());
-        int width = mapPtr->map().width();
-        int height = mapPtr->map().height();
-
-        double resolution = mapPtr->map().resolution();
-
-        double originX = mapPtr->map().origin().position_x();
-        double originY = mapPtr->map().origin().position_y();
-
+    if (mapChanged) {
         // Обновляем данные в MapWidget
-        mapWidget->setMapData(data, width, height, resolution, originX, originY);
-
-        // Обновляем предыдущие данные
-        previousData = data;
-        previousWidth = width;
-        previousHeight = height;
+        mapWidget->setMapData(dataCopy, width, height, resolution, originX, originY);
     }
 
-    if (hasPoseChanged()) {
+    if (poseChanged) {
         // Обновляем позицию робота в MapWidget
-
-        mapWidget->setRobotPose(mapPtr->robotpose().position_x(),
-                                mapPtr->robotpose().position_y(),
-                                poseToQuaternion(mapPtr->robotpose()));
+        mapWidget->setRobotPose(robotX, robotY, robotQuat);
     }
 
     mapWidget->update();
