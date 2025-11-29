@@ -189,6 +189,7 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
             this, [this](const QPointF &, int){
                 recordGoalsSnapshot();
                 refreshGoalList();
+                updateStateFromGoals();
             });
 
     connect(mapWidget.get(), &MapWidget::mouseMoved,
