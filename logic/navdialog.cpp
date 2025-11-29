@@ -299,6 +299,7 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
 
     // Запускаем таймер для проверки обновлений буферов
     startUpdates();
+    lastUpdateTimer.start();
 
     refreshGoalList();
     updateStateFromGoals();
@@ -485,6 +486,10 @@ void NavDialog::onMapUpdated()
     if (!isVisible()) {
         return;
     }
+    if (lastUpdateTimer.isValid() && lastUpdateTimer.elapsed() < 100) {
+        return;
+    }
+    lastUpdateTimer.restart();
 
     std::vector<int8_t> dataCopy;
     int width = 0;

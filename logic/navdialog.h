@@ -10,6 +10,7 @@
 #include <QListWidget>
 #include <QPushButton>
 #include <QRadioButton>
+#include <QElapsedTimer>
 #include <QShowEvent>
 #include <QHideEvent>
 #include <QTimer>
@@ -92,6 +93,7 @@ private:
     std::vector<int8_t> previousData;
     int previousWidth;
     int previousHeight;
+    QElapsedTimer lastUpdateTimer;
 
     /**
      * @brief Проверяет, изменились ли данные карты.
