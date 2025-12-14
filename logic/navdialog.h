@@ -110,9 +110,11 @@ private:
 
     void followWaypoints();
     void goThroughPoses();
+    void stopNavigation();
     void refreshGoalList();
     void recordGoalsSnapshot();
     void updateStateFromGoals();
+    void updateStateFromStatus();
     void setTaskState(NavTaskState state);
     void startUpdates();
     void stopUpdates();

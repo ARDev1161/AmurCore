@@ -45,6 +45,16 @@ public:
         navCmd->set_request_feedback(true);
     }
 
+    void buildCancelTask() const
+    {
+        auto* navCmd = resetNavCommand();
+        if(!navCmd)
+            return;
+
+        navCmd->mutable_cancel_task();
+        navCmd->set_request_feedback(false);
+    }
+
 private:
     Navigation::NavCommandRequest* resetNavCommand() const
     {
@@ -268,8 +278,7 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     connect(timer, &QTimer::timeout, this, [=]() {
         QString newData = taskStatusAsString();
         statusTaskLabel->setText("Status: " + newData);
-        if(navTaskState == NavTaskState::Busy)
-            updateStateFromGoals();
+        updateStateFromStatus();
     });
 
     commandsGroupBox->setLayout(commandsLayout);
@@ -388,11 +397,15 @@ void NavDialog::clearGoals()
 
 void NavDialog::sendGoals()
 {
-    if(isFollowWaypoints)
-        followWaypoints();
-    else
-        goThroughPoses();
-    setTaskState(NavTaskState::Busy);
+    if(navTaskState == NavTaskState::Busy) {
+        stopNavigation();
+    } else {
+        if(isFollowWaypoints)
+            followWaypoints();
+        else
+            goThroughPoses();
+        setTaskState(NavTaskState::Busy);
+    }
 }
 
 void NavDialog::undoGoals()
@@ -423,6 +436,12 @@ void NavDialog::goThroughPoses()
 {
     if(navCmdBuilder)
         navCmdBuilder->buildGoThroughPoses(*navigationGoalsList);
+}
+
+void NavDialog::stopNavigation()
+{
+    if(navCmdBuilder)
+        navCmdBuilder->buildCancelTask();
 }
 
 QString NavDialog::taskStatusAsString()
@@ -467,6 +486,9 @@ void NavDialog::refreshGoalList()
 
 void NavDialog::updateStateFromGoals()
 {
+    if(navTaskState == NavTaskState::Busy)
+        return;
+
     if(!navigationGoalsList || navigationGoalsList->empty()) {
         setTaskState(NavTaskState::Idle);
     } else {
@@ -474,11 +496,50 @@ void NavDialog::updateStateFromGoals()
     }
 }
 
+void NavDialog::updateStateFromStatus()
+{
+    if(!sensors)
+        return;
+
+    const auto status = static_cast<Navigation::CommandStatus>(sensors->navcontrolstatus().status());
+    switch (status) {
+    case Navigation::CommandStatus::IN_PROGRESS:
+        setTaskState(NavTaskState::Busy);
+        break;
+    case Navigation::CommandStatus::SUCCESS:
+    case Navigation::CommandStatus::FAILURE:
+    case Navigation::CommandStatus::CANCELED:
+        if(navigationGoalsList && !navigationGoalsList->empty())
+            setTaskState(NavTaskState::Ready);
+        else
+            setTaskState(NavTaskState::Idle);
+        break;
+    default:
+        updateStateFromGoals();
+        break;
+    }
+}
+
 void NavDialog::setTaskState(NavTaskState state)
 {
     navTaskState = state;
-    if(sendGoalsButton)
-        sendGoalsButton->setEnabled(state == NavTaskState::Ready);
+    if(sendGoalsButton) {
+        switch (state) {
+        case NavTaskState::Busy:
+            sendGoalsButton->setText(tr("Stop"));
+            sendGoalsButton->setEnabled(true);
+            break;
+        case NavTaskState::Ready:
+            sendGoalsButton->setText(tr("Send goals"));
+            sendGoalsButton->setEnabled(true);
+            break;
+        case NavTaskState::Idle:
+        default:
+            sendGoalsButton->setText(tr("Send goals"));
+            sendGoalsButton->setEnabled(false);
+            break;
+        }
+    }
 }
 
 void NavDialog::onMapUpdated()

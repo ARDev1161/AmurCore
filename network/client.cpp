@@ -55,13 +55,15 @@ grpc::Status grpcClient::DataStreamExchange()
 
     while(!stoppedStream && (clientChannel->GetState(true) == 2) )
     {
-        std::unique_lock<std::mutex> lock(muClient);
+        {
+            std::unique_lock<std::mutex> lock(muClient);
 
-        // Write controls
-        stream->Write(*controls);
+            // Write controls
+            stream->Write(*controls);
 
-        // Read sensors & write to protos
-        stream->Read(sensors.get());
+            // Read sensors & write to protos
+            stream->Read(sensors.get());
+        }
         emit sensorsUpdated();
     }
 
@@ -92,13 +94,15 @@ grpc::Status grpcClient::MapStream()
 
     while(!stoppedStream && (clientChannel->GetState(true) == 2) )
     {
-        std::unique_lock<std::mutex> lock(muMap);
+        {
+            std::unique_lock<std::mutex> lock(muMap);
 
-        // Request map
-        stream->Write(request);
+            // Request map
+            stream->Write(request);
 
-        // Read map
-        stream->Read(map.get());
+            // Read map
+            stream->Read(map.get());
+        }
         emit mapUpdated();
     }
 
