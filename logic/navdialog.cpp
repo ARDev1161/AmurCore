@@ -52,7 +52,7 @@ public:
             return;
 
         navCmd->mutable_cancel_task();
-        navCmd->set_request_feedback(false);
+        navCmd->set_request_feedback(true);
     }
 
 private:
@@ -397,14 +397,20 @@ void NavDialog::clearGoals()
 
 void NavDialog::sendGoals()
 {
+    {
+        std::scoped_lock lock(grpcMutex_);
+        lastNavStatus = static_cast<Navigation::CommandStatus>(sensors->navcontrolstatus().status());
+    }
     if(navTaskState == NavTaskState::Busy) {
         stopNavigation();
+        awaitingNavAck = true;
     } else {
         if(isFollowWaypoints)
             followWaypoints();
         else
             goThroughPoses();
         setTaskState(NavTaskState::Busy);
+        awaitingNavAck = true;
     }
 }
 
@@ -428,24 +434,28 @@ void NavDialog::redoGoals()
 
 void NavDialog::followWaypoints()
 {
+    std::scoped_lock lock(grpcMutex_);
     if(navCmdBuilder)
         navCmdBuilder->buildFollowWaypoints(*navigationGoalsList);
 }
 
 void NavDialog::goThroughPoses()
 {
+    std::scoped_lock lock(grpcMutex_);
     if(navCmdBuilder)
         navCmdBuilder->buildGoThroughPoses(*navigationGoalsList);
 }
 
 void NavDialog::stopNavigation()
 {
+    std::scoped_lock lock(grpcMutex_);
     if(navCmdBuilder)
         navCmdBuilder->buildCancelTask();
 }
 
 QString NavDialog::taskStatusAsString()
 {
+    std::scoped_lock lock(grpcMutex_);
     int statusValue = sensors->mutable_navcontrolstatus()->status();
     const google::protobuf::EnumDescriptor* descriptor = Navigation::CommandStatus_descriptor();
     if (descriptor) {
@@ -501,23 +511,38 @@ void NavDialog::updateStateFromStatus()
     if(!sensors)
         return;
 
-    const auto status = static_cast<Navigation::CommandStatus>(sensors->navcontrolstatus().status());
-    switch (status) {
-    case Navigation::CommandStatus::IN_PROGRESS:
-        setTaskState(NavTaskState::Busy);
-        break;
-    case Navigation::CommandStatus::SUCCESS:
-    case Navigation::CommandStatus::FAILURE:
-    case Navigation::CommandStatus::CANCELED:
-        if(navigationGoalsList && !navigationGoalsList->empty())
-            setTaskState(NavTaskState::Ready);
-        else
-            setTaskState(NavTaskState::Idle);
-        break;
-    default:
-        updateStateFromGoals();
-        break;
+    Navigation::CommandStatus status;
+    {
+        std::scoped_lock lock(grpcMutex_);
+        status = static_cast<Navigation::CommandStatus>(sensors->navcontrolstatus().status());
     }
+    if(navTaskState == NavTaskState::Busy && awaitingNavAck) {
+        // Ждём подтверждения от робота; держим Busy пока статус не изменится.
+        if(status != lastNavStatus) {
+            awaitingNavAck = false;
+        } else {
+            lastNavStatus = status;
+            return;
+        }
+    }
+
+    switch (status) {
+        case Navigation::CommandStatus::IN_PROGRESS:
+            setTaskState(NavTaskState::Busy);
+            break;
+        case Navigation::CommandStatus::SUCCESS:
+        case Navigation::CommandStatus::FAILURE:
+        case Navigation::CommandStatus::CANCELED:
+            if(navigationGoalsList && !navigationGoalsList->empty())
+                setTaskState(NavTaskState::Ready);
+            else
+                setTaskState(NavTaskState::Idle);
+            break;
+        default:
+            updateStateFromGoals();
+            break;
+    }
+    lastNavStatus = status;
 }
 
 void NavDialog::setTaskState(NavTaskState state)
@@ -565,7 +590,7 @@ void NavDialog::onMapUpdated()
     bool poseChanged = false;
 
     {
-        std::scoped_lock lock(mapMutex_, grpcMutex_);
+        std::scoped_lock lock(mapMutex_);
 
         if (!mapPtr) {
             navContainer->setEnabled(false);

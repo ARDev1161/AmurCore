@@ -58,6 +58,15 @@ void MapWidget::setMapData(const std::vector<int8_t>& data,
         return;
     }
 
+    const std::size_t expectedSize = static_cast<std::size_t>(width) * static_cast<std::size_t>(height);
+    if (data.size() != expectedSize) {
+        qWarning() << "MapWidget::setMapData size mismatch:" << data.size()
+                   << "vs" << expectedSize << "for" << width << "x" << height;
+        m_mapImage = QImage();
+        update();
+        return;
+    }
+
     // Сохраняем параметры
     m_mapResolution = resolution;
     m_originX = originX;

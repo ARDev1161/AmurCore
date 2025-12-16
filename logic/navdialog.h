@@ -88,6 +88,8 @@ private:
     QListWidget *goalListWidget;
     QPushButton *sendGoalsButton {nullptr};
     QLabel *statusTaskLabel {nullptr};
+    Navigation::CommandStatus lastNavStatus {Navigation::CommandStatus::SUCCESS};
+    bool awaitingNavAck {false};
 
     // Предыдущие данные карты для проверки изменений
     std::vector<int8_t> previousData;
