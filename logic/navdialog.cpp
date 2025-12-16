@@ -266,8 +266,11 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
             });
 
     // Patrol mode
-    QCheckBox *isPatrolCheckBox = new QCheckBox("Patrol");  ///< Сlosed route of waypoints
-    commandsLayout->addWidget(isPatrolCheckBox);
+    patrolCheckBox = new QCheckBox("Patrol");  ///< Сlosed route of waypoints
+    commandsLayout->addWidget(patrolCheckBox);
+    connect(patrolCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
+        isPatrolMode = checked;
+    });
 
     sendGoalsButton = new QPushButton("Send goals", this);
     commandsLayout->addWidget(sendGoalsButton);
@@ -531,6 +534,16 @@ void NavDialog::updateStateFromStatus()
             setTaskState(NavTaskState::Busy);
             break;
         case Navigation::CommandStatus::SUCCESS:
+            if(navigationGoalsList && !navigationGoalsList->empty()) {
+                if(isPatrolMode) {
+                    sendGoals();
+                } else {
+                    setTaskState(NavTaskState::Ready);
+                }
+            } else {
+                setTaskState(NavTaskState::Idle);
+            }
+            break;
         case Navigation::CommandStatus::FAILURE:
         case Navigation::CommandStatus::CANCELED:
             if(navigationGoalsList && !navigationGoalsList->empty())

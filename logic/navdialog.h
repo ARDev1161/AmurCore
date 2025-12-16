@@ -83,9 +83,11 @@ private:
     std::shared_ptr<NetworkController> networkController;
 
     bool isFollowWaypoints {true};
+    bool isPatrolMode {false};
     QGroupBox *waypointsGroupBox;
     QGroupBox *commandsGroupBox;
     QListWidget *goalListWidget;
+    QCheckBox *patrolCheckBox {nullptr};
     QPushButton *sendGoalsButton {nullptr};
     QLabel *statusTaskLabel {nullptr};
     Navigation::CommandStatus lastNavStatus {Navigation::CommandStatus::SUCCESS};
