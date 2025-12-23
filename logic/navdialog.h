@@ -15,6 +15,7 @@
 #include <QHideEvent>
 #include <QTimer>
 #include <QVBoxLayout>
+#include <cstdint>
 #include "mapwidget.h"
 #include "network/networkcontroller.h"
 #include "network/protobuf/robot.pb.h"
@@ -97,6 +98,7 @@ private:
     std::vector<int8_t> previousData;
     int previousWidth;
     int previousHeight;
+    std::uint64_t previousZoneSignature {0};
     QElapsedTimer lastUpdateTimer;
 
     /**

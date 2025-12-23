@@ -6,6 +6,9 @@
 #include <QPixmap>
 #include <QPoint>
 #include <QScrollBar>
+#include <QColor>
+#include <QVector>
+#include <cstdint>
 #include <vector>
 #include <mutex>
 #include <functional>
@@ -57,6 +60,14 @@ public:
     void setRobotOrientation(double yaw);
 
     void setRobotPose(double posX, double posY, PoseQuaternion quaternion);
+    struct ZoneOverlay {
+        std::uint32_t id{0};
+        std::uint32_t typeId{0};
+        QString name;
+        QColor color;
+        QVector<QPointF> contour;
+    };
+    void setZones(const std::vector<ZoneOverlay> &zones);
 
     // Возвращает список целей (в мировых координатах)
     const std::shared_ptr<std::vector<QPointF> > &getGoals() const;
@@ -125,10 +136,12 @@ private:
     void drawRobot(QPainter &painter);
     void drawWaypoints(QPainter &painter);
     void drawMapLayer(QPainter &painter);
+    void drawZonesLayer(QPainter &painter);
     void drawGridLayer(QPainter &painter);
     void drawAxisLayer(QPainter &painter);
     void drawRobotLayer(QPainter &painter);
     void drawWaypointsLayer(QPainter &painter);
+    void drawZones(QPainter &painter);
 
     void setupLayers();
     std::vector<std::function<void(QPainter&)>> m_layers;
@@ -150,6 +163,7 @@ private:
     QPoint m_lastMousePos;  // Последняя позиция мыши для панорамирования
     QPoint m_offset;        // Текущий сдвиг (панорамирование)
     bool m_panning;         // Флаг, указывающий на активное панорамирование
+    std::vector<ZoneOverlay> m_zones;
 
     // Переменные для положения робота
     QPixmap m_robotPixmap; // Изображение робота (треугольник)

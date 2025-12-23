@@ -56,5 +56,49 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
     return grpc::Status::OK;
 }
 
+grpc::Status grpcServer::PoseStream([[maybe_unused]] grpc::ServerContext* context,
+                                    grpc::ServerReaderWriter<map_service::PoseRequest, map_service::PoseState>* stream)
+{
+    map_service::PoseRequest request;
+    map_service::PoseState state;
+
+    std::unique_lock<std::mutex> ul(muMap, std::defer_lock);
+    while(true)
+    {
+      ul.lock();
+      if(!(stream->Read(&state)))
+          return grpc::Status::OK;
+      if (map) {
+          *map->mutable_robotpose() = state.pose();
+      }
+      stream->Write(request);
+      ul.unlock();
+    }
+
+    return grpc::Status::OK;
+}
+
+grpc::Status grpcServer::ZoneStream([[maybe_unused]] grpc::ServerContext* context,
+                                    grpc::ServerReaderWriter<map_service::ZoneRequest, map_service::ZoneState>* stream)
+{
+    map_service::ZoneRequest request;
+    map_service::ZoneState state;
+
+    std::unique_lock<std::mutex> ul(muMap, std::defer_lock);
+    while(true)
+    {
+      ul.lock();
+      if(!(stream->Read(&state)))
+          return grpc::Status::OK;
+      if (map) {
+          *map->mutable_zone_map() = state.zone_map();
+      }
+      stream->Write(request);
+      ul.unlock();
+    }
+
+    return grpc::Status::OK;
+}
+
 // TODO - make async methods
 // TODO - add async broadcast message stream exchange

@@ -3,6 +3,36 @@
 #include "navigation_adapter.h"
 #include <vector>
 #include <mutex>
+#include <cmath>
+
+namespace {
+
+std::uint64_t hashCombine(std::uint64_t seed, std::uint64_t value)
+{
+    return seed ^ (value + 0x9e3779b97f4a7c15ULL + (seed << 6) + (seed >> 2));
+}
+
+std::uint64_t buildZoneSignature(const map_service::ZoneMap &zone_map)
+{
+    std::uint64_t hash = static_cast<std::uint64_t>(zone_map.zones_size());
+    for (const auto &zone : zone_map.zones()) {
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.id()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.type_id()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.color().r()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.color().g()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.color().b()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.chain_code_size()));
+        for (const auto &pt : zone.chain_code()) {
+            auto qx = static_cast<std::int64_t>(std::llround(pt.x() * 1000.0));
+            auto qy = static_cast<std::int64_t>(std::llround(pt.y() * 1000.0));
+            hash = hashCombine(hash, static_cast<std::uint64_t>(qx));
+            hash = hashCombine(hash, static_cast<std::uint64_t>(qy));
+        }
+    }
+    return hash;
+}
+
+} // namespace
 
 class NavCommandBuilder
 {
@@ -601,6 +631,8 @@ void NavDialog::onMapUpdated()
     PoseQuaternion robotQuat {};
     bool mapChanged = false;
     bool poseChanged = false;
+    bool zonesChanged = false;
+    std::vector<MapWidget::ZoneOverlay> zonesCopy;
 
     {
         std::scoped_lock lock(mapMutex_);
@@ -614,7 +646,8 @@ void NavDialog::onMapUpdated()
 
         mapChanged = hasMapChanged();
         poseChanged = hasPoseChanged();
-        if (!mapChanged && !poseChanged) {
+        zonesChanged = buildZoneSignature(mapPtr->zone_map()) != previousZoneSignature;
+        if (!mapChanged && !poseChanged && !zonesChanged) {
             return;
         }
 
@@ -639,6 +672,27 @@ void NavDialog::onMapUpdated()
             robotY = mapPtr->robotpose().position_y();
             robotQuat = poseToQuaternion(mapPtr->robotpose());
         }
+
+        if (zonesChanged) {
+            const auto &zone_map = mapPtr->zone_map();
+            zonesCopy.clear();
+            zonesCopy.reserve(static_cast<std::size_t>(zone_map.zones_size()));
+            for (const auto &zone : zone_map.zones()) {
+                MapWidget::ZoneOverlay overlay;
+                overlay.id = static_cast<std::uint32_t>(zone.id());
+                overlay.typeId = zone.type_id();
+                overlay.name = QString::fromStdString(zone.name());
+                overlay.color = QColor(static_cast<int>(zone.color().r()),
+                                       static_cast<int>(zone.color().g()),
+                                       static_cast<int>(zone.color().b()));
+                overlay.contour.reserve(zone.chain_code_size());
+                for (const auto &pt : zone.chain_code()) {
+                    overlay.contour.push_back(QPointF(pt.x(), pt.y()));
+                }
+                zonesCopy.push_back(std::move(overlay));
+            }
+            previousZoneSignature = buildZoneSignature(zone_map);
+        }
     }
 
     if (mapChanged) {
@@ -649,6 +703,10 @@ void NavDialog::onMapUpdated()
     if (poseChanged) {
         // Обновляем позицию робота в MapWidget
         mapWidget->setRobotPose(robotX, robotY, robotQuat);
+    }
+
+    if (zonesChanged) {
+        mapWidget->setZones(zonesCopy);
     }
 
     mapWidget->update();

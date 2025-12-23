@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include <algorithm>
 #include <QtMath>
+#include <QPolygonF>
 
 MapWidget::MapWidget(std::shared_ptr<std::vector<QPointF>> navListGoals, QWidget* parent)
     : m_goalsWorld(navListGoals),
@@ -149,6 +150,13 @@ void MapWidget::setRobotPose(double posX, double posY, PoseQuaternion quaternion
     setRobotOrientation(quaternion);
 }
 
+void MapWidget::setZones(const std::vector<ZoneOverlay> &zones)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    m_zones = zones;
+    update();
+}
+
 const std::shared_ptr<std::vector<QPointF> > &MapWidget::getGoals() const
 {
     return m_goalsWorld;
@@ -239,6 +247,18 @@ void MapWidget::drawMapLayer(QPainter &painter)
     painter.restore();
 }
 
+void MapWidget::drawZonesLayer(QPainter &painter)
+{
+    if (m_mapImage.isNull())
+        return;
+
+    painter.save();
+    painter.translate(m_offset);
+    painter.scale(m_scaleFactor, m_scaleFactor);
+    drawZones(painter);
+    painter.restore();
+}
+
 void MapWidget::drawGridLayer(QPainter &painter)
 {
     if(!m_showGrid || m_mapImage.isNull())
@@ -266,6 +286,38 @@ void MapWidget::drawRobotLayer(QPainter &painter)
 void MapWidget::drawWaypointsLayer(QPainter &painter)
 {
     drawWaypoints(painter);
+}
+
+void MapWidget::drawZones(QPainter &painter)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if (m_mapImage.isNull() || m_zones.empty())
+        return;
+
+    for (const auto &zone : m_zones) {
+        if (zone.contour.size() < 3)
+            continue;
+
+        QPolygonF poly;
+        poly.reserve(zone.contour.size());
+        for (const auto &pt : zone.contour) {
+            double px = (pt.x() - m_originX) / m_mapResolution;
+            double py = (m_mapImage.height() - 1)
+                        - ((pt.y() - m_originY) / m_mapResolution);
+            poly << QPointF(px, py);
+        }
+
+        QColor fill = zone.color;
+        fill.setAlpha(80);
+        QColor stroke = zone.color;
+        stroke.setAlpha(150);
+        QPen pen(stroke);
+        pen.setCosmetic(true);
+        pen.setWidth(1);
+        painter.setPen(pen);
+        painter.setBrush(QBrush(fill));
+        painter.drawPolygon(poly);
+    }
 }
 
 void MapWidget::drawRobot(QPainter &painter)
@@ -448,6 +500,7 @@ void MapWidget::setupLayers()
 {
     m_layers.clear();
     m_layers.emplace_back([this](QPainter& painter){ drawMapLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawZonesLayer(painter); });
     m_layers.emplace_back([this](QPainter& painter){ drawGridLayer(painter); });
     m_layers.emplace_back([this](QPainter& painter){ drawAxisLayer(painter); });
     m_layers.emplace_back([this](QPainter& painter){ drawRobotLayer(painter); });

@@ -29,6 +29,10 @@ class grpcServer final : public ClientOnRobot::Service
 
   grpc::Status MapStream([[maybe_unused]] grpc::ServerContext* context,
                             grpc::ServerReaderWriter<map_service::GetMapRequest, map_service::GetMapResponse>* stream) override;
+  grpc::Status PoseStream([[maybe_unused]] grpc::ServerContext* context,
+                          grpc::ServerReaderWriter<map_service::PoseRequest, map_service::PoseState>* stream) override;
+  grpc::Status ZoneStream([[maybe_unused]] grpc::ServerContext* context,
+                          grpc::ServerReaderWriter<map_service::ZoneRequest, map_service::ZoneState>* stream) override;
 
 public:
     void setProtosPointers(std::shared_ptr<Controls> controlsPtr,
