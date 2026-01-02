@@ -179,6 +179,22 @@ Categories=${APPIMG_DESKTOP_CATEGORIES}
         WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
     )
 
+    set(QT_PLUGINS_DIR "")
+    if(DEFINED ENV{QMAKE} AND NOT "$ENV{QMAKE}" STREQUAL "")
+        execute_process(
+            COMMAND "$ENV{QMAKE}" -query QT_INSTALL_PLUGINS
+            OUTPUT_VARIABLE QT_PLUGINS_DIR
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+    endif()
+    if(QT_PLUGINS_DIR AND EXISTS "${QT_PLUGINS_DIR}/platforms")
+        file(MAKE_DIRECTORY "${APPDIR}/usr/plugins")
+        file(COPY "${QT_PLUGINS_DIR}/platforms" DESTINATION "${APPDIR}/usr/plugins")
+        if(EXISTS "${QT_PLUGINS_DIR}/xcbglintegrations")
+            file(COPY "${QT_PLUGINS_DIR}/xcbglintegrations" DESTINATION "${APPDIR}/usr/plugins")
+        endif()
+    endif()
+
     execute_process(
         COMMAND "${LINUXDEPLOY_BIN}"
             --appdir  "${APPDIR}"
