@@ -195,6 +195,61 @@ Categories=${APPIMG_DESKTOP_CATEGORIES}
         endif()
     endif()
 
+    set(GST_SCANNER_CANDIDATES "")
+    set(GST_LIBEXECDIR "")
+    execute_process(
+        COMMAND pkg-config --variable=libexecdir gstreamer-1.0
+        OUTPUT_VARIABLE GST_LIBEXECDIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_QUIET
+    )
+    if(GST_LIBEXECDIR)
+        list(APPEND GST_SCANNER_CANDIDATES
+            "${GST_LIBEXECDIR}/gstreamer-1.0/gst-plugin-scanner")
+    endif()
+    set(GST_LIBDIR "")
+    execute_process(
+        COMMAND pkg-config --variable=libdir gstreamer-1.0
+        OUTPUT_VARIABLE GST_LIBDIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_QUIET
+    )
+    if(GST_LIBDIR)
+        list(APPEND GST_SCANNER_CANDIDATES
+            "${GST_LIBDIR}/gstreamer1.0/gst-plugin-scanner"
+            "${GST_LIBDIR}/gstreamer-1.0/gst-plugin-scanner")
+    endif()
+    list(APPEND GST_SCANNER_CANDIDATES
+        "/usr/libexec/gstreamer-1.0/gst-plugin-scanner"
+        "/usr/lib/gstreamer1.0/gst-plugin-scanner"
+        "/usr/lib/gstreamer-1.0/gst-plugin-scanner"
+        "/usr/lib/x86_64-linux-gnu/gstreamer1.0/gst-plugin-scanner"
+        "/usr/lib/x86_64-linux-gnu/gstreamer-1.0/gst-plugin-scanner"
+    )
+
+    set(GST_SCANNER_PATH "")
+    foreach(candidate IN LISTS GST_SCANNER_CANDIDATES)
+        if(EXISTS "${candidate}")
+            set(GST_SCANNER_PATH "${candidate}")
+            break()
+        endif()
+    endforeach()
+    if(GST_SCANNER_PATH)
+        file(MAKE_DIRECTORY "${APPDIR}/usr/libexec/gstreamer-1.0")
+        file(COPY "${GST_SCANNER_PATH}"
+             DESTINATION "${APPDIR}/usr/libexec/gstreamer-1.0")
+    endif()
+
+    file(MAKE_DIRECTORY "${APPDIR}/usr/bin")
+    file(WRITE "${APPDIR}/usr/bin/gst-plugin-scanner" [=[
+#!/usr/bin/env sh
+HERE="$(dirname "$(readlink -f "$0")")"
+APPDIR="${APPDIR:-$(cd "${HERE}/../.." && pwd)}"
+export LD_LIBRARY_PATH="${APPDIR}/usr/lib:${LD_LIBRARY_PATH:-}"
+exec "${APPDIR}/usr/libexec/gstreamer-1.0/gst-plugin-scanner" "$@"
+]=])
+    execute_process(COMMAND chmod +x "${APPDIR}/usr/bin/gst-plugin-scanner")
+
     execute_process(
         COMMAND "${LINUXDEPLOY_BIN}"
             --appdir  "${APPDIR}"
