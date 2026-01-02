@@ -168,8 +168,23 @@ Categories=${APPIMG_DESKTOP_CATEGORIES}
             --desktop-file  "${DESKTOP_PATH}"
             --icon-file     "${ICON_FILEPATH}"
             --custom-apprun  "${APPIMG_APPRUN}"
-            --plugin qt
             --plugin gstreamer
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    )
+
+    execute_process(
+        COMMAND "${LINUXDEPLOY_QT_BIN}"
+            --appdir  "${APPDIR}"
+            --exclude-library  "libsybdb.so.5"
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    )
+
+    execute_process(
+        COMMAND "${LINUXDEPLOY_BIN}"
+            --appdir  "${APPDIR}"
+            --desktop-file  "${DESKTOP_PATH}"
+            --icon-file     "${ICON_FILEPATH}"
+            --custom-apprun  "${APPIMG_APPRUN}"
             --output appimage
         WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
     )
