@@ -65,6 +65,19 @@ bool RobotRepository::createTableIfNotExists()
     }
 
     // Secondary indexes to speed up filtering by frequently used fields.
+    bool hasDuplicateMachineIds = false;
+    {
+        QSqlQuery dupQuery(m_db);
+        if (dupQuery.exec(R"(SELECT machineID FROM robots GROUP BY machineID HAVING COUNT(*) > 1 LIMIT 1)")) {
+            hasDuplicateMachineIds = dupQuery.next();
+            if (hasDuplicateMachineIds) {
+                qDebug() << "Found duplicate machineID records; skipping unique index creation to avoid startup failure.";
+            }
+        } else {
+            qDebug() << "Failed to check duplicates:" << dupQuery.lastError().text();
+        }
+    }
+
     const QStringList indexStatements = {
         R"(CREATE UNIQUE INDEX IF NOT EXISTS idx_robots_machineID ON robots(machineID))",
         R"(CREATE INDEX IF NOT EXISTS idx_robots_address ON robots(address))",
@@ -72,14 +85,19 @@ bool RobotRepository::createTableIfNotExists()
         R"(CREATE INDEX IF NOT EXISTS idx_robots_mac ON robots(macAddress))"
     };
 
+    bool allIndexesOk = true;
     for (const QString &statement : indexStatements) {
+        if (hasDuplicateMachineIds && statement.contains("UNIQUE INDEX")) {
+            // Keep running even without the unique constraint; duplicates should be resolved via a migration step.
+            continue;
+        }
         if (!query.exec(statement)) {
             qDebug() << "Failed to create index:" << query.lastError().text();
-            return false;
+            allIndexesOk = false;
         }
     }
 
-    return true;
+    return allIndexesOk;
 }
 
 bool RobotRepository::robotExists(const QString &machineID)

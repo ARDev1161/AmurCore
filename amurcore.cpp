@@ -1,4 +1,5 @@
 #include "amurcore.h"
+#include <chrono>
 #include "ui_AmurCore.h"
 
 AmurCore::AmurCore(QWidget *parent) :
@@ -15,8 +16,11 @@ AmurCore::AmurCore(QWidget *parent) :
     this->initialize();
 }
 
- AmurCore::~AmurCore()
+AmurCore::~AmurCore()
 {
+    if (captureState) {
+        captureState->stop.store(true);
+    }
     capture.release();
     delete ui;
 }
@@ -48,6 +52,7 @@ void AmurCore::initialize()
     network = std::make_shared<NetworkController>(controls, sensors, map); // TODO - add robot id & &<vector> of robots id
     network->runArpingService(arpPort, grpcPort, arpHeader); // Start listening for initial arp message from robots
     network->runServer(address_mask); // Start AmurCore gRPC server
+    connect(network.get(), &NetworkController::sensorsUpdated, this, &AmurCore::onSensorsUpdated);
     connectDialog = new ConnectDialog(this, network, repo);
     statusLabel = new QLabel(statusMessage, this);
     ui->statusbar->addPermanentWidget(statusLabel);
@@ -123,7 +128,13 @@ void AmurCore::robotInfoDialogOpen()
 void AmurCore::resizeEvent(QResizeEvent *event)
 {    
     Q_UNUSED(event);
-    QImage qimgOut((uchar*) outputMat.data, outputMat.cols, outputMat.rows, outputMat.step, QImage::Format_RGB888);
+    Mat rgb;
+    if (outputMat.channels() == 3) {
+        cv::cvtColor(outputMat, rgb, cv::COLOR_BGR2RGB);
+    } else {
+        rgb = outputMat;
+    }
+    QImage qimgOut((uchar*) rgb.data, rgb.cols, rgb.rows, rgb.step, QImage::Format_RGB888);
     ui->OutLabel->setPixmap(QPixmap::fromImage(qimgOut).scaled(
                     this->width() - 16,
                     this->height() - 60
@@ -138,6 +149,27 @@ void AmurCore::robotHalt()
 void AmurCore::robotReboot()
 {
     controls->mutable_system()->set_restartflag(true);
+}
+
+void AmurCore::onSensorsUpdated()
+{
+    if (!sensors) {
+        return;
+    }
+
+    const std::string pipeline = sensors->video_stream().pipeline();
+    static std::string last_reported_pipeline;
+    if (pipeline != last_reported_pipeline) {
+        last_reported_pipeline = pipeline;
+        std::cerr << "Video pipeline received: "
+                  << (pipeline.empty() ? "<empty>" : pipeline) << std::endl;
+    }
+    if (pipeline.empty() || pipeline == videoStreamPipeline) {
+        return;
+    }
+
+    videoStreamPipeline = pipeline;
+    startCap();
 }
 
 void AmurCore::fetchJoystickId()
@@ -156,18 +188,55 @@ void AmurCore::startTimer()
 
 void AmurCore::startCap()
 {
-    capture.open(SOURCE_STREAM);
+    capture.release();
 
-    if(!capture.isOpened())
+    if (videoStreamPipeline.empty()) {
         return;
+    }
 
-    frameUpdate();
+    const std::string pipeline = videoStreamPipeline;
+    auto state = std::make_shared<CaptureState>();
+    if (captureState) {
+        captureState->stop.store(true);
+    }
+    captureState = state;
+
+    std::thread([state, pipeline]() {
+        cv::VideoCapture localCapture;
+        localCapture.set(cv::CAP_PROP_OPEN_TIMEOUT_MSEC, 2000);
+        localCapture.set(cv::CAP_PROP_READ_TIMEOUT_MSEC, 200);
+
+        if (!localCapture.open(pipeline, cv::CAP_GSTREAMER)) {
+            return;
+        }
+
+        cv::Mat frame;
+        while (!state->stop.load()) {
+            if (localCapture.read(frame)) {
+                std::lock_guard<std::mutex> lock(state->mutex);
+                frame.copyTo(state->latest);
+            } else {
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+        }
+
+        localCapture.release();
+    }).detach();
 }
 
 void AmurCore::frameUpdate()
 {
-    if(capture.read(sourceMat)){
-        cv::flip(sourceMat, sourceMat, 1);
+    Mat frame;
+    auto state = captureState;
+    if (state) {
+        std::lock_guard<std::mutex> lock(state->mutex);
+        if (!state->latest.empty()) {
+            state->latest.copyTo(frame);
+        }
+    }
+
+    if(!frame.empty()){
+        sourceMat = frame;
     //    cv::resize(sourceMat, sourceMat, Size(320, 240));
         undistortMat(sourceMat, undistortedMat);
         amurLogic->setSrcMat(&undistortedMat);
@@ -180,7 +249,13 @@ void AmurCore::frameUpdate()
 
 void AmurCore::outMat(Mat &toOut)
 {
-    QImage qimgOut((uchar*) toOut.data, toOut.cols, toOut.rows, toOut.step, QImage::Format_RGB888);
+    Mat rgb;
+    if (toOut.channels() == 3) {
+        cv::cvtColor(toOut, rgb, cv::COLOR_BGR2RGB);
+    } else {
+        rgb = toOut;
+    }
+    QImage qimgOut((uchar*) rgb.data, rgb.cols, rgb.rows, rgb.step, QImage::Format_RGB888);
 
     ui->OutLabel->setPixmap(QPixmap::fromImage(qimgOut).scaled(
                                 this->width() - 16,

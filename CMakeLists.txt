@@ -84,8 +84,8 @@ include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/grpc-src/third_party/abse
 # for generated pb files
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql LinguistTools)
+set(QT_VERSION_MAJOR 5)
+find_package(Qt5 REQUIRED COMPONENTS Widgets Network Sql LinguistTools)
 
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
@@ -184,8 +184,44 @@ option(BUILD_APPIMAGE "Generate .AppImage using linuxdeploy" ON)
 if(CMAKE_BUILD_TYPE STREQUAL Release)
     include("${CMAKE_SOURCE_DIR}/cmake/linuxdeploy.cmake")
 
+    set(APPIMAGE_QMAKE "")
+    find_program(QMAKE_PROGRAM NAMES qmake-qt5 qmake)
+    if(QMAKE_PROGRAM)
+        set(APPIMAGE_QMAKE "${QMAKE_PROGRAM}")
+    endif()
+    if(APPIMAGE_QMAKE STREQUAL "" AND TARGET Qt5::qmake)
+        get_target_property(QMAKE_LOCATION Qt5::qmake IMPORTED_LOCATION)
+        if(QMAKE_LOCATION AND NOT QMAKE_LOCATION MATCHES "-NOTFOUND$")
+            set(APPIMAGE_QMAKE "${QMAKE_LOCATION}")
+        endif()
+    endif()
+    if(APPIMAGE_QMAKE STREQUAL "")
+        if(DEFINED Qt5Core_QMAKE_EXECUTABLE AND NOT Qt5Core_QMAKE_EXECUTABLE MATCHES "-NOTFOUND$")
+            if(Qt5Core_QMAKE_EXECUTABLE MATCHES "^Qt5::")
+                if(TARGET ${Qt5Core_QMAKE_EXECUTABLE})
+                    get_target_property(QMAKE_LOCATION ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
+                    if(QMAKE_LOCATION AND NOT QMAKE_LOCATION MATCHES "-NOTFOUND$")
+                        set(APPIMAGE_QMAKE "${QMAKE_LOCATION}")
+                    endif()
+                endif()
+            else()
+                set(APPIMAGE_QMAKE "${Qt5Core_QMAKE_EXECUTABLE}")
+            endif()
+        elseif(DEFINED QT_QMAKE_EXECUTABLE AND NOT QT_QMAKE_EXECUTABLE MATCHES "-NOTFOUND$")
+            set(APPIMAGE_QMAKE "${QT_QMAKE_EXECUTABLE}")
+        endif()
+    endif()
+
+    set(APPIMAGE_QMAKE_LINE "")
+    if(NOT APPIMAGE_QMAKE STREQUAL "")
+        set(APPIMAGE_QMAKE_LINE "set(ENV{QMAKE} \"${APPIMAGE_QMAKE}\")\n")
+    endif()
+
     file(WRITE "${CMAKE_BINARY_DIR}/appimage_invoke.cmake" "
 include(\"${CMAKE_SOURCE_DIR}/cmake/linuxdeploy.cmake\")
+set(ENV{NO_STRIP} \"1\")
+set(ENV{LINUXDEPLOY_EXCLUDED_LIBRARIES} \"libsybdb.so.5\")
+${APPIMAGE_QMAKE_LINE}
 
 build_appimage(
     APP_NAME         \"${PROJECT_NAME}\"

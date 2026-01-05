@@ -4,7 +4,8 @@ grpcClient::grpcClient(std::shared_ptr<grpc::Channel> channel,
                std::shared_ptr<Controls> controlsPtr,
                std::shared_ptr<Sensors> sensorsPtr,
                std::shared_ptr<map_service::GetMapResponse> mapPtr)
-      : stub_(ServerOnRobot::NewStub(channel)),
+      : QObject(),
+        stub_(ServerOnRobot::NewStub(channel)),
         controls(controlsPtr),
         sensors(sensorsPtr),
         map(mapPtr)
@@ -54,13 +55,16 @@ grpc::Status grpcClient::DataStreamExchange()
 
     while(!stoppedStream && (clientChannel->GetState(true) == 2) )
     {
-        std::unique_lock<std::mutex> lock(muClient);
+        {
+            std::unique_lock<std::mutex> lock(muClient);
 
-        // Write controls
-        stream->Write(*controls);
+            // Write controls
+            stream->Write(*controls);
 
-        // Read sensors & write to protos
-        stream->Read(sensors.get());
+            // Read sensors & write to protos
+            stream->Read(sensors.get());
+        }
+        emit sensorsUpdated();
     }
 
     stream->WritesDone();
@@ -90,13 +94,16 @@ grpc::Status grpcClient::MapStream()
 
     while(!stoppedStream && (clientChannel->GetState(true) == 2) )
     {
-        std::unique_lock<std::mutex> lock(muMap);
+        {
+            std::unique_lock<std::mutex> lock(muMap);
 
-        // Request map
-        stream->Write(request);
+            // Request map
+            stream->Write(request);
 
-        // Read map
-        stream->Read(map.get());
+            // Read map
+            stream->Read(map.get());
+        }
+        emit mapUpdated();
     }
 
     stream->WritesDone();

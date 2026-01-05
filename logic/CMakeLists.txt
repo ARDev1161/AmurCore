@@ -20,9 +20,16 @@ add_library(${PROJECT_NAME}
             ${LOGIC_SOURCES}
            )
 
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        ${CMAKE_SOURCE_DIR}
+        ${CMAKE_BINARY_DIR}
+)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE
                     JoystickHandler
                     AMURProtos
                     ${OpenCV_LIBS}
                     Qt${QT_VERSION_MAJOR}::Widgets
+                    Qt${QT_VERSION_MAJOR}::Network
                 )

@@ -1,4 +1,17 @@
 #include "movements.h"
+#include <cmath>
+
+std::pair<double, double> DeadzoneBaseControlStrategy::velocities(const JoyState &state,
+                                                                 const MoveSettings::JoyBindings &bindings) const
+{
+    const double rawAngular = bindings.wheelXAxis(state);
+    const double rawLinear = bindings.wheelYAxis(state);
+
+    const double linear = (std::abs(rawLinear) > driftZone_) ? rawLinear : 0.0;
+    const double angular = (std::abs(rawAngular) > driftZone_) ? rawAngular : 0.0;
+
+    return {linear, angular};
+}
 
 ManualControl::ManualControl(std::shared_ptr<JoyState> joyState,
                      std::shared_ptr<Controls> controls,
@@ -9,6 +22,7 @@ ManualControl::ManualControl(std::shared_ptr<JoyState> joyState,
     grpcMutex_(grpcMutex),
     baseControlLevel(baseControlLevel)
 {
+    baseControlStrategy = std::make_unique<DeadzoneBaseControlStrategy>(joyDriftZone);
 
 }
 
@@ -23,9 +37,13 @@ int ManualControl::update()
     checkChangeRelayButton( moveSettings.joyBindings.relayButton );
     checkChangeLightButton( moveSettings.joyBindings.lightButton );
 
-    baseControlProcess( (WHEEL_X_AXIS / DIVIDER) , (WHEEL_Y_AXIS / DIVIDER) );
-    wheelRawProcess( (WHEEL_X_AXIS / DIVIDER) , (WHEEL_Y_AXIS / DIVIDER) );
-    moveCameraProcess( (CAM_X_AXIS / DIVIDER) , (CAM_Y_AXIS / DIVIDER) );
+    const int wheelX = moveSettings.joyBindings.wheelXAxis(*joyState);
+    const int wheelY = moveSettings.joyBindings.wheelYAxis(*joyState);
+
+    baseControlProcess(wheelX, wheelY);
+    wheelRawProcess(wheelX, wheelY);
+    moveCameraProcess(moveSettings.joyBindings.cameraXAxis(*joyState),
+                     moveSettings.joyBindings.cameraYAxis(*joyState));
 
     lastJoyState = *joyState;
     return 0;
@@ -60,8 +78,10 @@ void ManualControl::checkChangeLightButton(int buttonNumber)
 
 int ManualControl::baseControlProcess(int xAxis, int yAxis)
 {
-    double linear = (abs(yAxis)>joyDriftZone)?yAxis:0;
-    double angular = (abs(xAxis)>joyDriftZone)?xAxis:0;
+    if(!baseControlStrategy)
+        return -1;
+
+    const auto [linear, angular] = baseControlStrategy->velocities(*joyState, moveSettings.joyBindings);
 
     controls->mutable_basecontrol()->set_linearvelocity(linear);
     controls->mutable_basecontrol()->set_angularvelocity(angular);

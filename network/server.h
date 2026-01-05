@@ -2,6 +2,7 @@
 #define GSERVER_H
 
 #include <iostream>
+#include <functional>
 
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
@@ -20,6 +21,7 @@ class grpcServer final : public ClientOnRobot::Service
 
   std::mutex muServer;
   std::mutex muMap;
+  std::function<void()> sensors_updated_cb_;
 
   grpc::Status DataExchange([[maybe_unused]] grpc::ServerContext* context,
                             const Sensors* request, Controls* reply) override;
@@ -29,11 +31,16 @@ class grpcServer final : public ClientOnRobot::Service
 
   grpc::Status MapStream([[maybe_unused]] grpc::ServerContext* context,
                             grpc::ServerReaderWriter<map_service::GetMapRequest, map_service::GetMapResponse>* stream) override;
+  grpc::Status PoseStream([[maybe_unused]] grpc::ServerContext* context,
+                          grpc::ServerReaderWriter<map_service::PoseRequest, map_service::PoseState>* stream) override;
+  grpc::Status ZoneStream([[maybe_unused]] grpc::ServerContext* context,
+                          grpc::ServerReaderWriter<map_service::ZoneRequest, map_service::ZoneState>* stream) override;
 
 public:
     void setProtosPointers(std::shared_ptr<Controls> controlsPtr,
                            std::shared_ptr<Sensors> sensorsPtr,
                            std::shared_ptr<map_service::GetMapResponse> mapPtr);
+    void setSensorsUpdatedCallback(std::function<void()> cb) { sensors_updated_cb_ = std::move(cb); }
     int checkConn();
 
     std::mutex& getMutex() { return muServer; }

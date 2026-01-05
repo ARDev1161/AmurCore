@@ -1,5 +1,158 @@
 #include "navdialog.h"
 #include "ui_navdialog.h"
+#include "navigation_adapter.h"
+#include <vector>
+#include <mutex>
+#include <cmath>
+
+namespace {
+
+std::uint64_t hashCombine(std::uint64_t seed, std::uint64_t value)
+{
+    return seed ^ (value + 0x9e3779b97f4a7c15ULL + (seed << 6) + (seed >> 2));
+}
+
+std::uint64_t buildZoneSignature(const map_service::ZoneMap &zone_map)
+{
+    std::uint64_t hash = static_cast<std::uint64_t>(zone_map.zones_size());
+    for (const auto &zone : zone_map.zones()) {
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.id()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.type_id()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.color().r()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.color().g()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.color().b()));
+        hash = hashCombine(hash, static_cast<std::uint64_t>(zone.chain_code_size()));
+        for (const auto &pt : zone.chain_code()) {
+            auto qx = static_cast<std::int64_t>(std::llround(pt.x() * 1000.0));
+            auto qy = static_cast<std::int64_t>(std::llround(pt.y() * 1000.0));
+            hash = hashCombine(hash, static_cast<std::uint64_t>(qx));
+            hash = hashCombine(hash, static_cast<std::uint64_t>(qy));
+        }
+    }
+    return hash;
+}
+
+} // namespace
+
+class NavCommandBuilder
+{
+public:
+    explicit NavCommandBuilder(std::shared_ptr<Controls> controls) : controls_(std::move(controls)) {}
+
+    void buildFollowWaypoints(const std::vector<QPointF> &goals) const
+    {
+        auto* navCmd = resetNavCommand();
+        if(!navCmd)
+            return;
+
+        Navigation::FollowWaypoints* followWaypointsCmd = navCmd->mutable_follow_waypoints();
+        auto* waypoints = followWaypointsCmd->mutable_waypoints();
+        waypoints->Clear();
+        waypoints->Reserve(static_cast<int>(goals.size()));
+
+        for (const QPointF &point : goals) {
+            NavigationAdapter::fromPoint(point, followWaypointsCmd->add_waypoints());
+        }
+
+        navCmd->set_request_feedback(true);
+    }
+
+    void buildGoThroughPoses(const std::vector<QPointF> &goals) const
+    {
+        auto* navCmd = resetNavCommand();
+        if(!navCmd)
+            return;
+
+        Navigation::GoThroughPoses* goThroughPosesCmd = navCmd->mutable_go_through_poses();
+        auto* poses = goThroughPosesCmd->mutable_poses();
+        poses->Clear();
+        poses->Reserve(static_cast<int>(goals.size()));
+
+        for (const QPointF &point : goals) {
+            NavigationAdapter::fromPoint(point, goThroughPosesCmd->add_poses());
+        }
+
+        navCmd->set_request_feedback(true);
+    }
+
+    void buildCancelTask() const
+    {
+        auto* navCmd = resetNavCommand();
+        if(!navCmd)
+            return;
+
+        navCmd->mutable_cancel_task();
+        navCmd->set_request_feedback(true);
+    }
+
+private:
+    Navigation::NavCommandRequest* resetNavCommand() const
+    {
+        if(!controls_)
+            return nullptr;
+
+        auto* navCmd = controls_->mutable_navcontrol();
+        navCmd->Clear();
+        return navCmd;
+    }
+
+    std::shared_ptr<Controls> controls_;
+};
+
+class NavGoalsHistory
+{
+public:
+    explicit NavGoalsHistory(std::shared_ptr<std::vector<QPointF>> goals)
+        : goals_(std::move(goals))
+    {
+        if(goals_)
+            history_.push_back(*goals_);
+    }
+
+    void record()
+    {
+        if(!goals_)
+            return;
+
+        if(currentIndex_ + 1 < history_.size())
+            history_.erase(history_.begin() + static_cast<long>(currentIndex_ + 1), history_.end());
+
+        history_.push_back(*goals_);
+        currentIndex_ = history_.size() - 1;
+    }
+
+    bool canUndo() const { return currentIndex_ > 0; }
+    bool canRedo() const { return currentIndex_ + 1 < history_.size(); }
+
+    bool undo()
+    {
+        if(!canUndo())
+            return false;
+        --currentIndex_;
+        restore();
+        return true;
+    }
+
+    bool redo()
+    {
+        if(!canRedo())
+            return false;
+        ++currentIndex_;
+        restore();
+        return true;
+    }
+
+private:
+    void restore()
+    {
+        if(goals_ && currentIndex_ < history_.size())
+            *goals_ = history_[currentIndex_];
+    }
+
+    std::shared_ptr<std::vector<QPointF>> goals_;
+    std::vector<std::vector<QPointF>> history_;
+    std::size_t currentIndex_ {0};
+};
 
 NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
                      std::shared_ptr<Sensors> sensorsPtr,
@@ -14,6 +167,8 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     mapPtr(mapPtr),
     mapMutex_(mapMutex),
     grpcMutex_(grpcMutex),
+    networkController(std::make_shared<NetworkController>(controlsPtr, sensorsPtr, mapPtr)),
+    navCmdBuilder(std::make_unique<NavCommandBuilder>(controlsPtr)),
     timer(new QTimer(this)),
     previousWidth(0),
     previousHeight(0)
@@ -24,8 +179,9 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     QVBoxLayout *dialogLayout = new QVBoxLayout(this);
     setLayout(dialogLayout);
 
-    // Создаём список целей
+    // Создаём список целей и историю изменений
     navigationGoalsList = std::make_shared<std::vector<QPointF>>();
+    navGoalsHistory = std::make_unique<NavGoalsHistory>(navigationGoalsList);
 
     // 2) Создаём контейнер, который можно скрывать/задизейблить.
     navContainer = new QWidget(this);
@@ -69,6 +225,13 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     connect(drawGridCheckBox, &QCheckBox::toggled,
             mapWidget.get(), &MapWidget::setShowGrid);
 
+    connect(mapWidget.get(), &MapWidget::goalAdded,
+            this, [this](const QPointF &, int){
+                recordGoalsSnapshot();
+                refreshGoalList();
+                updateStateFromGoals();
+            });
+
     connect(mapWidget.get(), &MapWidget::mouseMoved,
                 this, [labelCoords](double x, double y){
                     // Показываем, что это координаты ROS
@@ -90,6 +253,15 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     QPushButton *clearWaypoints = new QPushButton("Clear waypoints", this);
     groupLayout->addWidget(clearWaypoints);
     connect(clearWaypoints, &QPushButton::clicked, this, &NavDialog::clearGoals);
+
+    QHBoxLayout *historyLayout = new QHBoxLayout;
+    QPushButton *undoGoalsButton = new QPushButton("Undo", this);
+    QPushButton *redoGoalsButton = new QPushButton("Redo", this);
+    historyLayout->addWidget(undoGoalsButton);
+    historyLayout->addWidget(redoGoalsButton);
+    groupLayout->addLayout(historyLayout);
+    connect(undoGoalsButton, &QPushButton::clicked, this, &NavDialog::undoGoals);
+    connect(redoGoalsButton, &QPushButton::clicked, this, &NavDialog::redoGoals);
 
 
     commandsGroupBox = new QGroupBox(tr("Commands"), this);
@@ -124,18 +296,22 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
             });
 
     // Patrol mode
-    QCheckBox *isPatrolCheckBox = new QCheckBox("Patrol");  ///< Сlosed route of waypoints
-    commandsLayout->addWidget(isPatrolCheckBox);
+    patrolCheckBox = new QCheckBox("Patrol");  ///< Сlosed route of waypoints
+    commandsLayout->addWidget(patrolCheckBox);
+    connect(patrolCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
+        isPatrolMode = checked;
+    });
 
-    QPushButton *sendGoalsButton = new QPushButton("Send goals", this);
+    sendGoalsButton = new QPushButton("Send goals", this);
     commandsLayout->addWidget(sendGoalsButton);
     connect(sendGoalsButton, &QPushButton::clicked, this, &NavDialog::sendGoals);
 
-    QLabel *statusTask = new QLabel("", this);
-    commandsLayout->addWidget(statusTask);
+    statusTaskLabel = new QLabel("", this);
+    commandsLayout->addWidget(statusTaskLabel);
     connect(timer, &QTimer::timeout, this, [=]() {
         QString newData = taskStatusAsString();
-        statusTask->setText("Status: " + newData);
+        statusTaskLabel->setText("Status: " + newData);
+        updateStateFromStatus();
     });
 
     commandsGroupBox->setLayout(commandsLayout);
@@ -159,13 +335,33 @@ NavDialog::NavDialog(std::shared_ptr<Controls> controlsPtr,
     // Подключаем сигнал таймера к слоту обновления карты
     connect(timer, &QTimer::timeout, this, &NavDialog::onMapUpdated);
 
+    // Реагируем на обновления от сети
+    connect(networkController.get(), &NetworkController::mapUpdated,
+            this, &NavDialog::onMapUpdated);
+
     // Запускаем таймер для проверки обновлений буферов
-    timer->start(42);
+    startUpdates();
+    lastUpdateTimer.start();
+
+    refreshGoalList();
+    updateStateFromGoals();
 }
 
 NavDialog::~NavDialog()
 {
     delete ui;
+}
+
+void NavDialog::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent(event);
+    startUpdates();
+}
+
+void NavDialog::hideEvent(QHideEvent *event)
+{
+    QDialog::hideEvent(event);
+    stopUpdates();
 }
 
 bool NavDialog::hasMapChanged() const
@@ -226,84 +422,73 @@ PoseQuaternion NavDialog::poseToQuaternion(map_service::Pose pose) const
 void NavDialog::clearGoals()
 {
     navigationGoalsList->clear();
+    recordGoalsSnapshot();
+    refreshGoalList();
+    mapWidget->update();
+    updateStateFromGoals();
 }
 
 void NavDialog::sendGoals()
 {
-    if(isFollowWaypoints)
-        followWaypoints();
-    else
-        goThroughPoses();
+    {
+        std::scoped_lock lock(grpcMutex_);
+        lastNavStatus = static_cast<Navigation::CommandStatus>(sensors->navcontrolstatus().status());
+    }
+    if(navTaskState == NavTaskState::Busy) {
+        stopNavigation();
+        awaitingNavAck = true;
+    } else {
+        if(isFollowWaypoints)
+            followWaypoints();
+        else
+            goThroughPoses();
+        setTaskState(NavTaskState::Busy);
+        awaitingNavAck = true;
+    }
+}
+
+void NavDialog::undoGoals()
+{
+    if(navGoalsHistory && navGoalsHistory->undo()) {
+        refreshGoalList();
+        mapWidget->update();
+        updateStateFromGoals();
+    }
+}
+
+void NavDialog::redoGoals()
+{
+    if(navGoalsHistory && navGoalsHistory->redo()) {
+        refreshGoalList();
+        mapWidget->update();
+        updateStateFromGoals();
+    }
 }
 
 void NavDialog::followWaypoints()
 {
-    // Получаем изменяемое сообщение NavCommandRequest.
-    Navigation::NavCommandRequest* navCmd = controls->mutable_navcontrol();
-
-    // Устанавливаем активным поле follow_waypoints в oneof.
-    Navigation::FollowWaypoints* followWaypointsCmd = navCmd->mutable_follow_waypoints();
-
-    // Очистим предыдущие waypoints, если они были заданы
-    followWaypointsCmd->clear_waypoints();
-    // Получаем указатель на повторяемое поле.
-    auto* waypoints = followWaypointsCmd->mutable_waypoints();
-    // Предварительно резервируем память для всех точек.
-    waypoints->Reserve(navigationGoalsList->size());
-
-    // Итерируемся по списку точек и добавляем каждую точку как новый Pose.
-    for (const QPointF &point : *navigationGoalsList) {
-         Navigation::Pose* pose = followWaypointsCmd->add_waypoints();
-         pose->set_x(point.x());
-         pose->set_y(point.y());
-         pose->set_z(0.0);  // Предполагаем, что навигация ведется в 2D, z = 0.
-
-         // Устанавливаем ориентацию по умолчанию: идентичный поворот (единичный кватернион).
-         pose->set_orientation_w(1.0);
-         pose->set_orientation_x(0.0);
-         pose->set_orientation_y(0.0);
-         pose->set_orientation_z(0.0);
-    }
-
-    // Если требуется, устанавливаем запрос обратной связи.
-    navCmd->set_request_feedback(true);
+    std::scoped_lock lock(grpcMutex_);
+    if(navCmdBuilder)
+        navCmdBuilder->buildFollowWaypoints(*navigationGoalsList);
 }
 
 void NavDialog::goThroughPoses()
 {
-    // Получаем изменяемое сообщение NavCommandRequest.
-    Navigation::NavCommandRequest* navCmd = controls->mutable_navcontrol();
+    std::scoped_lock lock(grpcMutex_);
+    if(navCmdBuilder)
+        navCmdBuilder->buildGoThroughPoses(*navigationGoalsList);
+}
 
-    // Устанавливаем активным поле follow_waypoints в oneof.
-    Navigation::GoThroughPoses* goThroughPosesCmd = navCmd->mutable_go_through_poses();
-
-    // Очистим предыдущие waypoints, если они были заданы
-    goThroughPosesCmd->clear_poses();
-    // Получаем указатель на повторяемое поле.
-    auto* poses = goThroughPosesCmd->mutable_poses();
-    // Предварительно резервируем память для всех точек.
-    poses->Reserve(navigationGoalsList->size());
-
-    // Итерируемся по списку точек и добавляем каждую точку как новый Pose.
-    for (const QPointF &point : *navigationGoalsList) {
-         Navigation::Pose* pose = goThroughPosesCmd->add_poses();
-         pose->set_x(point.x());
-         pose->set_y(point.y());
-         pose->set_z(0.0);  // Предполагаем, что навигация ведется в 2D, z = 0.
-
-         // Устанавливаем ориентацию по умолчанию: идентичный поворот (единичный кватернион).
-         pose->set_orientation_w(1.0);
-         pose->set_orientation_x(0.0);
-         pose->set_orientation_y(0.0);
-         pose->set_orientation_z(0.0);
-    }
-
-    // Если требуется, устанавливаем запрос обратной связи.
-    navCmd->set_request_feedback(true);
+void NavDialog::stopNavigation()
+{
+    std::scoped_lock lock(grpcMutex_);
+    if(navCmdBuilder)
+        navCmdBuilder->buildCancelTask();
 }
 
 QString NavDialog::taskStatusAsString()
 {
+    std::scoped_lock lock(grpcMutex_);
     int statusValue = sensors->mutable_navcontrolstatus()->status();
     const google::protobuf::EnumDescriptor* descriptor = Navigation::CommandStatus_descriptor();
     if (descriptor) {
@@ -317,55 +502,224 @@ QString NavDialog::taskStatusAsString()
     return QString("Unknown status");
 }
 
+void NavDialog::recordGoalsSnapshot()
+{
+    if(navGoalsHistory)
+        navGoalsHistory->record();
+}
+
+void NavDialog::refreshGoalList()
+{
+    if(!goalListWidget)
+        return;
+
+    goalListWidget->clear();
+
+    if(!navigationGoalsList)
+        return;
+
+    int index = 1;
+    for (const QPointF &point : *navigationGoalsList) {
+        goalListWidget->addItem(QString("%1: X=%2 Y=%3")
+                                .arg(index++)
+                                .arg(point.x(), 0, 'f', 3)
+                                .arg(point.y(), 0, 'f', 3));
+    }
+}
+
+void NavDialog::updateStateFromGoals()
+{
+    if(navTaskState == NavTaskState::Busy)
+        return;
+
+    if(!navigationGoalsList || navigationGoalsList->empty()) {
+        setTaskState(NavTaskState::Idle);
+    } else {
+        setTaskState(NavTaskState::Ready);
+    }
+}
+
+void NavDialog::updateStateFromStatus()
+{
+    if(!sensors)
+        return;
+
+    Navigation::CommandStatus status;
+    {
+        std::scoped_lock lock(grpcMutex_);
+        status = static_cast<Navigation::CommandStatus>(sensors->navcontrolstatus().status());
+    }
+    if(navTaskState == NavTaskState::Busy && awaitingNavAck) {
+        // Ждём подтверждения от робота; держим Busy пока статус не изменится.
+        if(status != lastNavStatus) {
+            awaitingNavAck = false;
+        } else {
+            lastNavStatus = status;
+            return;
+        }
+    }
+
+    switch (status) {
+        case Navigation::CommandStatus::IN_PROGRESS:
+            setTaskState(NavTaskState::Busy);
+            break;
+        case Navigation::CommandStatus::SUCCESS:
+            if(navigationGoalsList && !navigationGoalsList->empty()) {
+                if(isPatrolMode) {
+                    sendGoals();
+                } else {
+                    setTaskState(NavTaskState::Ready);
+                }
+            } else {
+                setTaskState(NavTaskState::Idle);
+            }
+            break;
+        case Navigation::CommandStatus::FAILURE:
+        case Navigation::CommandStatus::CANCELED:
+            if(navigationGoalsList && !navigationGoalsList->empty())
+                setTaskState(NavTaskState::Ready);
+            else
+                setTaskState(NavTaskState::Idle);
+            break;
+        default:
+            updateStateFromGoals();
+            break;
+    }
+    lastNavStatus = status;
+}
+
+void NavDialog::setTaskState(NavTaskState state)
+{
+    navTaskState = state;
+    if(sendGoalsButton) {
+        switch (state) {
+        case NavTaskState::Busy:
+            sendGoalsButton->setText(tr("Stop"));
+            sendGoalsButton->setEnabled(true);
+            break;
+        case NavTaskState::Ready:
+            sendGoalsButton->setText(tr("Send goals"));
+            sendGoalsButton->setEnabled(true);
+            break;
+        case NavTaskState::Idle:
+        default:
+            sendGoalsButton->setText(tr("Send goals"));
+            sendGoalsButton->setEnabled(false);
+            break;
+        }
+    }
+}
+
 void NavDialog::onMapUpdated()
 {
-    if (!mapPtr) {
-        navContainer->setEnabled(false);
+    if (!isVisible()) {
         return;
     }
-    if(!navContainer->isEnabled() && !(mapPtr->map().data().empty()))
-        navContainer->setEnabled(true);
-
-    // Проверяем, изменились ли данные карты
-    if (hasMapChanged()) {
-        // Извлекаем данные карты
-        std::vector<int8_t> data(mapPtr->map().data().begin(), mapPtr->map().data().end());
-        int width = mapPtr->map().width();
-        int height = mapPtr->map().height();
-
-        double resolution = mapPtr->map().resolution();
-
-        double originX = mapPtr->map().origin().position_x();
-        double originY = mapPtr->map().origin().position_y();
-
-        // Обновляем данные в MapWidget
-        mapWidget->setMapData(data, width, height, resolution, originX, originY);
-
-        // Обновляем предыдущие данные
-        previousData = data;
-        previousWidth = width;
-        previousHeight = height;
+    if (lastUpdateTimer.isValid() && lastUpdateTimer.elapsed() < 100) {
+        return;
     }
+    lastUpdateTimer.restart();
 
-    if (hasPoseChanged()) {
-        // Обновляем позицию робота в MapWidget
+    std::vector<int8_t> dataCopy;
+    int width = 0;
+    int height = 0;
+    double resolution = 0.0;
+    double originX = 0.0;
+    double originY = 0.0;
+    double robotX = 0.0;
+    double robotY = 0.0;
+    PoseQuaternion robotQuat {};
+    bool mapChanged = false;
+    bool poseChanged = false;
+    bool zonesChanged = false;
+    std::vector<MapWidget::ZoneOverlay> zonesCopy;
 
-        mapWidget->setRobotPose(mapPtr->robotpose().position_x(),
-                                mapPtr->robotpose().position_y(),
-                                poseToQuaternion(mapPtr->robotpose()));
-    }
+    {
+        std::scoped_lock lock(mapMutex_);
 
-    // Обновление списка целей (если MapWidget отправляет сигнал goalAdded, можно подключить этот сигнал)
-    // Здесь, например, можно получить список целей из mapWidget и обновить goalListWidget.
-    auto goals = mapWidget->getGoals();
-    goalListWidget->clear();
-    int index = 1;
+        if (!mapPtr) {
+            navContainer->setEnabled(false);
+            return;
+        }
+        if(!navContainer->isEnabled() && !(mapPtr->map().data().empty()))
+            navContainer->setEnabled(true);
 
-    if(goals)
-        for (auto goal : *goals) {
-            goalListWidget->addItem(QString("Goal %1: (%2, %3)").arg(index).arg(goal.x(), 0, 'f', 2).arg(goal.y(), 0, 'f', 2));
-            index++;
+        mapChanged = hasMapChanged();
+        poseChanged = hasPoseChanged();
+        zonesChanged = buildZoneSignature(mapPtr->zone_map()) != previousZoneSignature;
+        if (!mapChanged && !poseChanged && !zonesChanged) {
+            return;
         }
 
+        if (mapChanged) {
+            dataCopy.assign(mapPtr->map().data().begin(), mapPtr->map().data().end());
+            width = mapPtr->map().width();
+            height = mapPtr->map().height();
+
+            resolution = mapPtr->map().resolution();
+
+            originX = mapPtr->map().origin().position_x();
+            originY = mapPtr->map().origin().position_y();
+
+            // Обновляем предыдущие данные
+            previousData = dataCopy;
+            previousWidth = width;
+            previousHeight = height;
+        }
+
+        if (poseChanged) {
+            robotX = mapPtr->robotpose().position_x();
+            robotY = mapPtr->robotpose().position_y();
+            robotQuat = poseToQuaternion(mapPtr->robotpose());
+        }
+
+        if (zonesChanged) {
+            const auto &zone_map = mapPtr->zone_map();
+            zonesCopy.clear();
+            zonesCopy.reserve(static_cast<std::size_t>(zone_map.zones_size()));
+            for (const auto &zone : zone_map.zones()) {
+                MapWidget::ZoneOverlay overlay;
+                overlay.id = static_cast<std::uint32_t>(zone.id());
+                overlay.typeId = zone.type_id();
+                overlay.name = QString::fromStdString(zone.name());
+                overlay.color = QColor(static_cast<int>(zone.color().r()),
+                                       static_cast<int>(zone.color().g()),
+                                       static_cast<int>(zone.color().b()));
+                overlay.contour.reserve(zone.chain_code_size());
+                for (const auto &pt : zone.chain_code()) {
+                    overlay.contour.push_back(QPointF(pt.x(), pt.y()));
+                }
+                zonesCopy.push_back(std::move(overlay));
+            }
+            previousZoneSignature = buildZoneSignature(zone_map);
+        }
+    }
+
+    if (mapChanged) {
+        // Обновляем данные в MapWidget
+        mapWidget->setMapData(dataCopy, width, height, resolution, originX, originY);
+    }
+
+    if (poseChanged) {
+        // Обновляем позицию робота в MapWidget
+        mapWidget->setRobotPose(robotX, robotY, robotQuat);
+    }
+
+    if (zonesChanged) {
+        mapWidget->setZones(zonesCopy);
+    }
+
     mapWidget->update();
+}
+
+void NavDialog::startUpdates()
+{
+    if(timer && !timer->isActive())
+        timer->start(42);
+}
+
+void NavDialog::stopUpdates()
+{
+    if(timer && timer->isActive())
+        timer->stop();
 }

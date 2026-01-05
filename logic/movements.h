@@ -2,6 +2,8 @@
 #define MOVEMENTS_H
 
 #include "../joystick/joystick.h"
+#include <memory>
+#include <utility>
 #include <stdlib.h>     /* abs */
 
 using namespace Robot;
@@ -13,17 +15,34 @@ struct MoveSettings
         int relayButton = 5;
         int lightButton = 0;
 
-        #define WHEEL_X_AXIS joyState->joystickXaxis
-        #define WHEEL_Y_AXIS joyState->joystickYaxis
+        int divider = 129;
 
-        #define CAM_X_AXIS joyState->joystickZLTaxis
-        #define CAM_Y_AXIS joyState->joystickXrotation
+        int wheelXAxis(const JoyState &state) const { return state.joystickXaxis / divider; }
+        int wheelYAxis(const JoyState &state) const { return state.joystickYaxis / divider; }
 
-        #define HAND_AXIS joyState->joystickXrotation
-
-        #define DIVIDER 129
+        int cameraXAxis(const JoyState &state) const { return state.joystickZLTaxis / divider; }
+        int cameraYAxis(const JoyState &state) const { return state.joystickXrotation / divider; }
     }
     joyBindings;
+};
+
+class BaseControlStrategy
+{
+public:
+    virtual ~BaseControlStrategy() = default;
+    virtual std::pair<double, double> velocities(const JoyState &state,
+                                                 const MoveSettings::JoyBindings &bindings) const = 0;
+};
+
+class DeadzoneBaseControlStrategy : public BaseControlStrategy
+{
+public:
+    explicit DeadzoneBaseControlStrategy(int driftZone) : driftZone_(driftZone) {}
+    std::pair<double, double> velocities(const JoyState &state,
+                                         const MoveSettings::JoyBindings &bindings) const override;
+
+private:
+    int driftZone_;
 };
 
 class ManualControl
@@ -35,6 +54,8 @@ class ManualControl
     std::shared_ptr<JoyState> joyState;
     JoyState lastJoyState;
     int joyDriftZone = 7;
+
+    std::unique_ptr<BaseControlStrategy> baseControlStrategy;
 
     Base::BaseControl::ControlLevel baseControlLevel;
 

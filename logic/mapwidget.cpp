@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include <algorithm>
 #include <QtMath>
+#include <QPolygonF>
 
 MapWidget::MapWidget(std::shared_ptr<std::vector<QPointF>> navListGoals, QWidget* parent)
     : m_goalsWorld(navListGoals),
@@ -34,6 +35,8 @@ MapWidget::MapWidget(std::shared_ptr<std::vector<QPointF>> navListGoals, QWidget
         QPoint points[3] = { QPoint(10, 0), QPoint(0, 20), QPoint(20, 20) };
         painter.drawPolygon(points, 3);
     }
+
+    setupLayers();
 }
 
 
@@ -51,6 +54,15 @@ void MapWidget::setMapData(const std::vector<int8_t>& data,
 
     // Проверка валидности
     if (width <= 0 || height <= 0 || data.empty()) {
+        m_mapImage = QImage();
+        update();
+        return;
+    }
+
+    const std::size_t expectedSize = static_cast<std::size_t>(width) * static_cast<std::size_t>(height);
+    if (data.size() != expectedSize) {
+        qWarning() << "MapWidget::setMapData size mismatch:" << data.size()
+                   << "vs" << expectedSize << "for" << width << "x" << height;
         m_mapImage = QImage();
         update();
         return;
@@ -138,6 +150,13 @@ void MapWidget::setRobotPose(double posX, double posY, PoseQuaternion quaternion
     setRobotOrientation(quaternion);
 }
 
+void MapWidget::setZones(const std::vector<ZoneOverlay> &zones)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    m_zones = zones;
+    update();
+}
+
 const std::shared_ptr<std::vector<QPointF> > &MapWidget::getGoals() const
 {
     return m_goalsWorld;
@@ -214,6 +233,100 @@ void MapWidget::drawAxis(QPainter &painter)
     painter.setPen(penY);
     // В экранной системе координат Y растет вниз, поэтому для оси Y вверх отнимаем значение по Y.
     painter.drawLine(origin, origin - QPoint(0, 20));
+}
+
+void MapWidget::drawMapLayer(QPainter &painter)
+{
+    if(m_mapImage.isNull())
+        return;
+
+    painter.save();
+    painter.translate(m_offset);
+    painter.scale(m_scaleFactor, m_scaleFactor);
+    painter.drawImage(0, 0, m_mapImage);
+    painter.restore();
+}
+
+void MapWidget::drawZonesLayer(QPainter &painter)
+{
+    if (m_mapImage.isNull())
+        return;
+
+    painter.save();
+    painter.translate(m_offset);
+    painter.scale(m_scaleFactor, m_scaleFactor);
+    drawZones(painter);
+    painter.restore();
+}
+
+void MapWidget::drawGridLayer(QPainter &painter)
+{
+    if(!m_showGrid || m_mapImage.isNull())
+        return;
+
+    painter.save();
+    painter.translate(m_offset);
+    painter.scale(m_scaleFactor, m_scaleFactor);
+    drawGrid(painter);
+    painter.restore();
+}
+
+void MapWidget::drawAxisLayer(QPainter &painter)
+{
+    if(!m_showAxis)
+        return;
+    drawAxis(painter);
+}
+
+void MapWidget::drawRobotLayer(QPainter &painter)
+{
+    drawRobot(painter);
+}
+
+void MapWidget::drawWaypointsLayer(QPainter &painter)
+{
+    drawWaypoints(painter);
+}
+
+void MapWidget::drawZones(QPainter &painter)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if (m_mapImage.isNull() || m_zones.empty())
+        return;
+
+    const bool debugZones = true;
+
+    for (const auto &zone : m_zones) {
+        if (zone.contour.size() < 3)
+            continue;
+
+        QPolygonF poly;
+        poly.reserve(zone.contour.size());
+        for (const auto &pt : zone.contour) {
+            QPointF mapPt = worldToMap(pt);
+            poly << mapPt;
+        }
+
+        QColor fill = zone.color.darker(140);
+        fill.setAlpha(140);
+        QColor stroke = zone.color.darker(200);
+        stroke.setAlpha(220);
+        QPen pen(stroke);
+        pen.setCosmetic(true);
+        pen.setWidth(1);
+        painter.setPen(pen);
+        painter.setBrush(QBrush(fill));
+        painter.drawPolygon(poly);
+
+        if (debugZones) {
+            QPen debugPen(QColor(255, 0, 255));
+            debugPen.setCosmetic(true);
+            debugPen.setWidth(2);
+            painter.setPen(debugPen);
+            painter.setBrush(Qt::NoBrush);
+            painter.drawRect(poly.boundingRect());
+        }
+    }
 }
 
 void MapWidget::drawRobot(QPainter &painter)
@@ -317,31 +430,8 @@ void MapWidget::paintEvent(QPaintEvent* /*event*/)
     QPainter painter(this);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
-    if(!m_mapImage.isNull()) {
-        painter.save();
-        // Применяем масштабирование и сдвиг
-        painter.translate(m_offset);
-        painter.scale(m_scaleFactor, m_scaleFactor);
-        // 1) Рисуем карту
-        painter.drawImage(0, 0, m_mapImage);
-
-        // 2) Рисуем сетку поверх карты
-        if (m_showGrid) {
-            drawGrid(painter);
-        }
-
-        painter.restore(); // scale=1
-
-        // 3) Рисуем оси поверх карты
-        if (m_showAxis) {
-            drawAxis(painter);
-        }
-
-        // 4) Рисуем робота фиксированного размера (не масштабируя)
-        drawRobot(painter);
-
-        // 5) Отрисовываем цели (не масштабируемые)
-        drawWaypoints(painter);
+    for(auto &layer : m_layers) {
+        layer(painter);
     }
 }
 
@@ -369,6 +459,14 @@ QPointF MapWidget::widgetToMap(const QPointF &p) const
 {
     // Перевод из координат виджета в координаты карты (пиксели)
     return (p - m_offset) / m_scaleFactor;
+}
+
+QPointF MapWidget::worldToMap(const QPointF &world) const
+{
+    double px = (world.x() - m_originX) / m_mapResolution;
+    double py = (m_mapImage.height() - 1)
+                - ((world.y() - m_originY) / m_mapResolution);
+    return QPointF(px, py);
 }
 
 QPointF MapWidget::mapToWidget(const QPointF &mapPt) const
@@ -413,6 +511,17 @@ void MapWidget::setShowAxis(bool enable)
 {
     m_showAxis = enable;
     update();
+}
+
+void MapWidget::setupLayers()
+{
+    m_layers.clear();
+    m_layers.emplace_back([this](QPainter& painter){ drawMapLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawZonesLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawGridLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawAxisLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawRobotLayer(painter); });
+    m_layers.emplace_back([this](QPainter& painter){ drawWaypointsLayer(painter); });
 }
 
 void MapWidget::wheelEvent(QWheelEvent* event)

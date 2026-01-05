@@ -11,13 +11,14 @@
 #include "robotentry.h"
 
 #include "client.h"
+#include "networkfactory.h"
 #include "server.h"
 
 QT_BEGIN_NAMESPACE
 class QUdpSocket;
 QT_END_NAMESPACE
 
-class NetworkController : QObject
+class NetworkController : public QObject
 {
     Q_OBJECT
 
@@ -57,6 +58,10 @@ public:
     std::shared_ptr<grpcServer>& getServerInstance() {
         return serverPtr;
     }
+
+signals:
+    void sensorsUpdated();
+    void mapUpdated();
 };
 
 #endif // NETWORKCONTROLLER_H

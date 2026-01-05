@@ -8,7 +8,7 @@ NetworkController::NetworkController(std::shared_ptr<Controls> controlsPtr,
       map(mapPtr)
 {
     udpSocket = new QUdpSocket(this);
-    serverPtr = std::make_shared<grpcServer>();
+    serverPtr = NetworkFactory::createServer();
 }
 
 NetworkController::~NetworkController()
@@ -25,8 +25,10 @@ int NetworkController::runClient(std::string &server_address) // TODO - send con
     // We indicate that the channel isn't authenticated (use of
     // InsecureChannelCredentials()).
 
-    clientPtr = std::make_shared<grpcClient>(grpc::CreateChannel(
-        server_address, grpc::InsecureChannelCredentials()), controls, sensors, map);
+    clientPtr = NetworkFactory::createClient(server_address, controls, sensors, map);
+
+    QObject::connect(clientPtr.get(), &grpcClient::sensorsUpdated, this, &NetworkController::sensorsUpdated);
+    QObject::connect(clientPtr.get(), &grpcClient::mapUpdated, this, &NetworkController::mapUpdated);
 
     std::thread thr([&, this]()
      {
@@ -49,6 +51,7 @@ int NetworkController::runServer(std::string &address_mask) // TODO - send const
 
       // Send protos pointers to server
       serverPtr->setProtosPointers(controls, sensors, map);
+      serverPtr->setSensorsUpdatedCallback([this]() { emit sensorsUpdated(); });
 
       // Listen on the given address without any authentication mechanism.
       builder.AddListeningPort(address_mask, grpc::InsecureServerCredentials());

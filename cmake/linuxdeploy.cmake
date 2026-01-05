@@ -168,8 +168,94 @@ Categories=${APPIMG_DESKTOP_CATEGORIES}
             --desktop-file  "${DESKTOP_PATH}"
             --icon-file     "${ICON_FILEPATH}"
             --custom-apprun  "${APPIMG_APPRUN}"
-            --plugin qt
             --plugin gstreamer
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    )
+
+    execute_process(
+        COMMAND "${LINUXDEPLOY_QT_BIN}"
+            --appdir  "${APPDIR}"
+            --exclude-library  "libsybdb.so.5"
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    )
+
+    set(QT_PLUGINS_DIR "")
+    if(DEFINED ENV{QMAKE} AND NOT "$ENV{QMAKE}" STREQUAL "")
+        execute_process(
+            COMMAND "$ENV{QMAKE}" -query QT_INSTALL_PLUGINS
+            OUTPUT_VARIABLE QT_PLUGINS_DIR
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+    endif()
+    if(QT_PLUGINS_DIR AND EXISTS "${QT_PLUGINS_DIR}/platforms")
+        file(MAKE_DIRECTORY "${APPDIR}/usr/plugins")
+        file(COPY "${QT_PLUGINS_DIR}/platforms" DESTINATION "${APPDIR}/usr/plugins")
+        if(EXISTS "${QT_PLUGINS_DIR}/xcbglintegrations")
+            file(COPY "${QT_PLUGINS_DIR}/xcbglintegrations" DESTINATION "${APPDIR}/usr/plugins")
+        endif()
+    endif()
+
+    set(GST_SCANNER_CANDIDATES "")
+    set(GST_LIBEXECDIR "")
+    execute_process(
+        COMMAND pkg-config --variable=libexecdir gstreamer-1.0
+        OUTPUT_VARIABLE GST_LIBEXECDIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_QUIET
+    )
+    if(GST_LIBEXECDIR)
+        list(APPEND GST_SCANNER_CANDIDATES
+            "${GST_LIBEXECDIR}/gstreamer-1.0/gst-plugin-scanner")
+    endif()
+    set(GST_LIBDIR "")
+    execute_process(
+        COMMAND pkg-config --variable=libdir gstreamer-1.0
+        OUTPUT_VARIABLE GST_LIBDIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_QUIET
+    )
+    if(GST_LIBDIR)
+        list(APPEND GST_SCANNER_CANDIDATES
+            "${GST_LIBDIR}/gstreamer1.0/gst-plugin-scanner"
+            "${GST_LIBDIR}/gstreamer-1.0/gst-plugin-scanner")
+    endif()
+    list(APPEND GST_SCANNER_CANDIDATES
+        "/usr/libexec/gstreamer-1.0/gst-plugin-scanner"
+        "/usr/lib/gstreamer1.0/gst-plugin-scanner"
+        "/usr/lib/gstreamer-1.0/gst-plugin-scanner"
+        "/usr/lib/x86_64-linux-gnu/gstreamer1.0/gst-plugin-scanner"
+        "/usr/lib/x86_64-linux-gnu/gstreamer-1.0/gst-plugin-scanner"
+    )
+
+    set(GST_SCANNER_PATH "")
+    foreach(candidate IN LISTS GST_SCANNER_CANDIDATES)
+        if(EXISTS "${candidate}")
+            set(GST_SCANNER_PATH "${candidate}")
+            break()
+        endif()
+    endforeach()
+    if(GST_SCANNER_PATH)
+        file(MAKE_DIRECTORY "${APPDIR}/usr/libexec/gstreamer-1.0")
+        file(COPY "${GST_SCANNER_PATH}"
+             DESTINATION "${APPDIR}/usr/libexec/gstreamer-1.0")
+    endif()
+
+    file(MAKE_DIRECTORY "${APPDIR}/usr/bin")
+    file(WRITE "${APPDIR}/usr/bin/gst-plugin-scanner" [=[
+#!/usr/bin/env sh
+HERE="$(dirname "$(readlink -f "$0")")"
+APPDIR="${APPDIR:-$(cd "${HERE}/../.." && pwd)}"
+export LD_LIBRARY_PATH="${APPDIR}/usr/lib:${LD_LIBRARY_PATH:-}"
+exec "${APPDIR}/usr/libexec/gstreamer-1.0/gst-plugin-scanner" "$@"
+]=])
+    execute_process(COMMAND chmod +x "${APPDIR}/usr/bin/gst-plugin-scanner")
+
+    execute_process(
+        COMMAND "${LINUXDEPLOY_BIN}"
+            --appdir  "${APPDIR}"
+            --desktop-file  "${DESKTOP_PATH}"
+            --icon-file     "${ICON_FILEPATH}"
+            --custom-apprun  "${APPIMG_APPRUN}"
             --output appimage
         WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
     )
