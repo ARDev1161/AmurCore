@@ -127,6 +127,7 @@ private:
 
     QPointF widgetToWorld(const QPointF &point) const;
     QPointF widgetToMap(const QPointF &p) const;
+    QPointF worldToMap(const QPointF &world) const;
     QPointF mapToWidget(const QPointF &mapPt) const;
     bool m_showGrid = true;
     bool m_showAxis = true;

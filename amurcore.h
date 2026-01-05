@@ -21,7 +21,9 @@
 
 #undef main
 #include "pch.h"
+#include <atomic>
 #include <mutex>
+#include <thread>
 #include <QLabel>
 
 #define NO_PICTURE "./data/images/no_picture.jpeg"
@@ -74,6 +76,13 @@ class AmurCore : public QMainWindow
 
     CamSettingsHolder *camHolder;
     VideoCapture capture;
+    std::string videoStreamPipeline;
+    struct CaptureState {
+        std::mutex mutex;
+        std::atomic<bool> stop{false};
+        Mat latest;
+    };
+    std::shared_ptr<CaptureState> captureState;
 
     Mat sourceMat;
     Mat undistortedMat;
@@ -100,6 +109,7 @@ private slots:
 
     void robotHalt();
     void robotReboot();
+    void onSensorsUpdated();
 
 private:
     void fillFieldsByConfig();

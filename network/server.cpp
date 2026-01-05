@@ -16,6 +16,9 @@ grpc::Status grpcServer::DataExchange ([[maybe_unused]] grpc::ServerContext* con
   *sensors = *request;
   *reply = *controls;
   ul.unlock();
+  if (sensors_updated_cb_) {
+    sensors_updated_cb_();
+  }
 
   return grpc::Status::OK;
 }
@@ -33,6 +36,9 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
       // Write controls
       stream->Write(*controls);
       ul.unlock();
+      if (sensors_updated_cb_) {
+        sensors_updated_cb_();
+      }
     }
 }
 
@@ -40,17 +46,18 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
                                    grpc::ServerReaderWriter<map_service::GetMapRequest, map_service::GetMapResponse>* stream)
 {
     map_service::GetMapRequest request;
-
-    std::unique_lock<std::mutex> ul(muMap, std::defer_lock);
+    map_service::GetMapResponse response;
     while(true)
     {
-      ul.lock();
-      if(!(stream->Read(map.get())))
+      if(!(stream->Read(&response)))
           return grpc::Status::OK;
-
-      // Write controls
+      {
+          std::lock_guard<std::mutex> lock(muMap);
+          if (map) {
+              *map = response;
+          }
+      }
       stream->Write(request);
-      ul.unlock();
     }
 
     return grpc::Status::OK;
@@ -62,17 +69,17 @@ grpc::Status grpcServer::PoseStream([[maybe_unused]] grpc::ServerContext* contex
     map_service::PoseRequest request;
     map_service::PoseState state;
 
-    std::unique_lock<std::mutex> ul(muMap, std::defer_lock);
     while(true)
     {
-      ul.lock();
       if(!(stream->Read(&state)))
           return grpc::Status::OK;
-      if (map) {
-          *map->mutable_robotpose() = state.pose();
+      {
+          std::lock_guard<std::mutex> lock(muMap);
+          if (map) {
+              *map->mutable_robotpose() = state.pose();
+          }
       }
       stream->Write(request);
-      ul.unlock();
     }
 
     return grpc::Status::OK;
@@ -84,17 +91,17 @@ grpc::Status grpcServer::ZoneStream([[maybe_unused]] grpc::ServerContext* contex
     map_service::ZoneRequest request;
     map_service::ZoneState state;
 
-    std::unique_lock<std::mutex> ul(muMap, std::defer_lock);
     while(true)
     {
-      ul.lock();
       if(!(stream->Read(&state)))
           return grpc::Status::OK;
-      if (map) {
-          *map->mutable_zone_map() = state.zone_map();
+      {
+          std::lock_guard<std::mutex> lock(muMap);
+          if (map) {
+              *map->mutable_zone_map() = state.zone_map();
+          }
       }
       stream->Write(request);
-      ul.unlock();
     }
 
     return grpc::Status::OK;

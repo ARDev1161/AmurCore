@@ -294,6 +294,8 @@ void MapWidget::drawZones(QPainter &painter)
     if (m_mapImage.isNull() || m_zones.empty())
         return;
 
+    const bool debugZones = true;
+
     for (const auto &zone : m_zones) {
         if (zone.contour.size() < 3)
             continue;
@@ -301,22 +303,29 @@ void MapWidget::drawZones(QPainter &painter)
         QPolygonF poly;
         poly.reserve(zone.contour.size());
         for (const auto &pt : zone.contour) {
-            double px = (pt.x() - m_originX) / m_mapResolution;
-            double py = (m_mapImage.height() - 1)
-                        - ((pt.y() - m_originY) / m_mapResolution);
-            poly << QPointF(px, py);
+            QPointF mapPt = worldToMap(pt);
+            poly << mapPt;
         }
 
-        QColor fill = zone.color;
-        fill.setAlpha(80);
-        QColor stroke = zone.color;
-        stroke.setAlpha(150);
+        QColor fill = zone.color.darker(140);
+        fill.setAlpha(140);
+        QColor stroke = zone.color.darker(200);
+        stroke.setAlpha(220);
         QPen pen(stroke);
         pen.setCosmetic(true);
         pen.setWidth(1);
         painter.setPen(pen);
         painter.setBrush(QBrush(fill));
         painter.drawPolygon(poly);
+
+        if (debugZones) {
+            QPen debugPen(QColor(255, 0, 255));
+            debugPen.setCosmetic(true);
+            debugPen.setWidth(2);
+            painter.setPen(debugPen);
+            painter.setBrush(Qt::NoBrush);
+            painter.drawRect(poly.boundingRect());
+        }
     }
 }
 
@@ -450,6 +459,14 @@ QPointF MapWidget::widgetToMap(const QPointF &p) const
 {
     // Перевод из координат виджета в координаты карты (пиксели)
     return (p - m_offset) / m_scaleFactor;
+}
+
+QPointF MapWidget::worldToMap(const QPointF &world) const
+{
+    double px = (world.x() - m_originX) / m_mapResolution;
+    double py = (m_mapImage.height() - 1)
+                - ((world.y() - m_originY) / m_mapResolution);
+    return QPointF(px, py);
 }
 
 QPointF MapWidget::mapToWidget(const QPointF &mapPt) const

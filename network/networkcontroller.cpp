@@ -51,6 +51,7 @@ int NetworkController::runServer(std::string &address_mask) // TODO - send const
 
       // Send protos pointers to server
       serverPtr->setProtosPointers(controls, sensors, map);
+      serverPtr->setSensorsUpdatedCallback([this]() { emit sensorsUpdated(); });
 
       // Listen on the given address without any authentication mechanism.
       builder.AddListeningPort(address_mask, grpc::InsecureServerCredentials());
