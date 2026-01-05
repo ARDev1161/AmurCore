@@ -9,6 +9,9 @@ var dir_5e348a4506c756af4d72f85d73916a0d =
     [ "joystick.h", "joystick_8h.html", [
       [ "Joystick", "classJoystick.html", "classJoystick" ]
     ] ],
+    [ "joystick_factory.h", "joystick__factory_8h.html", [
+      [ "JoystickFactory", "classJoystickFactory.html", "classJoystickFactory" ]
+    ] ],
     [ "joystickdialog.cpp", "joystickdialog_8cpp.html", null ],
     [ "joystickdialog.h", "joystickdialog_8h.html", [
       [ "JoystickDialog", "classJoystickDialog.html", "classJoystickDialog" ]

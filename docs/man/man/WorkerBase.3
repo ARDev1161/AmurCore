@@ -1,0 +1,87 @@
+.TH "WorkerBase" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+WorkerBase
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <worker\&.h>\fP
+.PP
+Inherits QObject\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBprocess\fP ()"
+.br
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBfinished\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBWorkerBase\fP ()"
+.br
+.ti -1c
+.RI "\fB~WorkerBase\fP () override"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBonStart\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBonTick\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBonStop\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBrunning\fP {true}"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "WorkerBase::WorkerBase ()"
+
+.SS "WorkerBase::~WorkerBase ()\fC [override]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void WorkerBase::finished ()\fC [signal]\fP"
+
+.SS "virtual void WorkerBase::onStart ()\fC [inline]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.SS "virtual void WorkerBase::onStop ()\fC [inline]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.SS "virtual void WorkerBase::onTick ()\fC [inline]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.SS "void WorkerBase::process ()\fC [slot]\fP"
+
+.SS "void WorkerBase::stop ()\fC [slot]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool WorkerBase::running {true}\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

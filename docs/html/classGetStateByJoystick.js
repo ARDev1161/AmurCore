@@ -10,7 +10,7 @@ var classGetStateByJoystick =
     [ "hatSetup", "classGetStateByJoystick.html#adc802f0601e95c7d25af421e34d5bcd7", null ],
     [ "setAvaliableJoystick", "classGetStateByJoystick.html#a3436d800e860854e4dbae4b20a19095a", null ],
     [ "stop", "classGetStateByJoystick.html#ab7a34557b201e25046ba69cb208f59dc", null ],
-    [ "joyAdapter", "classGetStateByJoystick.html#af8015d36ab285df1ab97e417c5aad07d", null ],
+    [ "joyAdapter", "classGetStateByJoystick.html#a11260f4070a86636d3557076198f533a", null ],
     [ "joyState", "classGetStateByJoystick.html#a30eb4bba493a72b8255ac60a9fbef960", null ],
     [ "loopFlag", "classGetStateByJoystick.html#a08fa6edd1c3fa4011cff3f0c283e4e0f", null ],
     [ "LoopTime", "classGetStateByJoystick.html#a66d31e9706c734994f9d0f39c7fb435a", null ]

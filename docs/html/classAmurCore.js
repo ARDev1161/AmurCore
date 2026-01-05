@@ -1,5 +1,6 @@
 var classAmurCore =
 [
+    [ "CaptureState", "structAmurCore_1_1CaptureState.html", "structAmurCore_1_1CaptureState" ],
     [ "AmurCore", "classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651", null ],
     [ "~AmurCore", "classAmurCore.html#aae769f4fd193bdd989949561891ab9ec", null ],
     [ "calibDialogOpen", "classAmurCore.html#a2e39fc1b9e8c27cb63c9835cbc7573ac", null ],
@@ -11,6 +12,7 @@ var classAmurCore =
     [ "initialize", "classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9", null ],
     [ "joystickDialogOpen", "classAmurCore.html#a55989dd84418d54636ab77a5729d0a65", null ],
     [ "mapDialogOpen", "classAmurCore.html#a6d8daf1ae924caf1f304e3c4ab65b285", null ],
+    [ "onSensorsUpdated", "classAmurCore.html#a048888cb7228325ee542a7cd51944cd7", null ],
     [ "outMat", "classAmurCore.html#a6c7d5af7322ad0586428dc70fa1f8df2", null ],
     [ "resizeEvent", "classAmurCore.html#a3bba45044fd0a8c5032636f63940fc1f", null ],
     [ "robotHalt", "classAmurCore.html#aed3e106d258ddb61d08bf7e233016c61", null ],
@@ -28,6 +30,7 @@ var classAmurCore =
     [ "arpPort", "classAmurCore.html#a9fafed7c88f76e0a62d791fbc6bd418f", null ],
     [ "camHolder", "classAmurCore.html#a28cedb61eb702d105b452289b5a62316", null ],
     [ "capture", "classAmurCore.html#a4e35099d245057345af1dac0cada969b", null ],
+    [ "captureState", "classAmurCore.html#a4d055c52c81b93c03b2d2dc988c59618", null ],
     [ "config", "classAmurCore.html#adb878c20566c0220febb8cffcbd7f364", null ],
     [ "configName", "classAmurCore.html#a05a740dfbc5aa63dca556cabde8bfe4c", null ],
     [ "connectDialog", "classAmurCore.html#a977618f6f5947eb054547e6156f3944f", null ],
@@ -51,5 +54,6 @@ var classAmurCore =
     [ "statusMessage", "classAmurCore.html#ac54cc87ff9f9861f2eaa8c9765378089", null ],
     [ "tmrTimer", "classAmurCore.html#a583dc21e69c49f636232b7c08dcb644c", null ],
     [ "ui", "classAmurCore.html#afddb783940265bcf0d639e262e5e954d", null ],
-    [ "undistortedMat", "classAmurCore.html#aef40aa622233b6f8df42c524bce9273a", null ]
+    [ "undistortedMat", "classAmurCore.html#aef40aa622233b6f8df42c524bce9273a", null ],
+    [ "videoStreamPipeline", "classAmurCore.html#a7c2acb4b9a0d54c9f54386660d58a7a7", null ]
 ];

@@ -1,17 +1,20 @@
 <map id="network/networkcontroller.cpp" name="network/networkcontroller.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="495,5,689,32"/>
-<area shape="rect" id="node2" href="$networkcontroller_8h.html" title=" " alt="" coords="527,80,657,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="88,237,160,263"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,237,64,263"/>
-<area shape="rect" id="node5" title=" " alt="" coords="989,237,1059,263"/>
-<area shape="rect" id="node6" title=" " alt="" coords="1084,237,1169,263"/>
-<area shape="rect" id="node7" title=" " alt="" coords="1099,155,1165,181"/>
-<area shape="rect" id="node8" href="$robotentry_8h.html" title=" " alt="" coords="934,155,1023,181"/>
-<area shape="rect" id="node9" href="$client_8h.html" title=" " alt="" coords="274,155,337,181"/>
-<area shape="rect" id="node13" href="$server_8h.html" title=" " alt="" coords="522,155,590,181"/>
-<area shape="rect" id="node10" title=" " alt="" coords="184,237,245,263"/>
-<area shape="rect" id="node11" title=" " alt="" coords="269,237,384,263"/>
-<area shape="rect" id="node12" title=" " alt="" coords="409,237,615,263"/>
-<area shape="rect" id="node14" title=" " alt="" coords="639,229,782,271"/>
-<area shape="rect" id="node15" title=" " alt="" coords="806,229,965,271"/>
+<area shape="rect" id="node1" title=" " alt="" coords="232,5,427,32"/>
+<area shape="rect" id="node2" href="$networkcontroller_8h.html" title=" " alt="" coords="264,80,395,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="501,311,573,338"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,311,64,338"/>
+<area shape="rect" id="node5" title=" " alt="" coords="89,311,159,338"/>
+<area shape="rect" id="node6" title=" " alt="" coords="207,229,292,256"/>
+<area shape="rect" id="node7" title=" " alt="" coords="297,155,362,181"/>
+<area shape="rect" id="node8" href="$robotentry_8h.html" title=" " alt="" coords="131,155,221,181"/>
+<area shape="rect" id="node9" href="$client_8h.html" title=" " alt="" coords="346,229,409,256"/>
+<area shape="rect" id="node13" href="$networkfactory_8h.html" title=" " alt="" coords="488,155,605,181"/>
+<area shape="rect" id="node15" href="$server_8h.html" title=" " alt="" coords="619,229,687,256"/>
+<area shape="rect" id="node10" title=" " alt="" coords="184,311,245,338"/>
+<area shape="rect" id="node11" title=" " alt="" coords="597,311,712,338"/>
+<area shape="rect" id="node12" title=" " alt="" coords="270,311,477,338"/>
+<area shape="rect" id="node14" title=" " alt="" coords="513,229,581,256"/>
+<area shape="rect" id="node16" title=" " alt="" coords="737,311,815,338"/>
+<area shape="rect" id="node17" title=" " alt="" coords="839,304,982,345"/>
+<area shape="rect" id="node18" title=" " alt="" coords="1006,304,1165,345"/>
 </map>

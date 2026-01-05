@@ -6,6 +6,6 @@ var dir_b71e9c10552984757907f0ca0d59e659 =
     ] ],
     [ "worker.cpp", "worker_8cpp.html", null ],
     [ "worker.h", "worker_8h.html", [
-      [ "Worker", "classWorker.html", "classWorker" ]
+      [ "WorkerBase", "classWorkerBase.html", "classWorkerBase" ]
     ] ]
 ];

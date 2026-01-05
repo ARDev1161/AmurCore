@@ -6,6 +6,8 @@ var classgrpcClient =
     [ "getMapMutex", "classgrpcClient.html#a9eebc26e06a3d858a1e5c0975a204b89", null ],
     [ "getMutex", "classgrpcClient.html#a1cb6076dc439cf31d55750e178f6319f", null ],
     [ "MapStream", "classgrpcClient.html#ab877928b42b2e13b1d2953826072777d", null ],
+    [ "mapUpdated", "classgrpcClient.html#a5dee437ba223febe0b4ff4055facac80", null ],
+    [ "sensorsUpdated", "classgrpcClient.html#ab89dd37f19397a57c18a096b850fcf6f", null ],
     [ "stopStream", "classgrpcClient.html#a791265a5d7a0615281f250d1f0c8877a", null ],
     [ "clientChannel", "classgrpcClient.html#ac52219f3b5cc9b95c359cd4aaf03ab90", null ],
     [ "controls", "classgrpcClient.html#ac475afdea22873b98a1a08fc0132ed6c", null ],

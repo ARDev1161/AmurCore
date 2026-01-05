@@ -1,4 +1,4 @@
-.TH "ManualControl" 3 "Wed Nov 26 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "ManualControl" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -62,6 +62,9 @@ ManualControl
 .RI "int \fBjoyDriftZone\fP = 7"
 .br
 .ti -1c
+.RI "std::unique_ptr< \fBBaseControlStrategy\fP > \fBbaseControlStrategy\fP"
+.br
+.ti -1c
 .RI "Base::BaseControl::ControlLevel \fBbaseControlLevel\fP"
 .br
 .in -1c
@@ -88,6 +91,8 @@ ManualControl
 .SH "Member Data Documentation"
 .PP 
 .SS "Base::BaseControl::ControlLevel ManualControl::baseControlLevel\fC [private]\fP"
+
+.SS "std::unique_ptr<\fBBaseControlStrategy\fP> ManualControl::baseControlStrategy\fC [private]\fP"
 
 .SS "std::shared_ptr<Controls> ManualControl::controls\fC [private]\fP"
 

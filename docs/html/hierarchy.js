@@ -1,13 +1,20 @@
 var hierarchy =
 [
+    [ "BaseControlStrategy", "classBaseControlStrategy.html", [
+      [ "DeadzoneBaseControlStrategy", "classDeadzoneBaseControlStrategy.html", null ]
+    ] ],
     [ "CamSettingsHolder", "classCamSettingsHolder.html", null ],
+    [ "AmurCore::CaptureState", "structAmurCore_1_1CaptureState.html", null ],
     [ "ConfigProcessor", "classConfigProcessor.html", null ],
-    [ "grpcClient", "classgrpcClient.html", null ],
     [ "MoveSettings::JoyBindings", "structMoveSettings_1_1JoyBindings.html", null ],
     [ "JoyState", "structJoyState.html", null ],
+    [ "JoystickFactory", "classJoystickFactory.html", null ],
     [ "Logic", "classLogic.html", null ],
     [ "ManualControl", "classManualControl.html", null ],
     [ "MoveSettings", "structMoveSettings.html", null ],
+    [ "NavCommandBuilder", "classNavCommandBuilder.html", null ],
+    [ "NavGoalsHistory", "classNavGoalsHistory.html", null ],
+    [ "NetworkFactory", "classNetworkFactory.html", null ],
     [ "PoseQuaternion", "structPoseQuaternion.html", null ],
     [ "QDialog", null, [
       [ "CamCalibrate", "classCamCalibrate.html", null ],
@@ -28,7 +35,8 @@ var hierarchy =
       [ "NetworkController", "classNetworkController.html", null ],
       [ "Session", "classSession.html", null ],
       [ "VJoystickAdapter", "classVJoystickAdapter.html", null ],
-      [ "Worker", "classWorker.html", null ]
+      [ "WorkerBase", "classWorkerBase.html", null ],
+      [ "grpcClient", "classgrpcClient.html", null ]
     ] ],
     [ "QThread", null, [
       [ "VJoystickAdapter::VJoystickThread", "classVJoystickAdapter_1_1VJoystickThread.html", null ]
@@ -42,5 +50,6 @@ var hierarchy =
     [ "ClientOnRobot::Service", null, [
       [ "grpcServer", "classgrpcServer.html", null ]
     ] ],
-    [ "System", "classSystem.html", null ]
+    [ "System", "classSystem.html", null ],
+    [ "MapWidget::ZoneOverlay", "structMapWidget_1_1ZoneOverlay.html", null ]
 ];

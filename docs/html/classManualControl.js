@@ -9,6 +9,7 @@ var classManualControl =
     [ "update", "classManualControl.html#a38a16569b5807dccd550bd1a58534c9e", null ],
     [ "wheelRawProcess", "classManualControl.html#afa373688174e8ba403f8c83f8cf486da", null ],
     [ "baseControlLevel", "classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5", null ],
+    [ "baseControlStrategy", "classManualControl.html#a389de0ac5d9cc27f6a6e3b41e3b8f3e5", null ],
     [ "controls", "classManualControl.html#a95021e840dcae68629f898d6c4e2a7d6", null ],
     [ "grpcMutex_", "classManualControl.html#a3476cce0a91e39980f28071028e504a6", null ],
     [ "joyDriftZone", "classManualControl.html#a070bdcf51edd4fca578837eec5c8f0a3", null ],

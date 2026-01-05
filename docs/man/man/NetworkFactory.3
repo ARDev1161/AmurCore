@@ -1,0 +1,30 @@
+.TH "NetworkFactory" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+NetworkFactory
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <networkfactory\&.h>\fP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static std::shared_ptr< \fBgrpcClient\fP > \fBcreateClient\fP (const std::string &address, std::shared_ptr< Controls > controls, std::shared_ptr< Sensors > sensors, std::shared_ptr< map_service::GetMapResponse > map)"
+.br
+.ti -1c
+.RI "static std::shared_ptr< \fBgrpcServer\fP > \fBcreateServer\fP ()"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "static std::shared_ptr<\fBgrpcClient\fP> NetworkFactory::createClient (const std::string & address, std::shared_ptr< Controls > controls, std::shared_ptr< Sensors > sensors, std::shared_ptr< map_service::GetMapResponse > map)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static std::shared_ptr<\fBgrpcServer\fP> NetworkFactory::createServer ()\fC [inline]\fP, \fC [static]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

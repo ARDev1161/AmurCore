@@ -92,30 +92,42 @@ $(document).ready(function(){initNavTree('worker_8h_source.html',''); initResiza
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classWorker.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classWorker.html">Worker</a> : <span class="keyword">public</span> QObject</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classWorker.html#a3754817df06ffe220f7f0d903c78ccac">Worker</a>();</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classWorker.html#aa8e4543ef1e93fd9d884269ba30c5bfe">~Worker</a>();</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classWorker.html#ac37f8ed30237770297f6a6c705749c29">process</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classWorker.html#a273235a8775ff030dda42b53e2b3a895">stop</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;signals:</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classWorker.html#adfa119799838e68b671be5947a367f4a">   19</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classWorker.html#adfa119799838e68b671be5947a367f4a">finished</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// WORKER_H</span></div>
-<div class="ttc" id="aclassWorker_html"><div class="ttname"><a href="classWorker.html">Worker</a></div><div class="ttdef"><b>Definition:</b> worker.h:7</div></div>
-<div class="ttc" id="aclassWorker_html_a273235a8775ff030dda42b53e2b3a895"><div class="ttname"><a href="classWorker.html#a273235a8775ff030dda42b53e2b3a895">Worker::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdef"><b>Definition:</b> worker.cpp:18</div></div>
-<div class="ttc" id="aclassWorker_html_a3754817df06ffe220f7f0d903c78ccac"><div class="ttname"><a href="classWorker.html#a3754817df06ffe220f7f0d903c78ccac">Worker::Worker</a></div><div class="ttdeci">Worker()</div><div class="ttdef"><b>Definition:</b> worker.cpp:3</div></div>
-<div class="ttc" id="aclassWorker_html_aa8e4543ef1e93fd9d884269ba30c5bfe"><div class="ttname"><a href="classWorker.html#aa8e4543ef1e93fd9d884269ba30c5bfe">Worker::~Worker</a></div><div class="ttdeci">~Worker()</div><div class="ttdef"><b>Definition:</b> worker.cpp:8</div></div>
-<div class="ttc" id="aclassWorker_html_ac37f8ed30237770297f6a6c705749c29"><div class="ttname"><a href="classWorker.html#ac37f8ed30237770297f6a6c705749c29">Worker::process</a></div><div class="ttdeci">void process()</div><div class="ttdef"><b>Definition:</b> worker.cpp:13</div></div>
-<div class="ttc" id="aclassWorker_html_adfa119799838e68b671be5947a367f4a"><div class="ttname"><a href="classWorker.html#adfa119799838e68b671be5947a367f4a">Worker::finished</a></div><div class="ttdeci">void finished()</div></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Template Method pattern: defines lifecycle hooks onStart/onTick/onStop</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="classWorkerBase.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="classWorkerBase.html">WorkerBase</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classWorkerBase.html#ad0bc3acb22f4952c20db76ffe709bb7a">WorkerBase</a>();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="classWorkerBase.html#a5c3594a637899c6c9db826f2ea93d15a">~WorkerBase</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classWorkerBase.html#a3e077dc9682d293c05d12f604c348ec5">process</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classWorkerBase.html#a5e6bed391093f3c5608fc13ba9606722">stop</a>();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;signals:</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classWorkerBase.html#a983e0a63076b32ac67d18daf50849816">   20</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classWorkerBase.html#a983e0a63076b32ac67d18daf50849816">finished</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classWorkerBase.html#a5d0fd3dffaf7e5a416d8e71c3ed3816f">   23</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classWorkerBase.html#a5d0fd3dffaf7e5a416d8e71c3ed3816f">onStart</a>() {}</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classWorkerBase.html#a4767324d48634064509b08583b8ee9a8">   24</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classWorkerBase.html#a4767324d48634064509b08583b8ee9a8">onTick</a>() {}</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classWorkerBase.html#a50aa42e526b6971a394dd3d7b8d32214">   25</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classWorkerBase.html#a50aa42e526b6971a394dd3d7b8d32214">onStop</a>() {}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classWorkerBase.html#a389417459e9646620d01b25f99197fdd">   28</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classWorkerBase.html#a389417459e9646620d01b25f99197fdd">running</a> {<span class="keyword">true</span>};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// WORKER_H</span></div>
+<div class="ttc" id="aclassWorkerBase_html"><div class="ttname"><a href="classWorkerBase.html">WorkerBase</a></div><div class="ttdef"><b>Definition:</b> worker.h:8</div></div>
+<div class="ttc" id="aclassWorkerBase_html_a389417459e9646620d01b25f99197fdd"><div class="ttname"><a href="classWorkerBase.html#a389417459e9646620d01b25f99197fdd">WorkerBase::running</a></div><div class="ttdeci">bool running</div><div class="ttdef"><b>Definition:</b> worker.h:28</div></div>
+<div class="ttc" id="aclassWorkerBase_html_a3e077dc9682d293c05d12f604c348ec5"><div class="ttname"><a href="classWorkerBase.html#a3e077dc9682d293c05d12f604c348ec5">WorkerBase::process</a></div><div class="ttdeci">void process()</div><div class="ttdef"><b>Definition:</b> worker.cpp:12</div></div>
+<div class="ttc" id="aclassWorkerBase_html_a4767324d48634064509b08583b8ee9a8"><div class="ttname"><a href="classWorkerBase.html#a4767324d48634064509b08583b8ee9a8">WorkerBase::onTick</a></div><div class="ttdeci">virtual void onTick()</div><div class="ttdef"><b>Definition:</b> worker.h:24</div></div>
+<div class="ttc" id="aclassWorkerBase_html_a50aa42e526b6971a394dd3d7b8d32214"><div class="ttname"><a href="classWorkerBase.html#a50aa42e526b6971a394dd3d7b8d32214">WorkerBase::onStop</a></div><div class="ttdeci">virtual void onStop()</div><div class="ttdef"><b>Definition:</b> worker.h:25</div></div>
+<div class="ttc" id="aclassWorkerBase_html_a5c3594a637899c6c9db826f2ea93d15a"><div class="ttname"><a href="classWorkerBase.html#a5c3594a637899c6c9db826f2ea93d15a">WorkerBase::~WorkerBase</a></div><div class="ttdeci">~WorkerBase() override</div><div class="ttdef"><b>Definition:</b> worker.cpp:7</div></div>
+<div class="ttc" id="aclassWorkerBase_html_a5d0fd3dffaf7e5a416d8e71c3ed3816f"><div class="ttname"><a href="classWorkerBase.html#a5d0fd3dffaf7e5a416d8e71c3ed3816f">WorkerBase::onStart</a></div><div class="ttdeci">virtual void onStart()</div><div class="ttdef"><b>Definition:</b> worker.h:23</div></div>
+<div class="ttc" id="aclassWorkerBase_html_a5e6bed391093f3c5608fc13ba9606722"><div class="ttname"><a href="classWorkerBase.html#a5e6bed391093f3c5608fc13ba9606722">WorkerBase::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdef"><b>Definition:</b> worker.cpp:21</div></div>
+<div class="ttc" id="aclassWorkerBase_html_a983e0a63076b32ac67d18daf50849816"><div class="ttname"><a href="classWorkerBase.html#a983e0a63076b32ac67d18daf50849816">WorkerBase::finished</a></div><div class="ttdeci">void finished()</div></div>
+<div class="ttc" id="aclassWorkerBase_html_ad0bc3acb22f4952c20db76ffe709bb7a"><div class="ttname"><a href="classWorkerBase.html#ad0bc3acb22f4952c20db76ffe709bb7a">WorkerBase::WorkerBase</a></div><div class="ttdeci">WorkerBase()</div><div class="ttdef"><b>Definition:</b> worker.cpp:3</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

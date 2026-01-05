@@ -1,4 +1,4 @@
-.TH "amurcore.h" 3 "Wed Nov 26 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "amurcore.h" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,7 +8,11 @@ amurcore.h
 .PP
 \fC#include 'pch\&.h'\fP
 .br
+\fC#include <atomic>\fP
+.br
 \fC#include <mutex>\fP
+.br
+\fC#include <thread>\fP
 .br
 \fC#include <QLabel>\fP
 .br
@@ -18,6 +22,9 @@ amurcore.h
 .in +1c
 .ti -1c
 .RI "class \fBAmurCore\fP"
+.br
+.ti -1c
+.RI "struct \fBAmurCore::CaptureState\fP"
 .br
 .in -1c
 .SS "Namespaces"

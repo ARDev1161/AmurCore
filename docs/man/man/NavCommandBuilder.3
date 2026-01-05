@@ -1,0 +1,60 @@
+.TH "NavCommandBuilder" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+NavCommandBuilder
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNavCommandBuilder\fP (std::shared_ptr< Controls > controls)"
+.br
+.ti -1c
+.RI "void \fBbuildFollowWaypoints\fP (const std::vector< QPointF > &goals) const"
+.br
+.ti -1c
+.RI "void \fBbuildGoThroughPoses\fP (const std::vector< QPointF > &goals) const"
+.br
+.ti -1c
+.RI "void \fBbuildCancelTask\fP () const"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "Navigation::NavCommandRequest * \fBresetNavCommand\fP () const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::shared_ptr< Controls > \fBcontrols_\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "NavCommandBuilder::NavCommandBuilder (std::shared_ptr< Controls > controls)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void NavCommandBuilder::buildCancelTask () const\fC [inline]\fP"
+
+.SS "void NavCommandBuilder::buildFollowWaypoints (const std::vector< QPointF > & goals) const\fC [inline]\fP"
+
+.SS "void NavCommandBuilder::buildGoThroughPoses (const std::vector< QPointF > & goals) const\fC [inline]\fP"
+
+.SS "Navigation::NavCommandRequest* NavCommandBuilder::resetNavCommand () const\fC [inline]\fP, \fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::shared_ptr<Controls> NavCommandBuilder::controls_\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

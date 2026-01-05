@@ -1,12 +1,20 @@
 var searchData=
 [
-  ['dataexchange_585',['DataExchange',['../classgrpcClient.html#a9a41c802a2dbee85ce0259c3af494ad4',1,'grpcClient::DataExchange()'],['../classgrpcServer.html#a7eefb95b15451cbf826561d3ff7c98ab',1,'grpcServer::DataExchange()']]],
-  ['datastreamexchange_586',['DataStreamExchange',['../classgrpcClient.html#a7a569dfe1c1968b7ee3f40c351c19f51',1,'grpcClient::DataStreamExchange()'],['../classgrpcServer.html#a1a1091120919fbd7a482fcbd41a5023a',1,'grpcServer::DataStreamExchange()']]],
-  ['deleterobot_587',['deleteRobot',['../classRobotRepository.html#ad5ebd275f74b2a282b1b0158a469a4b2',1,'RobotRepository']]],
-  ['deleterobots_588',['deleteRobots',['../classRobotRepository.html#ab08ea1ca46b9db7e01343a7593a77a0e',1,'RobotRepository']]],
-  ['disconnectfromjoystick_589',['disconnectFromJoystick',['../classGetStateByJoystick.html#a8a350682c935a24654e51c28011fda35',1,'GetStateByJoystick::disconnectFromJoystick()'],['../classJoystickDialog.html#ac8f1e130269dcd340da46ab288c5d3d0',1,'JoystickDialog::disconnectFromJoystick()']]],
-  ['drawaxis_590',['drawAxis',['../classMapWidget.html#ab4238ead547aef7d309c463e663c2e88',1,'MapWidget']]],
-  ['drawgrid_591',['drawGrid',['../classMapWidget.html#a3a84d75fae44d076dde34c41c0f24451',1,'MapWidget']]],
-  ['drawrobot_592',['drawRobot',['../classMapWidget.html#ad59eb80bfcbdd6dac538a7742a37cdfd',1,'MapWidget']]],
-  ['drawwaypoints_593',['drawWaypoints',['../classMapWidget.html#a0d650aa191c33250f379c2697b8163fe',1,'MapWidget']]]
+  ['dataexchange_705',['DataExchange',['../classgrpcServer.html#a7eefb95b15451cbf826561d3ff7c98ab',1,'grpcServer::DataExchange()'],['../classgrpcClient.html#a9a41c802a2dbee85ce0259c3af494ad4',1,'grpcClient::DataExchange()']]],
+  ['datastreamexchange_706',['DataStreamExchange',['../classgrpcClient.html#a7a569dfe1c1968b7ee3f40c351c19f51',1,'grpcClient::DataStreamExchange()'],['../classgrpcServer.html#a1a1091120919fbd7a482fcbd41a5023a',1,'grpcServer::DataStreamExchange()']]],
+  ['deadzonebasecontrolstrategy_707',['DeadzoneBaseControlStrategy',['../classDeadzoneBaseControlStrategy.html#aae799328552c81bc3a97721cae360f1a',1,'DeadzoneBaseControlStrategy']]],
+  ['deleterobot_708',['deleteRobot',['../classRobotRepository.html#ad5ebd275f74b2a282b1b0158a469a4b2',1,'RobotRepository']]],
+  ['deleterobots_709',['deleteRobots',['../classRobotRepository.html#ab08ea1ca46b9db7e01343a7593a77a0e',1,'RobotRepository']]],
+  ['disconnectfromjoystick_710',['disconnectFromJoystick',['../classGetStateByJoystick.html#a8a350682c935a24654e51c28011fda35',1,'GetStateByJoystick::disconnectFromJoystick()'],['../classJoystickDialog.html#ac8f1e130269dcd340da46ab288c5d3d0',1,'JoystickDialog::disconnectFromJoystick()']]],
+  ['drawaxis_711',['drawAxis',['../classMapWidget.html#ab4238ead547aef7d309c463e663c2e88',1,'MapWidget']]],
+  ['drawaxislayer_712',['drawAxisLayer',['../classMapWidget.html#a68f39edf87d469aef1cb6ff507a41737',1,'MapWidget']]],
+  ['drawgrid_713',['drawGrid',['../classMapWidget.html#a3a84d75fae44d076dde34c41c0f24451',1,'MapWidget']]],
+  ['drawgridlayer_714',['drawGridLayer',['../classMapWidget.html#abfd0989f4aecbea8989177027d85a53e',1,'MapWidget']]],
+  ['drawmaplayer_715',['drawMapLayer',['../classMapWidget.html#a9828a4cf838887ac6eeec37a538091ef',1,'MapWidget']]],
+  ['drawrobot_716',['drawRobot',['../classMapWidget.html#ad59eb80bfcbdd6dac538a7742a37cdfd',1,'MapWidget']]],
+  ['drawrobotlayer_717',['drawRobotLayer',['../classMapWidget.html#a21f1bd8a14a18aa0cf171a211975c097',1,'MapWidget']]],
+  ['drawwaypoints_718',['drawWaypoints',['../classMapWidget.html#a0d650aa191c33250f379c2697b8163fe',1,'MapWidget']]],
+  ['drawwaypointslayer_719',['drawWaypointsLayer',['../classMapWidget.html#ac8336d2e3ba693032cec0579c65191de',1,'MapWidget']]],
+  ['drawzones_720',['drawZones',['../classMapWidget.html#a31dcc389a993e1c3d76f830c4cf62ced',1,'MapWidget']]],
+  ['drawzoneslayer_721',['drawZonesLayer',['../classMapWidget.html#ae2f692f151f7e6b69520cca2bb4e5890',1,'MapWidget']]]
 ];

@@ -1,9 +1,13 @@
 <map id="Logic::process" name="Logic::process">
-<area shape="rect" id="node1" title=" " alt="" coords="5,143,112,170"/>
-<area shape="rect" id="node2" href="$classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="160,143,311,170"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,274,112,301"/>
+<area shape="rect" id="node2" href="$classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="160,274,311,301"/>
 <area shape="rect" id="node3" href="$classManualControl.html#a312b8b5ba45b63e4e8f403b7d49d5237" title=" " alt="" coords="378,5,558,47"/>
-<area shape="rect" id="node4" href="$classManualControl.html#aa4a96f837624198177e3386583dafdd4" title=" " alt="" coords="373,71,563,112"/>
-<area shape="rect" id="node5" href="$classManualControl.html#a50789f43ceffaedf4d13b2040483124f" title=" " alt="" coords="373,136,563,177"/>
-<area shape="rect" id="node6" href="$classManualControl.html#a1f4fafd9bd86396cad2868d6b51de2be" title=" " alt="" coords="374,201,562,243"/>
-<area shape="rect" id="node7" href="$classManualControl.html#afa373688174e8ba403f8c83f8cf486da" title=" " alt="" coords="359,267,577,294"/>
+<area shape="rect" id="node4" href="$structMoveSettings_1_1JoyBindings.html#a932fb3cb23efbac5e3433c0d52512293" title=" " alt="" coords="379,71,557,112"/>
+<area shape="rect" id="node5" href="$structMoveSettings_1_1JoyBindings.html#a39c31b85eaf6494fcc1dd765e16ed138" title=" " alt="" coords="379,136,557,177"/>
+<area shape="rect" id="node6" href="$classManualControl.html#aa4a96f837624198177e3386583dafdd4" title=" " alt="" coords="373,201,563,243"/>
+<area shape="rect" id="node7" href="$classManualControl.html#a50789f43ceffaedf4d13b2040483124f" title=" " alt="" coords="373,267,563,308"/>
+<area shape="rect" id="node8" href="$classManualControl.html#a1f4fafd9bd86396cad2868d6b51de2be" title=" " alt="" coords="374,332,562,373"/>
+<area shape="rect" id="node9" href="$classManualControl.html#afa373688174e8ba403f8c83f8cf486da" title=" " alt="" coords="359,398,577,425"/>
+<area shape="rect" id="node10" href="$structMoveSettings_1_1JoyBindings.html#a08a8832adc9bee733283a0125604a45d" title=" " alt="" coords="379,449,557,491"/>
+<area shape="rect" id="node11" href="$structMoveSettings_1_1JoyBindings.html#a4ec62aca0ad2cdcf293a3a40136bda0d" title=" " alt="" coords="379,515,557,556"/>
 </map>

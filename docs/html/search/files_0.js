@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['amurcore_2ecpp_499',['amurcore.cpp',['../amurcore_8cpp.html',1,'']]],
-  ['amurcore_2eh_500',['amurcore.h',['../amurcore_8h.html',1,'']]]
+  ['agents_2emd_604',['AGENTS.md',['../AGENTS_8md.html',1,'']]],
+  ['amurcore_2ecpp_605',['amurcore.cpp',['../amurcore_8cpp.html',1,'']]],
+  ['amurcore_2eh_606',['amurcore.h',['../amurcore_8h.html',1,'']]]
 ];

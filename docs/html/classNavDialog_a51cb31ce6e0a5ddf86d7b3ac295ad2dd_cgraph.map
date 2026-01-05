@@ -1,15 +1,24 @@
 <map id="NavDialog::NavDialog" name="NavDialog::NavDialog">
-<area shape="rect" id="node1" title=" " alt="" coords="5,157,153,184"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,317,153,344"/>
 <area shape="rect" id="node2" href="$classMapWidget.html#af3a2367f392f330defab953d64787eb8" title=" " alt="" coords="212,5,392,32"/>
-<area shape="rect" id="node3" href="$classNavDialog.html#a82488cf40232962790474558e3b43ec2" title=" " alt="" coords="227,56,377,83"/>
-<area shape="rect" id="node4" href="$classNavDialog.html#ac0971a44daef15c560f8e5f4f3b6502f" title="Слот для обновления отображаемой карты." alt="" coords="214,107,390,133"/>
-<area shape="rect" id="node8" href="$classNavDialog.html#ae40ff07bb678d20549b24c582da68251" title=" " alt="" coords="227,157,377,184"/>
-<area shape="rect" id="node11" href="$classMapWidget.html#a1909565052ad72d7fd261bba3e38ae4f" title=" " alt="" coords="217,208,387,235"/>
-<area shape="rect" id="node12" href="$classMapWidget.html#ab02719eb8968c3dcadd112e81117c186" title=" " alt="" coords="218,259,386,285"/>
-<area shape="rect" id="node13" href="$classNavDialog.html#a0380aa580e5936b7075f0c4f0d4e430d" title=" " alt="" coords="201,309,403,336"/>
-<area shape="rect" id="node5" href="$classNavDialog.html#aec120c5c4c400531b613d746db9427f1" title="Проверяет, изменились ли данные карты." alt="" coords="453,5,639,32"/>
-<area shape="rect" id="node6" href="$classNavDialog.html#ab98567d957d65272dde340557c837d75" title="Проверяет, изменились ли данные положения робота." alt="" coords="451,56,641,83"/>
-<area shape="rect" id="node7" href="$classNavDialog.html#a0dcf645a3424c6d489ec3444ebc801fc" title=" " alt="" coords="689,81,884,108"/>
-<area shape="rect" id="node9" href="$classNavDialog.html#ae1f965b0e785a2cf08c33341a7165570" title=" " alt="" coords="455,157,637,184"/>
-<area shape="rect" id="node10" href="$classNavDialog.html#a9e8e546526e01784307edef35fd6feed" title=" " alt="" coords="453,208,639,235"/>
+<area shape="rect" id="node3" href="$classNavDialog.html#a82488cf40232962790474558e3b43ec2" title=" " alt="" coords="227,107,377,133"/>
+<area shape="rect" id="node5" href="$classNavDialog.html#a72681ba5b00990df5dd82235b87ee514" title=" " alt="" coords="469,157,646,184"/>
+<area shape="rect" id="node6" href="$classNavDialog.html#a920686cfeda7ddb311775218f7f8aabc" title=" " alt="" coords="463,209,651,250"/>
+<area shape="rect" id="node8" href="$classNavDialog.html#ac0971a44daef15c560f8e5f4f3b6502f" title="Слот для обновления отображаемой карты." alt="" coords="214,427,390,453"/>
+<area shape="rect" id="node12" href="$classNavDialog.html#a6045395590e1c4856154d14cc1544982" title=" " alt="" coords="229,208,375,235"/>
+<area shape="rect" id="node13" href="$classNavDialog.html#ae40ff07bb678d20549b24c582da68251" title=" " alt="" coords="482,325,633,352"/>
+<area shape="rect" id="node17" href="$classMapWidget.html#a1909565052ad72d7fd261bba3e38ae4f" title=" " alt="" coords="217,477,387,504"/>
+<area shape="rect" id="node18" href="$classMapWidget.html#ab02719eb8968c3dcadd112e81117c186" title=" " alt="" coords="218,528,386,555"/>
+<area shape="rect" id="node19" href="$classNavDialog.html#a37744d6dac15fe92584e05478535da2c" title=" " alt="" coords="221,579,383,605"/>
+<area shape="rect" id="node20" href="$classNavDialog.html#a0380aa580e5936b7075f0c4f0d4e430d" title=" " alt="" coords="201,629,403,656"/>
+<area shape="rect" id="node21" href="$classNavDialog.html#aa879876f3a0ed941a2541f01e5f03314" title=" " alt="" coords="227,157,377,184"/>
+<area shape="rect" id="node22" href="$classNavDialog.html#adf7860f546a167237c594dbf1fd8a99a" title=" " alt="" coords="208,310,396,351"/>
+<area shape="rect" id="node4" href="$classNavDialog.html#aa2c60e3c389feb95151377953cfb4309" title=" " alt="" coords="451,107,664,133"/>
+<area shape="rect" id="node7" href="$classNavDialog.html#a8f62728ff184778674a4b2f45dcaf758" title=" " alt="" coords="726,237,893,264"/>
+<area shape="rect" id="node9" href="$classNavDialog.html#aec120c5c4c400531b613d746db9427f1" title="Проверяет, изменились ли данные карты." alt="" coords="465,376,650,403"/>
+<area shape="rect" id="node10" href="$classNavDialog.html#ab98567d957d65272dde340557c837d75" title="Проверяет, изменились ли данные положения робота." alt="" coords="462,477,653,504"/>
+<area shape="rect" id="node11" href="$classNavDialog.html#a0dcf645a3424c6d489ec3444ebc801fc" title=" " alt="" coords="712,452,907,479"/>
+<area shape="rect" id="node14" href="$classNavDialog.html#ae1f965b0e785a2cf08c33341a7165570" title=" " alt="" coords="718,288,901,315"/>
+<area shape="rect" id="node15" href="$classNavDialog.html#a9e8e546526e01784307edef35fd6feed" title=" " alt="" coords="716,339,903,365"/>
+<area shape="rect" id="node16" href="$classNavDialog.html#a5dc5a500dfb949f2eddd9c53edfd5e03" title=" " alt="" coords="722,389,897,416"/>
 </map>

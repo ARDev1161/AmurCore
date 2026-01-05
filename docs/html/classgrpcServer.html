@@ -99,8 +99,8 @@ Inheritance diagram for grpcServer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgrpcServer__inherit__graph.png" border="0" usemap="#agrpcServer_inherit__map" alt="Inheritance graph"/></div>
 <map name="agrpcServer_inherit__map" id="agrpcServer_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,131,168,355"/>
-<area shape="rect" title=" " alt="" coords="9,5,165,83"/>
+<area shape="rect" title=" " alt="" coords="5,131,212,413"/>
+<area shape="rect" title=" " alt="" coords="31,5,187,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -108,8 +108,8 @@ Collaboration diagram for grpcServer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgrpcServer__coll__graph.png" border="0" usemap="#agrpcServer_coll__map" alt="Collaboration graph"/></div>
 <map name="agrpcServer_coll__map" id="agrpcServer_coll__map">
-<area shape="rect" title=" " alt="" coords="5,131,168,355"/>
-<area shape="rect" title=" " alt="" coords="9,5,165,83"/>
+<area shape="rect" title=" " alt="" coords="5,131,212,413"/>
+<area shape="rect" title=" " alt="" coords="31,5,187,83"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -117,6 +117,8 @@ Collaboration diagram for grpcServer:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7f759c95f648a9eef7a345767f216129"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a7f759c95f648a9eef7a345767f216129">setProtosPointers</a> (std::shared_ptr&lt; Controls &gt; controlsPtr, std::shared_ptr&lt; Sensors &gt; sensorsPtr, std::shared_ptr&lt; map_service::GetMapResponse &gt; mapPtr)</td></tr>
 <tr class="separator:a7f759c95f648a9eef7a345767f216129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb9e9929565b08fb615d52189a9230fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#adb9e9929565b08fb615d52189a9230fb">setSensorsUpdatedCallback</a> (std::function&lt; void()&gt; cb)</td></tr>
+<tr class="separator:adb9e9929565b08fb615d52189a9230fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d29d1294fbe427f27a44e9fd3a671bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a7d29d1294fbe427f27a44e9fd3a671bb">checkConn</a> ()</td></tr>
 <tr class="separator:a7d29d1294fbe427f27a44e9fd3a671bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35ff9770dcf6b7df51d61d7af92a027d"><td class="memItemLeft" align="right" valign="top">std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a35ff9770dcf6b7df51d61d7af92a027d">getMutex</a> ()</td></tr>
@@ -132,6 +134,10 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a1a1091120919fbd7a482fcbd41a5023a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a273ec0e03b66d16435a26d96d8c4c6a0"><td class="memItemLeft" align="right" valign="top">grpc::Status&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a273ec0e03b66d16435a26d96d8c4c6a0">MapStream</a> ([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter&lt; map_service::GetMapRequest, map_service::GetMapResponse &gt; *stream) override</td></tr>
 <tr class="separator:a273ec0e03b66d16435a26d96d8c4c6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae15460f59d9b30f1a64b359f4ab9d1cc"><td class="memItemLeft" align="right" valign="top">grpc::Status&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#ae15460f59d9b30f1a64b359f4ab9d1cc">PoseStream</a> ([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter&lt; map_service::PoseRequest, map_service::PoseState &gt; *stream) override</td></tr>
+<tr class="separator:ae15460f59d9b30f1a64b359f4ab9d1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a0087782cd10b11ccd02f73b4a75392"><td class="memItemLeft" align="right" valign="top">grpc::Status&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#a2a0087782cd10b11ccd02f73b4a75392">ZoneStream</a> ([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter&lt; map_service::ZoneRequest, map_service::ZoneState &gt; *stream) override</td></tr>
+<tr class="separator:a2a0087782cd10b11ccd02f73b4a75392"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -145,6 +151,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a33fdb8b89a90a900af52918b676704be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad17696157afb9d49a1005c4a3f144afe"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#ad17696157afb9d49a1005c4a3f144afe">muMap</a></td></tr>
 <tr class="separator:ad17696157afb9d49a1005c4a3f144afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfb67e2a4ec9cc2b40ab68961377585d"><td class="memItemLeft" align="right" valign="top">std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgrpcServer.html#adfb67e2a4ec9cc2b40ab68961377585d">sensors_updated_cb_</a></td></tr>
+<tr class="separator:adfb67e2a4ec9cc2b40ab68961377585d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7d29d1294fbe427f27a44e9fd3a671bb"></a>
@@ -328,6 +336,42 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae15460f59d9b30f1a64b359f4ab9d1cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae15460f59d9b30f1a64b359f4ab9d1cc">&#9670;&nbsp;</a></span>PoseStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">grpc::Status grpcServer::PoseStream </td>
+          <td>(</td>
+          <td class="paramtype">[[maybe_unused] ] grpc::ServerContext *&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">grpc::ServerReaderWriter&lt; map_service::PoseRequest, map_service::PoseState &gt; *&#160;</td>
+          <td class="paramname"><em>stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7f759c95f648a9eef7a345767f216129"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f759c95f648a9eef7a345767f216129">&#9670;&nbsp;</a></span>setProtosPointers()</h2>
 
@@ -358,6 +402,68 @@ Private Attributes</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb9e9929565b08fb615d52189a9230fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb9e9929565b08fb615d52189a9230fb">&#9670;&nbsp;</a></span>setSensorsUpdatedCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void grpcServer::setSensorsUpdatedCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a0087782cd10b11ccd02f73b4a75392"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a0087782cd10b11ccd02f73b4a75392">&#9670;&nbsp;</a></span>ZoneStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">grpc::Status grpcServer::ZoneStream </td>
+          <td>(</td>
+          <td class="paramtype">[[maybe_unused] ] grpc::ServerContext *&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">grpc::ServerReaderWriter&lt; map_service::ZoneRequest, map_service::ZoneState &gt; *&#160;</td>
+          <td class="paramname"><em>stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -462,6 +568,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::shared_ptr&lt;Sensors&gt; grpcServer::sensors</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adfb67e2a4ec9cc2b40ab68961377585d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfb67e2a4ec9cc2b40ab68961377585d">&#9670;&nbsp;</a></span>sensors_updated_cb_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void()&gt; grpcServer::sensors_updated_cb_</td>
         </tr>
       </table>
   </td>

@@ -1,0 +1,47 @@
+.TH "DeadzoneBaseControlStrategy" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DeadzoneBaseControlStrategy
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <movements\&.h>\fP
+.PP
+Inherits \fBBaseControlStrategy\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDeadzoneBaseControlStrategy\fP (int driftZone)"
+.br
+.ti -1c
+.RI "std::pair< double, double > \fBvelocities\fP (const \fBJoyState\fP &state, const \fBMoveSettings::JoyBindings\fP &bindings) const override"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBdriftZone_\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "DeadzoneBaseControlStrategy::DeadzoneBaseControlStrategy (int driftZone)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "std::pair< double, double > DeadzoneBaseControlStrategy::velocities (const \fBJoyState\fP & state, const \fBMoveSettings::JoyBindings\fP & bindings) const\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBBaseControlStrategy\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "int DeadzoneBaseControlStrategy::driftZone_\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

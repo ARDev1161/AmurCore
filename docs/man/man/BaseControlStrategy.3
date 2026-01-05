@@ -1,0 +1,36 @@
+.TH "BaseControlStrategy" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+BaseControlStrategy
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <movements\&.h>\fP
+.PP
+Inherited by \fBDeadzoneBaseControlStrategy\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~BaseControlStrategy\fP ()=default"
+.br
+.ti -1c
+.RI "virtual std::pair< double, double > \fBvelocities\fP (const \fBJoyState\fP &state, const \fBMoveSettings::JoyBindings\fP &bindings) const =0"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "virtual BaseControlStrategy::~BaseControlStrategy ()\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual std::pair<double, double> BaseControlStrategy::velocities (const \fBJoyState\fP & state, const \fBMoveSettings::JoyBindings\fP & bindings) const\fC [pure virtual]\fP"
+
+.PP
+Implemented in \fBDeadzoneBaseControlStrategy\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

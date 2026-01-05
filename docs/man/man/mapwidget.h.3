@@ -1,4 +1,4 @@
-.TH "logic/mapwidget.h" 3 "Wed Nov 26 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "logic/mapwidget.h" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,9 +16,17 @@ logic/mapwidget.h
 .br
 \fC#include <QScrollBar>\fP
 .br
+\fC#include <QColor>\fP
+.br
+\fC#include <QVector>\fP
+.br
+\fC#include <cstdint>\fP
+.br
 \fC#include <vector>\fP
 .br
 \fC#include <mutex>\fP
+.br
+\fC#include <functional>\fP
 .br
 
 .SS "Classes"
@@ -29,6 +37,9 @@ logic/mapwidget.h
 .br
 .ti -1c
 .RI "class \fBMapWidget\fP"
+.br
+.ti -1c
+.RI "struct \fBMapWidget::ZoneOverlay\fP"
 .br
 .in -1c
 .SS "Functions"

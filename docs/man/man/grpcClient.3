@@ -1,4 +1,4 @@
-.TH "grpcClient" 3 "Wed Nov 26 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "grpcClient" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,6 +8,18 @@ grpcClient
 .PP
 .PP
 \fC#include <client\&.h>\fP
+.PP
+Inherits QObject\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBsensorsUpdated\fP ()"
+.br
+.ti -1c
+.RI "void \fBmapUpdated\fP ()"
+.br
+.in -1c
 .SS "Public Member Functions"
 
 .in +1c
@@ -76,6 +88,10 @@ grpcClient
 .SS "std::mutex& grpcClient::getMutex ()\fC [inline]\fP"
 
 .SS "grpc::Status grpcClient::MapStream ()"
+
+.SS "void grpcClient::mapUpdated ()\fC [signal]\fP"
+
+.SS "void grpcClient::sensorsUpdated ()\fC [signal]\fP"
 
 .SS "void grpcClient::stopStream ()"
 

@@ -90,102 +90,154 @@ $(document).ready(function(){initNavTree('navdialog_8h_source.html',''); initRes
 <a href="navdialog_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef NAVDIALOG_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define NAVDIALOG_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QDialog&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QTimer&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QButtonGroup&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QCheckBox&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QDialog&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QGroupBox&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QCheckBox&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QRadioButton&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QButtonGroup&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QListWidget&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mapwidget_8h.html">mapwidget.h</a>&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;network/protobuf/robot.pb.h&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">using namespace </span>Robot;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceUi.html">Ui</a> {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">class </span><a class="code" href="classNavDialog.html">NavDialog</a>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classNavDialog.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNavDialog.html">NavDialog</a> : <span class="keyword">public</span> QDialog</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QHBoxLayout&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QListWidget&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QRadioButton&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QElapsedTimer&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QShowEvent&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;QHideEvent&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;QTimer&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mapwidget_8h.html">mapwidget.h</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="networkcontroller_8h.html">network/networkcontroller.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;network/protobuf/robot.pb.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">using namespace </span>Robot;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classNavDialog.html">NavDialog</a>(std::shared_ptr&lt;Controls&gt; controlsPtr,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                       std::shared_ptr&lt;Sensors&gt; sensorsPtr,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                       std::shared_ptr&lt;map_service::GetMapResponse&gt; mapPtr,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                       std::mutex &amp;grpcMutex,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                       std::mutex &amp;mapMutex,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                       QWidget *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    ~<a class="code" href="classNavDialog.html">NavDialog</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;signals:</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classNavDialog.html#a60450d6f49af01e7e5dc69d0097b254a">   37</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNavDialog.html#a60450d6f49af01e7e5dc69d0097b254a">mouseMoved</a>(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> onMapUpdated();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> clearGoals();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> sendGoals();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classNavDialog.html#aaacfb5ac9bef10d64fcb029c33fc67a5">   48</a></span>&#160;    Ui::NavDialog *<a class="code" href="classNavDialog.html#aaacfb5ac9bef10d64fcb029c33fc67a5">ui</a>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classNavDialog.html#abc607255ee8deedf11d57285b50eabff">   49</a></span>&#160;    QWidget *<a class="code" href="classNavDialog.html#abc607255ee8deedf11d57285b50eabff">navContainer</a>; </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classNavDialog.html#ad6467c8838101b3c76cdbee91941bb40">   50</a></span>&#160;    std::shared_ptr&lt;MapWidget&gt; <a class="code" href="classNavDialog.html#ad6467c8838101b3c76cdbee91941bb40">mapWidget</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classNavDialog.html#a7f81a1db5fb1dcecde63a1e406d3d4b4">   51</a></span>&#160;    QTimer *<a class="code" href="classNavDialog.html#a7f81a1db5fb1dcecde63a1e406d3d4b4">timer</a>; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classNavDialog.html#a73bc0d768c2e19e5082e815b54af15d0">   53</a></span>&#160;    std::shared_ptr&lt;Controls&gt; <a class="code" href="classNavDialog.html#a73bc0d768c2e19e5082e815b54af15d0">controls</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classNavDialog.html#a6b603b8ac0c7e5d81ddf5560ec89d8c4">   54</a></span>&#160;    std::shared_ptr&lt;Sensors&gt; <a class="code" href="classNavDialog.html#a6b603b8ac0c7e5d81ddf5560ec89d8c4">sensors</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classNavDialog.html#afd6ce282836b4075d121103fdcd6b6e6">   55</a></span>&#160;    std::shared_ptr&lt;map_service::GetMapResponse&gt; <a class="code" href="classNavDialog.html#afd6ce282836b4075d121103fdcd6b6e6">mapPtr</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classNavDialog.html#af15d3875580fa47e0c070e8ad4286fd7">   56</a></span>&#160;    std::mutex &amp;<a class="code" href="classNavDialog.html#af15d3875580fa47e0c070e8ad4286fd7">grpcMutex_</a>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classNavDialog.html#aa54317f5cbf312c66c9429ae8e65981f">   57</a></span>&#160;    std::mutex &amp;<a class="code" href="classNavDialog.html#aa54317f5cbf312c66c9429ae8e65981f">mapMutex_</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classNavDialog.html#abafbd8af8802e6f5b485e4a835af2ed1">   59</a></span>&#160;    <span class="keywordtype">bool</span> isFollowWaypoints {<span class="keyword">true</span>};</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classNavDialog.html#a7ad9bef545e02ac74fc621e3c12b4c12">   60</a></span>&#160;    QGroupBox *<a class="code" href="classNavDialog.html#a7ad9bef545e02ac74fc621e3c12b4c12">waypointsGroupBox</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classNavDialog.html#a06111c8ae6e5fa430acf24dc9a55c835">   61</a></span>&#160;    QGroupBox *<a class="code" href="classNavDialog.html#a06111c8ae6e5fa430acf24dc9a55c835">commandsGroupBox</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classNavDialog.html#a6d7f96e1771a7f7100dc574b60e071c9">   62</a></span>&#160;    QListWidget *<a class="code" href="classNavDialog.html#a6d7f96e1771a7f7100dc574b60e071c9">goalListWidget</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// Предыдущие данные карты для проверки изменений</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classNavDialog.html#a7026d69bd44b3fbc57fdeae5283fc2de">   65</a></span>&#160;    std::vector&lt;int8_t&gt; <a class="code" href="classNavDialog.html#a7026d69bd44b3fbc57fdeae5283fc2de">previousData</a>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classNavDialog.html#a8817ef1d96a4af41b999e5a27de4d1e9">   66</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classNavDialog.html#a8817ef1d96a4af41b999e5a27de4d1e9">previousWidth</a>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classNavDialog.html#a85813f32e307a2f3785c9ad46714db7b">   67</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classNavDialog.html#a85813f32e307a2f3785c9ad46714db7b">previousHeight</a>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span> hasMapChanged() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">bool</span> hasPoseChanged() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="structPoseQuaternion.html">PoseQuaternion</a> poseToQuaternion(map_service::Pose pose) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> followWaypoints();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> goThroughPoses();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classNavDialog.html#a5aea439b64af544a88ddaf6f41b5117d">   85</a></span>&#160;    std::shared_ptr&lt;std::vector&lt;QPointF&gt;&gt; <a class="code" href="classNavDialog.html#a5aea439b64af544a88ddaf6f41b5117d">navigationGoalsList</a>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    QString taskStatusAsString();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// NAVDIALOG_H</span></div>
-<div class="ttc" id="aclassNavDialog_html"><div class="ttname"><a href="classNavDialog.html">NavDialog</a></div><div class="ttdef"><b>Definition:</b> navdialog.h:24</div></div>
-<div class="ttc" id="aclassNavDialog_html_a06111c8ae6e5fa430acf24dc9a55c835"><div class="ttname"><a href="classNavDialog.html#a06111c8ae6e5fa430acf24dc9a55c835">NavDialog::commandsGroupBox</a></div><div class="ttdeci">QGroupBox * commandsGroupBox</div><div class="ttdef"><b>Definition:</b> navdialog.h:61</div></div>
-<div class="ttc" id="aclassNavDialog_html_a5aea439b64af544a88ddaf6f41b5117d"><div class="ttname"><a href="classNavDialog.html#a5aea439b64af544a88ddaf6f41b5117d">NavDialog::navigationGoalsList</a></div><div class="ttdeci">std::shared_ptr&lt; std::vector&lt; QPointF &gt; &gt; navigationGoalsList</div><div class="ttdef"><b>Definition:</b> navdialog.h:85</div></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceUi.html">Ui</a> {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">class </span><a class="code" href="classNavDialog.html">NavDialog</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">class </span><a class="code" href="classNavCommandBuilder.html">NavCommandBuilder</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">class </span><a class="code" href="classNavGoalsHistory.html">NavGoalsHistory</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classNavDialog.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNavDialog.html">NavDialog</a> : <span class="keyword">public</span> QDialog</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classNavDialog.html#a0f41f4fdaa40dd062ba108ea25036d0f">   38</a></span>&#160;    <span class="keyword">enum class</span> <a class="code" href="classNavDialog.html#a0f41f4fdaa40dd062ba108ea25036d0f">NavTaskState</a></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        Idle,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        Ready,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        Busy</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classNavDialog.html">NavDialog</a>(std::shared_ptr&lt;Controls&gt; controlsPtr,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                       std::shared_ptr&lt;Sensors&gt; sensorsPtr,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                       std::shared_ptr&lt;map_service::GetMapResponse&gt; mapPtr,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                       std::mutex &amp;grpcMutex,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                       std::mutex &amp;mapMutex,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                       QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ~<a class="code" href="classNavDialog.html">NavDialog</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;signals:</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classNavDialog.html#a60450d6f49af01e7e5dc69d0097b254a">   55</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNavDialog.html#a60450d6f49af01e7e5dc69d0097b254a">mouseMoved</a>(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> onMapUpdated();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> clearGoals();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> sendGoals();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> undoGoals();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> redoGoals();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> showEvent(QShowEvent *event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> hideEvent(QHideEvent *event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classNavDialog.html#aaacfb5ac9bef10d64fcb029c33fc67a5">   72</a></span>&#160;    Ui::NavDialog *<a class="code" href="classNavDialog.html#aaacfb5ac9bef10d64fcb029c33fc67a5">ui</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classNavDialog.html#abc607255ee8deedf11d57285b50eabff">   73</a></span>&#160;    QWidget *<a class="code" href="classNavDialog.html#abc607255ee8deedf11d57285b50eabff">navContainer</a>; </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classNavDialog.html#ad6467c8838101b3c76cdbee91941bb40">   74</a></span>&#160;    std::shared_ptr&lt;MapWidget&gt; <a class="code" href="classNavDialog.html#ad6467c8838101b3c76cdbee91941bb40">mapWidget</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classNavDialog.html#a7f81a1db5fb1dcecde63a1e406d3d4b4">   75</a></span>&#160;    QTimer *<a class="code" href="classNavDialog.html#a7f81a1db5fb1dcecde63a1e406d3d4b4">timer</a>; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classNavDialog.html#a73bc0d768c2e19e5082e815b54af15d0">   77</a></span>&#160;    std::shared_ptr&lt;Controls&gt; <a class="code" href="classNavDialog.html#a73bc0d768c2e19e5082e815b54af15d0">controls</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classNavDialog.html#a6b603b8ac0c7e5d81ddf5560ec89d8c4">   78</a></span>&#160;    std::shared_ptr&lt;Sensors&gt; <a class="code" href="classNavDialog.html#a6b603b8ac0c7e5d81ddf5560ec89d8c4">sensors</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classNavDialog.html#afd6ce282836b4075d121103fdcd6b6e6">   79</a></span>&#160;    std::shared_ptr&lt;map_service::GetMapResponse&gt; <a class="code" href="classNavDialog.html#afd6ce282836b4075d121103fdcd6b6e6">mapPtr</a>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classNavDialog.html#af15d3875580fa47e0c070e8ad4286fd7">   80</a></span>&#160;    std::mutex &amp;<a class="code" href="classNavDialog.html#af15d3875580fa47e0c070e8ad4286fd7">grpcMutex_</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classNavDialog.html#aa54317f5cbf312c66c9429ae8e65981f">   81</a></span>&#160;    std::mutex &amp;<a class="code" href="classNavDialog.html#aa54317f5cbf312c66c9429ae8e65981f">mapMutex_</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classNavDialog.html#a22d69bad0b396c1aeed663d0af77c22e">   82</a></span>&#160;    std::unique_ptr&lt;NavCommandBuilder&gt; <a class="code" href="classNavDialog.html#a22d69bad0b396c1aeed663d0af77c22e">navCmdBuilder</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classNavDialog.html#a40b30af38b1c3ebb2329b5ae3dd43674">   83</a></span>&#160;    std::unique_ptr&lt;NavGoalsHistory&gt; <a class="code" href="classNavDialog.html#a40b30af38b1c3ebb2329b5ae3dd43674">navGoalsHistory</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classNavDialog.html#a710d5f52adc9b65865d904c12193d73e">   84</a></span>&#160;    std::shared_ptr&lt;NetworkController&gt; <a class="code" href="classNavDialog.html#a710d5f52adc9b65865d904c12193d73e">networkController</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classNavDialog.html#abafbd8af8802e6f5b485e4a835af2ed1">   86</a></span>&#160;    <span class="keywordtype">bool</span> isFollowWaypoints {<span class="keyword">true</span>};</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classNavDialog.html#abfeb599ce2bb28996da40ba0545225ec">   87</a></span>&#160;    <span class="keywordtype">bool</span> isPatrolMode {<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classNavDialog.html#a7ad9bef545e02ac74fc621e3c12b4c12">   88</a></span>&#160;    QGroupBox *<a class="code" href="classNavDialog.html#a7ad9bef545e02ac74fc621e3c12b4c12">waypointsGroupBox</a>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classNavDialog.html#a06111c8ae6e5fa430acf24dc9a55c835">   89</a></span>&#160;    QGroupBox *<a class="code" href="classNavDialog.html#a06111c8ae6e5fa430acf24dc9a55c835">commandsGroupBox</a>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="classNavDialog.html#a6d7f96e1771a7f7100dc574b60e071c9">   90</a></span>&#160;    QListWidget *<a class="code" href="classNavDialog.html#a6d7f96e1771a7f7100dc574b60e071c9">goalListWidget</a>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classNavDialog.html#a9bf383ea2e93bccca0a93831b498df74">   91</a></span>&#160;    QCheckBox *patrolCheckBox {<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classNavDialog.html#aa56fd10f284c9a56f3a9899e873deda1">   92</a></span>&#160;    QPushButton *sendGoalsButton {<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classNavDialog.html#ab738216bcc1df27e165ddf9b9fd14362">   93</a></span>&#160;    QLabel *statusTaskLabel {<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classNavDialog.html#a2cd8bc20c14ab9e7bf224196b8091cf8">   94</a></span>&#160;    Navigation::CommandStatus lastNavStatus {Navigation::CommandStatus::SUCCESS};</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classNavDialog.html#ac6821f76d6a12b8dee63413563f521e8">   95</a></span>&#160;    <span class="keywordtype">bool</span> awaitingNavAck {<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">// Предыдущие данные карты для проверки изменений</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classNavDialog.html#a7026d69bd44b3fbc57fdeae5283fc2de">   98</a></span>&#160;    std::vector&lt;int8_t&gt; <a class="code" href="classNavDialog.html#a7026d69bd44b3fbc57fdeae5283fc2de">previousData</a>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classNavDialog.html#a8817ef1d96a4af41b999e5a27de4d1e9">   99</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classNavDialog.html#a8817ef1d96a4af41b999e5a27de4d1e9">previousWidth</a>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classNavDialog.html#a85813f32e307a2f3785c9ad46714db7b">  100</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classNavDialog.html#a85813f32e307a2f3785c9ad46714db7b">previousHeight</a>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classNavDialog.html#a183162cab33e5edc5681c675cde141f1">  101</a></span>&#160;    std::uint64_t previousZoneSignature {0};</div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classNavDialog.html#ab4fe29bde0a5948b3a248b5adb75b66e">  102</a></span>&#160;    QElapsedTimer <a class="code" href="classNavDialog.html#ab4fe29bde0a5948b3a248b5adb75b66e">lastUpdateTimer</a>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">bool</span> hasMapChanged() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">bool</span> hasPoseChanged() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <a class="code" href="structPoseQuaternion.html">PoseQuaternion</a> poseToQuaternion(map_service::Pose pose) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">void</span> followWaypoints();</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">void</span> goThroughPoses();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">void</span> stopNavigation();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">void</span> refreshGoalList();</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">void</span> recordGoalsSnapshot();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">void</span> updateStateFromGoals();</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordtype">void</span> updateStateFromStatus();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">void</span> setTaskState(<a class="code" href="classNavDialog.html#a0f41f4fdaa40dd062ba108ea25036d0f">NavTaskState</a> state);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">void</span> startUpdates();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">void</span> stopUpdates();</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classNavDialog.html#a5aea439b64af544a88ddaf6f41b5117d">  128</a></span>&#160;    std::shared_ptr&lt;std::vector&lt;QPointF&gt;&gt; <a class="code" href="classNavDialog.html#a5aea439b64af544a88ddaf6f41b5117d">navigationGoalsList</a>;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    QString taskStatusAsString();</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classNavDialog.html#a0778fe063629b669508d5ca2bedc8edf">  130</a></span>&#160;    <a class="code" href="classNavDialog.html#a0f41f4fdaa40dd062ba108ea25036d0f">NavTaskState</a> navTaskState {NavTaskState::Idle};</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;};</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// NAVDIALOG_H</span></div>
+<div class="ttc" id="aclassNavCommandBuilder_html"><div class="ttname"><a href="classNavCommandBuilder.html">NavCommandBuilder</a></div><div class="ttdef"><b>Definition:</b> navdialog.cpp:38</div></div>
+<div class="ttc" id="aclassNavDialog_html"><div class="ttname"><a href="classNavDialog.html">NavDialog</a></div><div class="ttdef"><b>Definition:</b> navdialog.h:35</div></div>
+<div class="ttc" id="aclassNavDialog_html_a06111c8ae6e5fa430acf24dc9a55c835"><div class="ttname"><a href="classNavDialog.html#a06111c8ae6e5fa430acf24dc9a55c835">NavDialog::commandsGroupBox</a></div><div class="ttdeci">QGroupBox * commandsGroupBox</div><div class="ttdef"><b>Definition:</b> navdialog.h:89</div></div>
+<div class="ttc" id="aclassNavDialog_html_a0f41f4fdaa40dd062ba108ea25036d0f"><div class="ttname"><a href="classNavDialog.html#a0f41f4fdaa40dd062ba108ea25036d0f">NavDialog::NavTaskState</a></div><div class="ttdeci">NavTaskState</div><div class="ttdef"><b>Definition:</b> navdialog.h:39</div></div>
+<div class="ttc" id="aclassNavDialog_html_a22d69bad0b396c1aeed663d0af77c22e"><div class="ttname"><a href="classNavDialog.html#a22d69bad0b396c1aeed663d0af77c22e">NavDialog::navCmdBuilder</a></div><div class="ttdeci">std::unique_ptr&lt; NavCommandBuilder &gt; navCmdBuilder</div><div class="ttdef"><b>Definition:</b> navdialog.h:82</div></div>
+<div class="ttc" id="aclassNavDialog_html_a40b30af38b1c3ebb2329b5ae3dd43674"><div class="ttname"><a href="classNavDialog.html#a40b30af38b1c3ebb2329b5ae3dd43674">NavDialog::navGoalsHistory</a></div><div class="ttdeci">std::unique_ptr&lt; NavGoalsHistory &gt; navGoalsHistory</div><div class="ttdef"><b>Definition:</b> navdialog.h:83</div></div>
+<div class="ttc" id="aclassNavDialog_html_a5aea439b64af544a88ddaf6f41b5117d"><div class="ttname"><a href="classNavDialog.html#a5aea439b64af544a88ddaf6f41b5117d">NavDialog::navigationGoalsList</a></div><div class="ttdeci">std::shared_ptr&lt; std::vector&lt; QPointF &gt; &gt; navigationGoalsList</div><div class="ttdef"><b>Definition:</b> navdialog.h:128</div></div>
 <div class="ttc" id="aclassNavDialog_html_a60450d6f49af01e7e5dc69d0097b254a"><div class="ttname"><a href="classNavDialog.html#a60450d6f49af01e7e5dc69d0097b254a">NavDialog::mouseMoved</a></div><div class="ttdeci">void mouseMoved(double x, double y)</div></div>
-<div class="ttc" id="aclassNavDialog_html_a6b603b8ac0c7e5d81ddf5560ec89d8c4"><div class="ttname"><a href="classNavDialog.html#a6b603b8ac0c7e5d81ddf5560ec89d8c4">NavDialog::sensors</a></div><div class="ttdeci">std::shared_ptr&lt; Sensors &gt; sensors</div><div class="ttdef"><b>Definition:</b> navdialog.h:54</div></div>
-<div class="ttc" id="aclassNavDialog_html_a6d7f96e1771a7f7100dc574b60e071c9"><div class="ttname"><a href="classNavDialog.html#a6d7f96e1771a7f7100dc574b60e071c9">NavDialog::goalListWidget</a></div><div class="ttdeci">QListWidget * goalListWidget</div><div class="ttdef"><b>Definition:</b> navdialog.h:62</div></div>
-<div class="ttc" id="aclassNavDialog_html_a7026d69bd44b3fbc57fdeae5283fc2de"><div class="ttname"><a href="classNavDialog.html#a7026d69bd44b3fbc57fdeae5283fc2de">NavDialog::previousData</a></div><div class="ttdeci">std::vector&lt; int8_t &gt; previousData</div><div class="ttdef"><b>Definition:</b> navdialog.h:65</div></div>
-<div class="ttc" id="aclassNavDialog_html_a73bc0d768c2e19e5082e815b54af15d0"><div class="ttname"><a href="classNavDialog.html#a73bc0d768c2e19e5082e815b54af15d0">NavDialog::controls</a></div><div class="ttdeci">std::shared_ptr&lt; Controls &gt; controls</div><div class="ttdef"><b>Definition:</b> navdialog.h:53</div></div>
-<div class="ttc" id="aclassNavDialog_html_a7ad9bef545e02ac74fc621e3c12b4c12"><div class="ttname"><a href="classNavDialog.html#a7ad9bef545e02ac74fc621e3c12b4c12">NavDialog::waypointsGroupBox</a></div><div class="ttdeci">QGroupBox * waypointsGroupBox</div><div class="ttdef"><b>Definition:</b> navdialog.h:60</div></div>
-<div class="ttc" id="aclassNavDialog_html_a7f81a1db5fb1dcecde63a1e406d3d4b4"><div class="ttname"><a href="classNavDialog.html#a7f81a1db5fb1dcecde63a1e406d3d4b4">NavDialog::timer</a></div><div class="ttdeci">QTimer * timer</div><div class="ttdoc">Таймер для периодической проверки обновлений</div><div class="ttdef"><b>Definition:</b> navdialog.h:51</div></div>
-<div class="ttc" id="aclassNavDialog_html_a85813f32e307a2f3785c9ad46714db7b"><div class="ttname"><a href="classNavDialog.html#a85813f32e307a2f3785c9ad46714db7b">NavDialog::previousHeight</a></div><div class="ttdeci">int previousHeight</div><div class="ttdef"><b>Definition:</b> navdialog.h:67</div></div>
-<div class="ttc" id="aclassNavDialog_html_a8817ef1d96a4af41b999e5a27de4d1e9"><div class="ttname"><a href="classNavDialog.html#a8817ef1d96a4af41b999e5a27de4d1e9">NavDialog::previousWidth</a></div><div class="ttdeci">int previousWidth</div><div class="ttdef"><b>Definition:</b> navdialog.h:66</div></div>
-<div class="ttc" id="aclassNavDialog_html_aa54317f5cbf312c66c9429ae8e65981f"><div class="ttname"><a href="classNavDialog.html#aa54317f5cbf312c66c9429ae8e65981f">NavDialog::mapMutex_</a></div><div class="ttdeci">std::mutex &amp; mapMutex_</div><div class="ttdef"><b>Definition:</b> navdialog.h:57</div></div>
-<div class="ttc" id="aclassNavDialog_html_aaacfb5ac9bef10d64fcb029c33fc67a5"><div class="ttname"><a href="classNavDialog.html#aaacfb5ac9bef10d64fcb029c33fc67a5">NavDialog::ui</a></div><div class="ttdeci">Ui::NavDialog * ui</div><div class="ttdef"><b>Definition:</b> navdialog.h:48</div></div>
-<div class="ttc" id="aclassNavDialog_html_abc607255ee8deedf11d57285b50eabff"><div class="ttname"><a href="classNavDialog.html#abc607255ee8deedf11d57285b50eabff">NavDialog::navContainer</a></div><div class="ttdeci">QWidget * navContainer</div><div class="ttdoc">Главный контейнер всего интерфейса</div><div class="ttdef"><b>Definition:</b> navdialog.h:49</div></div>
-<div class="ttc" id="aclassNavDialog_html_ad6467c8838101b3c76cdbee91941bb40"><div class="ttname"><a href="classNavDialog.html#ad6467c8838101b3c76cdbee91941bb40">NavDialog::mapWidget</a></div><div class="ttdeci">std::shared_ptr&lt; MapWidget &gt; mapWidget</div><div class="ttdef"><b>Definition:</b> navdialog.h:50</div></div>
-<div class="ttc" id="aclassNavDialog_html_af15d3875580fa47e0c070e8ad4286fd7"><div class="ttname"><a href="classNavDialog.html#af15d3875580fa47e0c070e8ad4286fd7">NavDialog::grpcMutex_</a></div><div class="ttdeci">std::mutex &amp; grpcMutex_</div><div class="ttdef"><b>Definition:</b> navdialog.h:56</div></div>
-<div class="ttc" id="aclassNavDialog_html_afd6ce282836b4075d121103fdcd6b6e6"><div class="ttname"><a href="classNavDialog.html#afd6ce282836b4075d121103fdcd6b6e6">NavDialog::mapPtr</a></div><div class="ttdeci">std::shared_ptr&lt; map_service::GetMapResponse &gt; mapPtr</div><div class="ttdef"><b>Definition:</b> navdialog.h:55</div></div>
+<div class="ttc" id="aclassNavDialog_html_a6b603b8ac0c7e5d81ddf5560ec89d8c4"><div class="ttname"><a href="classNavDialog.html#a6b603b8ac0c7e5d81ddf5560ec89d8c4">NavDialog::sensors</a></div><div class="ttdeci">std::shared_ptr&lt; Sensors &gt; sensors</div><div class="ttdef"><b>Definition:</b> navdialog.h:78</div></div>
+<div class="ttc" id="aclassNavDialog_html_a6d7f96e1771a7f7100dc574b60e071c9"><div class="ttname"><a href="classNavDialog.html#a6d7f96e1771a7f7100dc574b60e071c9">NavDialog::goalListWidget</a></div><div class="ttdeci">QListWidget * goalListWidget</div><div class="ttdef"><b>Definition:</b> navdialog.h:90</div></div>
+<div class="ttc" id="aclassNavDialog_html_a7026d69bd44b3fbc57fdeae5283fc2de"><div class="ttname"><a href="classNavDialog.html#a7026d69bd44b3fbc57fdeae5283fc2de">NavDialog::previousData</a></div><div class="ttdeci">std::vector&lt; int8_t &gt; previousData</div><div class="ttdef"><b>Definition:</b> navdialog.h:98</div></div>
+<div class="ttc" id="aclassNavDialog_html_a710d5f52adc9b65865d904c12193d73e"><div class="ttname"><a href="classNavDialog.html#a710d5f52adc9b65865d904c12193d73e">NavDialog::networkController</a></div><div class="ttdeci">std::shared_ptr&lt; NetworkController &gt; networkController</div><div class="ttdef"><b>Definition:</b> navdialog.h:84</div></div>
+<div class="ttc" id="aclassNavDialog_html_a73bc0d768c2e19e5082e815b54af15d0"><div class="ttname"><a href="classNavDialog.html#a73bc0d768c2e19e5082e815b54af15d0">NavDialog::controls</a></div><div class="ttdeci">std::shared_ptr&lt; Controls &gt; controls</div><div class="ttdef"><b>Definition:</b> navdialog.h:77</div></div>
+<div class="ttc" id="aclassNavDialog_html_a7ad9bef545e02ac74fc621e3c12b4c12"><div class="ttname"><a href="classNavDialog.html#a7ad9bef545e02ac74fc621e3c12b4c12">NavDialog::waypointsGroupBox</a></div><div class="ttdeci">QGroupBox * waypointsGroupBox</div><div class="ttdef"><b>Definition:</b> navdialog.h:88</div></div>
+<div class="ttc" id="aclassNavDialog_html_a7f81a1db5fb1dcecde63a1e406d3d4b4"><div class="ttname"><a href="classNavDialog.html#a7f81a1db5fb1dcecde63a1e406d3d4b4">NavDialog::timer</a></div><div class="ttdeci">QTimer * timer</div><div class="ttdoc">Таймер для периодической проверки обновлений</div><div class="ttdef"><b>Definition:</b> navdialog.h:75</div></div>
+<div class="ttc" id="aclassNavDialog_html_a85813f32e307a2f3785c9ad46714db7b"><div class="ttname"><a href="classNavDialog.html#a85813f32e307a2f3785c9ad46714db7b">NavDialog::previousHeight</a></div><div class="ttdeci">int previousHeight</div><div class="ttdef"><b>Definition:</b> navdialog.h:100</div></div>
+<div class="ttc" id="aclassNavDialog_html_a8817ef1d96a4af41b999e5a27de4d1e9"><div class="ttname"><a href="classNavDialog.html#a8817ef1d96a4af41b999e5a27de4d1e9">NavDialog::previousWidth</a></div><div class="ttdeci">int previousWidth</div><div class="ttdef"><b>Definition:</b> navdialog.h:99</div></div>
+<div class="ttc" id="aclassNavDialog_html_aa54317f5cbf312c66c9429ae8e65981f"><div class="ttname"><a href="classNavDialog.html#aa54317f5cbf312c66c9429ae8e65981f">NavDialog::mapMutex_</a></div><div class="ttdeci">std::mutex &amp; mapMutex_</div><div class="ttdef"><b>Definition:</b> navdialog.h:81</div></div>
+<div class="ttc" id="aclassNavDialog_html_aaacfb5ac9bef10d64fcb029c33fc67a5"><div class="ttname"><a href="classNavDialog.html#aaacfb5ac9bef10d64fcb029c33fc67a5">NavDialog::ui</a></div><div class="ttdeci">Ui::NavDialog * ui</div><div class="ttdef"><b>Definition:</b> navdialog.h:72</div></div>
+<div class="ttc" id="aclassNavDialog_html_ab4fe29bde0a5948b3a248b5adb75b66e"><div class="ttname"><a href="classNavDialog.html#ab4fe29bde0a5948b3a248b5adb75b66e">NavDialog::lastUpdateTimer</a></div><div class="ttdeci">QElapsedTimer lastUpdateTimer</div><div class="ttdef"><b>Definition:</b> navdialog.h:102</div></div>
+<div class="ttc" id="aclassNavDialog_html_abc607255ee8deedf11d57285b50eabff"><div class="ttname"><a href="classNavDialog.html#abc607255ee8deedf11d57285b50eabff">NavDialog::navContainer</a></div><div class="ttdeci">QWidget * navContainer</div><div class="ttdoc">Главный контейнер всего интерфейса</div><div class="ttdef"><b>Definition:</b> navdialog.h:73</div></div>
+<div class="ttc" id="aclassNavDialog_html_ad6467c8838101b3c76cdbee91941bb40"><div class="ttname"><a href="classNavDialog.html#ad6467c8838101b3c76cdbee91941bb40">NavDialog::mapWidget</a></div><div class="ttdeci">std::shared_ptr&lt; MapWidget &gt; mapWidget</div><div class="ttdef"><b>Definition:</b> navdialog.h:74</div></div>
+<div class="ttc" id="aclassNavDialog_html_af15d3875580fa47e0c070e8ad4286fd7"><div class="ttname"><a href="classNavDialog.html#af15d3875580fa47e0c070e8ad4286fd7">NavDialog::grpcMutex_</a></div><div class="ttdeci">std::mutex &amp; grpcMutex_</div><div class="ttdef"><b>Definition:</b> navdialog.h:80</div></div>
+<div class="ttc" id="aclassNavDialog_html_afd6ce282836b4075d121103fdcd6b6e6"><div class="ttname"><a href="classNavDialog.html#afd6ce282836b4075d121103fdcd6b6e6">NavDialog::mapPtr</a></div><div class="ttdeci">std::shared_ptr&lt; map_service::GetMapResponse &gt; mapPtr</div><div class="ttdef"><b>Definition:</b> navdialog.h:79</div></div>
+<div class="ttc" id="aclassNavGoalsHistory_html"><div class="ttname"><a href="classNavGoalsHistory.html">NavGoalsHistory</a></div><div class="ttdef"><b>Definition:</b> navdialog.cpp:103</div></div>
 <div class="ttc" id="amapwidget_8h_html"><div class="ttname"><a href="mapwidget_8h.html">mapwidget.h</a></div></div>
-<div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition:</b> amurcore.h:35</div></div>
-<div class="ttc" id="astructPoseQuaternion_html"><div class="ttname"><a href="structPoseQuaternion.html">PoseQuaternion</a></div><div class="ttdef"><b>Definition:</b> mapwidget.h:12</div></div>
+<div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition:</b> amurcore.h:37</div></div>
+<div class="ttc" id="anetworkcontroller_8h_html"><div class="ttname"><a href="networkcontroller_8h.html">networkcontroller.h</a></div></div>
+<div class="ttc" id="astructPoseQuaternion_html"><div class="ttname"><a href="structPoseQuaternion.html">PoseQuaternion</a></div><div class="ttdef"><b>Definition:</b> mapwidget.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

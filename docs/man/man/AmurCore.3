@@ -1,4 +1,4 @@
-.TH "AmurCore" 3 "Wed Nov 26 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "AmurCore" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,6 +10,13 @@ AmurCore
 \fC#include <amurcore\&.h>\fP
 .PP
 Inherits QMainWindow\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBCaptureState\fP"
+.br
+.in -1c
 .SS "Signals"
 
 .in +1c
@@ -63,6 +70,9 @@ Inherits QMainWindow\&.
 .br
 .ti -1c
 .RI "void \fBrobotReboot\fP ()"
+.br
+.ti -1c
+.RI "void \fBonSensorsUpdated\fP ()"
 .br
 .in -1c
 .SS "Private Member Functions"
@@ -178,6 +188,12 @@ Inherits QMainWindow\&.
 .RI "VideoCapture \fBcapture\fP"
 .br
 .ti -1c
+.RI "std::string \fBvideoStreamPipeline\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBCaptureState\fP > \fBcaptureState\fP"
+.br
+.ti -1c
 .RI "Mat \fBsourceMat\fP"
 .br
 .ti -1c
@@ -216,6 +232,8 @@ Inherits QMainWindow\&.
 
 .SS "void AmurCore::mapDialogOpen ()\fC [private]\fP, \fC [slot]\fP"
 
+.SS "void AmurCore::onSensorsUpdated ()\fC [private]\fP, \fC [slot]\fP"
+
 .SS "void AmurCore::outMat (Mat & toOut)\fC [private]\fP"
 
 .SS "void AmurCore::resizeEvent (QResizeEvent * e)\fC [override]\fP, \fC [protected]\fP"
@@ -251,6 +269,8 @@ Inherits QMainWindow\&.
 .SS "\fBCamSettingsHolder\fP* AmurCore::camHolder\fC [private]\fP"
 
 .SS "VideoCapture AmurCore::capture\fC [private]\fP"
+
+.SS "std::shared_ptr<\fBCaptureState\fP> AmurCore::captureState\fC [private]\fP"
 
 .SS "\fBConfigProcessor\fP* AmurCore::config\fC [private]\fP"
 
@@ -299,6 +319,8 @@ Inherits QMainWindow\&.
 .SS "Ui::AmurCore* AmurCore::ui\fC [private]\fP"
 
 .SS "Mat AmurCore::undistortedMat\fC [private]\fP"
+
+.SS "std::string AmurCore::videoStreamPipeline\fC [private]\fP"
 
 
 .SH "Author"

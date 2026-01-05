@@ -1,4 +1,4 @@
-.TH "NetworkController" 3 "Wed Nov 26 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "NetworkController" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,6 +10,16 @@ NetworkController
 \fC#include <networkcontroller\&.h>\fP
 .PP
 Inherits QObject\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBsensorsUpdated\fP ()"
+.br
+.ti -1c
+.RI "void \fBmapUpdated\fP ()"
+.br
+.in -1c
 .SS "Public Member Functions"
 
 .in +1c
@@ -89,11 +99,15 @@ Inherits QObject\&.
 
 .SS "std::shared_ptr<\fBgrpcServer\fP>& NetworkController::getServerInstance ()\fC [inline]\fP"
 
+.SS "void NetworkController::mapUpdated ()\fC [signal]\fP"
+
 .SS "int NetworkController::runArpingService (int arpPort, int gRPCPort, QString & arpHeader)"
 
 .SS "int NetworkController::runClient (std::string & server_address)"
 
 .SS "int NetworkController::runServer (std::string & address_mask)"
+
+.SS "void NetworkController::sensorsUpdated ()\fC [signal]\fP"
 
 .SH "Member Data Documentation"
 .PP 

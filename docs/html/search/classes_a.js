@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['vjoystickadapter_495',['VJoystickAdapter',['../classVJoystickAdapter.html',1,'']]],
-  ['vjoystickthread_496',['VJoystickThread',['../classVJoystickAdapter_1_1VJoystickThread.html',1,'VJoystickAdapter']]]
+  ['robotentry_593',['RobotEntry',['../classRobotEntry.html',1,'']]],
+  ['robotinfodialog_594',['RobotInfoDialog',['../classRobotInfoDialog.html',1,'']]],
+  ['robotrepository_595',['RobotRepository',['../classRobotRepository.html',1,'']]]
 ];

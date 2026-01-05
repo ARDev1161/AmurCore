@@ -1,0 +1,79 @@
+.TH "md_AGENTS" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_AGENTS \- Repository Guidelines 
+
+.SH "Project Structure & Modules"
+.PP
+.IP "\(bu" 2
+Core app: \fC\fBmain\&.cpp\fP\fP, \fCamurcore\&.*\fP, UI layouts in \fC*\&.ui\fP (Qt Designer)\&.
+.IP "\(bu" 2
+\fBLogic\fP: \fClogic/\fP (nav dialog, map widget, movements, robot info)\&.
+.IP "\(bu" 2
+Network: \fCnetwork/\fP (gRPC client/server, protobuf definitions in \fCnetwork/protobuf\fP)\&.
+.IP "\(bu" 2
+Input: \fCjoystick/\fP (state worker, adapter), threads helpers in \fCthreads/\fP\&.
+.IP "\(bu" 2
+Config & build: root \fCCMakeLists\&.txt\fP, \fCcmake/\fP helpers, \fCconfig/\fP for libconfig utilities, assets under \fCdata/\fP\&.
+.IP "\(bu" 2
+Build outputs: prefer \fCbuild/\fP (out-of-source)\&. Keep \fCCMakeLists\&.txt\&.user\fP/\fCbuild/\fP untracked\&.
+.PP
+.SH "Build, Test, Run"
+.PP
+.IP "\(bu" 2
+Configure & build (Debug): 
+.PP
+.nf
+cmake -S \&. -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
+
+.fi
+.PP
+
+.IP "\(bu" 2
+Configure & build (Release): add \fC-DCMAKE_BUILD_TYPE=Release\fP\&.
+.IP "\(bu" 2
+Run app (if GUI available): \fC\&./build/AmurCore\fP\&.
+.IP "\(bu" 2
+Tests: none defined; add CTest targets in CMake if introducing tests\&.
+.PP
+.SH "Coding Style & Naming"
+.PP
+.IP "\(bu" 2
+Language: C++17/Qt\&. Follow existing patterns; 4-space indent, braces on new line for classes/functions as in current code\&.
+.IP "\(bu" 2
+Naming: Classes \fCPascalCase\fP, methods \fCcamelCase\fP, constants/macros \fCUPPER_SNAKE\fP\&. Prefer \fCstd::\fP over raw macros; use RAII for locks\&.
+.IP "\(bu" 2
+UI text uses Qt \fCtr()\fP for i18n\&. Keep Russian locale strings in \fCAmurCore_ru_RU\&.ts\fP\&.
+.IP "\(bu" 2
+Avoid new macros for config; prefer enums/constexpr\&.
+.PP
+.SH "Testing Guidelines"
+.PP
+.IP "\(bu" 2
+Add unit/integration tests via CTest/GoogleTest if applicable; place under \fCtests/\fP or module-level \fC*_test\&.cpp\fP\&.
+.IP "\(bu" 2
+Name tests after feature: \fCnav_follow_waypoints_test\&.cpp\fP; ensure deterministic, no network dependency when possible\&.
+.IP "\(bu" 2
+Document how to run: \fCctest --output-on-failure\fP from build dir\&.
+.PP
+.SH "Commit & PR Guidelines"
+.PP
+.IP "\(bu" 2
+Commit messages: use Conventional Commits (\fCfeat:\fP, \fCfix:\fP, \fCrefactor:\fP, \fCchore:\fP)\&. Keep scope short (e\&.g\&., \fCnav\fP, \fCnetwork\fP)\&.
+.IP "\(bu" 2
+Each commit should be focused (e\&.g\&., logic change vs\&. build tag bump)\&.
+.IP "\(bu" 2
+PRs (if used): include summary, testing done, affected modules, screenshots/gifs for UI changes, link issues\&. Avoid committing build artifacts or user-specific CMake cache files\&.
+.PP
+.SH "Configuration & Security Tips"
+.PP
+.IP "\(bu" 2
+Protobuf/gRPC versions are pinned in \fCcmake/grpc\&.cmake\fP; update deliberately\&.
+.IP "\(bu" 2
+Keep network endpoints configurable via config files (see \fCAmurCore\&.cfg\&.in\fP / libconfig usage in \fCconfig/\fP)\&.
+.IP "\(bu" 2
+When handling mutexes around proto objects (\fC\fBnetwork/client\&.cpp\fP\fP), use RAII locks to avoid races\&. 
+.PP
+

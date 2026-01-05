@@ -1,8 +1,11 @@
 <map id="network/client.h" name="network/client.h">
-<area shape="rect" id="node1" title=" " alt="" coords="101,5,215,32"/>
-<area shape="rect" id="node2" href="$client_8cpp.html" title=" " alt="" coords="5,80,132,107"/>
-<area shape="rect" id="node3" href="$networkcontroller_8h.html" title=" " alt="" coords="157,80,338,107"/>
-<area shape="rect" id="node4" href="$connectdialog_8h.html" title=" " alt="" coords="65,155,227,181"/>
-<area shape="rect" id="node6" href="$networkcontroller_8cpp.html" title=" " alt="" coords="251,155,446,181"/>
-<area shape="rect" id="node5" href="$connectdialog_8cpp.html" title=" " alt="" coords="58,229,234,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="129,5,243,32"/>
+<area shape="rect" id="node2" href="$client_8cpp.html" title=" " alt="" coords="21,80,148,107"/>
+<area shape="rect" id="node3" href="$networkcontroller_8h.html" title=" " alt="" coords="155,155,337,181"/>
+<area shape="rect" id="node9" href="$networkfactory_8h.html" title=" " alt="" coords="224,80,391,107"/>
+<area shape="rect" id="node4" href="$navdialog_8h.html" title=" " alt="" coords="19,229,137,256"/>
+<area shape="rect" id="node6" href="$connectdialog_8h.html" title=" " alt="" coords="165,229,327,256"/>
+<area shape="rect" id="node8" href="$networkcontroller_8cpp.html" title=" " alt="" coords="351,229,546,256"/>
+<area shape="rect" id="node5" href="$navdialog_8cpp.html" title=" " alt="" coords="5,304,137,331"/>
+<area shape="rect" id="node7" href="$connectdialog_8cpp.html" title=" " alt="" coords="162,304,338,331"/>
 </map>

@@ -1,4 +1,4 @@
-.TH "MapWidget" 3 "Wed Nov 26 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "MapWidget" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,6 +10,13 @@ MapWidget
 \fC#include <mapwidget\&.h>\fP
 .PP
 Inherits QWidget, and QWidget\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBZoneOverlay\fP"
+.br
+.in -1c
 .SS "Public Slots"
 
 .in +1c
@@ -65,6 +72,9 @@ Inherits QWidget, and QWidget\&.
 .RI "void \fBsetRobotPose\fP (double posX, double posY, \fBPoseQuaternion\fP quaternion)"
 .br
 .ti -1c
+.RI "void \fBsetZones\fP (const std::vector< \fBZoneOverlay\fP > &zones)"
+.br
+.ti -1c
 .RI "const std::shared_ptr< std::vector< QPointF > > & \fBgetGoals\fP () const"
 .br
 .in -1c
@@ -113,6 +123,9 @@ Inherits QWidget, and QWidget\&.
 .RI "QPointF \fBwidgetToMap\fP (const QPointF &p) const"
 .br
 .ti -1c
+.RI "QPointF \fBworldToMap\fP (const QPointF &world) const"
+.br
+.ti -1c
 .RI "QPointF \fBmapToWidget\fP (const QPointF &mapPt) const"
 .br
 .ti -1c
@@ -126,6 +139,30 @@ Inherits QWidget, and QWidget\&.
 .br
 .ti -1c
 .RI "void \fBdrawWaypoints\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawMapLayer\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawZonesLayer\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawGridLayer\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawAxisLayer\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawRobotLayer\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawWaypointsLayer\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBdrawZones\fP (QPainter &painter)"
+.br
+.ti -1c
+.RI "void \fBsetupLayers\fP ()"
 .br
 .ti -1c
 .RI "void \fBfitMapToWidget\fP ()"
@@ -142,6 +179,9 @@ Inherits QWidget, and QWidget\&.
 .br
 .ti -1c
 .RI "bool \fBm_showAxis\fP = true"
+.br
+.ti -1c
+.RI "std::vector< std::function< void(QPainter &)> > \fBm_layers\fP"
 .br
 .ti -1c
 .RI "std::mutex \fBm_mutex\fP"
@@ -177,6 +217,9 @@ Inherits QWidget, and QWidget\&.
 .RI "bool \fBm_panning\fP"
 .br
 .ti -1c
+.RI "std::vector< \fBZoneOverlay\fP > \fBm_zones\fP"
+.br
+.ti -1c
 .RI "QPixmap \fBm_robotPixmap\fP"
 .br
 .ti -1c
@@ -206,11 +249,25 @@ Inherits QWidget, and QWidget\&.
 
 .SS "void MapWidget::drawAxis (QPainter & painter)\fC [private]\fP"
 
+.SS "void MapWidget::drawAxisLayer (QPainter & painter)\fC [private]\fP"
+
 .SS "void MapWidget::drawGrid (QPainter & painter)\fC [private]\fP"
+
+.SS "void MapWidget::drawGridLayer (QPainter & painter)\fC [private]\fP"
+
+.SS "void MapWidget::drawMapLayer (QPainter & painter)\fC [private]\fP"
 
 .SS "void MapWidget::drawRobot (QPainter & painter)\fC [private]\fP"
 
+.SS "void MapWidget::drawRobotLayer (QPainter & painter)\fC [private]\fP"
+
 .SS "void MapWidget::drawWaypoints (QPainter & painter)\fC [private]\fP"
+
+.SS "void MapWidget::drawWaypointsLayer (QPainter & painter)\fC [private]\fP"
+
+.SS "void MapWidget::drawZones (QPainter & painter)\fC [private]\fP"
+
+.SS "void MapWidget::drawZonesLayer (QPainter & painter)\fC [private]\fP"
 
 .SS "void MapWidget::fitMapToWidget ()\fC [private]\fP"
 
@@ -314,6 +371,10 @@ Inherits QWidget, and QWidget\&.
 
 .SS "void MapWidget::setShowGrid (bool enable)\fC [slot]\fP"
 
+.SS "void MapWidget::setupLayers ()\fC [private]\fP"
+
+.SS "void MapWidget::setZones (const std::vector< \fBZoneOverlay\fP > & zones)"
+
 .SS "void MapWidget::updateScaleOnResize (int widgetWidth, int widgetHeight)\fC [private]\fP"
 
 .PP
@@ -333,6 +394,8 @@ Inherits QWidget, and QWidget\&.
 
 .SS "QPointF MapWidget::widgetToWorld (const QPointF & point) const\fC [private]\fP"
 
+.SS "QPointF MapWidget::worldToMap (const QPointF & world) const\fC [private]\fP"
+
 .SH "Member Data Documentation"
 .PP 
 .SS "bool MapWidget::m_firstMapLoaded = false\fC [private]\fP"
@@ -340,6 +403,8 @@ Inherits QWidget, and QWidget\&.
 .SS "std::shared_ptr<std::vector<QPointF> > MapWidget::m_goalsWorld\fC [private]\fP"
 
 .SS "QPoint MapWidget::m_lastMousePos\fC [private]\fP"
+
+.SS "std::vector<std::function<void(QPainter&)> > MapWidget::m_layers\fC [private]\fP"
 
 .SS "QImage MapWidget::m_mapImage\fC [private]\fP"
 
@@ -372,6 +437,8 @@ Inherits QWidget, and QWidget\&.
 .SS "bool MapWidget::m_showAxis = true\fC [private]\fP"
 
 .SS "bool MapWidget::m_showGrid = true\fC [private]\fP"
+
+.SS "std::vector<\fBZoneOverlay\fP> MapWidget::m_zones\fC [private]\fP"
 
 
 .SH "Author"

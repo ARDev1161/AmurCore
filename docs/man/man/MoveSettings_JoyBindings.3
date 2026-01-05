@@ -1,4 +1,4 @@
-.TH "MoveSettings::JoyBindings" 3 "Wed Nov 26 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "MoveSettings::JoyBindings" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,6 +8,22 @@ MoveSettings::JoyBindings
 .PP
 .PP
 \fC#include <movements\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBwheelXAxis\fP (const \fBJoyState\fP &state) const"
+.br
+.ti -1c
+.RI "int \fBwheelYAxis\fP (const \fBJoyState\fP &state) const"
+.br
+.ti -1c
+.RI "int \fBcameraXAxis\fP (const \fBJoyState\fP &state) const"
+.br
+.ti -1c
+.RI "int \fBcameraYAxis\fP (const \fBJoyState\fP &state) const"
+.br
+.in -1c
 .SS "Public Attributes"
 
 .in +1c
@@ -17,9 +33,24 @@ MoveSettings::JoyBindings
 .ti -1c
 .RI "int \fBlightButton\fP = 0"
 .br
+.ti -1c
+.RI "int \fBdivider\fP = 129"
+.br
 .in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "int MoveSettings::JoyBindings::cameraXAxis (const \fBJoyState\fP & state) const\fC [inline]\fP"
+
+.SS "int MoveSettings::JoyBindings::cameraYAxis (const \fBJoyState\fP & state) const\fC [inline]\fP"
+
+.SS "int MoveSettings::JoyBindings::wheelXAxis (const \fBJoyState\fP & state) const\fC [inline]\fP"
+
+.SS "int MoveSettings::JoyBindings::wheelYAxis (const \fBJoyState\fP & state) const\fC [inline]\fP"
+
 .SH "Member Data Documentation"
 .PP 
+.SS "int MoveSettings::JoyBindings::divider = 129"
+
 .SS "int MoveSettings::JoyBindings::lightButton = 0"
 
 .SS "int MoveSettings::JoyBindings::relayButton = 5"

@@ -1,25 +1,31 @@
 var annotated_dup =
 [
     [ "AmurCore", "classAmurCore.html", "classAmurCore" ],
+    [ "BaseControlStrategy", "classBaseControlStrategy.html", "classBaseControlStrategy" ],
     [ "Calibrator", "classCalibrator.html", "classCalibrator" ],
     [ "CalibratorWorker", "classCalibratorWorker.html", "classCalibratorWorker" ],
     [ "CamCalibrate", "classCamCalibrate.html", "classCamCalibrate" ],
     [ "CamSettingsHolder", "classCamSettingsHolder.html", "classCamSettingsHolder" ],
     [ "ConfigProcessor", "classConfigProcessor.html", "classConfigProcessor" ],
     [ "ConnectDialog", "classConnectDialog.html", "classConnectDialog" ],
+    [ "DeadzoneBaseControlStrategy", "classDeadzoneBaseControlStrategy.html", "classDeadzoneBaseControlStrategy" ],
     [ "GetStateByJoystick", "classGetStateByJoystick.html", "classGetStateByJoystick" ],
     [ "grpcClient", "classgrpcClient.html", "classgrpcClient" ],
     [ "grpcServer", "classgrpcServer.html", "classgrpcServer" ],
     [ "JoyState", "structJoyState.html", "structJoyState" ],
     [ "Joystick", "classJoystick.html", "classJoystick" ],
     [ "JoystickDialog", "classJoystickDialog.html", "classJoystickDialog" ],
+    [ "JoystickFactory", "classJoystickFactory.html", "classJoystickFactory" ],
     [ "JoystickStateWorker", "classJoystickStateWorker.html", "classJoystickStateWorker" ],
     [ "Logic", "classLogic.html", "classLogic" ],
     [ "ManualControl", "classManualControl.html", "classManualControl" ],
     [ "MapWidget", "classMapWidget.html", "classMapWidget" ],
     [ "MoveSettings", "structMoveSettings.html", "structMoveSettings" ],
+    [ "NavCommandBuilder", "classNavCommandBuilder.html", "classNavCommandBuilder" ],
     [ "NavDialog", "classNavDialog.html", "classNavDialog" ],
+    [ "NavGoalsHistory", "classNavGoalsHistory.html", "classNavGoalsHistory" ],
     [ "NetworkController", "classNetworkController.html", "classNetworkController" ],
+    [ "NetworkFactory", "classNetworkFactory.html", "classNetworkFactory" ],
     [ "PoseQuaternion", "structPoseQuaternion.html", "structPoseQuaternion" ],
     [ "RobotEntry", "classRobotEntry.html", "classRobotEntry" ],
     [ "RobotInfoDialog", "classRobotInfoDialog.html", "classRobotInfoDialog" ],
@@ -27,5 +33,5 @@ var annotated_dup =
     [ "Session", "classSession.html", "classSession" ],
     [ "System", "classSystem.html", "classSystem" ],
     [ "VJoystickAdapter", "classVJoystickAdapter.html", "classVJoystickAdapter" ],
-    [ "Worker", "classWorker.html", "classWorker" ]
+    [ "WorkerBase", "classWorkerBase.html", "classWorkerBase" ]
 ];

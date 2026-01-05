@@ -1,4 +1,4 @@
-.TH "GetStateByJoystick" 3 "Wed Nov 26 2025" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.TH "GetStateByJoystick" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -63,7 +63,7 @@ Inherits QObject\&.
 
 .in +1c
 .ti -1c
-.RI "\fBVJoystickAdapter\fP * \fBjoyAdapter\fP"
+.RI "std::unique_ptr< \fBVJoystickAdapter\fP > \fBjoyAdapter\fP"
 .br
 .ti -1c
 .RI "int \fBLoopTime\fP =50"
@@ -110,7 +110,7 @@ Inherits QObject\&.
 
 .SH "Member Data Documentation"
 .PP 
-.SS "\fBVJoystickAdapter\fP* GetStateByJoystick::joyAdapter\fC [private]\fP"
+.SS "std::unique_ptr<\fBVJoystickAdapter\fP> GetStateByJoystick::joyAdapter\fC [private]\fP"
 
 .SS "std::shared_ptr<\fBJoyState\fP> GetStateByJoystick::joyState\fC [private]\fP"
 

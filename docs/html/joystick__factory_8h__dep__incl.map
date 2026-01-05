@@ -1,0 +1,15 @@
+<map id="joystick/joystick_factory.h" name="joystick/joystick_factory.h">
+<area shape="rect" id="node1" title=" " alt="" coords="99,5,269,32"/>
+<area shape="rect" id="node2" href="$getstatebyjoy_8cpp.html" title=" " alt="" coords="5,155,176,181"/>
+<area shape="rect" id="node3" href="$getstatebyjoy_8h.html" title=" " alt="" coords="183,80,339,107"/>
+<area shape="rect" id="node4" href="$joystickdialog_8h.html" title=" " alt="" coords="201,155,359,181"/>
+<area shape="rect" id="node12" href="$joystickstateworker_8h.html" title=" " alt="" coords="384,155,576,181"/>
+<area shape="rect" id="node5" href="$joystick_8h.html" title=" " alt="" coords="309,229,433,256"/>
+<area shape="rect" id="node11" href="$joystickdialog_8cpp.html" title=" " alt="" coords="113,229,285,256"/>
+<area shape="rect" id="node6" href="$joystick_8cpp.html" title=" " alt="" coords="223,304,361,331"/>
+<area shape="rect" id="node7" href="$movements_8h.html" title=" " alt="" coords="385,304,516,331"/>
+<area shape="rect" id="node8" href="$logic_8h.html" title=" " alt="" coords="333,379,424,405"/>
+<area shape="rect" id="node10" href="$movements_8cpp.html" title=" " alt="" coords="449,379,594,405"/>
+<area shape="rect" id="node9" href="$logic_8cpp.html" title=" " alt="" coords="327,453,431,480"/>
+<area shape="rect" id="node13" href="$joystickstateworker_8cpp.html" title=" " alt="" coords="457,229,663,256"/>
+</map>

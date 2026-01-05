@@ -1,0 +1,80 @@
+.TH "NavGoalsHistory" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+NavGoalsHistory
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNavGoalsHistory\fP (std::shared_ptr< std::vector< QPointF >> goals)"
+.br
+.ti -1c
+.RI "void \fBrecord\fP ()"
+.br
+.ti -1c
+.RI "bool \fBcanUndo\fP () const"
+.br
+.ti -1c
+.RI "bool \fBcanRedo\fP () const"
+.br
+.ti -1c
+.RI "bool \fBundo\fP ()"
+.br
+.ti -1c
+.RI "bool \fBredo\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBrestore\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::shared_ptr< std::vector< QPointF > > \fBgoals_\fP"
+.br
+.ti -1c
+.RI "std::vector< std::vector< QPointF > > \fBhistory_\fP"
+.br
+.ti -1c
+.RI "std::size_t \fBcurrentIndex_\fP {0}"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "NavGoalsHistory::NavGoalsHistory (std::shared_ptr< std::vector< QPointF >> goals)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool NavGoalsHistory::canRedo () const\fC [inline]\fP"
+
+.SS "bool NavGoalsHistory::canUndo () const\fC [inline]\fP"
+
+.SS "void NavGoalsHistory::record ()\fC [inline]\fP"
+
+.SS "bool NavGoalsHistory::redo ()\fC [inline]\fP"
+
+.SS "void NavGoalsHistory::restore ()\fC [inline]\fP, \fC [private]\fP"
+
+.SS "bool NavGoalsHistory::undo ()\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::size_t NavGoalsHistory::currentIndex_ {0}\fC [private]\fP"
+
+.SS "std::shared_ptr<std::vector<QPointF> > NavGoalsHistory::goals_\fC [private]\fP"
+
+.SS "std::vector<std::vector<QPointF> > NavGoalsHistory::history_\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AmurCore from the source code\&.

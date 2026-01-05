@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['logic_483',['Logic',['../classLogic.html',1,'']]]
+  ['getstatebyjoystick_574',['GetStateByJoystick',['../classGetStateByJoystick.html',1,'']]],
+  ['grpcclient_575',['grpcClient',['../classgrpcClient.html',1,'']]],
+  ['grpcserver_576',['grpcServer',['../classgrpcServer.html',1,'']]]
 ];

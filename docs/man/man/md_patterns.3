@@ -1,0 +1,115 @@
+.TH "md_patterns" 3 "Mon Jan 5 2026" "Version 1.0" "AmurCore" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_patterns \- OOP Patterns Suggestions 
+Ниже — адресные предложения по паттернам под текущую структуру проекта\&. Это ориентиры, без изменений кода\&.
+.SH "Strategy — управление **(реализовано частично)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fClogic/movements\&.*\fP, \fClogic/logic\&.*\fP\&.
+.IP "\(bu" 2
+Статус: \fC\fBDeadzoneBaseControlStrategy\fP\fP для базового движения уже внедрён; можно расширить новыми стратегиями под разные раскладки и фильтры\&.
+.IP "\(bu" 2
+Что даст: отсутствие \fC#define\fP внутри настроек, лёгкое переключение/тестирование разных раскладок, возможность подмешивать фильтры (smoothing, ramping) отдельными стратегиями\&.
+.PP
+.SH "Command — навигация **(не реализовано)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fClogic/navdialog\&.*\fP\&.
+.IP "\(bu" 2
+Идея: операции FollowWaypoints, GoThroughPoses, ClearGoals, Patrol оформить как команды \fCINavCommand\fP с единым исполнителем/очередью\&.
+.IP "\(bu" 2
+Что даст: логирование/отмена/повтор, единая точка отправки в gRPC, защита от параллельных запросов\&.
+.PP
+.SH "Observer / Pub-Sub — обновления данных **(реализовано частично)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fC\fBnetwork/client\&.cpp\fP\fP, \fC\fBlogic/navdialog\&.cpp\fP\fP, \fC\fBlogic/mapwidget\&.cpp\fP\fP\&.
+.IP "\(bu" 2
+Статус: сигналы \fCmapUpdated/sensorsUpdated\fP от \fBgrpcClient\fP + подписка \fBNavDialog\fP; таймер всё ещё работает, можно убрать или упростить поллинг\&.
+.IP "\(bu" 2
+Что даст: меньше поллинга, меньше гонок по мьютексам, возможность легко подменить источник данных (реплей, симулятор)\&.
+.PP
+.SH "Builder — сборка proto **(реализовано частично)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fC\fBlogic/navdialog\&.cpp\fP\fP, \fC\fBlogic/movements\&.cpp\fP\fP\&.
+.IP "\(bu" 2
+Статус: \fC\fBNavCommandBuilder\fP\fP уже используется для follow/go-through; для completeness можно добавить builder для базового управления/камеры\&.
+.IP "\(bu" 2
+Что даст: меньше дублирования \fCset_x()/set_orientation_*\fP, все инварианты в одном месте, безопасное расширение сообщений\&.
+.PP
+.SH "State — соединение и UI **(реализовано частично)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fCnetwork/networkcontroller\&.*\fP, \fCthreads/session\&.*\fP, \fC\fBlogic/navdialog\&.cpp\fP\fP (статус задач)\&.
+.IP "\(bu" 2
+Статус: \fBNavDialog\fP использует простые состояния Idle/Ready/Busy для кнопки отправки задач; сетевой слой пока без FSM\&.
+.IP "\(bu" 2
+Что даст: предсказуемое восстановление после обрывов, простые реакции UI на статус, меньше условных блоков в одном методе\&.
+.PP
+.SH "Factory Method / Abstract Factory — инициализация сервисов **(реализовано частично)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fC\fBnetwork/networkcontroller\&.cpp\fP\fP, \fC\fBjoystick/joystick\&.cpp\fP\fP\&.
+.IP "\(bu" 2
+Статус: \fC\fBNetworkFactory\fP\fP для client/server, \fC\fBJoystickFactory\fP\fP для адаптера; нет фабрик под разные транспорты/симулятор\&.
+.IP "\(bu" 2
+Что даст: минимизация \fC#ifdef\fP, удобная подмена транспорта/ввода в тестах\&.
+.PP
+.SH "Adapter — границы с proto **(реализовано частично)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fCnetwork/protobuf/*\&.proto\fP ↔ \fC\fBlogic/navdialog\&.cpp\fP\fP, \fC\fBlogic/movements\&.cpp\fP\fP, \fCmapwidget\fP\&.
+.IP "\(bu" 2
+Статус: \fC\fBNavigationAdapter::fromPoint\fP\fP покрывает позы для нав-команд; остальные сообщения (base control, сенсоры) без адаптеров\&.
+.IP "\(bu" 2
+Что даст: UI/логика не завязаны на схему proto, проще мигрировать протокол или менять единицы\&.
+.PP
+.SH "Template Method — потоки/воркеры **(реализовано частично)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fCthreads/worker\&.*\fP, \fCthreads/session\&.*\fP\&.
+.IP "\(bu" 2
+Статус: \fC\fBWorkerBase\fP\fP с onStart/onTick/onStop; \fC\fBSession\fP\fP пока не использует его и не управляет набором воркеров\&.
+.IP "\(bu" 2
+Что даст: единый контроль жизненного цикла, меньше дублирования подключений сигналов/слотов\&.
+.PP
+.SH "Decorator / Composite — оверлеи карты **(реализовано частично)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fClogic/mapwidget\&.*\fP\&.
+.IP "\(bu" 2
+Статус: слойная отрисовка через вектор лямбда-слоёв; нет явных классов \fCIMapLayer\fP, можно вынести слои в отдельные объекты и конфигурацию\&.
+.IP "\(bu" 2
+Что даст: расширяемость (trajectory/costmap/локальные цели) без роста \fCpaintEvent\fP, гибкое управление видимостью\&.
+.PP
+.SH "Dependency Injection — тестируемость **(не реализовано)**"
+.PP
+.IP "\(bu" 2
+Файлы: конструкторы \fC\fBNavDialog\fP\fP, \fC\fBNetworkController\fP\fP, воркеры\&.
+.IP "\(bu" 2
+Идея: принимать интерфейсы (\fCIMapProvider\fP, \fCISensorStream\fP, \fCICommandSender\fP) и время жизни через DI-контейнер или вручную\&.
+.IP "\(bu" 2
+Что даст: лёгкие моки/стабы в тестах, меньше скрытых глобальных зависимостей\&.
+.PP
+.SH "Memento — история целей **(реализовано)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fClogic/navdialog\&.*\fP\&.
+.IP "\(bu" 2
+Статус: \fC\fBNavGoalsHistory\fP\fP добавлен, поддерживает Undo/Redo списка целей\&.
+.IP "\(bu" 2
+Что даст: удобное откатывание/повтор маршрутов, безопасное редактирование\&.
+.PP
+.SH "Guarded Suspension / Monitor Object — синхронизация **(реализовано частично)**"
+.PP
+.IP "\(bu" 2
+Файлы: \fC\fBnetwork/client\&.cpp\fP\fP (доступ к proto), \fC\fBlogic/mapwidget\&.cpp\fP\fP\&.
+.IP "\(bu" 2
+Статус: \fBNavDialog\fP использует \fCstd::scoped_lock\fP для одновременного доступа к map/sensors; остальное можно покрыть RAII-обёртками\&.
+.IP "\(bu" 2
+Что даст: меньше риска забытых блокировок и гонок, ясные владения данными\&. 
+.PP
+

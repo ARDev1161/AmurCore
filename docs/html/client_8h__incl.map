@@ -1,8 +1,9 @@
 <map id="network/client.h" name="network/client.h">
-<area shape="rect" id="node1" title=" " alt="" coords="158,5,271,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="214,5,327,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,77,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="101,80,160,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="184,80,245,107"/>
 <area shape="rect" id="node5" title=" " alt="" coords="269,80,384,107"/>
 <area shape="rect" id="node6" title=" " alt="" coords="409,80,615,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="639,80,710,107"/>
 </map>

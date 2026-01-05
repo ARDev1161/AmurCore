@@ -99,10 +99,10 @@ Collaboration diagram for ManualControl:</div>
 <div class="dyncontent">
 <div class="center"><img src="classManualControl__coll__graph.png" border="0" usemap="#aManualControl_coll__map" alt="Collaboration graph"/></div>
 <map name="aManualControl_coll__map" id="aManualControl_coll__map">
-<area shape="rect" title=" " alt="" coords="81,417,268,656"/>
-<area shape="rect" href="structMoveSettings.html" title=" " alt="" coords="43,219,146,296"/>
-<area shape="rect" href="structMoveSettings_1_1JoyBindings.html" title=" " alt="" coords="5,5,184,97"/>
-<area shape="rect" href="structJoyState.html" title=" " alt="" coords="170,160,299,355"/>
+<area shape="rect" title=" " alt="" coords="81,476,268,729"/>
+<area shape="rect" href="structMoveSettings.html" title=" " alt="" coords="43,277,146,355"/>
+<area shape="rect" href="structMoveSettings_1_1JoyBindings.html" title=" " alt="" coords="5,5,184,156"/>
+<area shape="rect" href="structJoyState.html" title=" " alt="" coords="170,219,299,413"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -142,6 +142,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a46de0772e24ea35b54f12af2ddb05ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a070bdcf51edd4fca578837eec5c8f0a3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManualControl.html#a070bdcf51edd4fca578837eec5c8f0a3">joyDriftZone</a> = 7</td></tr>
 <tr class="separator:a070bdcf51edd4fca578837eec5c8f0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a389de0ac5d9cc27f6a6e3b41e3b8f3e5"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classBaseControlStrategy.html">BaseControlStrategy</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManualControl.html#a389de0ac5d9cc27f6a6e3b41e3b8f3e5">baseControlStrategy</a></td></tr>
+<tr class="separator:a389de0ac5d9cc27f6a6e3b41e3b8f3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa48d45f72acbdd24550752b1e40a0fa5"><td class="memItemLeft" align="right" valign="top">Base::BaseControl::ControlLevel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManualControl.html#aa48d45f72acbdd24550752b1e40a0fa5">baseControlLevel</a></td></tr>
 <tr class="separator:aa48d45f72acbdd24550752b1e40a0fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -225,15 +227,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classManualControl_a312b8b5ba45b63e4e8f403b7d49d5237_icgraph.png" border="0" usemap="#aclassManualControl_a312b8b5ba45b63e4e8f403b7d49d5237_icgraph" alt=""/></div>
 <map name="aclassManualControl_a312b8b5ba45b63e4e8f403b7d49d5237_icgraph" id="aclassManualControl_a312b8b5ba45b63e4e8f403b7d49d5237_icgraph">
-<area shape="rect" title=" " alt="" coords="1307,23,1487,65"/>
-<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,31,1259,57"/>
-<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,31,1060,57"/>
-<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,31,905,57"/>
-<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
-<area shape="rect" href="classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
-<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
-<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,31,329,57"/>
-<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,31,149,57"/>
+<area shape="rect" title=" " alt="" coords="1307,5,1487,47"/>
+<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,13,1259,39"/>
+<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,13,1060,39"/>
+<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,13,905,39"/>
+<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,13,732,39"/>
+<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,13,523,39"/>
+<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,13,329,39"/>
+<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,13,149,39"/>
 </map>
 </div>
 
@@ -267,15 +268,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classManualControl_aa4a96f837624198177e3386583dafdd4_icgraph.png" border="0" usemap="#aclassManualControl_aa4a96f837624198177e3386583dafdd4_icgraph" alt=""/></div>
 <map name="aclassManualControl_aa4a96f837624198177e3386583dafdd4_icgraph" id="aclassManualControl_aa4a96f837624198177e3386583dafdd4_icgraph">
-<area shape="rect" title=" " alt="" coords="1307,23,1497,65"/>
-<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,31,1259,57"/>
-<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,31,1060,57"/>
-<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,31,905,57"/>
-<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
-<area shape="rect" href="classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
-<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
-<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,31,329,57"/>
-<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,31,149,57"/>
+<area shape="rect" title=" " alt="" coords="1307,5,1497,47"/>
+<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,13,1259,39"/>
+<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,13,1060,39"/>
+<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,13,905,39"/>
+<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,13,732,39"/>
+<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,13,523,39"/>
+<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,13,329,39"/>
+<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,13,149,39"/>
 </map>
 </div>
 
@@ -309,15 +309,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classManualControl_a50789f43ceffaedf4d13b2040483124f_icgraph.png" border="0" usemap="#aclassManualControl_a50789f43ceffaedf4d13b2040483124f_icgraph" alt=""/></div>
 <map name="aclassManualControl_a50789f43ceffaedf4d13b2040483124f_icgraph" id="aclassManualControl_a50789f43ceffaedf4d13b2040483124f_icgraph">
-<area shape="rect" title=" " alt="" coords="1307,23,1497,65"/>
-<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,31,1259,57"/>
-<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,31,1060,57"/>
-<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,31,905,57"/>
-<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
-<area shape="rect" href="classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
-<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
-<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,31,329,57"/>
-<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,31,149,57"/>
+<area shape="rect" title=" " alt="" coords="1307,5,1497,47"/>
+<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,13,1259,39"/>
+<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,13,1060,39"/>
+<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,13,905,39"/>
+<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,13,732,39"/>
+<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,13,523,39"/>
+<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,13,329,39"/>
+<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,13,149,39"/>
 </map>
 </div>
 
@@ -361,15 +360,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classManualControl_a1f4fafd9bd86396cad2868d6b51de2be_icgraph.png" border="0" usemap="#aclassManualControl_a1f4fafd9bd86396cad2868d6b51de2be_icgraph" alt=""/></div>
 <map name="aclassManualControl_a1f4fafd9bd86396cad2868d6b51de2be_icgraph" id="aclassManualControl_a1f4fafd9bd86396cad2868d6b51de2be_icgraph">
-<area shape="rect" title=" " alt="" coords="1307,23,1495,65"/>
-<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,31,1259,57"/>
-<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,31,1060,57"/>
-<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,31,905,57"/>
-<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
-<area shape="rect" href="classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
-<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
-<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,31,329,57"/>
-<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,31,149,57"/>
+<area shape="rect" title=" " alt="" coords="1307,5,1495,47"/>
+<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,13,1259,39"/>
+<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,13,1060,39"/>
+<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,13,905,39"/>
+<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,13,732,39"/>
+<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,13,523,39"/>
+<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,13,329,39"/>
+<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,13,149,39"/>
 </map>
 </div>
 
@@ -412,12 +410,16 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classManualControl_a38a16569b5807dccd550bd1a58534c9e_cgraph.png" border="0" usemap="#aclassManualControl_a38a16569b5807dccd550bd1a58534c9e_cgraph" alt=""/></div>
 <map name="aclassManualControl_a38a16569b5807dccd550bd1a58534c9e_cgraph" id="aclassManualControl_a38a16569b5807dccd550bd1a58534c9e_cgraph">
-<area shape="rect" title=" " alt="" coords="5,143,156,170"/>
+<area shape="rect" title=" " alt="" coords="5,274,156,301"/>
 <area shape="rect" href="classManualControl.html#a312b8b5ba45b63e4e8f403b7d49d5237" title=" " alt="" coords="223,5,403,47"/>
-<area shape="rect" href="classManualControl.html#aa4a96f837624198177e3386583dafdd4" title=" " alt="" coords="218,71,409,112"/>
-<area shape="rect" href="classManualControl.html#a50789f43ceffaedf4d13b2040483124f" title=" " alt="" coords="218,136,409,177"/>
-<area shape="rect" href="classManualControl.html#a1f4fafd9bd86396cad2868d6b51de2be" title=" " alt="" coords="219,201,407,243"/>
-<area shape="rect" href="classManualControl.html#afa373688174e8ba403f8c83f8cf486da" title=" " alt="" coords="204,267,423,294"/>
+<area shape="rect" href="structMoveSettings_1_1JoyBindings.html#a932fb3cb23efbac5e3433c0d52512293" title=" " alt="" coords="224,71,403,112"/>
+<area shape="rect" href="structMoveSettings_1_1JoyBindings.html#a39c31b85eaf6494fcc1dd765e16ed138" title=" " alt="" coords="224,136,403,177"/>
+<area shape="rect" href="classManualControl.html#aa4a96f837624198177e3386583dafdd4" title=" " alt="" coords="218,201,409,243"/>
+<area shape="rect" href="classManualControl.html#a50789f43ceffaedf4d13b2040483124f" title=" " alt="" coords="218,267,409,308"/>
+<area shape="rect" href="classManualControl.html#a1f4fafd9bd86396cad2868d6b51de2be" title=" " alt="" coords="219,332,407,373"/>
+<area shape="rect" href="classManualControl.html#afa373688174e8ba403f8c83f8cf486da" title=" " alt="" coords="204,398,423,425"/>
+<area shape="rect" href="structMoveSettings_1_1JoyBindings.html#a08a8832adc9bee733283a0125604a45d" title=" " alt="" coords="224,449,403,491"/>
+<area shape="rect" href="structMoveSettings_1_1JoyBindings.html#a4ec62aca0ad2cdcf293a3a40136bda0d" title=" " alt="" coords="224,515,403,556"/>
 </map>
 </div>
 <div class="dynheader">
@@ -425,14 +427,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classManualControl_a38a16569b5807dccd550bd1a58534c9e_icgraph.png" border="0" usemap="#aclassManualControl_a38a16569b5807dccd550bd1a58534c9e_icgraph" alt=""/></div>
 <map name="aclassManualControl_a38a16569b5807dccd550bd1a58534c9e_icgraph" id="aclassManualControl_a38a16569b5807dccd550bd1a58534c9e_icgraph">
-<area shape="rect" title=" " alt="" coords="1108,31,1259,57"/>
-<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,31,1060,57"/>
-<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,31,905,57"/>
-<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
-<area shape="rect" href="classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
-<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
-<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,31,329,57"/>
-<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,31,149,57"/>
+<area shape="rect" title=" " alt="" coords="1108,5,1259,32"/>
+<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,5,1060,32"/>
+<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,5,905,32"/>
+<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,5,732,32"/>
+<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,5,523,32"/>
+<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,5,329,32"/>
+<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,5,149,32"/>
 </map>
 </div>
 
@@ -476,15 +477,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classManualControl_afa373688174e8ba403f8c83f8cf486da_icgraph.png" border="0" usemap="#aclassManualControl_afa373688174e8ba403f8c83f8cf486da_icgraph" alt=""/></div>
 <map name="aclassManualControl_afa373688174e8ba403f8c83f8cf486da_icgraph" id="aclassManualControl_afa373688174e8ba403f8c83f8cf486da_icgraph">
-<area shape="rect" title=" " alt="" coords="1307,31,1525,57"/>
-<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,31,1259,57"/>
-<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,31,1060,57"/>
-<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,31,905,57"/>
-<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,31,732,57"/>
-<area shape="rect" href="classAmurCore.html#aa79b40a7ade39697aa48e1914c663f5a" title=" " alt="" coords="383,5,517,32"/>
-<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,56,523,83"/>
-<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,31,329,57"/>
-<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,31,149,57"/>
+<area shape="rect" title=" " alt="" coords="1307,5,1525,32"/>
+<area shape="rect" href="classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1108,5,1259,32"/>
+<area shape="rect" href="classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,5,1060,32"/>
+<area shape="rect" href="classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,5,905,32"/>
+<area shape="rect" href="classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,5,732,32"/>
+<area shape="rect" href="classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,5,523,32"/>
+<area shape="rect" href="classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,5,329,32"/>
+<area shape="rect" href="classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,5,149,32"/>
 </map>
 </div>
 
@@ -502,6 +502,28 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">Base::BaseControl::ControlLevel ManualControl::baseControlLevel</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a389de0ac5d9cc27f6a6e3b41e3b8f3e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a389de0ac5d9cc27f6a6e3b41e3b8f3e5">&#9670;&nbsp;</a></span>baseControlStrategy</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classBaseControlStrategy.html">BaseControlStrategy</a>&gt; ManualControl::baseControlStrategy</td>
         </tr>
       </table>
   </td>

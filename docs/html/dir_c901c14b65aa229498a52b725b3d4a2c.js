@@ -12,6 +12,9 @@ var dir_c901c14b65aa229498a52b725b3d4a2c =
     [ "networkcontroller.h", "networkcontroller_8h.html", [
       [ "NetworkController", "classNetworkController.html", "classNetworkController" ]
     ] ],
+    [ "networkfactory.h", "networkfactory_8h.html", [
+      [ "NetworkFactory", "classNetworkFactory.html", "classNetworkFactory" ]
+    ] ],
     [ "robotentry.h", "robotentry_8h.html", "robotentry_8h" ],
     [ "robotrepository.cpp", "robotrepository_8cpp.html", null ],
     [ "robotrepository.h", "robotrepository_8h.html", [

@@ -1,4 +1,5 @@
 <map id="MapWidget::goalAdded" name="MapWidget::goalAdded">
-<area shape="rect" id="node1" title=" " alt="" coords="252,5,407,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="252,31,407,57"/>
 <area shape="rect" id="node2" href="$classMapWidget.html#aa48e5f8c7c771113afef4c63d8c0f6c4" title="Обработчик события нажатия кнопки мыши." alt="" coords="5,5,204,32"/>
+<area shape="rect" id="node3" href="$classNavDialog.html#a51cb31ce6e0a5ddf86d7b3ac295ad2dd" title=" " alt="" coords="31,56,179,83"/>
 </map>

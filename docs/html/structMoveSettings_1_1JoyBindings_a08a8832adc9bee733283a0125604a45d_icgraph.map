@@ -1,0 +1,11 @@
+<map id="MoveSettings::JoyBindings::wheelXAxis" name="MoveSettings::JoyBindings::wheelXAxis">
+<area shape="rect" id="node1" title=" " alt="" coords="1355,27,1533,69"/>
+<area shape="rect" id="node2" href="$classManualControl.html#a38a16569b5807dccd550bd1a58534c9e" title=" " alt="" coords="1132,5,1283,32"/>
+<area shape="rect" id="node9" href="$classDeadzoneBaseControlStrategy.html#a610c26ed917a111c9e21fea212ad621a" title=" " alt="" coords="1108,57,1307,98"/>
+<area shape="rect" id="node3" href="$classLogic.html#ae18f024fe3a3a6822c2d068552293c8a" title=" " alt="" coords="953,5,1060,32"/>
+<area shape="rect" id="node4" href="$classAmurCore.html#a7f2766d501d44b70907bee2e6e7d8796" title=" " alt="" coords="780,5,905,32"/>
+<area shape="rect" id="node5" href="$classAmurCore.html#abb9106bf117fc0ee8d7768283be528ea" title=" " alt="" coords="571,5,732,32"/>
+<area shape="rect" id="node6" href="$classAmurCore.html#a67c343866cbcfe00b169f4c242d69a5e" title=" " alt="" coords="377,5,523,32"/>
+<area shape="rect" id="node7" href="$classAmurCore.html#a7951f8dc057c9ee3bde1ae46a2f8f1b9" title=" " alt="" coords="197,5,329,32"/>
+<area shape="rect" id="node8" href="$classAmurCore.html#a4e35374d6f2faa1bdcc57b2fcfb0d651" title=" " alt="" coords="5,5,149,32"/>
+</map>
