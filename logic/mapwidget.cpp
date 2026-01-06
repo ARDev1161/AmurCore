@@ -218,8 +218,11 @@ void MapWidget::drawGrid(QPainter &painter)
 
 void MapWidget::drawAxis(QPainter &painter)
 {
-    // Предположим, что m_offset содержит экранную позицию начала координат карты.
-    QPointF origin = m_offset;
+    if (m_mapImage.isNull()) {
+        return;
+    }
+
+    QPointF origin = mapToWidget(worldToMap(QPointF(0.0, 0.0)));
 
     // Рисуем ось X (красная линия)
     QPen penX(Qt::red);
@@ -240,11 +243,9 @@ void MapWidget::drawMapLayer(QPainter &painter)
     if(m_mapImage.isNull())
         return;
 
-    painter.save();
-    painter.translate(m_offset);
-    painter.scale(m_scaleFactor, m_scaleFactor);
-    painter.drawImage(0, 0, m_mapImage);
-    painter.restore();
+    withMapTransform(painter, [this](QPainter &mapPainter) {
+        mapPainter.drawImage(0, 0, m_mapImage);
+    });
 }
 
 void MapWidget::drawZonesLayer(QPainter &painter)
@@ -252,11 +253,9 @@ void MapWidget::drawZonesLayer(QPainter &painter)
     if (m_mapImage.isNull())
         return;
 
-    painter.save();
-    painter.translate(m_offset);
-    painter.scale(m_scaleFactor, m_scaleFactor);
-    drawZones(painter);
-    painter.restore();
+    withMapTransform(painter, [this](QPainter &mapPainter) {
+        drawZones(mapPainter);
+    });
 }
 
 void MapWidget::drawGridLayer(QPainter &painter)
@@ -264,11 +263,9 @@ void MapWidget::drawGridLayer(QPainter &painter)
     if(!m_showGrid || m_mapImage.isNull())
         return;
 
-    painter.save();
-    painter.translate(m_offset);
-    painter.scale(m_scaleFactor, m_scaleFactor);
-    drawGrid(painter);
-    painter.restore();
+    withMapTransform(painter, [this](QPainter &mapPainter) {
+        drawGrid(mapPainter);
+    });
 }
 
 void MapWidget::drawAxisLayer(QPainter &painter)
@@ -522,6 +519,15 @@ void MapWidget::setupLayers()
     m_layers.emplace_back([this](QPainter& painter){ drawAxisLayer(painter); });
     m_layers.emplace_back([this](QPainter& painter){ drawRobotLayer(painter); });
     m_layers.emplace_back([this](QPainter& painter){ drawWaypointsLayer(painter); });
+}
+
+void MapWidget::withMapTransform(QPainter &painter, const std::function<void(QPainter&)> &drawFn)
+{
+    painter.save();
+    painter.translate(m_offset);
+    painter.scale(m_scaleFactor, m_scaleFactor);
+    drawFn(painter);
+    painter.restore();
 }
 
 void MapWidget::wheelEvent(QWheelEvent* event)

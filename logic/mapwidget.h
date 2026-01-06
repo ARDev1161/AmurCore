@@ -143,6 +143,7 @@ private:
     void drawRobotLayer(QPainter &painter);
     void drawWaypointsLayer(QPainter &painter);
     void drawZones(QPainter &painter);
+    void withMapTransform(QPainter &painter, const std::function<void(QPainter&)> &drawFn);
 
     void setupLayers();
     std::vector<std::function<void(QPainter&)>> m_layers;
