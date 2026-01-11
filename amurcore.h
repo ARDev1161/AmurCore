@@ -24,6 +24,8 @@
 #include <atomic>
 #include <mutex>
 #include <thread>
+#include <QTimer>
+#include <QComboBox>
 #include <QLabel>
 
 #define NO_PICTURE "./data/images/no_picture.jpeg"
@@ -45,6 +47,7 @@ class AmurCore : public QMainWindow
     Ui::AmurCore *ui;
 
     QTimer *tmrTimer;
+    QTimer *sensorsUpdateTimer = nullptr;
     QString *hostName;
     QString statusMessage = "No robot connected";
     QString currentRobotId;
@@ -65,10 +68,23 @@ class AmurCore : public QMainWindow
     NavDialog *navigationDialog;
     RobotInfoDialog *robotInfoDialog;
     QLabel *statusLabel;
+    QComboBox *videoSourceCombo;
+    bool updatingVideoSources = false;
+    int videoBitrateKbps = 800;
+    int lastVideoWidth = 0;
+    int lastVideoHeight = 0;
+    int lastVideoSourceType = 0;
+    QString lastVideoSourceName;
+    QString lastVideoSourcesSignature;
+    int lastVideoActiveType = 0;
+    QString lastVideoActiveName;
+    QTimer *videoConfigTimer = nullptr;
+    std::atomic<bool> sensorsUpdatePending{false};
 
     std::shared_ptr<Controls> controls;
     std::shared_ptr<Sensors> sensors;
     std::shared_ptr<map_service::GetMapResponse> map;
+    std::mutex *grpcMutex = nullptr;
 
     Joystick *joyThread;
     std::shared_ptr<JoyState> joyState;
@@ -121,6 +137,9 @@ private:
     void updateStatusMessage();
     void outMat(Mat &toOut);
     void undistortMat(Mat &inMat, Mat &outMat);
+    void setupVideoControls();
+    void updateVideoSources();
+    void applyVideoSelection();
 
 signals:
     void timeout();
