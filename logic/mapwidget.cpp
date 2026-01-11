@@ -309,20 +309,12 @@ void MapWidget::drawZones(QPainter &painter)
         QColor stroke = zone.color.darker(200);
         stroke.setAlpha(220);
         QPen pen(stroke);
+
         pen.setCosmetic(true);
         pen.setWidth(1);
         painter.setPen(pen);
         painter.setBrush(QBrush(fill));
         painter.drawPolygon(poly);
-
-        if (debugZones) {
-            QPen debugPen(QColor(255, 0, 255));
-            debugPen.setCosmetic(true);
-            debugPen.setWidth(2);
-            painter.setPen(debugPen);
-            painter.setBrush(Qt::NoBrush);
-            painter.drawRect(poly.boundingRect());
-        }
     }
 }
 

@@ -58,13 +58,39 @@ void AmurCore::initialize()
     ui->statusbar->addPermanentWidget(statusLabel);
 
     std::mutex& mapMutex = network->getServerInstance()->getMapMutex(); // MapStream mutex
-    std::mutex& grpcMutex = network->getServerInstance()->getMutex(); // DataStreamExchange mutex
+    grpcMutex = &network->getServerInstance()->getMutex(); // DataStreamExchange mutex
 
-    amurLogic = new Logic(joyState, controls, sensors, grpcMutex);
-    navigationDialog = new NavDialog(controls, sensors, map, mapMutex, grpcMutex, this);
+    amurLogic = new Logic(joyState, controls, sensors, *grpcMutex);
+    navigationDialog = new NavDialog(controls, sensors, map, mapMutex, *grpcMutex, this);
     robotInfoDialog = new RobotInfoDialog();
 
     connMenu();
+    setupVideoControls();
+    if (!sensorsUpdateTimer) {
+        sensorsUpdateTimer = new QTimer(this);
+        sensorsUpdateTimer->setInterval(200);
+        connect(sensorsUpdateTimer, &QTimer::timeout, this, [this]() {
+            if (!sensorsUpdatePending.exchange(false)) {
+                return;
+            }
+            if (!sensors) {
+                return;
+            }
+            std::string pipeline;
+            if (grpcMutex) {
+                std::unique_lock<std::mutex> lock(*grpcMutex);
+                pipeline = sensors->video_stream().pipeline();
+            } else {
+                pipeline = sensors->video_stream().pipeline();
+            }
+            if (!pipeline.empty() && pipeline != videoStreamPipeline) {
+                videoStreamPipeline = pipeline;
+                startCap();
+            }
+            updateVideoSources();
+        });
+        sensorsUpdateTimer->start();
+    }
     startTimer();
     startCap();
 }
@@ -139,6 +165,14 @@ void AmurCore::resizeEvent(QResizeEvent *event)
                     this->width() - 16,
                     this->height() - 60
                     ));
+    if (videoSourceCombo && !updatingVideoSources) {
+        if (!videoConfigTimer) {
+            videoConfigTimer = new QTimer(this);
+            videoConfigTimer->setSingleShot(true);
+            connect(videoConfigTimer, &QTimer::timeout, this, &AmurCore::applyVideoSelection);
+        }
+        videoConfigTimer->start(250);
+    }
 }
 
 void AmurCore::robotHalt()
@@ -153,23 +187,7 @@ void AmurCore::robotReboot()
 
 void AmurCore::onSensorsUpdated()
 {
-    if (!sensors) {
-        return;
-    }
-
-    const std::string pipeline = sensors->video_stream().pipeline();
-    static std::string last_reported_pipeline;
-    if (pipeline != last_reported_pipeline) {
-        last_reported_pipeline = pipeline;
-        std::cerr << "Video pipeline received: "
-                  << (pipeline.empty() ? "<empty>" : pipeline) << std::endl;
-    }
-    if (pipeline.empty() || pipeline == videoStreamPipeline) {
-        return;
-    }
-
-    videoStreamPipeline = pipeline;
-    startCap();
+    sensorsUpdatePending.store(true);
 }
 
 void AmurCore::fetchJoystickId()
@@ -334,6 +352,155 @@ void AmurCore::updateStatusMessage()
         statusMessage = newMessage;
         statusLabel->setText(statusMessage);
     }
+}
+
+void AmurCore::setupVideoControls()
+{
+    videoSourceCombo = new QComboBox(ui->menubar);
+    videoSourceCombo->setMinimumWidth(220);
+    videoSourceCombo->addItem("Video source");
+    ui->menubar->setCornerWidget(videoSourceCombo, Qt::TopRightCorner);
+
+    connect(videoSourceCombo,
+            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this,
+            &AmurCore::applyVideoSelection);
+}
+
+void AmurCore::updateVideoSources()
+{
+    if (!videoSourceCombo || !sensors) {
+        return;
+    }
+
+    video::VideoStatus status;
+    {
+        std::unique_lock<std::mutex> lock;
+        if (grpcMutex) {
+            lock = std::unique_lock<std::mutex>(*grpcMutex);
+        }
+        status = sensors->video_stream().status();
+    }
+
+    if (status.sources_size() == 0) {
+        return;
+    }
+
+    QStringList signature_parts;
+    signature_parts.reserve(status.sources_size());
+    for (int i = 0; i < status.sources_size(); ++i) {
+        const auto &src = status.sources(i);
+        signature_parts << QString("%1:%2").arg(src.type()).arg(QString::fromStdString(src.name()));
+    }
+    const QString signature = signature_parts.join("|");
+
+    const int active_type = status.active_source().type();
+    const QString active_name = QString::fromStdString(status.active_source().name());
+    if (signature == lastVideoSourcesSignature &&
+        active_type == lastVideoActiveType &&
+        active_name == lastVideoActiveName) {
+        return;
+    }
+
+    QString current_name = videoSourceCombo->currentData(Qt::UserRole + 1).toString();
+    int current_type = videoSourceCombo->currentData(Qt::UserRole).toInt();
+
+    updatingVideoSources = true;
+    videoSourceCombo->blockSignals(true);
+    videoSourceCombo->clear();
+    videoSourceCombo->addItem("Video source");
+
+    int active_index = -1;
+    for (int i = 0; i < status.sources_size(); ++i) {
+        const auto &src = status.sources(i);
+        QString label;
+        if (src.type() == video::V4L2_DEVICE) {
+            label = QString("Device: %1").arg(QString::fromStdString(src.name()));
+        } else {
+            label = QString::fromStdString(src.name());
+        }
+        videoSourceCombo->addItem(label);
+        int index = videoSourceCombo->count() - 1;
+        videoSourceCombo->setItemData(index, static_cast<int>(src.type()), Qt::UserRole);
+        videoSourceCombo->setItemData(index, QString::fromStdString(src.name()), Qt::UserRole + 1);
+
+        if (!status.active_source().name().empty() &&
+            status.active_source().name() == src.name() &&
+            status.active_source().type() == src.type()) {
+            active_index = index;
+        }
+    }
+
+    if (active_index >= 0) {
+        videoSourceCombo->setCurrentIndex(active_index);
+    } else {
+        for (int i = 1; i < videoSourceCombo->count(); ++i) {
+            if (videoSourceCombo->itemData(i, Qt::UserRole).toInt() == current_type &&
+                videoSourceCombo->itemData(i, Qt::UserRole + 1).toString() == current_name) {
+                videoSourceCombo->setCurrentIndex(i);
+                break;
+            }
+        }
+    }
+
+    videoSourceCombo->blockSignals(false);
+    updatingVideoSources = false;
+    lastVideoSourcesSignature = signature;
+    lastVideoActiveType = active_type;
+    lastVideoActiveName = active_name;
+}
+
+void AmurCore::applyVideoSelection()
+{
+    if (updatingVideoSources || !controls || !videoSourceCombo) {
+        return;
+    }
+
+    int index = videoSourceCombo->currentIndex();
+    if (index <= 0) {
+        return;
+    }
+
+    int type = videoSourceCombo->itemData(index, Qt::UserRole).toInt();
+    QString name = videoSourceCombo->itemData(index, Qt::UserRole + 1).toString();
+    if (name.isEmpty()) {
+        return;
+    }
+
+    int width = ui->OutLabel->width();
+    int height = ui->OutLabel->height();
+    if (type == lastVideoSourceType &&
+        name == lastVideoSourceName &&
+        width == lastVideoWidth &&
+        height == lastVideoHeight) {
+        return;
+    }
+
+    {
+        std::unique_lock<std::mutex> lock;
+        if (grpcMutex) {
+            lock = std::unique_lock<std::mutex>(*grpcMutex);
+        }
+
+        auto config = controls->mutable_video_config();
+        auto source = config->mutable_requested_source();
+        source->set_type(static_cast<video::VideoSourceType>(type));
+        source->set_name(name.toStdString());
+
+        auto format = config->mutable_format();
+        format->set_width(width);
+        format->set_height(height);
+        format->set_fps(static_cast<float>(1000.0 / loopTime));
+        format->set_encoding("rgb8");
+        format->set_bitrate_kbps(videoBitrateKbps);
+
+        config->set_use_widget_size(true);
+    }
+
+    lastVideoSourceType = type;
+    lastVideoSourceName = name;
+    lastVideoWidth = width;
+    lastVideoHeight = height;
 }
 
 void AmurCore::worker()
