@@ -13,6 +13,10 @@ NetworkController::NetworkController(std::shared_ptr<Controls> controlsPtr,
 
 NetworkController::~NetworkController()
 {
+    if (serverPtr) {
+        serverPtr->setSensorsUpdatedCallback({});
+    }
+
     // Clear list of robots
     robots.clear();
 }

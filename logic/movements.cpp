@@ -34,6 +34,8 @@ int ManualControl::update()
     if(lastJoyState.joyId < 0)
         lastJoyState = *joyState;
 
+    std::lock_guard<std::mutex> lock(grpcMutex_);
+
     checkChangeRelayButton( moveSettings.joyBindings.relayButton );
     checkChangeLightButton( moveSettings.joyBindings.lightButton );
 

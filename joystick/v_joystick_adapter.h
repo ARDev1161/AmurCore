@@ -22,6 +22,7 @@
 #include <QThread>
 #include <QString>
 #include <QStringList>
+#include <atomic>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_haptic.h>
@@ -53,32 +54,32 @@ public:
     void close();
     bool isConnected() const
     {
-        return SDL_JoystickGetAttached(m_joystick);
+        return m_joystick && SDL_JoystickGetAttached(m_joystick);
     }
 
     inline int getJoystickId() const
     {
-        return SDL_JoystickGetPlayerIndex(m_joystick);
+        return m_joystick ? SDL_JoystickInstanceID(m_joystick) : -1;
     }
     inline QString getJoystickName() const
     {
-        return QString(SDL_JoystickName(m_joystick));
+        return m_joystick ? QString(SDL_JoystickName(m_joystick)) : QString();
     }
     inline int getJoystickNumAxes() const
     {
-        return SDL_JoystickNumAxes(m_joystick);
+        return m_joystick ? SDL_JoystickNumAxes(m_joystick) : 0;
     }
     inline int getJoystickNumHats() const
     {
-        return SDL_JoystickNumHats(m_joystick);
+        return m_joystick ? SDL_JoystickNumHats(m_joystick) : 0;
     }
     inline int getJoystickNumBalls() const
     {
-        return SDL_JoystickNumBalls(m_joystick);
+        return m_joystick ? SDL_JoystickNumBalls(m_joystick) : 0;
     }
     inline int getJoystickNumButtons() const
     {
-        return SDL_JoystickNumButtons(m_joystick);
+        return m_joystick ? SDL_JoystickNumButtons(m_joystick) : 0;
     }
 
     int test_haptic();
@@ -104,11 +105,14 @@ class VJoystickAdapter::VJoystickThread : public QThread
 
 public:
     inline VJoystickThread(VJoystickAdapter* adapter) : m_adapter(adapter) { }
+    inline void requestStop() { m_stopRequested.store(true); }
+    inline void clearStop() { m_stopRequested.store(false); }
 
 protected:
     virtual void run();
 
 private:
+    std::atomic_bool m_stopRequested{false};
     VJoystickAdapter *m_adapter;
 };
 

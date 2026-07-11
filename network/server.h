@@ -21,7 +21,10 @@ class grpcServer final : public ClientOnRobot::Service
 
   std::mutex muServer;
   std::mutex muMap;
+  std::mutex muSensorsUpdatedCb;
   std::function<void()> sensors_updated_cb_;
+
+  void notifySensorsUpdated();
 
   grpc::Status DataExchange([[maybe_unused]] grpc::ServerContext* context,
                             const Sensors* request, Controls* reply) override;
@@ -40,7 +43,11 @@ public:
     void setProtosPointers(std::shared_ptr<Controls> controlsPtr,
                            std::shared_ptr<Sensors> sensorsPtr,
                            std::shared_ptr<map_service::GetMapResponse> mapPtr);
-    void setSensorsUpdatedCallback(std::function<void()> cb) { sensors_updated_cb_ = std::move(cb); }
+    void setSensorsUpdatedCallback(std::function<void()> cb)
+    {
+        std::lock_guard<std::mutex> lock(muSensorsUpdatedCb);
+        sensors_updated_cb_ = std::move(cb);
+    }
     int checkConn();
 
     std::mutex& getMutex() { return muServer; }

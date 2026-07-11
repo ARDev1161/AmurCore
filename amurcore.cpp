@@ -177,11 +177,19 @@ void AmurCore::resizeEvent(QResizeEvent *event)
 
 void AmurCore::robotHalt()
 {
+    std::unique_lock<std::mutex> lock;
+    if (grpcMutex) {
+        lock = std::unique_lock<std::mutex>(*grpcMutex);
+    }
     controls->mutable_system()->set_haltflag(true);
 }
 
 void AmurCore::robotReboot()
 {
+    std::unique_lock<std::mutex> lock;
+    if (grpcMutex) {
+        lock = std::unique_lock<std::mutex>(*grpcMutex);
+    }
     controls->mutable_system()->set_restartflag(true);
 }
 
@@ -192,6 +200,13 @@ void AmurCore::onSensorsUpdated()
 
 void AmurCore::fetchJoystickId()
 {
+    if(joyThread)
+    {
+        joyThread->stopThreads();
+        joyThread->deleteLater();
+        joyThread = nullptr;
+    }
+
     joyThread = new Joystick(joyState);
     joyThread->addThread();
 }

@@ -27,7 +27,7 @@ private:
     std::shared_ptr<JoyState> joyState;
     VJoystickAdapter* joyAdapter;
 
-    int joyId;
+    int joyId = -1;
 
     void setDefaultText();
     void initFields();

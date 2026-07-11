@@ -86,7 +86,7 @@ class AmurCore : public QMainWindow
     std::shared_ptr<map_service::GetMapResponse> map;
     std::mutex *grpcMutex = nullptr;
 
-    Joystick *joyThread;
+    Joystick *joyThread = nullptr;
     std::shared_ptr<JoyState> joyState;
     Logic *amurLogic;
 

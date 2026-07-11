@@ -38,15 +38,25 @@ VJoystickAdapter::~VJoystickAdapter()
 
 bool VJoystickAdapter::open(int id)
 {
-    Q_ASSERT(!m_joystick);
-
-    if(SDL_JoystickGetAttached(m_joystick))
-        return false;
-    m_joystick = SDL_JoystickOpen(id);
-    if(SDL_JoystickGetAttached(m_joystick))
+    if(m_joystick)
     {
-        test_haptic();
-        m_joystickThread->start();
+        if(SDL_JoystickGetAttached(m_joystick))
+            return false;
+        SDL_JoystickClose(m_joystick);
+        m_joystick = 0;
+    }
+
+    if(id < 0 || id >= SDL_NumJoysticks())
+        return false;
+
+    m_joystick = SDL_JoystickOpen(id);
+    if(m_joystick && SDL_JoystickGetAttached(m_joystick))
+    {
+        if(!m_joystickThread->isRunning())
+        {
+            m_joystickThread->clearStop();
+            m_joystickThread->start();
+        }
     }
     else
         m_joystick = 0;
@@ -58,10 +68,7 @@ void VJoystickAdapter::close()
 {
     if(m_joystick)
     {
-        SDL_Event closeEvent;
-
-        closeEvent.type = SDL_QUIT;
-        SDL_PushEvent(&closeEvent);
+        m_joystickThread->requestStop();
 
         m_joystickThread->wait();
         SDL_JoystickClose(m_joystick);
@@ -76,31 +83,44 @@ void VJoystickAdapter::VJoystickThread::run()
 
     while(running)
     {
-        SDL_WaitEvent(&joyEvent);
+        if(m_stopRequested.load())
+            break;
+
+        if(!SDL_WaitEventTimeout(&joyEvent, 50))
+            continue;
 
         if(joyEvent.type == SDL_QUIT)
-            running = false;
-        else if(joyEvent.jbutton.which == m_adapter->getJoystickId())
         {
-            switch(joyEvent.type)
-            {
-            case SDL_JOYAXISMOTION:
-                emit m_adapter->sigAxisChanged(joyEvent.jaxis.axis,joyEvent.jaxis.value);
-                break;
+            running = false;
+            continue;
+        }
 
-            case SDL_JOYHATMOTION:
+        const int adapterJoystickId = m_adapter->getJoystickId();
+        switch(joyEvent.type)
+        {
+        case SDL_JOYAXISMOTION:
+            if(joyEvent.jaxis.which == adapterJoystickId)
+                emit m_adapter->sigAxisChanged(joyEvent.jaxis.axis, joyEvent.jaxis.value);
+            break;
+
+        case SDL_JOYHATMOTION:
+            if(joyEvent.jhat.which == adapterJoystickId)
                 emit m_adapter->sigHatChanged(joyEvent.jhat.hat, joyEvent.jhat.value);
-                break;
+            break;
 
-            case SDL_JOYBALLMOTION:
+        case SDL_JOYBALLMOTION:
+            if(joyEvent.jball.which == adapterJoystickId)
                 emit m_adapter->sigBallChanged(joyEvent.jball.ball, joyEvent.jball.xrel, joyEvent.jball.yrel);
-                break;
+            break;
 
-            case SDL_JOYBUTTONDOWN:
-            case SDL_JOYBUTTONUP:
+        case SDL_JOYBUTTONDOWN:
+        case SDL_JOYBUTTONUP:
+            if(joyEvent.jbutton.which == adapterJoystickId)
                 emit m_adapter->sigButtonChanged(joyEvent.jbutton.button, joyEvent.jbutton.state);
-                break;
-            }
+            break;
+
+        default:
+            break;
         }
     }
 }
@@ -118,7 +138,7 @@ QStringList VJoystickAdapter::getAvailableJoystickName()
     int joyNum = getNumAvailableJoystick();
 
     for(int i = 0; i < joyNum; ++i)
-        joyNames.push_front(QString(SDL_JoystickNameForIndex(i)));
+        joyNames.push_back(QString(SDL_JoystickNameForIndex(i)));
 
     return joyNames;
 }
