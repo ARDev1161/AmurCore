@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QPlainTextEdit>
-#include "rc_api_v2.pb.h"
+#include "network/protobuf/rc_api_v2.pb.h"
 
 namespace Ui {
 class RobotInfoDialog;
