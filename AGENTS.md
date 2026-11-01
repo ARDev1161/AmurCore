@@ -65,3 +65,12 @@ Retain all original repository guidelines below. UI is Qt5/C++17. Preserve `MapW
 - Protobuf/gRPC versions are pinned in `cmake/grpc.cmake`; update deliberately.
 - Keep network endpoints configurable via config files (see `AmurCore.cfg.in` / libconfig usage in `config/`).
 - When handling mutexes around proto objects (`network/client.cpp`), use RAII locks to avoid races.
+
+
+## Mandatory CI before handoff or phase advancement
+GitHub Actions workflows live in `.github/workflows/rc-api-v2.yml` in each affected repository.
+- AmurCore: `protobuf-compatibility` (mirrored definitions + Python/C++ wire tests) and `qt-app-build` (full Qt5/CMake compilation).
+- rc_agent: `protobuf-compatibility`, `config-unit-tests` (new + legacy GTests), `ros2-humble-build` (complete ROS2 build and colcon tests).
+- ros2_rknn_llm: `planner-status-regression` is *source-contract only*; without RKLLM SDK it is **NOT** a runtime ROS/LLM test.
+- robot_orchestrator: `pinned-llm-contract` checks the gitlink points to the tested feature revision and executes pinned LLM tests.
+Open each workflow run, inspect failing job logs and fix source or CI configuration. **Do not mark phase DONE or report all-green unless all required jobs complete successfully for the same current commit.** Keep Nav2/video/manual smoke tests in PLAN as manual gates; proto-only green is insufficient.
