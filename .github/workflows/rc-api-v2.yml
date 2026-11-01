@@ -92,5 +92,5 @@ jobs:
       - name: Compile AmurCore and Qt UI
         run: cmake --build build-ci --parallel 2
       - name: Run real loopback gRPC transport regression
-        run: ctest --test-dir build-ci --output-on-failure -R rc_api_v2_transport
+        run: ctest --test-dir build-ci --output-on-failure -R rc_api_v2_
 
