@@ -148,6 +148,17 @@ void AmurCore::mapDialogOpen()
 
 void AmurCore::robotInfoDialogOpen()
 {
+    rc::api::v2::RobotInfo info;
+    if (sensors) {
+        std::unique_lock<std::mutex> lock;
+        if (grpcMutex) {
+            lock = std::unique_lock<std::mutex>(*grpcMutex);
+        }
+        if (sensors->has_robot_info()) {
+            info.CopyFrom(sensors->robot_info());
+        }
+    }
+    robotInfoDialog->setRobotInfo(info);
     robotInfoDialog->show(); // Немодальное открытие
 }
 
