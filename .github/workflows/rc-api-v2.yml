@@ -55,3 +55,18 @@ jobs:
           set -euo pipefail
           g++ -std=c++17 -O0 -I generated generated/*.pb.cc tests/proto_cpp_smoke.cpp -lprotobuf -pthread -o generated/protocol_smoke
           ./generated/protocol_smoke
+  qt-app-build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Qt5, OpenCV, SDL2, libconfig++, protobuf and gRPC
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build cmake pkg-config qtbase5-dev qttools5-dev qttools5-dev-tools \
+            libopencv-dev libsdl2-dev libconfig++-dev libgrpc++-dev protobuf-compiler \
+            protobuf-compiler-grpc libprotobuf-dev
+      - name: Configure with system gRPC
+        run: cmake -S . -B build-ci -G Ninja -DCMAKE_BUILD_TYPE=Debug -DGRPC_FETCHCONTENT=OFF -DBUILD_APPIMAGE=OFF
+      - name: Compile AmurCore and Qt UI
+        run: cmake --build build-ci --parallel 2
