@@ -495,7 +495,7 @@ QString NavDialog::taskStatusAsString()
         const google::protobuf::EnumValueDescriptor* enumValue = descriptor->FindValueByNumber(statusValue);
         if (enumValue)
         {
-            absl::string_view nameView = enumValue->name();
+            const auto &nameView = enumValue->name();
             return QString::fromLatin1(nameView.data(), static_cast<int>(nameView.size()));
         }
     }
