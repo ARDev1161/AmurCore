@@ -41,6 +41,7 @@ foreach(proto_file ${PROTO_FILES})
         OUTPUT "${proto_src}" "${proto_hdr}" "${grpc_src}" "${grpc_hdr}"
         COMMAND ${CMAKE_COMMAND} -E echo "=== Generating code from ${proto_file} ==="
         COMMAND ${_PROTOBUF_PROTOC}
+                --experimental_allow_proto3_optional
                 --grpc_out "${GENERATED_PROTO_DIR}"
                 --cpp_out "${GENERATED_PROTO_DIR}"
                 -I "${PROTO_DIR}"
