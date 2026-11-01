@@ -45,18 +45,24 @@ grpc::Status grpcServer::DataExchange ([[maybe_unused]] grpc::ServerContext* con
 grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContext* context,
                                 grpc::ServerReaderWriter<Controls, Sensors >* stream)
 {
-    std::unique_lock<std::mutex> ul(muServer, std::defer_lock);
-
-    while(true)
+    // Network I/O must never hold the mutex also used by the operator UI.
+    // Read into a local message; publish a consistent sensor/control snapshot
+    // under the lock, then write the response without blocking UI access.
+    Sensors incoming;
+    while (stream->Read(&incoming))
     {
-      ul.lock();
-      if(!(stream->Read(sensors.get())))
-          return grpc::Status::OK;
-      // Write controls
-      stream->Write(*controls);
-      ul.unlock();
-      notifySensorsUpdated();
+        Controls outgoing;
+        {
+            std::lock_guard<std::mutex> lock(muServer);
+            *sensors = incoming;
+            outgoing = *controls;
+        }
+        notifySensorsUpdated();
+        if (!stream->Write(outgoing)) {
+            break;
+        }
     }
+    return grpc::Status::OK;
 }
 
 grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
