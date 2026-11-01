@@ -166,6 +166,23 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
                         Qt${QT_VERSION_MAJOR}::Widgets
 )
 
+# Opt-in headless gRPC acceptance checks; no Qt event loop or robot required.
+option(RC_API_V2_TESTING "Build loopback protocol integration tests" OFF)
+if(RC_API_V2_TESTING)
+    enable_testing()
+    add_executable(rc_api_v2_transport_test
+        tests/grpc_server_smoke.cpp
+        network/server.cpp
+    )
+    target_include_directories(rc_api_v2_transport_test PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
+    )
+    target_link_libraries(rc_api_v2_transport_test PRIVATE AMURProtos)
+    add_test(NAME rc_api_v2_transport COMMAND rc_api_v2_transport_test)
+    set_tests_properties(rc_api_v2_transport PROPERTIES TIMEOUT 12)
+endif()
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER AmurClient.online
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION_SEMVER}
