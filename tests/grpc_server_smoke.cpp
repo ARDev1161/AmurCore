@@ -93,8 +93,11 @@ int main() {
             require(reply.basecontrol().angularvelocity() == -3.0,
                     "Streaming controls payload changed");
 
-            // The server is now waiting for the next message. GUI/control mutex
-            // must remain available while the peer sends nothing.
+            // Give the server time to enter its next blocking Read. Otherwise
+            // an old implementation could briefly release the lock and make a
+            // race-dependent false positive in this regression test.
+            std::this_thread::sleep_for(std::chrono::milliseconds(40));
+            // GUI/control mutex must remain available while the peer is idle.
             bool unlocked_during_idle = false;
             for (int i = 0; i != 40; ++i) {
                 if (service.getMutex().try_lock()) {
