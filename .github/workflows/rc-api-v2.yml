@@ -54,6 +54,22 @@ jobs:
         env:
           PYTHONPATH: generated
         run: /usr/bin/python3 -m unittest discover -s tests -p test_proto_contract.py -v
+      - name: Checkout legacy dev wire contract
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          path: legacy-source
+          persist-credentials: false
+      - name: Generate legacy Python protocol and verify real old/new wire interoperability
+        env:
+          PYTHONPATH: generated
+          LEGACY_PROTO_PY: legacy-generated
+        run: |
+          set -euo pipefail
+          mkdir -p legacy-generated
+          protoc --experimental_allow_proto3_optional -I legacy-source/network/protobuf \
+            --python_out=legacy-generated legacy-source/network/protobuf/*.proto
+          /usr/bin/python3 -m unittest discover -s tests -p test_legacy_wire_interop.py -v
       - name: Compile and run C++ legacy/v2 roundtrip
         shell: bash
         run: |
