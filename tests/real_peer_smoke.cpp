@@ -274,6 +274,26 @@ int main() {
                     "ZoneStream unexpectedly modified map or pose");
         }
 
+        // A stopped rc_agent client must also reject the legacy unary path,
+        // without sending stale telemetry or changing the last controls.
+        auto stopped_channel = grpc::CreateChannel(
+            address, grpc::InsecureChannelCredentials());
+        grpcClient stopped_client(stopped_channel, agent_controls, agent_sensors,
+                                  agent_map, true);
+        stopped_client.stopStream();
+        const auto stopped_start = std::chrono::steady_clock::now();
+        require(stopped_client.DataExchange().error_code() ==
+                    grpc::StatusCode::CANCELLED,
+                "Stopped real peer restarted unary DataExchange");
+        require(std::chrono::steady_clock::now() - stopped_start <
+                    std::chrono::seconds(1),
+                "Stopped unary peer did not return promptly");
+        {
+            std::lock_guard<std::mutex> guard(*stopped_client.getMutex());
+            require(agent_controls->basecontrol().linearvelocity() == 4.5,
+                    "Stopped unary peer modified previously valid controls");
+        }
+
         // P1 reconnect failure: a cleanly shut down operator must not make
         // one-shot rc_agent DataExchange block forever or inject empty controls.
         server->Shutdown();
