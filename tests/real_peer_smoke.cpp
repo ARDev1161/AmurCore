@@ -105,6 +105,21 @@ int main() {
         }
         require(notifications.load() == 4 && lock_free.load(),
                 "Missing callback or callback holds GUI mutex");
+
+        // P1 reconnect failure: a cleanly shut down operator must not make
+        // one-shot rc_agent DataExchange block forever or inject empty controls.
+        server->Shutdown();
+        const auto disconnect_start = std::chrono::steady_clock::now();
+        const grpc::Status failed_rpc = fresh.DataExchange();
+        require(!failed_rpc.ok(), "Disconnected operator falsely accepted telemetry");
+        require(std::chrono::steady_clock::now() - disconnect_start <
+                    std::chrono::seconds(4),
+                "One-shot real peer did not return after operator disconnect");
+        {
+            std::lock_guard<std::mutex> guard(*fresh.getMutex());
+            require(fresh_controls->basecontrol().linearvelocity() == 4.5,
+                    "Disconnected peer overwrote the previous controls");
+        }
     } catch (const std::exception &e) {
         server->Shutdown();
         std::cerr << "Real peer test failed: " << e.what() << '\n';

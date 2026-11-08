@@ -186,3 +186,8 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 - Paired real peer source/CI revision `41db27715aa2e453742fb712b548b7bcdfe51dd2`. New integration job verifies legacy controls, v2 robot capabilities/axes over the unchanged RPC, legacy-after-v2 clearing, fresh-channel reconnect and nonblocking sensor callbacks. Initial CI attempts exposed build-time header-name collisions and were corrected explicitly; no production code or proto changed.
 - Updated documentation in the separate documentation branch: [Pages run #42432865763](https://github.com/ARDev1161/AmurCore/actions/runs/42432865763) SUCCESS. Documentation will refresh its displayed source revision to this tested source SHA.
 - **Acceptance**: P1 remains IN PROGRESS. These are headless in-process loopback tests, not hardware/VPN/real joystick/Nav2/map/GStreamer acceptance. Execute P1-01 through P1-08 and capture actual results before starting P2. No merges to dev/master.
+
+
+## P1 real-peer disconnect contract — 2026-11-08
+- Added to AmurCore/tests/real_peer_smoke.cpp: after legacy/v2/reconnect success, shutdown the **real** AmurCore gRPC server and verify the **real** rc_agent one-shot unary call returns a non-OK status within 4 seconds, preserving the last valid controls. Paired rc_agent source hardens retry policy and 3s unary deadlines (see rc_agent feat/rc-api-v2), without altering any protobuf field.
+- These tests remain pure headless localhost P1 software checks. CI pending; P1 remains IN PROGRESS until hardware/VPN/joystick/Nav2/map/GStreamer acceptance, no P2 work or default branch merges.
