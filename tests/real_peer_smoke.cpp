@@ -80,7 +80,15 @@ int main() {
         auto agent_controls = std::make_shared<Robot::Controls>();
         grpcClient agent(channel, agent_controls, agent_sensors, agent_map, false);
         agent_sensors->mutable_batterystate()->set_percentage(0.25);
+        agent_sensors->mutable_video_stream()->set_pipeline(
+            "videotestsrc ! fakesink");
         require(agent.DataExchange().ok(), "Legacy DataExchange failed");
+        {
+            std::lock_guard<std::mutex> guard(svc.getMutex());
+            require(observed->video_stream().pipeline() ==
+                        "videotestsrc ! fakesink",
+                    "Legacy video pipeline was not transmitted to operator");
+        }
         check(svc, *observed, "", 0.25);
         {
             std::lock_guard<std::mutex> guard(*agent.getMutex());
@@ -89,7 +97,17 @@ int main() {
         }
         advertise(*agent_sensors);
         agent_sensors->mutable_batterystate()->set_percentage(0.5);
+        agent_sensors->mutable_video_stream()->set_pipeline(
+            "videotestsrc pattern=ball ! fakesink");
         require(agent.DataExchange().ok(), "V2 DataExchange failed");
+        {
+            std::lock_guard<std::mutex> guard(svc.getMutex());
+            require(observed->video_stream().pipeline() ==
+                        "videotestsrc pattern=ball ! fakesink",
+                    "Updated video pipeline was not transmitted with v2 RobotInfo");
+            require(observed->robot_info().robot_id() == "robot-001",
+                    "Video update erased advertised robot identity");
+        }
         check(svc, *observed, "robot-001", 0.5);
         agent_sensors->clear_robot_info();
         agent_sensors->mutable_batterystate()->set_percentage(0.75);
@@ -104,6 +122,11 @@ int main() {
         require(fresh.DataExchange().ok(), "Reconnect first snapshot failed");
         check(svc, *observed, "robot-001", 1.0);
         {
+            std::lock_guard<std::mutex> guard(svc.getMutex());
+            require(observed->video_stream().pipeline().empty(),
+                    "New client snapshot retained previous robot's video pipeline");
+        }
+        {
             std::lock_guard<std::mutex> guard(*fresh.getMutex());
             require(fresh_controls->basecontrol().linearvelocity() == 4.5,
                     "Legacy controls lost on reconnect");
@@ -113,6 +136,11 @@ int main() {
 
         // The real rc_agent stream must terminate when stopStream() is
         // requested, rather than leave a blocking network Read alive.
+        {
+            std::lock_guard<std::mutex> guard(*agent.getMutex());
+            agent_sensors->mutable_video_stream()->set_pipeline(
+                "videotestsrc pattern=snow ! fakesink");
+        }
         auto live_stream = std::async(std::launch::async, [&agent]() {
             return agent.DataStreamExchange();
         });
@@ -121,6 +149,12 @@ int main() {
         }
         require(notifications.load() >= 5,
                 "Real peer did not transmit the streaming snapshot");
+        {
+            std::lock_guard<std::mutex> guard(svc.getMutex());
+            require(observed->video_stream().pipeline() ==
+                        "videotestsrc pattern=snow ! fakesink",
+                    "Legacy stream did not deliver updated video pipeline");
+        }
         agent.stopStream();
         require(live_stream.wait_for(std::chrono::seconds(3)) ==
                     std::future_status::ready,
