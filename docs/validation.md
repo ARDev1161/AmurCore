@@ -58,3 +58,10 @@ The [real-peer integration scenario](https://github.com/ARDev1161/AmurCore/blob/
 The headless [real-peer test](https://github.com/ARDev1161/AmurCore/blob/feat/rc-api-v2/tests/real_peer_smoke.cpp) now allocates **independent** agent-side and operator-side map objects. It verifies that an initial `GetMapResponse` with `map_seq=71` and robot pose arrives through actual gRPC transport, then that a changed snapshot with `map_seq=72` is received, and finally that `stopStream()` cancels the real map RPC. This prevents accidental success through a shared in-memory pointer.
 
 [Source 0526a1e1c48a](https://github.com/ARDev1161/AmurCore/commit/0526a1e1c48a53d8a41b76e1810fabf223ad66a1) · [CI 42444276933](https://github.com/ARDev1161/AmurCore/actions/runs/42444276933). CI outcome must be checked for the exact source SHA before marking PASS. No real robot, Qt map rendering, physical motion, VPN, Nav2 or GStreamer is exercised here; P1-01..08 are still required.
+
+
+## P1 legacy PoseStream and ZoneStream real-peer regression — 2026-11-08
+
+The headless [real-peer integration test](https://github.com/ARDev1161/AmurCore/blob/feat/rc-api-v2/tests/real_peer_smoke.cpp) now independently verifies the legacy pose and zone streams after stopping the map stream. With separate agent/operator map objects, it checks pose x=3.75 followed by x=4.25 and `CANCELLED` stream shutdown; it then checks zone ID 1001 with name `alpha` followed by `beta` on zone sequence 802, and another `CANCELLED` shutdown. It also asserts that pose transport did not replace map sequence 72 and zone transport did not replace pose or map data.
+
+[Working source 7c8e1990aeac](https://github.com/ARDev1161/AmurCore/commit/7c8e1990aeacae6a23b4f7d8328e1d5608bc884a) / [CI 42445927699](https://github.com/ARDev1161/AmurCore/actions/runs/42445927699) (verify final result before claiming PASS). This is headless software transport evidence, not physical GUI/Nav2/VPN/GStreamer acceptance. P1 remains IN PROGRESS.
