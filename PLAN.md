@@ -191,3 +191,10 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 ## P1 real-peer disconnect contract — 2026-11-08
 - Added to AmurCore/tests/real_peer_smoke.cpp: after legacy/v2/reconnect success, shutdown the **real** AmurCore gRPC server and verify the **real** rc_agent one-shot unary call returns a non-OK status within 4 seconds, preserving the last valid controls. Paired rc_agent source hardens retry policy and 3s unary deadlines (see rc_agent feat/rc-api-v2), without altering any protobuf field.
 - These tests remain pure headless localhost P1 software checks. CI pending; P1 remains IN PROGRESS until hardware/VPN/joystick/Nav2/map/GStreamer acceptance, no P2 work or default branch merges.
+
+
+## Verified P1 transport disconnect and retry regression — 2026-11-08
+- Tested source SHA `956f2b970885c65664067f8a5a84eea2dc080a91` — [GitHub Actions #42435043821](https://github.com/ARDev1161/AmurCore/actions/runs/42435043821) **SUCCESS** at exactly this revision. All 3 jobs: complete Qt5 build/CTest, Protobuf+dev↔v2 wire, real AmurCore/rc_agent gRPC integration with explicit server disconnect.
+- Tested peer `29cda7bf4a390bb5f672feacdbcd4f70d880588a`; both projects compile real peer implementations over unchanged legacy gRPC and mirrored Protobuf.
+- Docs source changes only in separate `documentation` branch, SHA `0d7a16986fce38396232062ad8021f6a330f0ac5`, [Pages CI #42435175700](https://github.com/ARDev1161/AmurCore/actions/runs/42435175700) **pending at handoff**; check deployment and fix if red. The documentation tree must remain isolated and must not be merged to source branches.
+- P1 still **IN PROGRESS**. Headless CI does not validate actual operator GUI workflow, physical joystick, hardware/VPN, Nav2/TF/map/video, safety watchdog or end-to-end lifecycle. Manual P1-01..08 remain **NOT RUN**; no P2 or default branch changes. Stream `stopStream()` still cannot cancel a blocking gRPC Read; atomic flag prevents retry only after the read unblocks. Do not claim fully resilient teleop until the P5 safety gates are implemented.
