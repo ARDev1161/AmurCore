@@ -132,6 +132,42 @@ int main() {
                     "Legacy sensor snapshot was not applied");
         }
 
+        // Battery expiry is encoded as field absence, not 0%. A new
+        // complete Sensors snapshot must clear the previous battery and
+        // subsequently accept a recovered sample without leaking state.
+        {
+            Robot::Sensors without_battery;
+            without_battery.mutable_robot_info()->set_robot_id("unit-robot");
+            Robot::Controls reply;
+            grpc::ClientContext context;
+            require(stub->DataExchange(&context, without_battery, &reply).ok(),
+                    "Battery-absent unary snapshot failed");
+            std::lock_guard<std::mutex> lock(service.getMutex());
+            require(!sensors->has_batterystate(),
+                    "Battery field survived a complete snapshot without battery");
+            require(sensors->has_robot_info(),
+                    "Battery expiry incorrectly removed robot identity");
+        }
+        {
+            Robot::Sensors recovered;
+            recovered.mutable_robot_info()->set_robot_id("unit-robot");
+            auto *pack = recovered.mutable_batterystate();
+            pack->set_present(true);
+            pack->set_percentage(0.76f);
+            pack->set_power_supply_status(Power::BatteryState::CHARGING);
+            Robot::Controls reply;
+            grpc::ClientContext context;
+            require(stub->DataExchange(&context, recovered, &reply).ok(),
+                    "Recovered battery unary snapshot failed");
+            std::lock_guard<std::mutex> lock(service.getMutex());
+            require(sensors->has_batterystate() && sensors->batterystate().present(),
+                    "Recovered battery missing after unary snapshot");
+            require(sensors->batterystate().percentage() == 0.76f,
+                    "Recovered battery percentage was not preserved");
+            require(sensors->batterystate().power_supply_status() == Power::BatteryState::CHARGING,
+                    "Recovered battery charging state was not preserved");
+        }
+
         {
             grpc::ClientContext context;
             context.set_deadline(std::chrono::system_clock::now() + std::chrono::seconds(5));
