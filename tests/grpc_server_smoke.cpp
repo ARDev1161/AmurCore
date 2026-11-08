@@ -168,6 +168,27 @@ int main() {
                     "Recovered battery charging state was not preserved");
         }
 
+        // Explicit pack removal from ROS must be distinct from 0% charge.
+        // Legacy clients may send a present=false BatteryState field instead
+        // of omitting it; the workstation must preserve that distinction.
+        {
+            Robot::Sensors removed;
+            removed.mutable_robot_info()->set_robot_id("unit-robot");
+            removed.mutable_batterystate()->set_present(false);
+            removed.mutable_batterystate()->set_percentage(0.76f);
+            Robot::Controls reply;
+            grpc::ClientContext context;
+            require(stub->DataExchange(&context, removed, &reply).ok(),
+                    "Explicitly absent battery unary snapshot failed");
+            std::lock_guard<std::mutex> lock(service.getMutex());
+            require(sensors->has_batterystate(),
+                    "Legacy explicitly absent battery field was dropped on the wire");
+            require(!sensors->batterystate().present(),
+                    "Explicitly absent battery was incorrectly marked present");
+            require(sensors->robot_info().robot_id() == "unit-robot",
+                    "Explicit battery removal damaged robot identity");
+        }
+
         {
             grpc::ClientContext context;
             context.set_deadline(std::chrono::system_clock::now() + std::chrono::seconds(5));
