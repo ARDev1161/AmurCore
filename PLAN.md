@@ -214,3 +214,10 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 ## P1 paired real-peer stream shutdown — 2026-11-08
 - Extended `tests/real_peer_smoke.cpp` to run the real rc_agent `DataStreamExchange()` against the real AmurCore gRPC service, observe its initial streaming snapshot, call `stopStream()`, assert the stream exits within 3s with CANCELLED status, and recheck nonblocking workstation callback. This exercises the rc_agent active ClientContext cancellation change without modifying AmurCore production code.
 - rc_agent implementation lives only in its `feat/rc-api-v2` branch, and both jobs compile it via separate checkout. Protobuf and Qt/ROS2 behavior unchanged. Current CI PENDING; hardware/VPN/joystick/Nav2/GStreamer P1-01..08 remain NOT RUN, P1 IN PROGRESS; no P2.
+
+
+### Verified P1 active-stream cancellation on current code — 2026-11-08
+- Tested source/test SHA `fd68254c572c20961d80be6ae089e5457feb38b2`: [GitHub Actions run 42441869752](https://github.com/ARDev1161/AmurCore/actions/runs/42441869752) **SUCCESS** for all 3 jobs (including real `AmurCore` ↔ `rc_agent` gRPC and full Qt5/CTest and mirrored protobuf tests). The cross-repo peer checked out was at `598c6da8efd42bd0de120c7947f2c2a776677019`.
+- Docs-only `documentation` SHA `1addd3f4192e7b369aa628caf9a651181f46f5af`: [Sphinx/Doxygen/Pages run 42441934353](https://github.com/ARDev1161/AmurCore/actions/runs/42441934353) **SUCCESS**; no documentation sources were copied to working C++ branches.
+- `stopStream()` now cancels blocking gRPC stream I/O; this is lifecycle cancellation, NOT proof of robot physical stop or v2 velocity lease/deadman/watchdog. A stopped client is terminal and must be replaced to reconnect. Current branch HEAD may differ by this PLAN-only handoff update; do not misrepresent the tested SHA.
+- Phase **P1 IN PROGRESS**. Hardware/VPN/operator GUI/joystick/Nav2/map/video/old↔new live tests P1-01..08 remain **NOT RUN**. No P2 development or merge to dev/master permitted until gates; next meaningful task is physical/simulator manual acceptance when available, or a targeted P1 blocker regression.
