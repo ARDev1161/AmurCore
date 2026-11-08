@@ -37,3 +37,10 @@ The [current CI workflow](https://github.com/ARDev1161/AmurCore/actions/runs/424
 ### Real-peer acceptance result (CI, 2026-11-08)
 
 The cross-repository test passed on the exact source revision [`8da7cc1303fb7e6687e7f889792bc260d771a309`](https://github.com/ARDev1161/AmurCore/commit/8da7cc1303fb7e6687e7f889792bc260d771a309): [workflow #42432935800](https://github.com/ARDev1161/AmurCore/actions/runs/42432935800) **SUCCESS**. Both repositories now compile and run the actual workstation gRPC server with the actual gateway gRPC client in CI. This is a headless P1 transport acceptance check, **not** P1-01 through P1-08 real-robot/UI/Nav2/GStreamer acceptance; P1 remains in progress.
+
+
+## Real operator disconnect (P1) — 2026-11-08
+
+The `real-peer-grpc-loopback` job now exercises the real `AmurCore` server shutdown while the real `rc_agent` client is connected. A one-shot unary attempt must return a failed gRPC status within four seconds rather than hang, preserving the last received controls. This is a loopback integration check, **not** the physical/VPN/Nav2/GStreamer/manual acceptance gate.
+
+[Source revision **956f2b970885**](https://github.com/ARDev1161/AmurCore/commit/956f2b970885c65664067f8a5a84eea2dc080a91) — [CI workflow](https://github.com/ARDev1161/AmurCore/actions/runs/42435043821) (check status for this exact SHA).

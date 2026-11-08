@@ -1,3 +1,4 @@
-# Updated P1 tested real-peer source revision
-feat/rc-api-v2 source/test SHA: 8da7cc1303fb7e6687e7f889792bc260d771a309
-CI: https://github.com/ARDev1161/AmurCore/actions/runs/42432935800
+# P1 transport disconnection hardening
+feat/rc-api-v2 source commit 956f2b970885c65664067f8a5a84eea2dc080a91
+peer source commit 29cda7bf4a390bb5f672feacdbcd4f70d880588a
+CI: https://github.com/ARDev1161/AmurCore/actions/runs/42435043821
