@@ -209,3 +209,8 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 ### P1 paired rc_agent failed-stream regression — 2026-11-08
 - rc_agent added a regression asserting failed one-shot streaming RPC does not overwrite valid legacy controls: [test commit ef600cfa](https://github.com/ARDev1161/rc_agent/commit/ef600cfaa17e8ac9a34de13795d148ccc2481385), [paired PLAN handoff 4a2ec9c](https://github.com/ARDev1161/rc_agent/commit/4a2ec9c74adfe0673d20207e6b95639b38a8f276). AmurCore runtime/test source and mirrored proto unchanged.
 - New rc_agent feature-head CI: NOT VERIFIED (connector commit status endpoint returned no statuses or PR-triggered runs); do not infer success. Previous tested AmurCore source SHA `956f2b970885c65664067f8a5a84eea2dc080a91` remains historical CI evidence only. P1 IN PROGRESS; hardware/VPN/joystick/Nav2/map/video and live old↔new P1-01..08 remain NOT RUN. P2 not started.
+
+
+## P1 paired real-peer stream shutdown — 2026-11-08
+- Extended `tests/real_peer_smoke.cpp` to run the real rc_agent `DataStreamExchange()` against the real AmurCore gRPC service, observe its initial streaming snapshot, call `stopStream()`, assert the stream exits within 3s with CANCELLED status, and recheck nonblocking workstation callback. This exercises the rc_agent active ClientContext cancellation change without modifying AmurCore production code.
+- rc_agent implementation lives only in its `feat/rc-api-v2` branch, and both jobs compile it via separate checkout. Protobuf and Qt/ROS2 behavior unchanged. Current CI PENDING; hardware/VPN/joystick/Nav2/GStreamer P1-01..08 remain NOT RUN, P1 IN PROGRESS; no P2.

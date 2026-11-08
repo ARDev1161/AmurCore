@@ -11,6 +11,8 @@
 #include <atomic>
 #include <chrono>
 #include <iostream>
+#include <future>
+#include <thread>
 #include <memory>
 #include <mutex>
 #include <stdexcept>
@@ -105,6 +107,25 @@ int main() {
         }
         require(notifications.load() == 4 && lock_free.load(),
                 "Missing callback or callback holds GUI mutex");
+
+        // The real rc_agent stream must terminate when stopStream() is
+        // requested, rather than leave a blocking network Read alive.
+        auto live_stream = std::async(std::launch::async, [&agent]() {
+            return agent.DataStreamExchange();
+        });
+        for (int i = 0; i < 300 && notifications.load() < 5; ++i) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        }
+        require(notifications.load() >= 5,
+                "Real peer did not transmit the streaming snapshot");
+        agent.stopStream();
+        require(live_stream.wait_for(std::chrono::seconds(3)) ==
+                    std::future_status::ready,
+                "stopStream did not release real peer stream");
+        const auto stopped_status = live_stream.get();
+        require(stopped_status.error_code() == grpc::StatusCode::CANCELLED,
+                "Stopped real peer stream did not report cancellation");
+        require(lock_free.load(), "Stopped peer callback held UI mutex");
 
         // P1 reconnect failure: a cleanly shut down operator must not make
         // one-shot rc_agent DataExchange block forever or inject empty controls.
