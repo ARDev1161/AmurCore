@@ -27,6 +27,10 @@ int main(int argc, char **argv)
     if (apply() != QStringLiteral("Battery: unknown (charging)")) return 5;
     battery.set_percentage(1.5f);
     if (apply() != QStringLiteral("Battery: unknown (charging)")) return 6;
+    battery.set_percentage(std::numeric_limits<float>::infinity());
+    if (apply() != QStringLiteral("Battery: unknown (charging)")) return 13;
+    battery.set_percentage(-std::numeric_limits<float>::infinity());
+    if (apply() != QStringLiteral("Battery: unknown (charging)")) return 14;
     battery.set_present(false);
     if (!apply().isEmpty()) return 7;
     battery.Clear(); // equivalent to absent Sensors.batteryState
