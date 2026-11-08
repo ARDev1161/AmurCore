@@ -32,3 +32,8 @@ This is a simulated transport regression, **not a completed P1 manual gate**. [C
 The independent working branches now run a new **real-peer-grpc-loopback** CI job. Each job checks out the two actual C++ implementations, compares the mirrored protobuf contracts, compiles the production transport peers together, and exercises an ephemeral localhost gRPC connection. The shared scenario, maintained under [AmurCore/tests/real_peer_smoke.cpp](https://github.com/ARDev1161/AmurCore/blob/feat/rc-api-v2/tests/real_peer_smoke.cpp), checks legacy control/sensor roundtrips, v2 descriptor and supported axes, legacy-after-v2 reset, fresh-channel reconnect, and workstation mutex availability during callbacks.
 
 The [current CI workflow](https://github.com/ARDev1161/AmurCore/actions/runs/42432805702) must complete successfully before this gate can be marked PASS. No test sends commands to robot actuators. Hardware/VPN/joystick/Nav2/map/GStreamer acceptance remains separate and **not completed**; P1 is still IN PROGRESS.
+
+
+### Real-peer acceptance result (CI, 2026-11-08)
+
+The cross-repository test passed on the exact source revision [`8da7cc1303fb7e6687e7f889792bc260d771a309`](https://github.com/ARDev1161/AmurCore/commit/8da7cc1303fb7e6687e7f889792bc260d771a309): [workflow #42432935800](https://github.com/ARDev1161/AmurCore/actions/runs/42432935800) **SUCCESS**. Both repositories now compile and run the actual workstation gRPC server with the actual gateway gRPC client in CI. This is a headless P1 transport acceptance check, **not** P1-01 through P1-08 real-robot/UI/Nav2/GStreamer acceptance; P1 remains in progress.
