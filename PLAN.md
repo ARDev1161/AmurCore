@@ -278,3 +278,7 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 
 ### P1 rc_agent stream retry shutdown coordination — 2026-11-08
 - Peer rc_agent fix [1a0f0a50](https://github.com/ARDev1161/rc_agent/commit/1a0f0a50930db89a5e0117bfedb74a717d8df129) returns CANCELLED if stopStream interrupts streaming retry backoff; regression [fc28ea70](https://github.com/ARDev1161/rc_agent/commit/fc28ea7083c9af2efb7d3c50e954470e999c9b6c) checks a real mock gRPC failure followed by shutdown. No AmurCore source or protobuf changes. New rc_agent CI NOT VERIFIED at handoff; do not treat earlier green runs as this revision. P1 IN PROGRESS; P1-01..08 NOT RUN; P2 TODO. Next: verify peer CI, run simulator/manual gates.
+
+
+### P1 optional battery peer handoff (2026-11-08)
+- rc_agent added opt-in ROS2 `sensor_msgs/msg/BatteryState` subscriber configured via `Amur.API.battery_topic` (libconfig), writing under the gRPC Sensors mutex to existing optional `Sensors.batteryState=5`; no proto changes. Source commits [`5ab8cf1`](https://github.com/ARDev1161/rc_agent/commit/5ab8cf13b1276831759b78c29f39ac3f2d2c266c), [`49e7f85`](https://github.com/ARDev1161/rc_agent/commit/49e7f858f0cbdb6db6a634245f58b74ec531320c), test [`c157a22`](https://github.com/ARDev1161/rc_agent/commit/c157a224dd507e1947048935cfe8b4626a6b806a). AmurCore production unchanged; UI battery absent/stale/NaN behavior still requires implementation/review. New rc_agent CI NOT VERIFIED, local build NOT RUN. P1 IN PROGRESS, P1-01..08 NOT RUN, P2 TODO.
