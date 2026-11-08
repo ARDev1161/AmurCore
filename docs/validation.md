@@ -19,3 +19,9 @@ The [eight-case P1 manual checklist](https://github.com/ARDev1161/AmurCore/blob/
 ## Scope of this documentation CI
 
 It checks documentation branch isolation, Doxygen XML/HTML API generation from a separately checked out source revision, successful Sphinx rendering, Mermaid markup, navigable API pages, and presence of a source SHA in the site title. It does **not** replace the source code's Qt5, ROS2, gRPC or hardware test matrix.
+
+## P1 loopback legacy-after-v2 regression — 2026-11-08
+
+[Source revision bc6d90648d5bd0dfbedb984373524fc1c07857e1](https://github.com/ARDev1161/AmurCore/commit/bc6d90648d5bd0dfbedb984373524fc1c07857e1) extends the **real AmurCore gRPC server** loopback test. After an agent advertises a v2 descriptor via the bidirectional stream, the same service receives a legacy unary sensor snapshot. The test checks that the prior robot ID/capabilities are cleared, the new battery value is retained and the old control reply remains valid.
+
+This is a simulated transport regression, **not a completed P1 manual gate**. [CI run](https://github.com/ARDev1161/AmurCore/actions/runs/42431821920) must pass before this new test is considered verified. The actual robot/VPN/joystick/Nav2/map/GStreamer checks remain outstanding.
