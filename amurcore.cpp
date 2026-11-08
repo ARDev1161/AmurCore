@@ -367,6 +367,12 @@ void AmurCore::updateStatusMessage()
     const RobotList robots = network->getRobots();
     if (robots.isEmpty()) {
         currentRobotId.clear();
+        // The last received Sensors snapshot can outlive its gRPC peer.
+        // Never display that robot's battery after disconnect.
+        if (batteryStatusLabel) {
+            batteryStatusLabel->clear();
+            batteryStatusLabel->setVisible(false);
+        }
         if (statusMessage != "No robot connected") {
             statusMessage = "No robot connected";
             statusLabel->setText(statusMessage);
