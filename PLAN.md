@@ -169,3 +169,8 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 - Paired peer tested source/test commit `da2b081dbe25a4bf8c560cfa3db7eb0f0ac18252`; the common `robot.proto` and `rc_api_v2.proto` remained unchanged and mirrored.
 - `documentation` revision `fe6e2ae533949da09d12cc18c66af375adbfac7b`: [Sphinx/Doxygen/Pages run #42431878233](https://github.com/ARDev1161/AmurCore/actions/runs/42431878233) **SUCCESS**, generated API source checkout pinned at tested commit during build. Documentation remains separate from production branches.
 - This is **CI-only evidence**, not P1 hardware acceptance. P1 remains **IN PROGRESS** with P1-01..08 live robot/VPN/joystick/map/TF2/Nav2/GStreamer checks outstanding. No P2 implementation is authorized before manual gate; next safe action is to record real smoke results when robot is available, or add only genuinely useful deterministic P1 regressions. Do not misinterpret an untested `PLAN.md`-only successor commit as a source-code CI pass.
+
+
+## P1 cross-repo real gRPC peer test (2026-11-08)
+- Added tests/real_peer_smoke.cpp: deterministic test compiling REAL AmurCore grpcServer with REAL rc_agent grpcClient (checked out independently by CI). Covers unary legacy, additive v2 RobotInfo capabilities, legacy-after-v2 clearing, new-channel reconnect snapshot and GUI mutex availability in the callback.
+- The test does not perform ROS2 navigation, joystick, video, or physical robot checks; P1 remains IN PROGRESS. The paired CI workflow must be wired and validated before this test is claimed as passed. Shared wire schemas and production code are unchanged.
