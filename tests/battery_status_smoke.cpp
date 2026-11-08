@@ -31,5 +31,16 @@ int main(int argc, char **argv)
     if (!apply().isEmpty()) return 7;
     battery.Clear(); // equivalent to absent Sensors.batteryState
     if (!apply().isEmpty()) return 8;
+    // Reconnect: the next snapshot must restore a real percentage, and the
+    // old charging status must not leak across the missing battery.
+    battery.set_present(true);
+    battery.set_percentage(0.76f);
+    if (apply() != QStringLiteral("Battery: 76%")) return 9;
+    battery.set_percentage(0.0f);
+    if (apply() != QStringLiteral("Battery: 0%")) return 10;
+    battery.set_percentage(1.0f);
+    if (apply() != QStringLiteral("Battery: 100%")) return 11;
+    battery.Clear();
+    if (!apply().isEmpty()) return 12;
     return 0;
 }
