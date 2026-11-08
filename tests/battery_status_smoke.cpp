@@ -44,6 +44,11 @@ int main(int argc, char **argv)
     if (apply() != QStringLiteral("Battery: 0%")) return 10;
     battery.set_percentage(1.0f);
     if (apply() != QStringLiteral("Battery: 100%")) return 11;
+    // A full pack is still 100%, but must not retain a previous charging label.
+    battery.set_power_supply_status(Power::BatteryState::FULL);
+    if (apply() != QStringLiteral("Battery: 100%")) return 15;
+    battery.set_power_supply_status(Power::BatteryState::UNKNOWN);
+    if (apply() != QStringLiteral("Battery: 100%")) return 16;
     battery.Clear();
     if (!apply().isEmpty()) return 12;
     return 0;
