@@ -48,9 +48,12 @@ void check(grpcServer &svc, const Robot::Sensors &observed,
 int main() {
     auto controls = std::make_shared<Robot::Controls>();
     auto observed = std::make_shared<Robot::Sensors>();
-    auto map = std::make_shared<map_service::GetMapResponse>();
+    // Distinct protobuf storage is essential: map transport tests must not
+    // accidentally pass merely because both peers share an in-process pointer.
+    auto operator_map = std::make_shared<map_service::GetMapResponse>();
+    auto agent_map = std::make_shared<map_service::GetMapResponse>();
     grpcServer svc;
-    svc.setProtosPointers(controls, observed, map);
+    svc.setProtosPointers(controls, observed, operator_map);
     std::atomic<unsigned> notifications{0};
     std::atomic<bool> lock_free{true};
     svc.setSensorsUpdatedCallback([&]() {
@@ -75,7 +78,7 @@ int main() {
                                           std::chrono::seconds(3)), "Cannot connect");
         auto agent_sensors = std::make_shared<Robot::Sensors>();
         auto agent_controls = std::make_shared<Robot::Controls>();
-        grpcClient agent(channel, agent_controls, agent_sensors, map, false);
+        grpcClient agent(channel, agent_controls, agent_sensors, agent_map, false);
         agent_sensors->mutable_batterystate()->set_percentage(0.25);
         require(agent.DataExchange().ok(), "Legacy DataExchange failed");
         check(svc, *observed, "", 0.25);
@@ -97,7 +100,7 @@ int main() {
         advertise(*fresh_sensors);
         auto fresh_controls = std::make_shared<Robot::Controls>();
         auto fresh_channel = grpc::CreateChannel(address, grpc::InsecureChannelCredentials());
-        grpcClient fresh(fresh_channel, fresh_controls, fresh_sensors, map, false);
+        grpcClient fresh(fresh_channel, fresh_controls, fresh_sensors, agent_map, false);
         require(fresh.DataExchange().ok(), "Reconnect first snapshot failed");
         check(svc, *observed, "robot-001", 1.0);
         {
@@ -126,6 +129,56 @@ int main() {
         require(stopped_status.error_code() == grpc::StatusCode::CANCELLED,
                 "Stopped real peer stream did not report cancellation");
         require(lock_free.load(), "Stopped peer callback held UI mutex");
+
+        // Real legacy map stream: verify an initial coherent snapshot and
+        // a changed sequence reach the workstation across gRPC (not shared
+        // protobuf pointers). No full-map comparison is performed.
+        auto map_channel = grpc::CreateChannel(
+            address, grpc::InsecureChannelCredentials());
+        grpcClient map_client(map_channel, agent_controls, agent_sensors,
+                              agent_map, false);
+        {
+            std::lock_guard<std::mutex> guard(*map_client.getMapMutex());
+            agent_map->set_map_seq(71);
+            agent_map->mutable_robotpose()->set_position_x(1.25);
+        }
+        auto map_rpc = std::async(std::launch::async, [&map_client]() {
+            return map_client.MapStream();
+        });
+        auto waitMapSeq = [&](std::uint64_t seq, double position) {
+            for (int i = 0; i < 500; ++i) {
+                {
+                    std::lock_guard<std::mutex> guard(svc.getMapMutex());
+                    if (operator_map->map_seq() == seq &&
+                        operator_map->robotpose().position_x() == position) {
+                        return true;
+                    }
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(5));
+            }
+            return false;
+        };
+        const bool initial_map_received = waitMapSeq(71, 1.25);
+        {
+            std::lock_guard<std::mutex> guard(*map_client.getMapMutex());
+            agent_map->set_map_seq(72);
+            agent_map->mutable_robotpose()->set_position_x(2.50);
+        }
+        const bool updated_map_received = waitMapSeq(72, 2.50);
+        bool map_mutex_available = map_client.getMapMutex()->try_lock();
+        if (map_mutex_available) {
+            map_client.getMapMutex()->unlock();
+        }
+        map_client.stopStream();
+        const bool map_stopped =
+            map_rpc.wait_for(std::chrono::seconds(3)) ==
+            std::future_status::ready;
+        require(initial_map_received, "Real map stream did not send the initial map");
+        require(updated_map_received, "Real map stream did not send updated map sequence");
+        require(map_mutex_available, "Real map stream held mutex while idle");
+        require(map_stopped, "stopStream failed to cancel real map RPC");
+        require(map_rpc.get().error_code() == grpc::StatusCode::CANCELLED,
+                "Cancelled map RPC returned the wrong status");
 
         // P1 reconnect failure: a cleanly shut down operator must not make
         // one-shot rc_agent DataExchange block forever or inject empty controls.
