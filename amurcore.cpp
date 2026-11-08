@@ -326,6 +326,11 @@ void AmurCore::updateBatteryStatus()
     if (!batteryStatusLabel || !sensors) {
         return;
     }
+    if (!network || network->getRobots().isEmpty()) {
+        batteryStatusLabel->clear();
+        batteryStatusLabel->setVisible(false);
+        return;
+    }
 
     // Take a consistent copy; the ROS agent updates this protobuf under the
     // same mutex used by the operator's gRPC receive path.
