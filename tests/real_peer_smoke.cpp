@@ -180,6 +180,100 @@ int main() {
         require(map_rpc.get().error_code() == grpc::StatusCode::CANCELLED,
                 "Cancelled map RPC returned the wrong status");
 
+        // Pose and zone use their own LEGACY streams. MapStream is already
+        // stopped, so these values cannot arrive through a full-map snapshot.
+        // Keep sender/receiver map pointers independent to exercise real gRPC.
+        auto pose_channel = grpc::CreateChannel(
+            address, grpc::InsecureChannelCredentials());
+        grpcClient pose_client(pose_channel, agent_controls, agent_sensors,
+                               agent_map, false);
+        {
+            std::lock_guard<std::mutex> guard(*pose_client.getMapMutex());
+            agent_map->mutable_robotpose()->set_position_x(3.75f);
+        }
+        auto pose_rpc = std::async(std::launch::async, [&pose_client]() {
+            return pose_client.PoseStream();
+        });
+        auto waitPose = [&](float x) {
+            for (int i = 0; i < 500; ++i) {
+                {
+                    std::lock_guard<std::mutex> guard(svc.getMapMutex());
+                    if (operator_map->robotpose().position_x() == x)
+                        return true;
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(5));
+            }
+            return false;
+        };
+        const bool pose_initial = waitPose(3.75f);
+        {
+            std::lock_guard<std::mutex> guard(*pose_client.getMapMutex());
+            agent_map->mutable_robotpose()->set_position_x(4.25f);
+        }
+        const bool pose_updated = waitPose(4.25f);
+        pose_client.stopStream();
+        const bool pose_finished =
+            pose_rpc.wait_for(std::chrono::seconds(3)) == std::future_status::ready;
+        require(pose_initial, "Initial pose did not arrive via PoseStream");
+        require(pose_updated, "Updated pose did not arrive via PoseStream");
+        require(pose_finished, "PoseStream did not stop on cancellation");
+        require(pose_rpc.get().error_code() == grpc::StatusCode::CANCELLED,
+                "Canceled PoseStream status mismatch");
+        {
+            std::lock_guard<std::mutex> guard(svc.getMapMutex());
+            require(operator_map->map_seq() == 72,
+                    "PoseStream unexpectedly replaced OccupancyGrid/map_seq");
+        }
+
+        auto zone_channel = grpc::CreateChannel(
+            address, grpc::InsecureChannelCredentials());
+        grpcClient zone_client(zone_channel, agent_controls, agent_sensors,
+                               agent_map, false);
+        {
+            std::lock_guard<std::mutex> guard(*zone_client.getMapMutex());
+            agent_map->set_zone_seq(801);
+            auto *zone = agent_map->mutable_zone_map()->add_zones();
+            zone->set_id(1001);
+            zone->set_name("alpha");
+        }
+        auto zone_rpc = std::async(std::launch::async, [&zone_client]() {
+            return zone_client.ZoneStream();
+        });
+        auto waitZone = [&](const std::string &name) {
+            for (int i = 0; i < 500; ++i) {
+                {
+                    std::lock_guard<std::mutex> guard(svc.getMapMutex());
+                    const auto &zones = operator_map->zone_map();
+                    if (zones.zones_size() == 1 && zones.zones(0).id() == 1001 &&
+                        zones.zones(0).name() == name)
+                        return true;
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(5));
+            }
+            return false;
+        };
+        const bool zone_initial = waitZone("alpha");
+        {
+            std::lock_guard<std::mutex> guard(*zone_client.getMapMutex());
+            agent_map->set_zone_seq(802);
+            agent_map->mutable_zone_map()->mutable_zones(0)->set_name("beta");
+        }
+        const bool zone_updated = waitZone("beta");
+        zone_client.stopStream();
+        const bool zone_finished =
+            zone_rpc.wait_for(std::chrono::seconds(3)) == std::future_status::ready;
+        require(zone_initial, "Initial zone did not arrive via ZoneStream");
+        require(zone_updated, "Updated zone did not arrive via ZoneStream");
+        require(zone_finished, "ZoneStream did not stop on cancellation");
+        require(zone_rpc.get().error_code() == grpc::StatusCode::CANCELLED,
+                "Canceled ZoneStream status mismatch");
+        {
+            std::lock_guard<std::mutex> guard(svc.getMapMutex());
+            require(operator_map->map_seq() == 72 &&
+                        operator_map->robotpose().position_x() == 4.25f,
+                    "ZoneStream unexpectedly modified map or pose");
+        }
+
         // P1 reconnect failure: a cleanly shut down operator must not make
         // one-shot rc_agent DataExchange block forever or inject empty controls.
         server->Shutdown();

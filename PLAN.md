@@ -243,3 +243,9 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 ### Completed documentation deployment for coherent map CI — 2026-11-08
 - [Documentation branch revision `f6ef51fe85bea248a2d612b2024810a3894f8ad0`](https://github.com/ARDev1161/AmurCore/commit/f6ef51fe85bea248a2d612b2024810a3894f8ad0): [Sphinx/Doxygen + Pages run 42444346158](https://github.com/ARDev1161/AmurCore/actions/runs/42444346158) **SUCCESS** including deployment, updated from tested source `0526a1e1c48a53d8a41b76e1810fabf223ad66a1`. This supersedes the earlier *QUEUED* handoff in this file.
 - Working-code [CI run 42444276933](https://github.com/ARDev1161/AmurCore/actions/runs/42444276933) **SUCCESS** on `0526a1e1c48a53d8a41b76e1810fabf223ad66a1`. No changes in this handoff to production code or mirrored protobuf. P1 remains IN PROGRESS until P1-01..08 live acceptance; P2 remains TODO.
+
+
+## P1 real-peer legacy pose/zone stream isolation — 2026-11-08
+- Extended AmurCore/tests/real_peer_smoke.cpp after the existing independent-map test. Once MapStream is explicitly stopped, launch **real** rc_agent PoseStream and verify initial pose x=3.75 then changed pose x=4.25, cancel and assert CANCELLED. Assert map_seq 72 is preserved.
+- Then launch **real** rc_agent ZoneStream against AmurCore server with zone_seq 801, id 1001/name alpha; update to zone_seq 802/name beta; verify each through the real gRPC boundary, cancel and assert CANCELLED. Assert map_seq and pose are untouched by the zone stream. No shared map pointer or alternative stream is active; this detects missing or stale legacy streaming updates.
+- Pair with rc_agent source change making ZoneStream zone_seq/zone_map snapshot atomic and removing RPC creation under muMap for Pose/Zone. Protobuf and production AmurCore code unchanged. **CI PENDING** at authorship for both feature commits; P1 manual P1-01..08 still NOT RUN, P1 IN PROGRESS. No P2.
