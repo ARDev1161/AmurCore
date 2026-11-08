@@ -56,6 +56,19 @@ int main(int argc, char **argv) {
         require(!text.contains("diff-001") && !text.contains("manual.velocity"),
                 "Stale previous robot descriptor shown");
 
+        // Blank identity is legacy mode even when capabilities are populated.
+        rc::api::v2::RobotInfo anonymous;
+        anonymous.set_display_name("Anonymous");
+        anonymous.set_api_major(2);
+        anonymous.add_capabilities()->set_id("manual.velocity");
+        dialog.setRobotInfo(anonymous);
+        text = view->toPlainText();
+        require(text.contains("No v2 robot descriptor") &&
+                    !text.contains("dog-002") &&
+                    !text.contains("manual.velocity") &&
+                    !text.contains("Anonymous"),
+                "Anonymous descriptor leaked stale or untrusted metadata");
+
         dialog.setRobotInfo(rc::api::v2::RobotInfo());
         text = view->toPlainText();
         require(text.contains("No v2 robot descriptor") &&
