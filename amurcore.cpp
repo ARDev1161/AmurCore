@@ -1,5 +1,6 @@
 #include "amurcore.h"
 #include <chrono>
+#include <cmath>
 #include "ui_AmurCore.h"
 
 AmurCore::AmurCore(QWidget *parent) :
@@ -56,6 +57,10 @@ void AmurCore::initialize()
     connectDialog = new ConnectDialog(this, network, repo);
     statusLabel = new QLabel(statusMessage, this);
     ui->statusbar->addPermanentWidget(statusLabel);
+    batteryStatusLabel = new QLabel(this);
+    batteryStatusLabel->setObjectName("batteryStatusLabel");
+    batteryStatusLabel->setVisible(false);
+    ui->statusbar->addPermanentWidget(batteryStatusLabel);
 
     std::mutex& mapMutex = network->getServerInstance()->getMapMutex(); // MapStream mutex
     grpcMutex = &network->getServerInstance()->getMutex(); // DataStreamExchange mutex
@@ -88,6 +93,7 @@ void AmurCore::initialize()
                 startCap();
             }
             updateVideoSources();
+            updateBatteryStatus();
         });
         sensorsUpdateTimer->start();
     }
@@ -313,6 +319,47 @@ void AmurCore::undistortMat(Mat &inMat, Mat &outMat)
         outMat = camHolder->remap(inMat);
     else
         outMat = inMat;
+}
+
+void AmurCore::updateBatteryStatus()
+{
+    if (!batteryStatusLabel || !sensors) {
+        return;
+    }
+
+    // Take a consistent copy; the ROS agent updates this protobuf under the
+    // same mutex used by the operator's gRPC receive path.
+    Power::BatteryState battery;
+    bool available = false;
+    {
+        std::unique_lock<std::mutex> lock;
+        if (grpcMutex) {
+            lock = std::unique_lock<std::mutex>(*grpcMutex);
+        }
+        available = sensors->has_batterystate();
+        if (available) {
+            battery.CopyFrom(sensors->batterystate());
+        }
+    }
+
+    // Absence is not 0%. An explicitly absent pack also must not appear as
+    // a healthy charged battery.
+    if (!available || !battery.present()) {
+        batteryStatusLabel->clear();
+        batteryStatusLabel->setVisible(false);
+        return;
+    }
+
+    QString display = tr("Battery: unknown");
+    const double percentage = static_cast<double>(battery.percentage());
+    if (std::isfinite(percentage) && percentage >= 0.0 && percentage <= 1.0) {
+        display = tr("Battery: %1%").arg(qRound(percentage * 100.0));
+    }
+    if (battery.power_supply_status() == Power::BatteryState::CHARGING) {
+        display += tr(" (charging)");
+    }
+    batteryStatusLabel->setText(display);
+    batteryStatusLabel->setVisible(true);
 }
 
 void AmurCore::updateStatusMessage()
