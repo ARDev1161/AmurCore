@@ -1,6 +1,6 @@
 #include "amurcore.h"
 #include <chrono>
-#include <cmath>
+#include "logic/batterystatus.h"
 #include "ui_AmurCore.h"
 
 AmurCore::AmurCore(QWidget *parent) :
@@ -347,24 +347,9 @@ void AmurCore::updateBatteryStatus()
         }
     }
 
-    // Absence is not 0%. An explicitly absent pack also must not appear as
-    // a healthy charged battery.
-    if (!available || !battery.present()) {
-        batteryStatusLabel->clear();
-        batteryStatusLabel->setVisible(false);
-        return;
-    }
-
-    QString display = tr("Battery: unknown");
-    const double percentage = static_cast<double>(battery.percentage());
-    if (std::isfinite(percentage) && percentage >= 0.0 && percentage <= 1.0) {
-        display = tr("Battery: %1%").arg(qRound(percentage * 100.0));
-    }
-    if (battery.power_supply_status() == Power::BatteryState::CHARGING) {
-        display += tr(" (charging)");
-    }
+    const QString display = available ? batteryStatusText(battery) : QString{};
     batteryStatusLabel->setText(display);
-    batteryStatusLabel->setVisible(true);
+    batteryStatusLabel->setVisible(!display.isEmpty());
 }
 
 void AmurCore::updateStatusMessage()
