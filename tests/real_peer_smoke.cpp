@@ -1,6 +1,13 @@
 // P1: exercise real rc_agent grpcClient against real AmurCore grpcServer.
-#include "network/server.h"
+// Both repositories have network/client.h and network/server.h. Include the
+// intended implementation explicitly; avoid compiling against the wrong class.
+#ifdef RC_AGENT_ROOT
+#include "peer/network/server.h"
 #include "network/client.h"
+#else
+#include "network/server.h"
+#include "peer/network/client.h"
+#endif
 #include <atomic>
 #include <chrono>
 #include <iostream>
