@@ -204,3 +204,8 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 - Source/test SHA `956f2b970885c65664067f8a5a84eea2dc080a91`: [RC API v2 CI #42435043821](https://github.com/ARDev1161/AmurCore/actions/runs/42435043821) **SUCCESS** (all 3 jobs).
 - Docs-only SHA `0d7a16986fce38396232062ad8021f6a330f0ac5`: [GitHub Pages CI #42435175700](https://github.com/ARDev1161/AmurCore/actions/runs/42435175700) **SUCCESS** (Sphinx/Doxygen isolation + Pages deploy).
 - These success claims are scoped to exact source and docs revisions; plan-only handoff commit does not rerun source CI because workflows filter paths. P1 manual hardware/GUI/VPN/Nav2/GStreamer gates remain **NOT RUN**. Next permitted work: additional targeted P1 reliability tests or manual P1 acceptance; do not implement P2 until approved gate passes. Do not merge documentation or source feature branches.
+
+
+### P1 paired rc_agent failed-stream regression — 2026-11-08
+- rc_agent added a regression asserting failed one-shot streaming RPC does not overwrite valid legacy controls: [test commit ef600cfa](https://github.com/ARDev1161/rc_agent/commit/ef600cfaa17e8ac9a34de13795d148ccc2481385), [paired PLAN handoff 4a2ec9c](https://github.com/ARDev1161/rc_agent/commit/4a2ec9c74adfe0673d20207e6b95639b38a8f276). AmurCore runtime/test source and mirrored proto unchanged.
+- New rc_agent feature-head CI: NOT VERIFIED (connector commit status endpoint returned no statuses or PR-triggered runs); do not infer success. Previous tested AmurCore source SHA `956f2b970885c65664067f8a5a84eea2dc080a91` remains historical CI evidence only. P1 IN PROGRESS; hardware/VPN/joystick/Nav2/map/video and live old↔new P1-01..08 remain NOT RUN. P2 not started.
