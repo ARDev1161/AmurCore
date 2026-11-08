@@ -51,3 +51,10 @@ The `real-peer-grpc-loopback` job now exercises the real `AmurCore` server shutd
 The [real-peer integration scenario](https://github.com/ARDev1161/AmurCore/blob/feat/rc-api-v2/tests/real_peer_smoke.cpp) now also opens a real `rc_agent` streaming RPC to the actual `AmurCore` gRPC service, verifies a snapshot arrived, then calls `stopStream()` and requires the stream to terminate with cancellation within three seconds. The workstation telemetry callback must remain responsive throughout.
 
 [Source revision `fd68254c572c`](https://github.com/ARDev1161/AmurCore/commit/fd68254c572c20961d80be6ae089e5457feb38b2), [current CI](https://github.com/ARDev1161/AmurCore/actions/runs/42441869752) — check completion before marking PASS. This does not exercise the actual robot or replace the manual P1-01 through P1-08 gates.
+
+
+## P1 coherent map snapshots over real gRPC peers — 2026-11-08
+
+The headless [real-peer test](https://github.com/ARDev1161/AmurCore/blob/feat/rc-api-v2/tests/real_peer_smoke.cpp) now allocates **independent** agent-side and operator-side map objects. It verifies that an initial `GetMapResponse` with `map_seq=71` and robot pose arrives through actual gRPC transport, then that a changed snapshot with `map_seq=72` is received, and finally that `stopStream()` cancels the real map RPC. This prevents accidental success through a shared in-memory pointer.
+
+[Source 0526a1e1c48a](https://github.com/ARDev1161/AmurCore/commit/0526a1e1c48a53d8a41b76e1810fabf223ad66a1) · [CI 42444276933](https://github.com/ARDev1161/AmurCore/actions/runs/42444276933). CI outcome must be checked for the exact source SHA before marking PASS. No real robot, Qt map rendering, physical motion, VPN, Nav2 or GStreamer is exercised here; P1-01..08 are still required.

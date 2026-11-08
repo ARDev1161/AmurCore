@@ -1,3 +1,3 @@
-# P1 gRPC cancellation source refresh
-source_revision=fd68254c572c20961d80be6ae089e5457feb38b2
-source_ci=https://github.com/ARDev1161/AmurCore/actions/runs/42441869752
+# P1 coherent legacy map snapshot transport
+source_revision=0526a1e1c48a53d8a41b76e1810fabf223ad66a1
+source_ci=https://github.com/ARDev1161/AmurCore/actions/runs/42444276933
