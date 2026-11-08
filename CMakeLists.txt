@@ -194,6 +194,11 @@ if(RC_API_V2_TESTING)
         ${CMAKE_CURRENT_BINARY_DIR}
     )
     target_link_libraries(rc_api_v2_ui_test PRIVATE AMURProtos Qt5::Widgets)
+    add_executable(rc_api_v2_battery_ui_test tests/battery_status_smoke.cpp)
+    target_include_directories(rc_api_v2_battery_ui_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+    target_link_libraries(rc_api_v2_battery_ui_test PRIVATE AMURProtos Qt5::Widgets)
+    add_test(NAME rc_api_v2_battery_ui COMMAND rc_api_v2_battery_ui_test)
+    set_tests_properties(rc_api_v2_battery_ui PROPERTIES TIMEOUT 12 ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
     add_test(NAME rc_api_v2_ui COMMAND rc_api_v2_ui_test)
     set_tests_properties(rc_api_v2_ui PROPERTIES
         TIMEOUT 12
