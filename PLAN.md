@@ -174,3 +174,8 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 ## P1 cross-repo real gRPC peer test (2026-11-08)
 - Added tests/real_peer_smoke.cpp: deterministic test compiling REAL AmurCore grpcServer with REAL rc_agent grpcClient (checked out independently by CI). Covers unary legacy, additive v2 RobotInfo capabilities, legacy-after-v2 clearing, new-channel reconnect snapshot and GUI mutex availability in the callback.
 - The test does not perform ROS2 navigation, joystick, video, or physical robot checks; P1 remains IN PROGRESS. The paired CI workflow must be wired and validated before this test is claimed as passed. Shared wire schemas and production code are unchanged.
+
+
+## P1 real-peer CI gate (2026-11-08)
+- New real-peer-grpc-loopback job compiles BOTH real AmurCore server and rc_agent client together using mirrored proto, runs the shared AmurCore scenario on ephemeral localhost with legacy/v2/legacy/reconnect snapshots, and fails on lost controls/descriptor or callback mutex blocking.
+- Both repositories have the same test job; this branch checks out the other peer at feat/rc-api-v2. No production endpoints, proto, ROS2 bindings or motor control changed. CI is PENDING until both jobs finish; hardware acceptance P1-01..08 remains NOT RUN, P1 IN PROGRESS.
