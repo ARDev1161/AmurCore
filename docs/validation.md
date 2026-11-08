@@ -44,3 +44,10 @@ The cross-repository test passed on the exact source revision [`8da7cc1303fb7e66
 The `real-peer-grpc-loopback` job now exercises the real `AmurCore` server shutdown while the real `rc_agent` client is connected. A one-shot unary attempt must return a failed gRPC status within four seconds rather than hang, preserving the last received controls. This is a loopback integration check, **not** the physical/VPN/Nav2/GStreamer/manual acceptance gate.
 
 [Source revision **956f2b970885**](https://github.com/ARDev1161/AmurCore/commit/956f2b970885c65664067f8a5a84eea2dc080a91) — [CI workflow](https://github.com/ARDev1161/AmurCore/actions/runs/42435043821) (check status for this exact SHA).
+
+
+## P1: real-peer stream stop (2026-11-08)
+
+The [real-peer integration scenario](https://github.com/ARDev1161/AmurCore/blob/feat/rc-api-v2/tests/real_peer_smoke.cpp) now also opens a real `rc_agent` streaming RPC to the actual `AmurCore` gRPC service, verifies a snapshot arrived, then calls `stopStream()` and requires the stream to terminate with cancellation within three seconds. The workstation telemetry callback must remain responsive throughout.
+
+[Source revision `fd68254c572c`](https://github.com/ARDev1161/AmurCore/commit/fd68254c572c20961d80be6ae089e5457feb38b2), [current CI](https://github.com/ARDev1161/AmurCore/actions/runs/42441869752) — check completion before marking PASS. This does not exercise the actual robot or replace the manual P1-01 through P1-08 gates.
