@@ -113,6 +113,25 @@ int main() {
             require(notifications.load() > 0, "Stream did not notify observer");
         }
 
+        // The same workstation session can transition from a v2 peer to a
+        // legacy peer. Unknown-field fallback must never leave the previous
+        // robot's capabilities visible in the next Sensors snapshot.
+        {
+            Robot::Sensors legacy_after_v2;
+            legacy_after_v2.mutable_batterystate()->set_percentage(0.25);
+            Robot::Controls reply;
+            grpc::ClientContext context;
+            require(stub->DataExchange(&context, legacy_after_v2, &reply).ok(),
+                    "Legacy unary reconnect after v2 stream failed");
+            require(reply.basecontrol().linearvelocity() == 17.5,
+                    "Legacy command reply changed after v2 stream");
+            std::lock_guard<std::mutex> lock(service.getMutex());
+            require(!sensors->has_robot_info(),
+                    "Legacy reconnect retained stale v2 descriptor");
+            require(sensors->batterystate().percentage() == 0.25,
+                    "Legacy sensor snapshot was not applied");
+        }
+
         {
             grpc::ClientContext context;
             context.set_deadline(std::chrono::system_clock::now() + std::chrono::seconds(5));

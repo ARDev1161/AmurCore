@@ -155,3 +155,10 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 - Shared proto and legacy wire definitions **unchanged**. The above are test-only changes, not proof of real robot behavior.
 - CI: check latest feature HEAD after this PLAN commit and record actual job outcomes; prior green runs are historical, not evidence for these new commits. Local Qt5/ROS2 builds and physical/VPN/Nav2/GStreamer tests: **NOT RUN** in this tool environment.
 - Next: review feature HEAD CI jobs, fix any regression; then execute P1-01 through P1-08 with the physical robot or approved equivalent and record evidence. Do not mark P1 DONE without manual acceptance.
+
+
+## P1 gRPC legacy-after-v2 regression — 2026-11-08
+- [AmurCore CI #42429632698](https://github.com/ARDev1161/AmurCore/actions/runs/42429632698) passed full Qt5 and protobuf jobs for the earlier RobotInfo Qt test revision `1bcc98b`; `PLAN.md` alone subsequently advanced HEAD.
+- Added a headless real `grpcServer` loopback regression that first receives v2 RobotInfo through the existing data stream, then accepts a legacy unary sensor snapshot on the same service. Asserts that old v2 metadata is completely removed, legacy battery data is applied, and legacy control reply is unchanged. No production or proto changes.
+- Paired rc_agent fix: [recursive mock capture / legacy reset](https://github.com/ARDev1161/rc_agent/commit/da2b081dbe25a4bf8c560cfa3db7eb0f0ac18252). Shared proto stays byte-for-byte mirrored.
+- **CI pending for this test commit**; check latest HEAD's `protobuf-compatibility` and `qt-app-build` jobs before declaring automatic acceptance. Hardware/VPN/joystick/Nav2/map/GStreamer P1-01..08 remain **NOT RUN** and P1 stays **IN PROGRESS**.
