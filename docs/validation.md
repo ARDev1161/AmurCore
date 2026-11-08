@@ -25,3 +25,10 @@ It checks documentation branch isolation, Doxygen XML/HTML API generation from a
 [Source revision bc6d90648d5bd0dfbedb984373524fc1c07857e1](https://github.com/ARDev1161/AmurCore/commit/bc6d90648d5bd0dfbedb984373524fc1c07857e1) extends the **real AmurCore gRPC server** loopback test. After an agent advertises a v2 descriptor via the bidirectional stream, the same service receives a legacy unary sensor snapshot. The test checks that the prior robot ID/capabilities are cleared, the new battery value is retained and the old control reply remains valid.
 
 This is a simulated transport regression, **not a completed P1 manual gate**. [CI run](https://github.com/ARDev1161/AmurCore/actions/runs/42431821920) must pass before this new test is considered verified. The actual robot/VPN/joystick/Nav2/map/GStreamer checks remain outstanding.
+
+
+## Real AmurCore ↔ rc_agent P1 integration test — 2026-11-08
+
+The independent working branches now run a new **real-peer-grpc-loopback** CI job. Each job checks out the two actual C++ implementations, compares the mirrored protobuf contracts, compiles the production transport peers together, and exercises an ephemeral localhost gRPC connection. The shared scenario, maintained under [AmurCore/tests/real_peer_smoke.cpp](https://github.com/ARDev1161/AmurCore/blob/feat/rc-api-v2/tests/real_peer_smoke.cpp), checks legacy control/sensor roundtrips, v2 descriptor and supported axes, legacy-after-v2 reset, fresh-channel reconnect, and workstation mutex availability during callbacks.
+
+The [current CI workflow](https://github.com/ARDev1161/AmurCore/actions/runs/42432805702) must complete successfully before this gate can be marked PASS. No test sends commands to robot actuators. Hardware/VPN/joystick/Nav2/map/GStreamer acceptance remains separate and **not completed**; P1 is still IN PROGRESS.
