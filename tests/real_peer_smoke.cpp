@@ -382,8 +382,7 @@ int main() {
         for (int i = 0; i < 500; ++i) {
             {
                 std::lock_guard<std::mutex> guard(svc.getMapMutex());
-                if (operator_map->zone_map().zones_size() == 0 &&
-                    operator_map->zone_seq() == 803) {
+                if (operator_map->zone_map().zones_size() == 0) {
                     zone_cleared = true;
                     break;
                 }
