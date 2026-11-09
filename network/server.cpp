@@ -80,7 +80,9 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
               *map = response;
           }
       }
-      stream->Write(request);
+      if (!stream->Write(request)) {
+          return grpc::Status::OK;
+      }
     }
 
     return grpc::Status::OK;
@@ -102,7 +104,9 @@ grpc::Status grpcServer::PoseStream([[maybe_unused]] grpc::ServerContext* contex
               *map->mutable_robotpose() = state.pose();
           }
       }
-      stream->Write(request);
+      if (!stream->Write(request)) {
+          return grpc::Status::OK;
+      }
     }
 
     return grpc::Status::OK;
@@ -124,7 +128,9 @@ grpc::Status grpcServer::ZoneStream([[maybe_unused]] grpc::ServerContext* contex
               *map->mutable_zone_map() = state.zone_map();
           }
       }
-      stream->Write(request);
+      if (!stream->Write(request)) {
+          return grpc::Status::OK;
+      }
     }
 
     return grpc::Status::OK;
