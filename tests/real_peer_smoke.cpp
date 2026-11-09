@@ -150,6 +150,25 @@ int main() {
         require(notifications.load() == 4 && lock_free.load(),
                 "Missing callback or callback holds GUI mutex");
 
+        // BatteryState is optional: a v2 peer may have no battery sensor.
+        // Clearing it on the next unary snapshot must not retain stale data
+        // or erase the independent RobotInfo descriptor.
+        {
+            std::lock_guard<std::mutex> guard(*fresh.getMutex());
+            fresh_sensors->clear_batterystate();
+        }
+        require(fresh.DataExchange().ok(), "Battery-less v2 unary exchange failed");
+        {
+            std::lock_guard<std::mutex> guard(svc.getMutex());
+            require(!observed->has_batterystate(),
+                    "Battery-less snapshot retained stale BatteryState");
+            require(observed->robot_info().robot_id() == "robot-001" &&
+                        observed->robot_info().api_major() == 2,
+                    "Battery-less snapshot lost v2 RobotInfo");
+        }
+        require(notifications.load() == 5 && lock_free.load(),
+                "Battery-less exchange missed callback or held UI mutex");
+
         // The real rc_agent stream must terminate when stopStream() is
         // requested, rather than leave a blocking network Read alive.
         {
@@ -160,10 +179,10 @@ int main() {
         auto live_stream = std::async(std::launch::async, [&agent]() {
             return agent.DataStreamExchange();
         });
-        for (int i = 0; i < 300 && notifications.load() < 5; ++i) {
+        for (int i = 0; i < 300 && notifications.load() < 6; ++i) {
             std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
-        require(notifications.load() >= 5,
+        require(notifications.load() >= 6,
                 "Real peer did not transmit the streaming snapshot");
         {
             std::lock_guard<std::mutex> guard(svc.getMutex());
