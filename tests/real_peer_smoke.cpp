@@ -169,6 +169,27 @@ int main() {
         require(notifications.load() == 5 && lock_free.load(),
                 "Battery-less exchange missed callback or held UI mutex");
 
+        // A sensor may recover after a battery-less snapshot. Ensure the
+        // restored optional field carries fresh values and keeps RobotInfo.
+        {
+            std::lock_guard<std::mutex> guard(*fresh.getMutex());
+            fresh_sensors->mutable_batterystate()->set_percentage(0.42f);
+            fresh_sensors->mutable_batterystate()->set_present(true);
+        }
+        require(fresh.DataExchange().ok(), "Restored battery unary exchange failed");
+        {
+            std::lock_guard<std::mutex> guard(svc.getMutex());
+            require(observed->has_batterystate() &&
+                        observed->batterystate().percentage() > 0.419f &&
+                        observed->batterystate().percentage() < 0.421f,
+                    "Restored battery snapshot lost updated BatteryState");
+            require(observed->robot_info().robot_id() == "robot-001" &&
+                        observed->robot_info().api_major() == 2,
+                    "Restored battery snapshot lost v2 RobotInfo");
+        }
+        require(notifications.load() == 6 && lock_free.load(),
+                "Restored battery exchange missed callback or held UI mutex");
+
         // The real rc_agent stream must terminate when stopStream() is
         // requested, rather than leave a blocking network Read alive.
         {
@@ -179,10 +200,10 @@ int main() {
         auto live_stream = std::async(std::launch::async, [&agent]() {
             return agent.DataStreamExchange();
         });
-        for (int i = 0; i < 300 && notifications.load() < 6; ++i) {
+        for (int i = 0; i < 300 && notifications.load() < 7; ++i) {
             std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
-        require(notifications.load() >= 6,
+        require(notifications.load() >= 7,
                 "Real peer did not transmit the streaming snapshot");
         {
             std::lock_guard<std::mutex> guard(svc.getMutex());
