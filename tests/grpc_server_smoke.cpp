@@ -198,10 +198,15 @@ int main() {
             require(stream && stream->Write(update), "Cannot send map update");
             map_service::GetMapRequest ack;
             require(stream->Read(&ack), "Map service did not acknowledge snapshot");
+            // Keep the same RPC alive across a second map snapshot. The
+            // server must acknowledge both frames and retain the newest map.
+            update.set_map_seq(43);
+            require(stream->Write(update), "Cannot send second map update");
+            require(stream->Read(&ack), "Map service did not acknowledge second snapshot");
             stream->WritesDone();
             require(stream->Finish().ok(), "Map stream RPC failed");
             std::lock_guard<std::mutex> lock(service.getMapMutex());
-            require(map->map_seq() == 42, "Map snapshot was not retained");
+            require(map->map_seq() == 43, "Latest map snapshot was not retained");
         }
     } catch (const std::exception &e) {
         server->Shutdown();
