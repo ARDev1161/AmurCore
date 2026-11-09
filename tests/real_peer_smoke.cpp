@@ -370,11 +370,32 @@ int main() {
             agent_map->mutable_zone_map()->mutable_zones(0)->set_name("beta");
         }
         const bool zone_updated = waitZone("beta");
+        // An empty ZoneMap is a valid changed snapshot, not an instruction
+        // to retain stale zones from the previous update. Exercise the real
+        // client/server gRPC stream with a sequence increment and zero zones.
+        {
+            std::lock_guard<std::mutex> guard(*zone_client.getMapMutex());
+            agent_map->set_zone_seq(803);
+            agent_map->mutable_zone_map()->clear_zones();
+        }
+        bool zone_cleared = false;
+        for (int i = 0; i < 500; ++i) {
+            {
+                std::lock_guard<std::mutex> guard(svc.getMapMutex());
+                if (operator_map->zone_map().zones_size() == 0 &&
+                    operator_map->zone_seq() == 803) {
+                    zone_cleared = true;
+                    break;
+                }
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        }
         zone_client.stopStream();
         const bool zone_finished =
             zone_rpc.wait_for(std::chrono::seconds(3)) == std::future_status::ready;
         require(zone_initial, "Initial zone did not arrive via ZoneStream");
         require(zone_updated, "Updated zone did not arrive via ZoneStream");
+        require(zone_cleared, "Empty ZoneMap update retained stale zones");
         require(zone_finished, "ZoneStream did not stop on cancellation");
         require(zone_rpc.get().error_code() == grpc::StatusCode::CANCELLED,
                 "Canceled ZoneStream status mismatch");
