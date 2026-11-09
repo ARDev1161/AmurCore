@@ -208,6 +208,51 @@ int main() {
             std::lock_guard<std::mutex> lock(service.getMapMutex());
             require(map->map_seq() == 43, "Latest map snapshot was not retained");
         }
+        // Pose updates must acknowledge each frame on the SAME live RPC.
+        // A new position must not reset the occupancy grid snapshot.
+        {
+            grpc::ClientContext context;
+            context.set_deadline(std::chrono::system_clock::now() + std::chrono::seconds(5));
+            auto stream = stub->PoseStream(&context);
+            map_service::PoseState update;
+            update.mutable_pose()->set_position_x(1.25f);
+            require(stream && stream->Write(update), "Cannot send first pose update");
+            map_service::PoseRequest ack;
+            require(stream->Read(&ack), "Pose service did not acknowledge first update");
+            update.mutable_pose()->set_position_x(-2.5f);
+            require(stream->Write(update), "Cannot send second pose update");
+            require(stream->Read(&ack), "Pose service did not acknowledge second update");
+            stream->WritesDone();
+            require(stream->Finish().ok(), "Pose stream RPC failed");
+            std::lock_guard<std::mutex> lock(service.getMapMutex());
+            require(map->robotpose().position_x() == -2.5f,
+                    "Latest pose was not retained");
+            require(map->map_seq() == 43, "Pose update reset map snapshot");
+        }
+
+        // Zone removal is a real empty snapshot, not an idle/no-change event.
+        // It must clear the previous zone list without erasing map or pose.
+        {
+            grpc::ClientContext context;
+            context.set_deadline(std::chrono::system_clock::now() + std::chrono::seconds(5));
+            auto stream = stub->ZoneStream(&context);
+            map_service::ZoneState update;
+            update.mutable_zone_map()->add_zones()->set_id(7);
+            require(stream && stream->Write(update), "Cannot send populated zone map");
+            map_service::ZoneRequest ack;
+            require(stream->Read(&ack), "Zone service did not acknowledge populated map");
+            update.clear_zone_map();
+            require(stream->Write(update), "Cannot send empty zone map");
+            require(stream->Read(&ack), "Zone service did not acknowledge empty map");
+            stream->WritesDone();
+            require(stream->Finish().ok(), "Zone stream RPC failed");
+            std::lock_guard<std::mutex> lock(service.getMapMutex());
+            require(map->zone_map().zones_size() == 0,
+                    "Empty zone snapshot did not clear stale zones");
+            require(map->map_seq() == 43, "Zone update reset map snapshot");
+            require(map->robotpose().position_x() == -2.5f,
+                    "Zone update reset latest pose");
+        }
     } catch (const std::exception &e) {
         server->Shutdown();
         std::cerr << "gRPC transport smoke failed: " << e.what() << std::endl;
