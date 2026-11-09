@@ -47,3 +47,48 @@
 
 Capture for each case: branch SHA, test setup, expected/actual behavior, logs,
 and PASS/FAIL/SKIP reason. **Do not claim P1 complete based on CI alone.**
+
+## TurtleBot3 / Gazebo Sim P1 integration lane (agreed 2026-11-09)
+
+The operator already has a container that starts TurtleBot3 in **Gazebo Sim**
+(the ROS2 Humble recommended pairing is Gazebo Fortress). Reuse that container;
+do not prescribe a new Compose file, Gazebo installation, or hard-coded
+container name. This lane can run without the physical robot being repaired.
+
+**Network scope:** the operator explicitly waived *repeating VPN-specific
+acceptance* if the connection/discovery/session model is unchanged. Before
+marking that item N/A, compare the current feature implementation with the
+legacy `dev` connection path (UDP discovery, gRPC transport, reconnect).
+If anything changed, record the difference and test it separately. Localhost
+success does not prove VPN traversal.
+
+**Setup evidence (capture before testing):**
+- Container/image identifier and startup command (operator-provided), ROS distro,
+  `gz sim --version`, `ros2 pkg list | grep -E 'turtlebot3|nav2|ros_gz'`.
+- `ros2 topic list -t`, `ros2 action list -t`, `ros2 node list`, and
+  `ros2 topic info /cmd_vel -v`; do not assume the topic name or message
+  type until these commands confirm it. If `/map`, TF, Nav2, or a camera are
+  missing, record SKIP and reason; do not invent sensor publishers.
+- Both feature branch commit SHAs, actual `robot.cfg` path, configured
+  robot_id/capabilities/velocity_axes, AmurCore address and whether UDP
+  discovery crosses the container network boundary.
+
+**Run and record these checks on the running simulator:**
+
+| Gate | Action | Evidence and pass condition |
+|---|---|---|
+| P1-01 | Start v2 agent with a unique nonempty robot_id and connect AmurCore; open Robot Info | Screenshot/log confirms exact configured ID, display name, API 2.0, capabilities and axes |
+| P1-02/03 | Run both cross-version *application* pairings with separately built `dev` binaries | Real legacy controls and telemetry survive both directions; unknown RobotInfo ignored; protobuf-only CI is not sufficient |
+| P1-04 | With Nav2 idle, send a short legacy joystick command and release it | Capture `/cmd_vel` with message type and timestamps; simulated robot moves and stops after release; never infer a physical safety guarantee |
+| P1-05 | With map, TF and Nav2 actually available, display map/pose and send a reachable Nav2 goal | Capture map/pose, Nav2 action feedback and result; goal accepted alone is not success |
+| P1-06 | Use a separately configured GStreamer test sender if TurtleBot3 has no camera | Video starts and stops on disconnect; note that inactive-robot video gating belongs to P5 |
+| P1-07 | Keep simulator stationary for two minutes with an open GUI | Controls remain responsive, no blocked gRPC/Qt callbacks |
+| P1-08 | Restart rc_agent (same ID), reconnect and inspect Robot Info/map | Fresh snapshot restored, no stale capability/pose/map; multi-robot isolation remains P3 |
+
+For each row record **PASS / FAIL / SKIP**, exact commands, relevant logs,
+expected versus observed behavior, and SHAs in PLAN.md. Do not mark an
+unperformed test PASS. Simulator success may satisfy the P1 *software
+integration* evidence, but physical joystick, motor/watchdog and real-camera
+behavior remain separately **NOT RUN** until hardware is available. P1 is
+still IN PROGRESS until the owner reviews the applicable gate evidence; P2
+must not be started automatically.
