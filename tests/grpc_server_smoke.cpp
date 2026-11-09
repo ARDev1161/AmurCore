@@ -277,11 +277,17 @@ int main() {
             update.clear_zone_map();
             require(stream->Write(update), "Cannot send empty zone map");
             require(stream->Read(&ack), "Zone service did not acknowledge empty map");
+            // Recovery on the same RPC must restore the new zone without
+            // resurrecting the zone removed by the empty snapshot.
+            update.mutable_zone_map()->add_zones()->set_id(19);
+            require(stream->Write(update), "Cannot restore zone map on active RPC");
+            require(stream->Read(&ack), "Zone service did not acknowledge restored map");
             stream->WritesDone();
             require(stream->Finish().ok(), "Zone stream RPC failed");
             std::lock_guard<std::mutex> lock(service.getMapMutex());
-            require(map->zone_map().zones_size() == 0,
-                    "Empty zone snapshot did not clear stale zones");
+            require(map->zone_map().zones_size() == 1 &&
+                    map->zone_map().zones(0).id() == 19,
+                    "Restored zone snapshot retained stale zones or lost recovery");
             require(map->map_seq() == 43, "Zone update reset map snapshot");
             require(map->robotpose().position_x() == -2.5f,
                     "Zone update reset latest pose");
