@@ -57,8 +57,24 @@ int main() {
     std::atomic<unsigned> notifications{0};
     std::atomic<bool> lock_free{true};
     svc.setSensorsUpdatedCallback([&]() {
-        if (svc.getMutex().try_lock()) svc.getMutex().unlock();
-        else lock_free = false;
+        // An unrelated RPC may briefly own the mutex when this callback
+        // runs. A single try_lock would report a false positive. Probe from
+        // another thread with a bounded deadline: it can acquire the mutex
+        // after ordinary contention, but not while this callback's own RPC
+        // is still holding the mutex.
+        auto probe = std::async(std::launch::async, [&]() {
+            const auto deadline = std::chrono::steady_clock::now() +
+                                  std::chrono::milliseconds(250);
+            do {
+                if (svc.getMutex().try_lock()) {
+                    svc.getMutex().unlock();
+                    return true;
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            } while (std::chrono::steady_clock::now() < deadline);
+            return false;
+        });
+        if (!probe.get()) lock_free = false;
         ++notifications;
     });
     {
