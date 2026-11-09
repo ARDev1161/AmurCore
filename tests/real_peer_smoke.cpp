@@ -389,12 +389,35 @@ int main() {
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
+        // A later nonempty update on the same stream must restore zones,
+        // rather than leaving the operator with the cleared snapshot.
+        {
+            std::lock_guard<std::mutex> guard(*zone_client.getMapMutex());
+            agent_map->set_zone_seq(804);
+            auto *restored = agent_map->mutable_zone_map()->add_zones();
+            restored->set_id(2002);
+            restored->set_name("restored");
+        }
+        bool zone_restored = false;
+        for (int i = 0; i < 500; ++i) {
+            {
+                std::lock_guard<std::mutex> guard(svc.getMapMutex());
+                const auto &zones = operator_map->zone_map();
+                if (zones.zones_size() == 1 && zones.zones(0).id() == 2002 &&
+                    zones.zones(0).name() == "restored") {
+                    zone_restored = true;
+                    break;
+                }
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        }
         zone_client.stopStream();
         const bool zone_finished =
             zone_rpc.wait_for(std::chrono::seconds(3)) == std::future_status::ready;
         require(zone_initial, "Initial zone did not arrive via ZoneStream");
         require(zone_updated, "Updated zone did not arrive via ZoneStream");
         require(zone_cleared, "Empty ZoneMap update retained stale zones");
+        require(zone_restored, "ZoneMap recovery did not reach operator");
         require(zone_finished, "ZoneStream did not stop on cancellation");
         require(zone_rpc.get().error_code() == grpc::StatusCode::CANCELLED,
                 "Canceled ZoneStream status mismatch");
