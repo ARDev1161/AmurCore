@@ -93,6 +93,39 @@ int main() {
             require(reply.basecontrol().angularvelocity() == -3.0,
                     "Streaming controls payload changed");
 
+            // A legacy peer may reuse an established stream after a v2
+            // snapshot. Each Sensors frame is a complete snapshot: absent
+            // descriptor and battery fields must not retain stale values.
+            Robot::Sensors legacy_on_stream;
+            require(stream->Write(legacy_on_stream),
+                    "Could not send legacy snapshot on active v2 stream");
+            require(stream->Read(&reply),
+                    "No controls reply to legacy snapshot on v2 stream");
+            {
+                std::lock_guard<std::mutex> lock(service.getMutex());
+                require(!sensors->has_robot_info(),
+                        "Legacy stream snapshot retained stale v2 descriptor");
+                require(!sensors->has_batterystate(),
+                        "Legacy stream snapshot retained stale battery");
+            }
+            Robot::Sensors zero_battery;
+            zero_battery.mutable_robot_info()->set_robot_id("unit-robot");
+            zero_battery.mutable_batterystate()->set_present(true);
+            zero_battery.mutable_batterystate()->set_percentage(0.0f);
+            require(stream->Write(zero_battery),
+                    "Could not restore v2 snapshot on active stream");
+            require(stream->Read(&reply),
+                    "No controls reply to restored v2 snapshot");
+            {
+                std::lock_guard<std::mutex> lock(service.getMutex());
+                require(sensors->robot_info().robot_id() == "unit-robot",
+                        "Restored stream snapshot lost robot identity");
+                require(sensors->has_batterystate() && sensors->batterystate().present(),
+                        "Zero-percent battery was confused with missing battery");
+                require(sensors->batterystate().percentage() == 0.0f,
+                        "Zero-percent battery value was not preserved");
+            }
+
             // Give the server time to enter its next blocking Read. Otherwise
             // an old implementation could briefly release the lock and make a
             // race-dependent false positive in this regression test.
