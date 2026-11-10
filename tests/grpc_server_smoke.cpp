@@ -378,6 +378,42 @@ int main() {
             require(map->zone_seq() == 12,
                     "Map-only frame reset legacy combined-stream zone sequence");
         }
+        // A transient map publication with no OccupancyGrid field must not
+        // erase the last valid grid. An explicitly present but empty grid,
+        // however, is a legitimate replacement (e.g. map reset).
+        {
+            grpc::ClientContext context;
+            context.set_deadline(std::chrono::system_clock::now() + std::chrono::seconds(5));
+            auto stream = stub->MapStream(&context);
+            require(static_cast<bool>(stream), "Cannot open map-presence stream");
+            map_service::GetMapResponse update;
+            map_service::GetMapRequest ack;
+            update.set_map_seq(48);
+            require(stream->Write(update) && stream->Read(&ack),
+                    "Absent-grid map snapshot was not acknowledged");
+            {
+                std::lock_guard<std::mutex> lock(service.getMapMutex());
+                require(map->has_map() && map->map().data() == std::string(1, char(43)),
+                        "Absent OccupancyGrid incorrectly erased previous map");
+            }
+            update.set_map_seq(49);
+            update.mutable_map()->set_width(0);
+            update.mutable_map()->set_height(0);
+            update.mutable_map()->clear_data();
+            require(stream->Write(update) && stream->Read(&ack),
+                    "Explicitly empty grid was not acknowledged");
+            stream->WritesDone();
+            require(stream->Finish().ok(), "Map-presence stream failed");
+            std::lock_guard<std::mutex> lock(service.getMapMutex());
+            require(map->map_seq() == 49 && map->has_map() &&
+                    map->map().width() == 0 && map->map().height() == 0 &&
+                    map->map().data().empty(),
+                    "Explicitly empty grid failed to replace previous map");
+            require(map->robotpose().position_x() == 9.0f &&
+                    map->zone_map().zones_size() == 1 && map->zone_map().zones(0).id() == 27 &&
+                    map->zone_seq() == 12,
+                    "Map presence transition erased independent pose or zones");
+        }
     } catch (const std::exception &e) {
         server->Shutdown();
         std::cerr << "gRPC transport smoke failed: " << e.what() << std::endl;
