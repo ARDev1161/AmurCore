@@ -310,13 +310,22 @@ int main() {
             require(stream && stream->Write(update), "Cannot send map-only refresh");
             map_service::GetMapRequest ack;
             require(stream->Read(&ack), "Map-only refresh was not acknowledged");
+            // A second map-only frame on the same RPC replaces the previous
+            // occupancy payload; the independently streamed pose and zones
+            // must remain intact.
+            update.set_map_seq(45);
+            grid->set_width(1);
+            grid->set_height(1);
+            grid->set_data(std::string(1, char(-1)));
+            require(stream->Write(update), "Cannot send replacement occupancy grid");
+            require(stream->Read(&ack), "Replacement occupancy grid was not acknowledged");
             stream->WritesDone();
             require(stream->Finish().ok(), "Map-only refresh RPC failed");
             std::lock_guard<std::mutex> lock(service.getMapMutex());
-            require(map->map_seq() == 44, "Map-only refresh did not advance map sequence");
-            require(map->has_map() && map->map().width() == 2 &&
+            require(map->map_seq() == 45, "Replacement map-only refresh did not advance map sequence");
+            require(map->has_map() && map->map().width() == 1 &&
                     map->map().height() == 1 && map->map().frame_id() == "map" &&
-                    map->map().data() == std::string({char(0), char(100)}),
+                    map->map().data() == std::string(1, char(-1)),
                     "Map-only refresh did not preserve occupancy grid payload");
             require(map->robotpose().position_x() == -2.5f,
                     "Map-only refresh erased independently streamed pose");
