@@ -301,6 +301,12 @@ int main() {
             auto stream = stub->MapStream(&context);
             map_service::GetMapResponse update;
             update.set_map_seq(44);
+            auto* grid = update.mutable_map();
+            grid->set_width(2);
+            grid->set_height(1);
+            grid->set_resolution(0.05f);
+            grid->set_frame_id("map");
+            grid->set_data(std::string("\\x00\\x64", 2));
             require(stream && stream->Write(update), "Cannot send map-only refresh");
             map_service::GetMapRequest ack;
             require(stream->Read(&ack), "Map-only refresh was not acknowledged");
@@ -308,6 +314,10 @@ int main() {
             require(stream->Finish().ok(), "Map-only refresh RPC failed");
             std::lock_guard<std::mutex> lock(service.getMapMutex());
             require(map->map_seq() == 44, "Map-only refresh did not advance map sequence");
+            require(map->has_map() && map->map().width() == 2 &&
+                    map->map().height() == 1 && map->map().frame_id() == "map" &&
+                    map->map().data().size() == 2,
+                    "Map-only refresh did not preserve occupancy grid payload");
             require(map->robotpose().position_x() == -2.5f,
                     "Map-only refresh erased independently streamed pose");
             require(map->zone_map().zones_size() == 1 && map->zone_map().zones(0).id() == 19,
