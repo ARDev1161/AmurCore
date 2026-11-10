@@ -306,7 +306,7 @@ int main() {
             grid->set_height(1);
             grid->set_resolution(0.05f);
             grid->set_frame_id("map");
-            grid->set_data(std::string("\\x00\\x64", 2));
+            grid->set_data(std::string({char(0), char(100)}));
             require(stream && stream->Write(update), "Cannot send map-only refresh");
             map_service::GetMapRequest ack;
             require(stream->Read(&ack), "Map-only refresh was not acknowledged");
@@ -316,7 +316,7 @@ int main() {
             require(map->map_seq() == 44, "Map-only refresh did not advance map sequence");
             require(map->has_map() && map->map().width() == 2 &&
                     map->map().height() == 1 && map->map().frame_id() == "map" &&
-                    map->map().data().size() == 2,
+                    map->map().data() == std::string({char(0), char(100)}),
                     "Map-only refresh did not preserve occupancy grid payload");
             require(map->robotpose().position_x() == -2.5f,
                     "Map-only refresh erased independently streamed pose");
