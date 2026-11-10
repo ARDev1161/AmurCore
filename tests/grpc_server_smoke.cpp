@@ -342,6 +342,42 @@ int main() {
             require(map->zone_map().zones_size() == 1 && map->zone_map().zones(0).id() == 19,
                     "Map-only refresh erased independently streamed zones");
         }
+        // Legacy MapStream can include map, pose and zones in one snapshot.
+        // An ensuing map-only frame must not discard these optional fields.
+        {
+            grpc::ClientContext context;
+            context.set_deadline(std::chrono::system_clock::now() + std::chrono::seconds(5));
+            auto stream = stub->MapStream(&context);
+            require(static_cast<bool>(stream), "Cannot open legacy combined MapStream");
+            map_service::GetMapResponse combined;
+            combined.set_map_seq(46);
+            combined.set_zone_seq(12);
+            combined.mutable_map()->set_width(1);
+            combined.mutable_map()->set_height(1);
+            combined.mutable_map()->set_data(std::string(1, char(42)));
+            combined.mutable_robotpose()->set_position_x(9.0f);
+            combined.mutable_zone_map()->add_zones()->set_id(27);
+            map_service::GetMapRequest ack;
+            require(stream->Write(combined) && stream->Read(&ack),
+                    "Combined legacy map/pose/zone snapshot was not acknowledged");
+            combined.clear_robotpose();
+            combined.clear_zone_map();
+            combined.set_map_seq(47);
+            combined.mutable_map()->set_data(std::string(1, char(43)));
+            require(stream->Write(combined) && stream->Read(&ack),
+                    "Map-only update after combined legacy snapshot was not acknowledged");
+            stream->WritesDone();
+            require(stream->Finish().ok(), "Combined legacy MapStream failed");
+            std::lock_guard<std::mutex> lock(service.getMapMutex());
+            require(map->map_seq() == 47 && map->map().data() == std::string(1, char(43)),
+                    "Legacy combined stream did not retain newest map");
+            require(map->robotpose().position_x() == 9.0f,
+                    "Map-only frame erased legacy combined-stream pose");
+            require(map->zone_map().zones_size() == 1 && map->zone_map().zones(0).id() == 27,
+                    "Map-only frame erased legacy combined-stream zones");
+            require(map->zone_seq() == 12,
+                    "Map-only frame reset legacy combined-stream zone sequence");
+        }
     } catch (const std::exception &e) {
         server->Shutdown();
         std::cerr << "gRPC transport smoke failed: " << e.what() << std::endl;
