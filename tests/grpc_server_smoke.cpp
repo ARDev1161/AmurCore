@@ -310,6 +310,16 @@ int main() {
             require(stream && stream->Write(update), "Cannot send map-only refresh");
             map_service::GetMapRequest ack;
             require(stream->Read(&ack), "Map-only refresh was not acknowledged");
+            {
+                std::lock_guard<std::mutex> lock(service.getMapMutex());
+                require(map->has_map() && map->map().width() == 2 &&
+                        map->map().height() == 1 &&
+                        map->map().data() == std::string({char(0), char(100)}),
+                        "First occupancy grid payload was not preserved");
+                require(map->robotpose().position_x() == -2.5f &&
+                        map->zone_map().zones_size() == 1,
+                        "First map-only frame erased pose or zones");
+            }
             // A second map-only frame on the same RPC replaces the previous
             // occupancy payload; the independently streamed pose and zones
             // must remain intact.
