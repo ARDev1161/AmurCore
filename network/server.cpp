@@ -77,7 +77,19 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
       {
           std::lock_guard<std::mutex> lock(muMap);
           if (map) {
-              *map = response;
+              // MapStream may carry only OccupancyGrid/map_seq. Preserve
+              // independently streamed pose and zones when omitted.
+              if (response.has_map()) {
+                  *map->mutable_map() = response.map();
+              }
+              map->set_map_seq(response.map_seq());
+              if (response.has_robotpose()) {
+                  *map->mutable_robotpose() = response.robotpose();
+              }
+              if (response.has_zone_map()) {
+                  *map->mutable_zone_map() = response.zone_map();
+                  map->set_zone_seq(response.zone_seq());
+              }
           }
       }
       if (!stream->Write(request)) {
