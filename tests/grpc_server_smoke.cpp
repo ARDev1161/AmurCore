@@ -292,6 +292,27 @@ int main() {
             require(map->robotpose().position_x() == -2.5f,
                     "Zone update reset latest pose");
         }
+        // A map-only snapshot must not erase pose and zones that arrived
+        // on their independent streams. The legacy server assigned the whole
+        // GetMapResponse and silently cleared both fields here.
+        {
+            grpc::ClientContext context;
+            context.set_deadline(std::chrono::system_clock::now() + std::chrono::seconds(5));
+            auto stream = stub->MapStream(&context);
+            map_service::GetMapResponse update;
+            update.set_map_seq(44);
+            require(stream && stream->Write(update), "Cannot send map-only refresh");
+            map_service::GetMapRequest ack;
+            require(stream->Read(&ack), "Map-only refresh was not acknowledged");
+            stream->WritesDone();
+            require(stream->Finish().ok(), "Map-only refresh RPC failed");
+            std::lock_guard<std::mutex> lock(service.getMapMutex());
+            require(map->map_seq() == 44, "Map-only refresh did not advance map sequence");
+            require(map->robotpose().position_x() == -2.5f,
+                    "Map-only refresh erased independently streamed pose");
+            require(map->zone_map().zones_size() == 1 && map->zone_map().zones(0).id() == 19,
+                    "Map-only refresh erased independently streamed zones");
+        }
     } catch (const std::exception &e) {
         server->Shutdown();
         std::cerr << "gRPC transport smoke failed: " << e.what() << std::endl;
