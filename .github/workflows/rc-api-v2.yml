@@ -45,8 +45,8 @@ jobs:
           echo "Mirrored protobuf contracts match"
       - name: Install protobuf compiler + C++ library
         run: |
-          sudo apt-get update
-          sudo apt-get install -y protobuf-compiler libprotobuf-dev python3-protobuf g++
+          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=30 update
+          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=30 install -y protobuf-compiler libprotobuf-dev python3-protobuf g++
       - name: Generate all Protobuf C++ and Python types
         shell: bash
         run: |
@@ -86,8 +86,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Qt5, OpenCV, SDL2, libconfig++, protobuf and gRPC
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ninja-build cmake pkg-config qtbase5-dev qttools5-dev qttools5-dev-tools \
+          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=30 update
+          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=30 install -y ninja-build cmake pkg-config qtbase5-dev qttools5-dev qttools5-dev-tools \
             libopencv-dev libsdl2-dev libconfig++-dev libgrpc++-dev protobuf-compiler \
             protobuf-compiler-grpc libprotobuf-dev
       - name: Configure with system gRPC
@@ -115,8 +115,8 @@ jobs:
           persist-credentials: false
       - name: Install C++ gRPC toolchain
         run: |
-          sudo apt-get update
-          sudo apt-get install -y g++ pkg-config libgrpc++-dev libprotobuf-dev protobuf-compiler protobuf-compiler-grpc
+          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=30 update
+          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=30 install -y g++ pkg-config libgrpc++-dev libprotobuf-dev protobuf-compiler protobuf-compiler-grpc
       - name: Compile and execute real peers over localhost
         shell: bash
         run: |
