@@ -6,7 +6,7 @@ The canonical [P0–P6 roadmap](https://github.com/ARDev1161/AmurCore/blob/feat/
 | --- | --- | --- |
 | P0 | Done | branches and architecture frozen |
 | P1 | **In progress** | protobuf mirror, old/new wire, Qt/ROS2, loopback, real robot/manual smoke |
-| P2 | Not started | configurable trusted ROS2 endpoints |
+| P2 | **In progress** (authorized overlap; P1 manual pending) | trusted local ROS2 endpoint profiles, two robot profiles, real Nav2 result/cancellation tests |
 | P3 | Not started | independent multi-robot sessions |
 | P4 | Not started | tasks/dialogue adapter |
 | P5 | Not started | change-only streams and safe teleop |
@@ -79,3 +79,9 @@ Subsequent rc_agent commits [`453be21f`](https://github.com/ARDev1161/rc_agent/c
 The [real AmurCore ↔ rc_agent gRPC integration](https://github.com/ARDev1161/AmurCore/blob/feat/rc-api-v2/tests/real_peer_smoke.cpp) now asserts the legacy `Sensors.video_stream.pipeline` is sent on initial unary exchange, an updated pipeline arrives alongside v2 RobotInfo without erasing the ID, a fresh reconnect snapshot clears the old pipeline, and an updated pipeline travels on legacy DataStreamExchange.
 
 [Source revision `348f4cdde1ce`](https://github.com/ARDev1161/AmurCore/commit/348f4cdde1ce7ea0d24e1e1468e24a18f5902aa1) — [CI 42503577387](https://github.com/ARDev1161/AmurCore/actions/runs/42503577387) (verify complete results for exact source SHA). This validates *metadata transport only*, not live GStreamer capture/playback. P1 hardware/VPN/video/GUI/Nav2 gates remain NOT RUN; no P2 work.
+
+## P2 auxiliary velocity profile binding — 2026-11-13
+
+The gateway binds the legacy `cmd_vel`, `cmd_vel_smoothed` and `cmd_vel_unsafety` selectors only to trusted local ROS2 endpoints from the libconfig robot profile. `cmd_vel_smoothed_topic` and `cmd_vel_nav_topic` are now exposed in the gateway's `Amur.API.endpoints` settings and passed to the ROS2 adapter; omitted values retain legacy defaults. Two independent config files and invalid-type/empty values are covered by gateway C++ GTests. This does **not** implement v2 velocity authorization.
+
+[Functional rc_agent test revision `15327dc0`](https://github.com/ARDev1161/rc_agent/commit/15327dc0eebd7b36294c742177d19f8607bb0692) · [source CI #43327905089](https://github.com/ARDev1161/rc_agent/actions/runs/43327905089) (verify completion for this revision). P1 software/manual and physical gates remain open.
