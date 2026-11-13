@@ -1,5 +1,7 @@
 # P1 manual acceptance: AmurCore ↔ rc_agent
 
+> Owner override (2026-11-13): v2-only acceptance. Legacy dev↔v2 pairing and [-255,255] velocity scaling are obsolete. Do not enable remote velocity until TTL/session/lease/deadman/watchdog are enforced.
+>
 > Scope: one selected robot at a time. This is a **manual hardware/VPN/UI gate**;
 > the automated loopback tests do not prove Nav2, 2D map, joystick or video
 > operation on real hardware. Record actual results in PLAN.md before closing P1.
@@ -29,9 +31,9 @@
 | Case | Action | Pass condition |
 |---|---|---|
 | P1-01 Descriptor | Connect v2 agent and open **Robot Info** in AmurCore | Stable robot ID/name, `RC API 2.0`, capabilities and axes match the robot config |
-| P1-02 Legacy agent | Connect previous `dev` agent to v2 AmurCore | Existing joystick, map, Nav2 and video controls still work; no fabricated v2 robot descriptor |
-| P1-03 Legacy workstation | Connect v2 agent to a separately built `dev` AmurCore | Existing commands and sensor messages still work; unknown `Sensors.robot_info` field does not cause disconnect |
-| P1-04 Motion | In a **safe simulation or wheels-off-ground** setup, send a short legacy joystick command and release it | Robot receives expected permitted motion; zero/stop works; no unsupported 6DoF axes are assumed operational |
+| P1-02 v2-only handshake | Connect v2 agent to v2 AmurCore | v2 handshake and capabilities work; legacy RPC is not required or accepted |
+| P1-03 v2-only wire | Exchange v2 commands and telemetry between feature builds | Commands and telemetry use only v2 messages; old dev pairing is not an acceptance requirement |
+| P1-04 Motion | In a **safe simulation or wheels-off-ground** setup, send a short v2 SI-unit velocity command through the authorized control path and release it | Robot receives expected permitted motion; zero/stop works; no unsupported 6DoF axes are assumed operational |
 | P1-05 Map/pose | With `/map` and TF2 publisher active, open map and send a navigation goal to Nav2 | 2D OccupancyGrid, position, waypoint and Nav2 feedback match the actual robot |
 | P1-06 Video | With a configured GStreamer sender, choose camera and disconnect/stop stream | Stream plays and stops; no stuck process or continuously sending camera video after disconnect (P5 gating not yet implemented; record the actual limitation) |
 | P1-07 Idle | Leave a connected robot stationary for 2 minutes, inspect GUI controls and task/navigation status | GUI remains responsive; no mutex stall during network read, no stuck Nav2 callbacks |
