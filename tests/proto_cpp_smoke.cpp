@@ -66,6 +66,31 @@ int main() {
   assert(parsed_velocity.sequence() == 42);
   assert(parsed_velocity.valid_for_ms() == 250);
 
+  // RobotInfo is an additive Sensors field: the legacy telemetry survives
+  // serialization alongside multiple robot-specific capability declarations.
+  Robot::Sensors additive;
+  additive.mutable_robot_info()->set_robot_id("robot-002");
+  additive.mutable_robot_info()->set_display_name("Sim robot");
+  additive.mutable_robot_info()->set_api_major(2);
+  auto* manual = additive.mutable_robot_info()->add_capabilities();
+  manual->set_id("manual.velocity");
+  manual->add_velocity_axes("linear.x");
+  manual->add_velocity_axes("angular.z");
+  additive.mutable_robot_info()->add_capabilities()->set_id("navigation.nav2");
+  additive.mutable_batterystate()->set_percentage(0.75);
+  additive.mutable_navcontrolstatus()->set_status(Navigation::IN_PROGRESS);
+  assert(additive.SerializeToString(&wire));
+  Robot::Sensors decoded;
+  assert(decoded.ParseFromString(wire));
+  assert(decoded.robot_info().robot_id() == "robot-002");
+  assert(decoded.robot_info().api_major() == 2);
+  assert(decoded.robot_info().capabilities_size() == 2);
+  assert(decoded.robot_info().capabilities(0).velocity_axes(0) == "linear.x");
+  assert(decoded.robot_info().capabilities(0).velocity_axes(1) == "angular.z");
+  assert(decoded.robot_info().capabilities(1).id() == "navigation.nav2");
+  assert(decoded.batterystate().percentage() == 0.75);
+  assert(decoded.navcontrolstatus().status() == Navigation::IN_PROGRESS);
+
   rc::api::v2::ChatMessage chat;
   chat.set_text("Are you there?");
   assert(chat.content_case() == rc::api::v2::ChatMessage::kText);
