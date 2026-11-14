@@ -41,8 +41,10 @@
 
 ## Automated checks (not substitutes)
 
-- AmurCore: C++ gRPC loopback server and offscreen Qt5 Robot Info tests, plus
-  Python cross-version `dev`↔v2 wire decoding.
+- AmurCore: C++ gRPC loopback server and offscreen Qt5 Robot Info tests,
+  plus v2 protobuf contract and serialization checks. Historical dev↔v2
+  interoperability results are not an acceptance gate under the 2026-11-13
+  v2-only owner override.
 - rc_agent: C++ gRPC loopback client against a mocked operator, including
   first stream snapshot from a new channel, and ROS2 Humble `colcon` build/tests.
 - CI sources and exact current results are in the two projects' `PLAN.md`.
