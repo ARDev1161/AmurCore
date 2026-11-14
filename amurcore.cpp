@@ -1,5 +1,6 @@
 #include "amurcore.h"
 #include <chrono>
+#include "logic/batterystatus.h"
 #include "ui_AmurCore.h"
 
 AmurCore::AmurCore(QWidget *parent) :
@@ -56,6 +57,10 @@ void AmurCore::initialize()
     connectDialog = new ConnectDialog(this, network, repo);
     statusLabel = new QLabel(statusMessage, this);
     ui->statusbar->addPermanentWidget(statusLabel);
+    batteryStatusLabel = new QLabel(this);
+    batteryStatusLabel->setObjectName("batteryStatusLabel");
+    batteryStatusLabel->setVisible(false);
+    ui->statusbar->addPermanentWidget(batteryStatusLabel);
 
     std::mutex& mapMutex = network->getServerInstance()->getMapMutex(); // MapStream mutex
     grpcMutex = &network->getServerInstance()->getMutex(); // DataStreamExchange mutex
@@ -88,6 +93,7 @@ void AmurCore::initialize()
                 startCap();
             }
             updateVideoSources();
+            updateBatteryStatus();
         });
         sensorsUpdateTimer->start();
     }
@@ -148,6 +154,17 @@ void AmurCore::mapDialogOpen()
 
 void AmurCore::robotInfoDialogOpen()
 {
+    rc::api::v2::RobotInfo info;
+    if (sensors) {
+        std::unique_lock<std::mutex> lock;
+        if (grpcMutex) {
+            lock = std::unique_lock<std::mutex>(*grpcMutex);
+        }
+        if (sensors->has_robot_info()) {
+            info.CopyFrom(sensors->robot_info());
+        }
+    }
+    robotInfoDialog->setRobotInfo(info);
     robotInfoDialog->show(); // Немодальное открытие
 }
 
@@ -304,11 +321,48 @@ void AmurCore::undistortMat(Mat &inMat, Mat &outMat)
         outMat = inMat;
 }
 
+void AmurCore::updateBatteryStatus()
+{
+    if (!batteryStatusLabel || !sensors) {
+        return;
+    }
+    if (!network || network->getRobots().isEmpty()) {
+        batteryStatusLabel->clear();
+        batteryStatusLabel->setVisible(false);
+        return;
+    }
+
+    // Take a consistent copy; the ROS agent updates this protobuf under the
+    // same mutex used by the operator's gRPC receive path.
+    Power::BatteryState battery;
+    bool available = false;
+    {
+        std::unique_lock<std::mutex> lock;
+        if (grpcMutex) {
+            lock = std::unique_lock<std::mutex>(*grpcMutex);
+        }
+        available = sensors->has_batterystate();
+        if (available) {
+            battery.CopyFrom(sensors->batterystate());
+        }
+    }
+
+    const QString display = available ? batteryStatusText(battery) : QString{};
+    batteryStatusLabel->setText(display);
+    batteryStatusLabel->setVisible(!display.isEmpty());
+}
+
 void AmurCore::updateStatusMessage()
 {
     const RobotList robots = network->getRobots();
     if (robots.isEmpty()) {
         currentRobotId.clear();
+        // The last received Sensors snapshot can outlive its gRPC peer.
+        // Never display that robot's battery after disconnect.
+        if (batteryStatusLabel) {
+            batteryStatusLabel->clear();
+            batteryStatusLabel->setVisible(false);
+        }
         if (statusMessage != "No robot connected") {
             statusMessage = "No robot connected";
             statusLabel->setText(statusMessage);

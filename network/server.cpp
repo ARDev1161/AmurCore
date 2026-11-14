@@ -45,18 +45,24 @@ grpc::Status grpcServer::DataExchange ([[maybe_unused]] grpc::ServerContext* con
 grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContext* context,
                                 grpc::ServerReaderWriter<Controls, Sensors >* stream)
 {
-    std::unique_lock<std::mutex> ul(muServer, std::defer_lock);
-
-    while(true)
+    // Network I/O must never hold the mutex also used by the operator UI.
+    // Read into a local message; publish a consistent sensor/control snapshot
+    // under the lock, then write the response without blocking UI access.
+    Sensors incoming;
+    while (stream->Read(&incoming))
     {
-      ul.lock();
-      if(!(stream->Read(sensors.get())))
-          return grpc::Status::OK;
-      // Write controls
-      stream->Write(*controls);
-      ul.unlock();
-      notifySensorsUpdated();
+        Controls outgoing;
+        {
+            std::lock_guard<std::mutex> lock(muServer);
+            *sensors = incoming;
+            outgoing = *controls;
+        }
+        notifySensorsUpdated();
+        if (!stream->Write(outgoing)) {
+            break;
+        }
     }
+    return grpc::Status::OK;
 }
 
 grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
@@ -71,10 +77,24 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
       {
           std::lock_guard<std::mutex> lock(muMap);
           if (map) {
-              *map = response;
+              // MapStream may carry only OccupancyGrid/map_seq. Preserve
+              // independently streamed pose and zones when omitted.
+              if (response.has_map()) {
+                  *map->mutable_map() = response.map();
+              }
+              map->set_map_seq(response.map_seq());
+              if (response.has_robotpose()) {
+                  *map->mutable_robotpose() = response.robotpose();
+              }
+              if (response.has_zone_map()) {
+                  *map->mutable_zone_map() = response.zone_map();
+                  map->set_zone_seq(response.zone_seq());
+              }
           }
       }
-      stream->Write(request);
+      if (!stream->Write(request)) {
+          return grpc::Status::OK;
+      }
     }
 
     return grpc::Status::OK;
@@ -96,7 +116,9 @@ grpc::Status grpcServer::PoseStream([[maybe_unused]] grpc::ServerContext* contex
               *map->mutable_robotpose() = state.pose();
           }
       }
-      stream->Write(request);
+      if (!stream->Write(request)) {
+          return grpc::Status::OK;
+      }
     }
 
     return grpc::Status::OK;
@@ -118,7 +140,9 @@ grpc::Status grpcServer::ZoneStream([[maybe_unused]] grpc::ServerContext* contex
               *map->mutable_zone_map() = state.zone_map();
           }
       }
-      stream->Write(request);
+      if (!stream->Write(request)) {
+          return grpc::Status::OK;
+      }
     }
 
     return grpc::Status::OK;
