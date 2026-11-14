@@ -80,8 +80,8 @@ success does not prove VPN traversal.
 | Gate | Action | Evidence and pass condition |
 |---|---|---|
 | P1-01 | Start v2 agent with a unique nonempty robot_id and connect AmurCore; open Robot Info | Screenshot/log confirms exact configured ID, display name, API 2.0, capabilities and axes |
-| P1-02/03 | Run both cross-version *application* pairings with separately built `dev` binaries | Real legacy controls and telemetry survive both directions; unknown RobotInfo ignored; protobuf-only CI is not sufficient |
-| P1-04 | With Nav2 idle, send a short legacy joystick command and release it | Capture `/cmd_vel` with message type and timestamps; simulated robot moves and stops after release; never infer a physical safety guarantee |
+| P1-02/03 | Connect v2 operator and v2 agent; exchange v2 commands and telemetry, then reconnect | Confirm v2-only handshake, descriptor and capabilities; no legacy RPC or dev pairing is required; protobuf-only CI is not sufficient |
+| P1-04 | With Nav2 idle, use an authorized v2 session/lease and deadman to send a short SI-unit velocity command, then release it | Capture `/cmd_vel` type, timestamps, m/s and rad/s values and zero stop; if authenticated v2 transport is not implemented, record BLOCKED/NOT RUN, never fall back to legacy or bypass VelocityGate |
 | P1-05 | With map, TF and Nav2 actually available, display map/pose and send a reachable Nav2 goal | Capture map/pose, Nav2 action feedback and result; goal accepted alone is not success |
 | P1-06 | Use a separately configured GStreamer test sender if TurtleBot3 has no camera | Video starts and stops on disconnect; note that inactive-robot video gating belongs to P5 |
 | P1-07 | Keep simulator stationary for two minutes with an open GUI | Controls remain responsive, no blocked gRPC/Qt callbacks |
