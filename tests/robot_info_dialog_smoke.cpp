@@ -109,6 +109,27 @@ int main(int argc, char **argv) {
                     !text.contains("manual.velocity"),
                 "Missing protocol major was accepted");
 
+        // A valid descriptor arriving after an incompatible/anonymous peer
+        // must restore the view from the new snapshot, without stale fields.
+        // Minor v2 revisions remain compatible with the supported major.
+        rc::api::v2::RobotInfo recovered;
+        recovered.set_robot_id("recovered-004");
+        recovered.set_display_name("Recovered robot");
+        recovered.set_api_major(2);
+        recovered.set_api_minor(7);
+        recovered.add_capabilities()->set_id("navigation.nav2");
+        dialog.setRobotInfo(recovered);
+        text = view->toPlainText();
+        require(text.contains("recovered-004") &&
+                    text.contains("Recovered robot") &&
+                    text.contains("RC API: 2.7") &&
+                    text.contains("navigation.nav2"),
+                "Valid v2 minor-version descriptor failed to recover UI");
+        require(!text.contains("future-003") &&
+                    !text.contains("manual.velocity") &&
+                    !text.contains("dog-002"),
+                "Recovered descriptor retained stale peer capabilities");
+
         dialog.setRobotInfo(rc::api::v2::RobotInfo());
         text = view->toPlainText();
         require(text.contains("No v2 robot descriptor") &&
