@@ -53,8 +53,10 @@ int main(int argc, char **argv) {
         text = view->toPlainText();
         require(text.contains("dog-002") && text.contains("navigation.nav2"),
                 "Robot selection replacement missing");
-        require(!text.contains("diff-001") && !text.contains("manual.velocity"),
-                "Stale previous robot descriptor shown");
+        require(!text.contains("diff-001") && !text.contains("manual.velocity") &&
+                    !text.contains("linear.x") && !text.contains("angular.z") &&
+                    !text.contains("map.2d"),
+                "Stale previous robot identity, axes or capabilities shown");
 
         // Blank identity is legacy mode even when capabilities are populated.
         rc::api::v2::RobotInfo anonymous;
