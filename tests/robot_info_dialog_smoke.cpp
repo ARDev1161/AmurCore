@@ -71,6 +71,21 @@ int main(int argc, char **argv) {
                     !text.contains("Anonymous"),
                 "Anonymous descriptor leaked stale or untrusted metadata");
 
+        // Whitespace-only IDs are not stable robot identities; reject them
+        // without retaining the previously displayed robot or capabilities.
+        rc::api::v2::RobotInfo whitespace;
+        whitespace.set_robot_id("  \\t  ");
+        whitespace.set_display_name("Whitespace robot");
+        whitespace.set_api_major(2);
+        whitespace.add_capabilities()->set_id("manual.velocity");
+        dialog.setRobotInfo(whitespace);
+        text = view->toPlainText();
+        require(text.contains("No v2 robot descriptor") &&
+                    !text.contains("Whitespace robot") &&
+                    !text.contains("manual.velocity") &&
+                    !text.contains("dog-002"),
+                "Whitespace-only robot ID leaked untrusted or stale metadata");
+
         // A descriptor from an incompatible protocol major must never expose
         // capabilities as if they were supported by this v2-only UI.
         rc::api::v2::RobotInfo unsupported;
