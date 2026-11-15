@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
         // Whitespace-only IDs are not stable robot identities; reject them
         // without retaining the previously displayed robot or capabilities.
         rc::api::v2::RobotInfo whitespace;
-        whitespace.set_robot_id("  \\t  ");
+        whitespace.set_robot_id("  \t  ");
         whitespace.set_display_name("Whitespace robot");
         whitespace.set_api_major(2);
         whitespace.add_capabilities()->set_id("manual.velocity");
