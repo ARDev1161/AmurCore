@@ -25,7 +25,7 @@ void RobotInfoDialog::setRobotInfo(const rc::api::v2::RobotInfo &info)
     if (!capabilitiesView) {
         return;
     }
-    if (info.robot_id().empty()) {
+    if (info.robot_id().empty() || info.api_major() != 2) {
         capabilitiesView->setPlainText(tr("No v2 robot descriptor received"));
         return;
     }
