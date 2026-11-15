@@ -71,6 +71,29 @@ int main(int argc, char **argv) {
                     !text.contains("Anonymous"),
                 "Anonymous descriptor leaked stale or untrusted metadata");
 
+        // A descriptor from an incompatible protocol major must never expose
+        // capabilities as if they were supported by this v2-only UI.
+        rc::api::v2::RobotInfo unsupported;
+        unsupported.set_robot_id("future-003");
+        unsupported.set_display_name("Unsupported robot");
+        unsupported.set_api_major(3);
+        unsupported.add_capabilities()->set_id("manual.velocity");
+        dialog.setRobotInfo(unsupported);
+        text = view->toPlainText();
+        require(text.contains("No v2 robot descriptor") &&
+                    !text.contains("future-003") &&
+                    !text.contains("Unsupported robot") &&
+                    !text.contains("manual.velocity"),
+                "Unsupported protocol major leaked capabilities");
+
+        // A missing protocol major (protobuf default zero) also fails closed.
+        unsupported.set_api_major(0);
+        dialog.setRobotInfo(unsupported);
+        text = view->toPlainText();
+        require(text.contains("No v2 robot descriptor") &&
+                    !text.contains("manual.velocity"),
+                "Missing protocol major was accepted");
+
         dialog.setRobotInfo(rc::api::v2::RobotInfo());
         text = view->toPlainText();
         require(text.contains("No v2 robot descriptor") &&
