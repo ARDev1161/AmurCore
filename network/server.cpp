@@ -25,15 +25,25 @@ void grpcServer::setProtosPointers( std::shared_ptr<Controls> controlsPtr,
                                     std::shared_ptr<Sensors> sensorsPtr,
                                     std::shared_ptr<map_service::GetMapResponse> mapPtr)
 {
-    this->controls = controlsPtr;
-    this->sensors = sensorsPtr;
-    this->map = mapPtr;
+    {
+        std::lock_guard<std::mutex> control_lock(muServer);
+        controls = std::move(controlsPtr);
+        sensors = std::move(sensorsPtr);
+    }
+    {
+        std::lock_guard<std::mutex> map_lock(muMap);
+        map = std::move(mapPtr);
+    }
 }
 
-grpc::Status grpcServer::DataExchange ([[maybe_unused]] grpc::ServerContext* context,
+grpc::Status grpcServer::DataExchange (grpc::ServerContext* context,
                           const Sensors* request, Controls* reply)
 {
   std::unique_lock<std::mutex> ul(muServer);
+  if (context->IsCancelled())
+      return grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected");
+  if (!sensors || !controls)
+      return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "transport state unavailable");
   *sensors = *request;
   *reply = *controls;
   ul.unlock();
@@ -54,6 +64,10 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
         Controls outgoing;
         {
             std::lock_guard<std::mutex> lock(muServer);
+            if (context->IsCancelled())
+                return grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected");
+            if (!sensors || !controls)
+                return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "transport state unavailable");
             *sensors = incoming;
             outgoing = *controls;
         }
