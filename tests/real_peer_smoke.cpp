@@ -448,6 +448,20 @@ int main() {
                     "Stopped unary peer modified previously valid controls");
         }
 
+        // Rebinding to absent operator state must fail closed without a crash.
+        // Restore the state afterward for the independent disconnect test.
+        svc.setProtosPointers(nullptr, nullptr, nullptr);
+        {
+            grpc::ClientContext ctx;
+            auto stub = Robot::ClientOnRobot::NewStub(channel);
+            Robot::Sensors incoming;
+            Robot::Controls rejected_reply;
+            const auto status = stub->DataExchange(&ctx, incoming, &rejected_reply);
+            require(status.error_code() == grpc::StatusCode::FAILED_PRECONDITION,
+                    "Unbound operator unary RPC did not fail closed");
+        }
+        svc.setProtosPointers(controls, observed, operator_map);
+
         // P1 reconnect failure: a cleanly shut down operator must not make
         // one-shot rc_agent DataExchange block forever or inject empty controls.
         server->Shutdown();
