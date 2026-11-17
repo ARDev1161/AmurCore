@@ -79,7 +79,9 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
         }
         notifySensorsUpdated();
         if (!stream->Write(outgoing)) {
-            break;
+            return context->IsCancelled()
+                ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected")
+                : grpc::Status(grpc::StatusCode::UNAVAILABLE, "control stream write failed");
         }
     }
     if (context->IsCancelled())
