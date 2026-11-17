@@ -59,10 +59,10 @@ grpc::Status grpcClient::DataStreamExchange()
             std::unique_lock<std::mutex> lock(muClient);
 
             // Write controls
-            stream->Write(*controls);
+            if (!stream->Write(*controls)) break;
 
-            // Read sensors & write to protos
-            stream->Read(sensors.get());
+            // A failed read must not notify the UI with a stale snapshot.
+            if (!stream->Read(sensors.get())) break;
         }
         emit sensorsUpdated();
     }
@@ -98,10 +98,10 @@ grpc::Status grpcClient::MapStream()
             std::unique_lock<std::mutex> lock(muMap);
 
             // Request map
-            stream->Write(request);
+            if (!stream->Write(request)) break;
 
-            // Read map
-            stream->Read(map.get());
+            // A failed read must not publish a stale map update.
+            if (!stream->Read(map.get())) break;
         }
         emit mapUpdated();
     }
