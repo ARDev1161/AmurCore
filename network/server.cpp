@@ -117,7 +117,8 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
           }
       }
       if (!stream->Write(request)) {
-          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
+          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected")
+                                        : grpc::Status(grpc::StatusCode::UNAVAILABLE, "map/pose/zone stream write failed");
       }
     }
 
@@ -141,7 +142,8 @@ grpc::Status grpcServer::PoseStream(grpc::ServerContext* context,
           }
       }
       if (!stream->Write(request)) {
-          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
+          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected")
+                                        : grpc::Status(grpc::StatusCode::UNAVAILABLE, "map/pose/zone stream write failed");
       }
     }
 
@@ -165,7 +167,8 @@ grpc::Status grpcServer::ZoneStream(grpc::ServerContext* context,
           }
       }
       if (!stream->Write(request)) {
-          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
+          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected")
+                                        : grpc::Status(grpc::StatusCode::UNAVAILABLE, "map/pose/zone stream write failed");
       }
     }
 
