@@ -90,8 +90,9 @@ int main() {
             require(stream && stream->Write(modern), "Could not send v2 stream snapshot");
             Robot::Controls reply;
             require(stream->Read(&reply), "Could not read streamed controls");
-            require(reply.basecontrol().angularvelocity() == -3.0,
-                    "Streaming controls payload changed");
+            require(reply.basecontrol().linearvelocity() == 0.0 &&
+                    reply.basecontrol().angularvelocity() == 0.0,
+                    "Unauthenticated streaming controls must not carry motion");
 
             // A legacy peer may reuse an established stream after a v2
             // snapshot. Each Sensors frame is a complete snapshot: absent
