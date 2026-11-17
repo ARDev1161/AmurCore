@@ -54,8 +54,8 @@ int main() {
             grpc::ClientContext context;
             require(stub->DataExchange(&context, legacy, &reply).ok(),
                     "Legacy unary DataExchange failed");
-            require(reply.basecontrol().linearvelocity() == 17.5,
-                    "Legacy drive control changed");
+            require(reply.basecontrol().linearvelocity() == 0.0,
+                    "Disconnected or unauthenticated control velocity must be zero");
             std::lock_guard<std::mutex> lock(service.getMutex());
             require(!sensors->has_robot_info(), "Legacy payload invented robot metadata");
         }
@@ -156,8 +156,8 @@ int main() {
             grpc::ClientContext context;
             require(stub->DataExchange(&context, legacy_after_v2, &reply).ok(),
                     "Legacy unary reconnect after v2 stream failed");
-            require(reply.basecontrol().linearvelocity() == 17.5,
-                    "Legacy command reply changed after v2 stream");
+            require(reply.basecontrol().linearvelocity() == 0.0,
+                    "Disconnected or unauthenticated control velocity must be zero");
             std::lock_guard<std::mutex> lock(service.getMutex());
             require(!sensors->has_robot_info(),
                     "Legacy reconnect retained stale v2 descriptor");
