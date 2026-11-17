@@ -108,8 +108,8 @@ int main() {
         check(svc, *observed, "", 0.25);
         {
             std::lock_guard<std::mutex> guard(*agent.getMutex());
-            require(agent_controls->basecontrol().linearvelocity() == 4.5,
-                    "Legacy controls reply changed");
+            require(agent_controls->basecontrol().linearvelocity() == 0.0,
+                    "Disconnected or unauthenticated control velocity must be zero");
         }
         advertise(*agent_sensors);
         agent_sensors->mutable_batterystate()->set_percentage(0.5);
@@ -144,8 +144,8 @@ int main() {
         }
         {
             std::lock_guard<std::mutex> guard(*fresh.getMutex());
-            require(fresh_controls->basecontrol().linearvelocity() == 4.5,
-                    "Legacy controls lost on reconnect");
+            require(fresh_controls->basecontrol().linearvelocity() == 0.0,
+                    "Disconnected or unauthenticated control velocity must be zero");
         }
         require(notifications.load() == 4 && lock_free.load(),
                 "Missing callback or callback holds GUI mutex");
@@ -473,8 +473,8 @@ int main() {
                 "One-shot real peer did not return after operator disconnect");
         {
             std::lock_guard<std::mutex> guard(*fresh.getMutex());
-            require(fresh_controls->basecontrol().linearvelocity() == 4.5,
-                    "Disconnected peer overwrote the previous controls");
+            require(fresh_controls->basecontrol().linearvelocity() == 0.0,
+                    "Disconnected or unauthenticated control velocity must be zero");
         }
     } catch (const std::exception &e) {
         server->Shutdown();
