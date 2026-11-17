@@ -89,7 +89,7 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
     while(true)
     {
       if(!(stream->Read(&response)))
-          return grpc::Status::OK;
+          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
       {
           std::lock_guard<std::mutex> lock(muMap);
           if (map) {
@@ -109,14 +109,14 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
           }
       }
       if (!stream->Write(request)) {
-          return grpc::Status::OK;
+          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
       }
     }
 
-    return grpc::Status::OK;
+    return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
 }
 
-grpc::Status grpcServer::PoseStream([[maybe_unused]] grpc::ServerContext* context,
+grpc::Status grpcServer::PoseStream(grpc::ServerContext* context,
                                     grpc::ServerReaderWriter<map_service::PoseRequest, map_service::PoseState>* stream)
 {
     map_service::PoseRequest request;
@@ -125,7 +125,7 @@ grpc::Status grpcServer::PoseStream([[maybe_unused]] grpc::ServerContext* contex
     while(true)
     {
       if(!(stream->Read(&state)))
-          return grpc::Status::OK;
+          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
       {
           std::lock_guard<std::mutex> lock(muMap);
           if (map) {
@@ -133,14 +133,14 @@ grpc::Status grpcServer::PoseStream([[maybe_unused]] grpc::ServerContext* contex
           }
       }
       if (!stream->Write(request)) {
-          return grpc::Status::OK;
+          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
       }
     }
 
-    return grpc::Status::OK;
+    return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
 }
 
-grpc::Status grpcServer::ZoneStream([[maybe_unused]] grpc::ServerContext* context,
+grpc::Status grpcServer::ZoneStream(grpc::ServerContext* context,
                                     grpc::ServerReaderWriter<map_service::ZoneRequest, map_service::ZoneState>* stream)
 {
     map_service::ZoneRequest request;
@@ -149,7 +149,7 @@ grpc::Status grpcServer::ZoneStream([[maybe_unused]] grpc::ServerContext* contex
     while(true)
     {
       if(!(stream->Read(&state)))
-          return grpc::Status::OK;
+          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
       {
           std::lock_guard<std::mutex> lock(muMap);
           if (map) {
@@ -157,11 +157,11 @@ grpc::Status grpcServer::ZoneStream([[maybe_unused]] grpc::ServerContext* contex
           }
       }
       if (!stream->Write(request)) {
-          return grpc::Status::OK;
+          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
       }
     }
 
-    return grpc::Status::OK;
+    return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
 }
 
 // TODO - make async methods
