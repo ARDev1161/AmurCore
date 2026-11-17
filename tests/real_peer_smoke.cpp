@@ -444,8 +444,8 @@ int main() {
                 "Stopped unary peer did not return promptly");
         {
             std::lock_guard<std::mutex> guard(*stopped_client.getMutex());
-            require(agent_controls->basecontrol().linearvelocity() == 4.5,
-                    "Stopped unary peer modified previously valid controls");
+            require(!agent_controls->has_basecontrol(),
+                    "Stopped unary peer retained stale operator controls");
         }
 
         // Rebinding to absent operator state must fail closed without a crash.
