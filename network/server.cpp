@@ -76,6 +76,8 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
             break;
         }
     }
+    if (context->IsCancelled())
+        return grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected");
     return grpc::Status::OK;
 }
 
