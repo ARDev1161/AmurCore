@@ -79,21 +79,6 @@ void ManualControl::checkChangeLightButton(int buttonNumber)
     }
 }
 
-int ManualControl::baseControlProcess(int xAxis, int yAxis)
-{
-    if(!baseControlStrategy)
-        return -1;
-
-    const auto [linear, angular] = baseControlStrategy->velocities(*joyState, moveSettings.joyBindings);
-
-    controls->mutable_basecontrol()->set_linearvelocity(linear);
-    controls->mutable_basecontrol()->set_angularvelocity(angular);
-
-    controls->mutable_basecontrol()->set_controllevel(baseControlLevel);
-
-    return 0;
-}
-
 int ManualControl::moveCameraProcess(int xAxis, int yAxis)
 {
     controls->mutable_cameraservos()->set_xangle( xAxis );
