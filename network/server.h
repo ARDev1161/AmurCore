@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <functional>
+#include <cstdint>
 
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
@@ -20,6 +21,7 @@ class grpcServer final : public ClientOnRobot::Service
   std::shared_ptr<map_service::GetMapResponse> map;
 
   std::mutex muServer;
+  std::uint64_t state_generation_ = 0; // Rebinding invalidates in-flight streams.
   std::mutex muMap;
   std::mutex muSensorsUpdatedCb;
   std::function<void()> sensors_updated_cb_;
