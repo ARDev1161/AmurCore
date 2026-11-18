@@ -28,8 +28,14 @@ ManualControl::ManualControl(std::shared_ptr<JoyState> joyState,
 
 int ManualControl::update()
 {
-    if(joyState->joyId < 0)
-         return joyState->joyId;
+    if (joyState->joyId < 0) {
+        // A disconnected joystick must never leave its last velocity cached.
+        std::lock_guard<std::mutex> lock(grpcMutex_);
+        controls->mutable_basecontrol()->set_linearvelocity(0.0);
+        controls->mutable_basecontrol()->set_angularvelocity(0.0);
+        lastJoyState = *joyState;
+        return joyState->joyId;
+    }
 
     if(lastJoyState.joyId < 0)
         lastJoyState = *joyState;
