@@ -62,7 +62,6 @@ class ManualControl
     void checkChangeRelayButton(int buttonNumber);
     void checkChangeLightButton(int buttonNumber);
 
-    int baseControlProcess(int xAxis, int yAxis);
     int moveCameraProcess(int xAxis, int yAxis);
 public:
     ManualControl(std::shared_ptr<JoyState> joyState,
