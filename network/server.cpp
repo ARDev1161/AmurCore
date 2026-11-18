@@ -123,8 +123,12 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
     }
     while(true)
     {
-      if(!(stream->Read(&response)))
-          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
+      if(!(stream->Read(&response))) {
+          if (context->IsCancelled()) return grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected");
+          std::lock_guard<std::mutex> lock(muMap);
+          return (!map || map_generation_ != bound_map_generation)
+              ? grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state generation changed") : grpc::Status::OK;
+      }
       {
           std::lock_guard<std::mutex> lock(muMap);
           if (!map || map_generation_ != bound_map_generation)
@@ -169,8 +173,12 @@ grpc::Status grpcServer::PoseStream(grpc::ServerContext* context,
     }
     while(true)
     {
-      if(!(stream->Read(&state)))
-          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
+      if(!(stream->Read(&state))) {
+          if (context->IsCancelled()) return grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected");
+          std::lock_guard<std::mutex> lock(muMap);
+          return (!map || map_generation_ != bound_map_generation)
+              ? grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state generation changed") : grpc::Status::OK;
+      }
       {
           std::lock_guard<std::mutex> lock(muMap);
           if (!map || map_generation_ != bound_map_generation)
@@ -203,8 +211,12 @@ grpc::Status grpcServer::ZoneStream(grpc::ServerContext* context,
     }
     while(true)
     {
-      if(!(stream->Read(&state)))
-          return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
+      if(!(stream->Read(&state))) {
+          if (context->IsCancelled()) return grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected");
+          std::lock_guard<std::mutex> lock(muMap);
+          return (!map || map_generation_ != bound_map_generation)
+              ? grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state generation changed") : grpc::Status::OK;
+      }
       {
           std::lock_guard<std::mutex> lock(muMap);
           if (!map || map_generation_ != bound_map_generation)
