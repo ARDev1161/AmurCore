@@ -29,6 +29,7 @@ void grpcServer::setProtosPointers( std::shared_ptr<Controls> controlsPtr,
         std::lock_guard<std::mutex> control_lock(muServer);
         controls = std::move(controlsPtr);
         sensors = std::move(sensorsPtr);
+        ++state_generation_;
     }
     {
         std::lock_guard<std::mutex> map_lock(muMap);
@@ -64,6 +65,13 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
     // Network I/O must never hold the mutex also used by the operator UI.
     // Read into a local message; publish a consistent sensor/control snapshot
     // under the lock, then write the response without blocking UI access.
+    std::uint64_t bound_generation;
+    {
+        std::lock_guard<std::mutex> lock(muServer);
+        if (!controls || !sensors)
+            return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "transport state unavailable");
+        bound_generation = state_generation_;
+    }
     Sensors incoming;
     while (stream->Read(&incoming))
     {
@@ -72,8 +80,8 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
             std::lock_guard<std::mutex> lock(muServer);
             if (context->IsCancelled())
                 return grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected");
-            if (!sensors || !controls)
-                return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "transport state unavailable");
+            if (!sensors || !controls || state_generation_ != bound_generation)
+                return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "transport state generation changed");
             *sensors = incoming;
             outgoing = *controls;
             // Never leak stale/unleased motion from any legacy GUI writer.
@@ -92,6 +100,11 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
     }
     if (context->IsCancelled())
         return grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected");
+    {
+        std::lock_guard<std::mutex> lock(muServer);
+        if (!controls || !sensors || state_generation_ != bound_generation)
+            return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "transport state generation changed");
+    }
     return grpc::Status::OK;
 }
 
