@@ -49,6 +49,9 @@ grpc::Status grpcServer::DataExchange (grpc::ServerContext* context,
   // The generic Controls exchange is not an authenticated v2 velocity path.
   reply->mutable_basecontrol()->set_linearvelocity(0.0);
   reply->mutable_basecontrol()->set_angularvelocity(0.0);
+  reply->clear_wheelmotors();
+  reply->mutable_handmotors()->set_leftpower(0);
+  reply->mutable_handmotors()->set_rightpower(0);
   ul.unlock();
   notifySensorsUpdated();
 
@@ -76,6 +79,9 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
             // Never leak stale/unleased motion from any legacy GUI writer.
             outgoing.mutable_basecontrol()->set_linearvelocity(0.0);
             outgoing.mutable_basecontrol()->set_angularvelocity(0.0);
+            outgoing.clear_wheelmotors();
+            outgoing.mutable_handmotors()->set_leftpower(0);
+            outgoing.mutable_handmotors()->set_rightpower(0);
         }
         notifySensorsUpdated();
         if (!stream->Write(outgoing)) {
