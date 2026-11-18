@@ -34,6 +34,7 @@ void grpcServer::setProtosPointers( std::shared_ptr<Controls> controlsPtr,
     {
         std::lock_guard<std::mutex> map_lock(muMap);
         map = std::move(mapPtr);
+        ++map_generation_;
     }
 }
 
@@ -113,12 +114,21 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
 {
     map_service::GetMapRequest request;
     map_service::GetMapResponse response;
+    std::uint64_t bound_map_generation;
+    {
+        std::lock_guard<std::mutex> lock(muMap);
+        if (!map)
+            return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state unavailable");
+        bound_map_generation = map_generation_;
+    }
     while(true)
     {
       if(!(stream->Read(&response)))
           return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
       {
           std::lock_guard<std::mutex> lock(muMap);
+          if (!map || map_generation_ != bound_map_generation)
+              return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state generation changed");
           if (map) {
               // MapStream may carry only OccupancyGrid/map_seq. Preserve
               // independently streamed pose and zones when omitted.
@@ -150,12 +160,21 @@ grpc::Status grpcServer::PoseStream(grpc::ServerContext* context,
     map_service::PoseRequest request;
     map_service::PoseState state;
 
+    std::uint64_t bound_map_generation;
+    {
+        std::lock_guard<std::mutex> lock(muMap);
+        if (!map)
+            return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state unavailable");
+        bound_map_generation = map_generation_;
+    }
     while(true)
     {
       if(!(stream->Read(&state)))
           return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
       {
           std::lock_guard<std::mutex> lock(muMap);
+          if (!map || map_generation_ != bound_map_generation)
+              return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state generation changed");
           if (map) {
               *map->mutable_robotpose() = state.pose();
           }
@@ -175,12 +194,21 @@ grpc::Status grpcServer::ZoneStream(grpc::ServerContext* context,
     map_service::ZoneRequest request;
     map_service::ZoneState state;
 
+    std::uint64_t bound_map_generation;
+    {
+        std::lock_guard<std::mutex> lock(muMap);
+        if (!map)
+            return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state unavailable");
+        bound_map_generation = map_generation_;
+    }
     while(true)
     {
       if(!(stream->Read(&state)))
           return context->IsCancelled() ? grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected") : grpc::Status::OK;
       {
           std::lock_guard<std::mutex> lock(muMap);
+          if (!map || map_generation_ != bound_map_generation)
+              return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state generation changed");
           if (map) {
               *map->mutable_zone_map() = state.zone_map();
           }
