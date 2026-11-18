@@ -39,16 +39,26 @@ int ManualControl::update()
     checkChangeRelayButton( moveSettings.joyBindings.relayButton );
     checkChangeLightButton( moveSettings.joyBindings.lightButton );
 
-    // The old Controls.BaseControl velocity is not a v2 command: it has no
-    // session, lease, TTL or deadman. Keep the generic stream at zero until
-    // the dedicated authorized v2 velocity sender is connected.
-    controls->mutable_basecontrol()->set_linearvelocity(0.0);
-    controls->mutable_basecontrol()->set_angularvelocity(0.0);
+    const int wheelX = moveSettings.joyBindings.wheelXAxis(*joyState);
+    const int wheelY = moveSettings.joyBindings.wheelYAxis(*joyState);
+    baseControlProcess(wheelX, wheelY);
     // v2 operator controls must not emit raw actuator power commands.
     moveCameraProcess(moveSettings.joyBindings.cameraXAxis(*joyState),
                      moveSettings.joyBindings.cameraYAxis(*joyState));
 
     lastJoyState = *joyState;
+    return 0;
+}
+
+int ManualControl::baseControlProcess(int, int)
+{
+    if (!baseControlStrategy)
+        return -1;
+
+    const auto [linear, angular] = baseControlStrategy->velocities(*joyState, moveSettings.joyBindings);
+    controls->mutable_basecontrol()->set_linearvelocity(linear);
+    controls->mutable_basecontrol()->set_angularvelocity(angular);
+    controls->mutable_basecontrol()->set_controllevel(baseControlLevel);
     return 0;
 }
 
