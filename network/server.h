@@ -23,6 +23,7 @@ class grpcServer final : public ClientOnRobot::Service
   std::mutex muServer;
   std::uint64_t state_generation_ = 0; // Rebinding invalidates in-flight streams.
   std::mutex muMap;
+  std::uint64_t map_generation_ = 0; // Reject map/pose/zone streams from a replaced robot.
   std::mutex muSensorsUpdatedCb;
   std::function<void()> sensors_updated_cb_;
 
