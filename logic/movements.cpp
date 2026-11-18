@@ -69,6 +69,10 @@ void ManualControl::setBaseControlLevel(Base::BaseControl::ControlLevel newBaseC
 
 void ManualControl::checkChangeRelayButton(int buttonNumber)
 {
+    if (buttonNumber < 0 || static_cast<size_t>(buttonNumber) >= joyState->buttonVector.size() ||
+        static_cast<size_t>(buttonNumber) >= lastJoyState.buttonVector.size())
+        return;
+
     bool state = joyState->buttonVector[buttonNumber];
 
     if(state != lastJoyState.buttonVector[buttonNumber])
