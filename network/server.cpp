@@ -223,6 +223,7 @@ grpc::Status grpcServer::ZoneStream(grpc::ServerContext* context,
               return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state generation changed");
           if (map) {
               *map->mutable_zone_map() = state.zone_map();
+               map->set_zone_seq(state.zone_seq());
           }
       }
       if (!stream->Write(request)) {
