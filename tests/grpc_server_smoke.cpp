@@ -229,12 +229,14 @@ int main() {
             auto stream = stub->MapStream(&context);
             map_service::GetMapResponse update;
             update.set_map_seq(42);
+            update.mutable_map()->set_width(1);
             require(stream && stream->Write(update), "Cannot send map update");
             map_service::GetMapRequest ack;
             require(stream->Read(&ack), "Map service did not acknowledge snapshot");
             // Keep the same RPC alive across a second map snapshot. The
             // server must acknowledge both frames and retain the newest map.
             update.set_map_seq(43);
+            update.mutable_map()->set_width(2);
             require(stream->Write(update), "Cannot send second map update");
             require(stream->Read(&ack), "Map service did not acknowledge second snapshot");
             stream->WritesDone();
