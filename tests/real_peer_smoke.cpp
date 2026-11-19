@@ -251,17 +251,18 @@ int main() {
         {
             std::lock_guard<std::mutex> guard(*map_client.getMapMutex());
             agent_map->set_map_seq(71);
-            agent_map->mutable_robotpose()->set_position_x(1.25);
+            agent_map->mutable_map()->set_width(1);
         }
         auto map_rpc = std::async(std::launch::async, [&map_client]() {
             return map_client.MapStream();
         });
-        auto waitMapSeq = [&](std::uint64_t seq, double position) {
+        auto waitMapSeq = [&](std::uint64_t seq, int width) {
             for (int i = 0; i < 500; ++i) {
                 {
                     std::lock_guard<std::mutex> guard(svc.getMapMutex());
                     if (operator_map->map_seq() == seq &&
-                        operator_map->robotpose().position_x() == position) {
+                        operator_map->has_map() &&
+                        operator_map->map().width() == width) {
                         return true;
                     }
                 }
@@ -269,13 +270,13 @@ int main() {
             }
             return false;
         };
-        const bool initial_map_received = waitMapSeq(71, 1.25);
+        const bool initial_map_received = waitMapSeq(71, 1);
         {
             std::lock_guard<std::mutex> guard(*map_client.getMapMutex());
             agent_map->set_map_seq(72);
-            agent_map->mutable_robotpose()->set_position_x(2.50);
+            agent_map->mutable_map()->set_width(2);
         }
-        const bool updated_map_received = waitMapSeq(72, 2.50);
+        const bool updated_map_received = waitMapSeq(72, 2);
         bool map_mutex_available = map_client.getMapMutex()->try_lock();
         if (map_mutex_available) {
             map_client.getMapMutex()->unlock();
