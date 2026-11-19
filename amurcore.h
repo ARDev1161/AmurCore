@@ -68,6 +68,7 @@ class AmurCore : public QMainWindow
     NavDialog *navigationDialog;
     RobotInfoDialog *robotInfoDialog;
     QLabel *statusLabel;
+    QLabel *batteryStatusLabel = nullptr;
     QComboBox *videoSourceCombo;
     bool updatingVideoSources = false;
     int videoBitrateKbps = 800;
@@ -135,6 +136,7 @@ private:
     void connMenu();
     void worker();
     void updateStatusMessage();
+    void updateBatteryStatus();
     void outMat(Mat &toOut);
     void undistortMat(Mat &inMat, Mat &outMat);
     void setupVideoControls();

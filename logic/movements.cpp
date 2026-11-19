@@ -28,8 +28,14 @@ ManualControl::ManualControl(std::shared_ptr<JoyState> joyState,
 
 int ManualControl::update()
 {
-    if(joyState->joyId < 0)
-         return joyState->joyId;
+    if (joyState->joyId < 0) {
+        // A disconnected joystick must never leave its last velocity cached.
+        std::lock_guard<std::mutex> lock(grpcMutex_);
+        controls->mutable_basecontrol()->set_linearvelocity(0.0);
+        controls->mutable_basecontrol()->set_angularvelocity(0.0);
+        lastJoyState = *joyState;
+        return joyState->joyId;
+    }
 
     if(lastJoyState.joyId < 0)
         lastJoyState = *joyState;
@@ -41,13 +47,24 @@ int ManualControl::update()
 
     const int wheelX = moveSettings.joyBindings.wheelXAxis(*joyState);
     const int wheelY = moveSettings.joyBindings.wheelYAxis(*joyState);
-
     baseControlProcess(wheelX, wheelY);
-    wheelRawProcess(wheelX, wheelY);
+    // v2 operator controls must not emit raw actuator power commands.
     moveCameraProcess(moveSettings.joyBindings.cameraXAxis(*joyState),
                      moveSettings.joyBindings.cameraYAxis(*joyState));
 
     lastJoyState = *joyState;
+    return 0;
+}
+
+int ManualControl::baseControlProcess(int, int)
+{
+    if (!baseControlStrategy)
+        return -1;
+
+    const auto [linear, angular] = baseControlStrategy->velocities(*joyState, moveSettings.joyBindings);
+    controls->mutable_basecontrol()->set_linearvelocity(linear);
+    controls->mutable_basecontrol()->set_angularvelocity(angular);
+    controls->mutable_basecontrol()->set_controllevel(baseControlLevel);
     return 0;
 }
 
@@ -58,6 +75,10 @@ void ManualControl::setBaseControlLevel(Base::BaseControl::ControlLevel newBaseC
 
 void ManualControl::checkChangeRelayButton(int buttonNumber)
 {
+    if (buttonNumber < 0 || static_cast<size_t>(buttonNumber) >= joyState->buttonVector.size() ||
+        static_cast<size_t>(buttonNumber) >= lastJoyState.buttonVector.size())
+        return;
+
     bool state = joyState->buttonVector[buttonNumber];
 
     if(state != lastJoyState.buttonVector[buttonNumber])
@@ -69,6 +90,10 @@ void ManualControl::checkChangeRelayButton(int buttonNumber)
 
 void ManualControl::checkChangeLightButton(int buttonNumber)
 {
+    if (buttonNumber < 0 || static_cast<size_t>(buttonNumber) >= joyState->buttonVector.size() ||
+        static_cast<size_t>(buttonNumber) >= lastJoyState.buttonVector.size())
+        return;
+
     bool state = joyState->buttonVector[buttonNumber];
 
     if(state != lastJoyState.buttonVector[buttonNumber])
@@ -76,44 +101,6 @@ void ManualControl::checkChangeLightButton(int buttonNumber)
         controls->mutable_light()->set_ledleftpower( 255 * (int)state );
         controls->mutable_light()->set_ledrightpower( 255 * (int)state );
     }
-}
-
-int ManualControl::baseControlProcess(int xAxis, int yAxis)
-{
-    if(!baseControlStrategy)
-        return -1;
-
-    const auto [linear, angular] = baseControlStrategy->velocities(*joyState, moveSettings.joyBindings);
-
-    controls->mutable_basecontrol()->set_linearvelocity(linear);
-    controls->mutable_basecontrol()->set_angularvelocity(angular);
-
-    controls->mutable_basecontrol()->set_controllevel(baseControlLevel);
-
-    return 0;
-}
-
-int ManualControl::wheelRawProcess(int xAxis, int yAxis)
-{
-//    controls->mutable_wheelmotors()->set_leftpower( (xAxis+yAxis)/2 );
-//    controls->mutable_wheelmotors()->set_rightpower( (-xAxis+yAxis)/2 );
-
-//    controls->mutable_handmotors()->set_leftrelay(true);
-//    controls->mutable_handmotors()->set_rightrelay(true);
-    controls->mutable_handmotors()->set_leftpower( (xAxis) );
-    controls->mutable_handmotors()->set_rightpower( (yAxis) );
-
-    std::cout << "\nX = " << xAxis << "\tY = " << yAxis << std::endl;
-//    std::cout << "l = " << controls->wheelmotors().leftpower() << "\tr = " << controls->wheelmotors().rightpower() << std::endl;
-    std::cout << "l = " << controls->mutable_handmotors()->leftpower() << "\tr = " << controls->mutable_handmotors()->rightpower() << std::endl;
-
-//    controls->mutable_wheelmotors()->set_lefttime(1000);
-//    controls->mutable_wheelmotors()->set_righttime(1000);
-
-    controls->mutable_handmotors()->set_lefttime(1000);
-    controls->mutable_handmotors()->set_righttime(1000);
-
-    return 0;
 }
 
 int ManualControl::moveCameraProcess(int xAxis, int yAxis)
