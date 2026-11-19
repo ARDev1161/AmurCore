@@ -138,8 +138,8 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
               // independently streamed pose and zones when omitted.
               if (response.has_map()) {
                   *map->mutable_map() = response.map();
+                  map->set_map_seq(response.map_seq());
               }
-              map->set_map_seq(response.map_seq());
               if (response.has_robotpose()) {
                   *map->mutable_robotpose() = response.robotpose();
               }
