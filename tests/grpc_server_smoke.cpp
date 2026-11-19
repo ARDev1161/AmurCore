@@ -274,6 +274,7 @@ int main() {
             auto stream = stub->ZoneStream(&context);
             map_service::ZoneState update;
             update.mutable_zone_map()->add_zones()->set_id(7);
+             update.set_zone_seq(21);
             require(stream && stream->Write(update), "Cannot send populated zone map");
             map_service::ZoneRequest ack;
             require(stream->Read(&ack), "Zone service did not acknowledge populated map");
@@ -283,6 +284,7 @@ int main() {
             // Recovery on the same RPC must restore the new zone without
             // resurrecting the zone removed by the empty snapshot.
             update.mutable_zone_map()->add_zones()->set_id(19);
+             update.set_zone_seq(23);
             require(stream->Write(update), "Cannot restore zone map on active RPC");
             require(stream->Read(&ack), "Zone service did not acknowledge restored map");
             stream->WritesDone();
@@ -291,7 +293,8 @@ int main() {
             require(map->zone_map().zones_size() == 1 &&
                     map->zone_map().zones(0).id() == 19,
                     "Restored zone snapshot retained stale zones or lost recovery");
-            require(map->map_seq() == 43, "Zone update reset map snapshot");
+            require(map->zone_seq() == 23, "ZoneStream did not retain latest zone revision");
+             require(map->map_seq() == 43, "Zone update reset map snapshot");
             require(map->robotpose().position_x() == -2.5f,
                     "Zone update reset latest pose");
         }
