@@ -1535,3 +1535,9 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 - ZoneState now carries `zone_seq = 2` in each repository's `network/protobuf/map.proto` (existing field 1 unchanged). rc_agent copies the revision under the map mutex with the ZoneMap snapshot; AmurCore receives both together. This fixes stale zone revision after zone updates, including empty zone maps. AmurCore gRPC smoke asserts latest revision 23 after three zone snapshots.
 - P1 manual hardware acceptance PENDING; owner-authorized P2 IN PROGRESS. This does not enable velocity or close the session/lease transport gap. No default or documentation branch changes.
 - Local Qt5/ROS2/Gazebo/hardware NOT RUN. Inspect exact-HEAD Actions for build/loopback results; next: trusted session/lease RPC and SI joystick command to VelocityGate with watchdog stop.
+
+
+### 2026-11-21 — transient gRPC stream factory reconnect (cross-repo handoff)
+- rc_agent production commit [978c53cd](https://github.com/ARDev1161/rc_agent/commit/978c53cd6acfba4e770f7aee18ddd12e1c3a8d83): a null DataStreamExchange/MapStream/PoseStream/ZoneStream factory result now enters the existing retry/backoff policy when retry is enabled, instead of terminating the stream worker. With retry disabled it returns UNAVAILABLE. The Controls factory continues to invalidate stale cached Controls on null, so retry cannot reuse a previous command snapshot.
+- AmurCore production unchanged at b7511420e83498029703c851fdefe5ff074e0ac3; no shared proto edits. This is transport resilience, NOT authenticated velocity authorization. P1 hardware/manual gate OPEN; P2 owner-authorized IN PROGRESS.
+- Local ROS2/Qt5/Gazebo tests NOT RUN (direct git clone DNS unavailable); verify new rc_agent exact-HEAD Actions before calling it green. Next: implement trusted v2 session/lease/velocity transport, SI joystick command and TTL/deadman stop smoke; preserve Nav2 and all ROS topic allowlists.
