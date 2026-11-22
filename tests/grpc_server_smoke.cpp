@@ -258,6 +258,10 @@ int main() {
             update.mutable_pose()->set_position_x(-2.5f);
             require(stream->Write(update), "Cannot send second pose update");
             require(stream->Read(&ack), "Pose service did not acknowledge second update");
+            // An absent pose is not an update; retain the last real odometry.
+            update.Clear();
+            require(stream->Write(update) && stream->Read(&ack),
+                    "Pose service did not acknowledge empty update");
             stream->WritesDone();
             require(stream->Finish().ok(), "Pose stream RPC failed");
             std::lock_guard<std::mutex> lock(service.getMapMutex());
