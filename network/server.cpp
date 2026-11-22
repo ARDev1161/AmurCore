@@ -136,12 +136,7 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
           if (map) {
               // MapStream may carry only OccupancyGrid/map_seq. Preserve
               // independently streamed pose and zones when omitted.
-              if (response.has_map() &&
-                  response.map().width() > 0 &&
-                  response.map().height() > 0 &&
-                  !response.map().data().empty()) {
-                  // Do not replace a valid grid or advance its revision with
-                  // an incomplete map snapshot from a reconnecting agent.
+              if (response.has_map()) {
                   *map->mutable_map() = response.map();
                   map->set_map_seq(response.map_seq());
               }
