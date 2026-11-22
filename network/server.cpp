@@ -183,7 +183,9 @@ grpc::Status grpcServer::PoseStream(grpc::ServerContext* context,
           std::lock_guard<std::mutex> lock(muMap);
           if (!map || map_generation_ != bound_map_generation)
               return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state generation changed");
-          if (map) {
+          // A stream without a pose is not an odometry update. In particular,
+          // do not replace the last valid pose with protobuf's default origin.
+          if (map && state.has_pose()) {
               *map->mutable_robotpose() = state.pose();
           }
       }
