@@ -223,9 +223,11 @@ grpc::Status grpcServer::ZoneStream(grpc::ServerContext* context,
           std::lock_guard<std::mutex> lock(muMap);
           if (!map || map_generation_ != bound_map_generation)
               return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "map state generation changed");
-          if (map) {
+          // An absent ZoneMap is not a request to clear the last valid
+          // zones. Explicitly present empty ZoneMap still removes all zones.
+          if (map && state.has_zone_map()) {
               *map->mutable_zone_map() = state.zone_map();
-               map->set_zone_seq(state.zone_seq());
+              map->set_zone_seq(state.zone_seq());
           }
       }
       if (!stream->Write(request)) {
