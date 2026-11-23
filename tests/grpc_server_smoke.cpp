@@ -231,6 +231,7 @@ int main() {
             update.set_map_seq(42);
             update.mutable_map()->set_width(1);
             update.mutable_map()->set_height(1);
+            update.mutable_map()->set_resolution(0.05f);
             update.mutable_map()->set_data(std::string(1, char(0)));
             require(stream && stream->Write(update), "Cannot send map update");
             map_service::GetMapRequest ack;
@@ -379,6 +380,7 @@ int main() {
             combined.set_zone_seq(12);
             combined.mutable_map()->set_width(1);
             combined.mutable_map()->set_height(1);
+            combined.mutable_map()->set_resolution(0.05f);
             combined.mutable_map()->set_data(std::string(1, char(42)));
             combined.mutable_robotpose()->set_position_x(9.0f);
             combined.mutable_zone_map()->add_zones()->set_id(27);
