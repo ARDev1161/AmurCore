@@ -282,7 +282,19 @@ int main() {
             require(stream && stream->Write(update), "Cannot send populated zone map");
             map_service::ZoneRequest ack;
             require(stream->Read(&ack), "Zone service did not acknowledge populated map");
+            // Missing payload is not an explicit zone removal.
             update.clear_zone_map();
+            update.set_zone_seq(22);
+            require(stream->Write(update), "Cannot send absent zone payload");
+            require(stream->Read(&ack), "Zone service did not acknowledge absent payload");
+            {
+                std::lock_guard<std::mutex> lock(service.getMapMutex());
+                require(map->zone_map().zones_size() == 1 &&
+                        map->zone_map().zones(0).id() == 7 &&
+                        map->zone_seq() == 21,
+                        "Absent ZoneMap cleared valid zones or advanced revision");
+            }
+            update.mutable_zone_map()->clear_zones();
             require(stream->Write(update), "Cannot send empty zone map");
             require(stream->Read(&ack), "Zone service did not acknowledge empty map");
             // Recovery on the same RPC must restore the new zone without
