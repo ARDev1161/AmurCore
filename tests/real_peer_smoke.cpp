@@ -253,6 +253,7 @@ int main() {
             agent_map->set_map_seq(71);
             agent_map->mutable_map()->set_width(1);
             agent_map->mutable_map()->set_height(1);
+            agent_map->mutable_map()->set_resolution(0.05f);
             agent_map->mutable_map()->set_data(std::string(1, '\0'));
         }
         auto map_rpc = std::async(std::launch::async, [&map_client]() {
