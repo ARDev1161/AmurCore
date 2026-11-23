@@ -230,6 +230,8 @@ int main() {
             map_service::GetMapResponse update;
             update.set_map_seq(42);
             update.mutable_map()->set_width(1);
+            update.mutable_map()->set_height(1);
+            update.mutable_map()->set_data(std::string(1, char(0)));
             require(stream && stream->Write(update), "Cannot send map update");
             map_service::GetMapRequest ack;
             require(stream->Read(&ack), "Map service did not acknowledge snapshot");
@@ -237,6 +239,7 @@ int main() {
             // server must acknowledge both frames and retain the newest map.
             update.set_map_seq(43);
             update.mutable_map()->set_width(2);
+            update.mutable_map()->set_data(std::string(2, char(0)));
             require(stream->Write(update), "Cannot send second map update");
             require(stream->Read(&ack), "Map service did not acknowledge second snapshot");
             stream->WritesDone();
@@ -419,6 +422,17 @@ int main() {
                         "Absent OccupancyGrid incorrectly erased previous map");
             }
             update.set_map_seq(49);
+            // A partial grid must not replace the last complete map or revision.
+            update.mutable_map()->set_width(2);
+            update.mutable_map()->set_height(1);
+            update.mutable_map()->set_data(std::string(1, char(0)));
+            require(stream->Write(update) && stream->Read(&ack),
+                    "Partial grid frame was not acknowledged");
+            {
+                std::lock_guard<std::mutex> lock(service.getMapMutex());
+                require(map->map_seq() == 47 && map->map().data() == std::string(1, char(43)),
+                        "Partial OccupancyGrid replaced valid map");
+            }
             update.mutable_map()->set_width(0);
             update.mutable_map()->set_height(0);
             update.mutable_map()->clear_data();
