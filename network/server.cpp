@@ -1,3 +1,4 @@
+#include <cmath>
 #include "server.h"
 
 void grpcServer::notifySensorsUpdated()
@@ -138,6 +139,7 @@ grpc::Status grpcServer::MapStream(grpc::ServerContext *context,
               // independently streamed pose and zones when omitted.
               if (response.has_map() && ((response.map().width() == 0 && response.map().height() == 0 && response.map().data().empty()) ||
                    (response.map().width() > 0 && response.map().height() > 0 &&
+                    std::isfinite(response.map().resolution()) &&
                     response.map().data().size() ==
                         static_cast<std::uint64_t>(response.map().width()) * response.map().height()))) {
                   *map->mutable_map() = response.map();
