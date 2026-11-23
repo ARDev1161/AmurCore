@@ -1624,3 +1624,7 @@ New headless integration tests complement the earlier protobuf-only and full-bui
 ### 2026-11-23 map metadata hardening
 - Reject non-finite OccupancyGrid resolution on the receiving server side, preserving the last valid map and map sequence. Explicit empty-map reset remains supported. No protobuf changes.
 - Validation: source review only; full build/CI on the new commit pending. Hardware acceptance remains open. Next: authorized session/lease/velocity transport.
+
+### 2026-11-23 — MapStream nonpositive resolution guard
+- AmurCore: MapStream now rejects finite zero/negative resolution for nonempty OccupancyGrid (in addition to NaN/Inf and shape checks); explicit empty 0x0 reset remains allowed. Cross-repo counterpart changed in the same cycle. Source commit: ee156c0852446d88a45fb65a6be617e25f18eee2.
+- Validation: source guard inspected; fresh feature-HEAD CI pending, local Qt5/ROS2 NOT RUN. P1 hardware/simulator gates remain open. Next priority: authorized session/lease/velocity transport with TTL/deadman/watchdog; no unsafe Controls bypass.
