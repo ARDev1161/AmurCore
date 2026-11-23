@@ -252,6 +252,8 @@ int main() {
             std::lock_guard<std::mutex> guard(*map_client.getMapMutex());
             agent_map->set_map_seq(71);
             agent_map->mutable_map()->set_width(1);
+            agent_map->mutable_map()->set_height(1);
+            agent_map->mutable_map()->set_data(std::string(1, '\0'));
         }
         auto map_rpc = std::async(std::launch::async, [&map_client]() {
             return map_client.MapStream();
@@ -275,6 +277,8 @@ int main() {
             std::lock_guard<std::mutex> guard(*map_client.getMapMutex());
             agent_map->set_map_seq(72);
             agent_map->mutable_map()->set_width(2);
+            agent_map->mutable_map()->set_height(1);
+            agent_map->mutable_map()->set_data(std::string(2, '\0'));
         }
         const bool updated_map_received = waitMapSeq(72, 2);
         bool map_mutex_available = map_client.getMapMutex()->try_lock();
