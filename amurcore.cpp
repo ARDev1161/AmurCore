@@ -54,6 +54,7 @@ void AmurCore::initialize()
     network = std::make_shared<NetworkController>(controls, sensors, map); // TODO - add robot id & &<vector> of robots id
     try {
         const auto tls = rc::transport::loadTlsMaterial(*config);
+        authenticatedNetwork_ = tls.has_value();
         auto credentials = tls ? rc::transport::makeTlsServerCredentials(*tls)
                                : grpc::InsecureServerCredentials();
         if (network->runServer(address_mask, std::move(credentials)) == 0)
@@ -69,6 +70,10 @@ void AmurCore::initialize()
     batteryStatusLabel->setObjectName("batteryStatusLabel");
     batteryStatusLabel->setVisible(false);
     ui->statusbar->addPermanentWidget(batteryStatusLabel);
+    baseStatusLabel = new QLabel(this);
+    baseStatusLabel->setObjectName("baseStatusLabel");
+    baseStatusLabel->hide();
+    ui->statusbar->addPermanentWidget(baseStatusLabel);
 
     std::mutex& mapMutex = network->getServerInstance()->getMapMutex(); // MapStream mutex
     grpcMutex = &network->getServerInstance()->getMutex(); // DataStreamExchange mutex
@@ -102,6 +107,7 @@ void AmurCore::initialize()
             }
             updateVideoSources();
             updateBatteryStatus();
+            updateBaseStatus();
         });
         sensorsUpdateTimer->start();
     }
@@ -334,7 +340,7 @@ void AmurCore::updateBatteryStatus()
     if (!batteryStatusLabel || !sensors) {
         return;
     }
-    if (!network || network->getRobots().isEmpty()) {
+    if (!network || (!authenticatedNetwork_ && network->getRobots().isEmpty())) {
         batteryStatusLabel->clear();
         batteryStatusLabel->setVisible(false);
         return;
@@ -349,7 +355,8 @@ void AmurCore::updateBatteryStatus()
         if (grpcMutex) {
             lock = std::unique_lock<std::mutex>(*grpcMutex);
         }
-        available = sensors->has_batterystate();
+        available = sensors->has_batterystate() &&
+                    (!authenticatedNetwork_ || sensors->has_robot_info());
         if (available) {
             battery.CopyFrom(sensors->batterystate());
         }
@@ -360,8 +367,48 @@ void AmurCore::updateBatteryStatus()
     batteryStatusLabel->setVisible(!display.isEmpty());
 }
 
+void AmurCore::updateBaseStatus()
+{
+    if (!baseStatusLabel || !sensors || !grpcMutex) return;
+    rc::api::v2::BaseState state;
+    bool available = false;
+    {
+        std::lock_guard<std::mutex> lock(*grpcMutex);
+        available = sensors->has_robot_info() && sensors->robot_info().has_base() &&
+                    sensors->has_base_state();
+        if (available) state = sensors->base_state();
+    }
+    if (!available || !state.has_velocity()) {
+        baseStatusLabel->clear();
+        baseStatusLabel->hide();
+        return;
+    }
+    const auto &v = state.velocity();
+    baseStatusLabel->setText(tr("v: %1 %2 %3 m/s | ω: %4 %5 %6 rad/s")
+        .arg(v.linear().x(), 0, 'f', 2).arg(v.linear().y(), 0, 'f', 2)
+        .arg(v.linear().z(), 0, 'f', 2).arg(v.angular().x(), 0, 'f', 2)
+        .arg(v.angular().y(), 0, 'f', 2).arg(v.angular().z(), 0, 'f', 2));
+    baseStatusLabel->show();
+}
+
 void AmurCore::updateStatusMessage()
 {
+    if (authenticatedNetwork_) {
+        rc::api::v2::RobotInfo info;
+        if (grpcMutex && sensors) {
+            std::lock_guard<std::mutex> lock(*grpcMutex);
+            if (sensors->has_robot_info()) info = sensors->robot_info();
+        }
+        currentRobotId = QString::fromStdString(info.robot_id());
+        const auto message = currentRobotId.isEmpty() ? tr("No authenticated robot connected") :
+            tr("Connected to %1 (%2) via TLS")
+                .arg(QString::fromStdString(info.display_name()), currentRobotId);
+        if (message != statusMessage) {
+            statusMessage = message;
+            statusLabel->setText(message);
+        }
+        return;
+    }
     const RobotList robots = network->getRobots();
     if (robots.isEmpty()) {
         currentRobotId.clear();
