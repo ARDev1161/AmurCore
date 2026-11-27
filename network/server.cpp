@@ -52,6 +52,8 @@ grpc::Status grpcServer::DataExchange (grpc::ServerContext* context,
   // The generic Controls exchange is not an authenticated v2 velocity path.
   reply->mutable_basecontrol()->set_linearvelocity(0.0);
   reply->mutable_basecontrol()->set_angularvelocity(0.0);
+  reply->clear_velocity_command();
+  reply->clear_request_velocity_lease();
   reply->clear_wheelmotors();
   reply->mutable_handmotors()->set_leftpower(0);
   reply->mutable_handmotors()->set_rightpower(0);
@@ -89,6 +91,25 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
             // Never leak stale/unleased motion from any legacy GUI writer.
             outgoing.mutable_basecontrol()->set_linearvelocity(0.0);
             outgoing.mutable_basecontrol()->set_angularvelocity(0.0);
+            const auto auth = context->auth_context();
+            const auto transport = auth ? auth->FindPropertyValues("transport_security_type")
+                                        : std::vector<grpc::string_ref>{};
+            const bool authenticated = auth && auth->IsPeerAuthenticated() &&
+                transport.size() == 1 && transport.front() == "ssl";
+            if (!authenticated || !incoming.has_robot_info() ||
+                !incoming.robot_info().has_base()) {
+                outgoing.clear_velocity_command();
+                outgoing.clear_request_velocity_lease();
+            } else if (outgoing.has_velocity_command()) {
+                const auto &cmd = outgoing.velocity_command();
+                if (!incoming.has_velocity_lease() || !incoming.velocity_lease().granted() ||
+                    cmd.robot_id() != incoming.robot_info().robot_id() ||
+                    cmd.robot_id() != incoming.velocity_lease().robot_id() ||
+                    cmd.session_id() != incoming.velocity_lease().session_id() ||
+                    cmd.lease_id() != incoming.velocity_lease().lease_id()) {
+                    outgoing.clear_velocity_command();
+                }
+            }
             outgoing.clear_wheelmotors();
             outgoing.mutable_handmotors()->set_leftpower(0);
             outgoing.mutable_handmotors()->set_rightpower(0);
