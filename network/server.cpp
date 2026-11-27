@@ -1,5 +1,27 @@
 #include <cmath>
 #include "server.h"
+#include <algorithm>
+#include <memory>
+
+namespace {
+bool authenticatedTls(grpc::ServerContext *context)
+{
+    const auto auth = context->auth_context();
+    if (!auth || !auth->IsPeerAuthenticated()) return false;
+    const auto transport = auth->FindPropertyValues("transport_security_type");
+    return transport.size() == 1 && transport.front() == "ssl";
+}
+
+bool peerMatchesRobot(grpc::ServerContext *context, const std::string &robot_id)
+{
+    const auto auth = context->auth_context();
+    if (!auth || robot_id.empty()) return false;
+    const auto identities = auth->GetPeerIdentity();
+    return std::any_of(identities.begin(), identities.end(), [&](const auto &identity) {
+        return std::string(identity.data(), identity.size()) == robot_id;
+    });
+}
+} // namespace
 
 void grpcServer::notifySensorsUpdated()
 {
@@ -42,6 +64,9 @@ void grpcServer::setProtosPointers( std::shared_ptr<Controls> controlsPtr,
 grpc::Status grpcServer::DataExchange (grpc::ServerContext* context,
                           const Sensors* request, Controls* reply)
 {
+  std::unique_lock<std::mutex> exclusive(authenticated_stream_mutex_, std::try_to_lock);
+  if (!exclusive.owns_lock() || authenticatedTls(context))
+      return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "use authenticated data stream");
   std::unique_lock<std::mutex> ul(muServer);
   if (context->IsCancelled())
       return grpc::Status(grpc::StatusCode::CANCELLED, "client disconnected");
@@ -69,16 +94,60 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
     // Network I/O must never hold the mutex also used by the operator UI.
     // Read into a local message; publish a consistent sensor/control snapshot
     // under the lock, then write the response without blocking UI access.
+    const bool authenticated = authenticatedTls(context);
+    std::unique_lock<std::mutex> exclusive(authenticated_stream_mutex_, std::defer_lock);
+    if (authenticated && !exclusive.try_lock())
+        return grpc::Status(grpc::StatusCode::RESOURCE_EXHAUSTED, "authenticated robot stream already active");
+    // Insecure fixture/telemetry streams cannot overwrite authenticated state.
+    if (!authenticated) {
+        if (!exclusive.try_lock())
+            return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "authenticated robot stream active");
+        exclusive.unlock();
+    }
     std::uint64_t bound_generation;
     {
         std::lock_guard<std::mutex> lock(muServer);
         if (!controls || !sensors)
             return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "transport state unavailable");
         bound_generation = state_generation_;
+        if (authenticated) {
+            controls->clear_velocity_command();
+            controls->clear_request_velocity_lease();
+            sensors->clear_velocity_lease();
+            sensors->clear_base_state();
+            sensors->clear_robot_info();
+        }
     }
+    // Clear only this stream's state, on every return path including cancellation.
+    auto cleanup = [this, authenticated, bound_generation](void *) {
+        if (!authenticated) return;
+        {
+            std::lock_guard<std::mutex> lock(muServer);
+            if (state_generation_ == bound_generation && controls && sensors) {
+                controls->clear_velocity_command();
+                controls->clear_request_velocity_lease();
+                sensors->clear_velocity_lease();
+                sensors->clear_base_state();
+                sensors->clear_robot_info();
+            }
+        }
+        notifySensorsUpdated();
+    };
+    std::unique_ptr<void, decltype(cleanup)> stream_cleanup(this, cleanup);
+    std::string bound_robot_id;
     Sensors incoming;
     while (stream->Read(&incoming))
     {
+        if (authenticated) {
+            if (!incoming.has_robot_info() || !peerMatchesRobot(context, incoming.robot_info().robot_id()) ||
+                (!bound_robot_id.empty() && bound_robot_id != incoming.robot_info().robot_id()))
+                return grpc::Status(grpc::StatusCode::PERMISSION_DENIED, "robot certificate identity mismatch");
+            bound_robot_id = incoming.robot_info().robot_id();
+        }
+        // Recheck ownership before each insecure telemetry write.
+        std::unique_lock<std::mutex> telemetry_lock(authenticated_stream_mutex_, std::defer_lock);
+        if (!authenticated && !telemetry_lock.try_lock())
+            return grpc::Status(grpc::StatusCode::FAILED_PRECONDITION, "authenticated robot stream active");
         Controls outgoing;
         {
             std::lock_guard<std::mutex> lock(muServer);
@@ -91,11 +160,6 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
             // Never leak stale/unleased motion from any legacy GUI writer.
             outgoing.mutable_basecontrol()->set_linearvelocity(0.0);
             outgoing.mutable_basecontrol()->set_angularvelocity(0.0);
-            const auto auth = context->auth_context();
-            const auto transport = auth ? auth->FindPropertyValues("transport_security_type")
-                                        : std::vector<grpc::string_ref>{};
-            const bool authenticated = auth && auth->IsPeerAuthenticated() &&
-                transport.size() == 1 && transport.front() == "ssl";
             if (!authenticated || !incoming.has_robot_info() ||
                 !incoming.robot_info().has_base()) {
                 outgoing.clear_velocity_command();
@@ -114,6 +178,7 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
             outgoing.mutable_handmotors()->set_leftpower(0);
             outgoing.mutable_handmotors()->set_rightpower(0);
         }
+        if (telemetry_lock.owns_lock()) telemetry_lock.unlock();
         notifySensorsUpdated();
         if (!stream->Write(outgoing)) {
             return context->IsCancelled()

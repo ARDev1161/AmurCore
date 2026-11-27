@@ -31,6 +31,9 @@ Amur:
     Network:
     {
         address = "176.193.245.203:7777";
+        // Optional mutual TLS; all three PEM paths required if group is present.
+        // Robot certificate identity (SAN, or CN if no SAN) must equal robot_id.
+        // tls: { ca_file = "/path/ca.pem"; certificate_file = "/path/operator.pem"; private_key_file = "/path/operator.key"; };
     };
 
 

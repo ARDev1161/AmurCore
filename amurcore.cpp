@@ -1,4 +1,5 @@
 #include "amurcore.h"
+#include "network/tls_credentials.h"
 #include <chrono>
 #include "logic/batterystatus.h"
 #include "ui_AmurCore.h"
@@ -51,8 +52,15 @@ void AmurCore::initialize()
     }
 
     network = std::make_shared<NetworkController>(controls, sensors, map); // TODO - add robot id & &<vector> of robots id
-    network->runArpingService(arpPort, grpcPort, arpHeader); // Start listening for initial arp message from robots
-    network->runServer(address_mask); // Start AmurCore gRPC server
+    try {
+        const auto tls = rc::transport::loadTlsMaterial(*config);
+        auto credentials = tls ? rc::transport::makeTlsServerCredentials(*tls)
+                               : grpc::InsecureServerCredentials();
+        if (network->runServer(address_mask, std::move(credentials)) == 0)
+            network->runArpingService(arpPort, grpcPort, arpHeader);
+    } catch (const std::exception &error) {
+        qCritical() << "Network configuration rejected:" << error.what();
+    }
     connect(network.get(), &NetworkController::sensorsUpdated, this, &AmurCore::onSensorsUpdated);
     connectDialog = new ConnectDialog(this, network, repo);
     statusLabel = new QLabel(statusMessage, this);

@@ -21,6 +21,7 @@ class grpcServer final : public ClientOnRobot::Service
   std::shared_ptr<map_service::GetMapResponse> map;
 
   std::mutex muServer;
+  std::mutex authenticated_stream_mutex_; // V1: one authenticated data stream at a time.
   std::uint64_t state_generation_ = 0; // Rebinding invalidates in-flight streams.
   std::mutex muMap;
   std::uint64_t map_generation_ = 0; // Reject map/pose/zone streams from a replaced robot.
