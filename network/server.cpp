@@ -134,6 +134,9 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
         notifySensorsUpdated();
     };
     std::unique_ptr<void, decltype(cleanup)> stream_cleanup(this, cleanup);
+    const auto stream_started = TeleopIntent::Clock::now();
+    bool release_observed = false;
+    std::uint64_t velocity_sequence = 0;
     std::string bound_robot_id;
     Sensors incoming;
     while (stream->Read(&incoming))
@@ -160,7 +163,13 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
             // Never leak stale/unleased motion from any legacy GUI writer.
             outgoing.mutable_basecontrol()->set_linearvelocity(0.0);
             outgoing.mutable_basecontrol()->set_angularvelocity(0.0);
-            if (!authenticated || !incoming.has_robot_info() ||
+            const auto now = TeleopIntent::Clock::now();
+            const auto sample = teleop_intent_.sample_time;
+            const bool fresh = sample > stream_started && sample <= now &&
+                               now - sample < TeleopIntent::max_age;
+            if (!fresh) release_observed = false;
+            else if (teleop_intent_.deadman_released) release_observed = true;
+            if (!authenticated || !fresh || !release_observed || !incoming.has_robot_info() ||
                 !incoming.robot_info().has_base()) {
                 outgoing.clear_velocity_command();
                 outgoing.clear_request_velocity_lease();
@@ -172,6 +181,18 @@ grpc::Status grpcServer::DataStreamExchange ([[maybe_unused]] grpc::ServerContex
                     cmd.session_id() != incoming.velocity_lease().session_id() ||
                     cmd.lease_id() != incoming.velocity_lease().lease_id()) {
                     outgoing.clear_velocity_command();
+                } else {
+                    const auto remaining = std::chrono::duration_cast<std::chrono::milliseconds>(
+                        TeleopIntent::max_age - (now - sample)).count();
+                    if (remaining <= 0) {
+                        outgoing.clear_velocity_command();
+                        outgoing.clear_request_velocity_lease();
+                        release_observed = false;
+                    } else {
+                        auto *v = outgoing.mutable_velocity_command()->mutable_velocity();
+                        v->set_sequence(++velocity_sequence);
+                        v->set_valid_for_ms(static_cast<std::uint32_t>(remaining));
+                    }
                 }
             }
             outgoing.clear_wheelmotors();

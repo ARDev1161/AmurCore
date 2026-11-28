@@ -78,7 +78,11 @@ void AmurCore::initialize()
     std::mutex& mapMutex = network->getServerInstance()->getMapMutex(); // MapStream mutex
     grpcMutex = &network->getServerInstance()->getMutex(); // DataStreamExchange mutex
 
-    amurLogic = new Logic(joyState, controls, sensors, *grpcMutex);
+    int deadmanButton = -1;
+    if (config->searchInt("Amur.Logic.deadman_button", deadmanButton) != EXIT_SUCCESS)
+        deadmanButton = -1;
+    amurLogic = new Logic(joyState, controls, sensors, *grpcMutex,
+                        network->getServerInstance()->getTeleopIntent(), deadmanButton);
     navigationDialog = new NavDialog(controls, sensors, map, mapMutex, *grpcMutex, this);
     robotInfoDialog = new RobotInfoDialog();
 
@@ -231,6 +235,12 @@ void AmurCore::onSensorsUpdated()
 
 void AmurCore::fetchJoystickId()
 {
+    {
+        std::lock_guard<std::mutex> lock(*joyState->mutex);
+        ++joyState->generation;
+        joyState->connected = false;
+        joyState->sample_time = {};
+    }
     if(joyThread)
     {
         joyThread->stopThreads();

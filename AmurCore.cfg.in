@@ -25,7 +25,9 @@ Amur:
 
     Logic:
     {
-
+        // Zero-based SDL button index. Missing/negative disables motion.
+        // Confirm the physical button before operating the robot.
+        deadman_button = -1;
     };
 
     Network:

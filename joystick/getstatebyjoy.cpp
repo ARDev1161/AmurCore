@@ -1,102 +1,77 @@
 #include "getstatebyjoy.h"
-#include "joystick_factory.h"
+#include <algorithm>
 
-GetStateByJoystick::GetStateByJoystick(const std::shared_ptr<JoyState> state, QObject *parent) :
-    QObject(parent),
-    loopFlag(true),
-    joyState(state)
+GetStateByJoystick::GetStateByJoystick(const std::shared_ptr<JoyState> state,
+                                       std::uint64_t generation, QObject *parent)
+    : QObject(parent), generation_(generation), joyState(state)
 {
-    joyState->buttonVector = QVector<bool>(MAX_JOYSTICK_BUTTONS);
+    int id = -1;
+    {
+        std::lock_guard<std::mutex> lock(*joyState->mutex);
+        if (joyState->generation == generation_) id = joyState->joyId;
+    }
     joyAdapter = JoystickFactory::createAdapter();
-    connectToJoystick();
+    if (id >= 0 && joyAdapter && joyAdapter->open(id)) {
+        pollTimer = new QTimer(this);
+        connect(pollTimer, &QTimer::timeout, this, &GetStateByJoystick::poll);
+        pollTimer->start(LoopTime);
+        poll();
+    } else {
+        invalidate();
+    }
 }
 
 GetStateByJoystick::~GetStateByJoystick()
 {
-    disconnectFromJoystick();
+    stop();
+}
+
+void GetStateByJoystick::invalidate()
+{
+    std::lock_guard<std::mutex> lock(*joyState->mutex);
+    if (joyState->generation != generation_) return;
+    joyState->connected = false;
+    joyState->sample_time = {};
+    joyState->buttonVector.clear();
+    joyState->joystickXaxis = joyState->joystickYaxis = joyState->joystickXrotation = 0;
+    joyState->joystickYrotation = joyState->joystickZLTaxis = joyState->joystickZRTaxis = 0;
+    joyState->joystickPOV0 = 0;
 }
 
 void GetStateByJoystick::stop()
 {
-    loopFlag = false;
+    if (pollTimer) pollTimer->stop();
+    invalidate();
+    if (joyAdapter) joyAdapter->close();
 }
 
-void GetStateByJoystick::connectToJoystick()
+void GetStateByJoystick::poll()
 {
-    if(joyState->joyId != -1)
-        if(joyAdapter && joyAdapter->open(joyState->joyId))
-        {
-            connect(joyAdapter.get(), SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
-            connect(joyAdapter.get(), SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
-            connect(joyAdapter.get(), SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
-            connect(joyAdapter.get(), SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
-        }
-}
-
-void GetStateByJoystick::disconnectFromJoystick()
-{
-    if(joyAdapter && joyAdapter->isConnected())
-    {
-        joyAdapter->close();
-        disconnect(joyAdapter.get(), SIGNAL(sigButtonChanged(int,bool)), this, SLOT(buttonSetup(int,bool)));
-        disconnect(joyAdapter.get(), SIGNAL(sigAxisChanged(int,int)), this, SLOT(axisSetup(int,int)));
-        disconnect(joyAdapter.get(), SIGNAL(sigHatChanged(int,int)), this, SLOT(hatSetup(int,int)));
-        disconnect(joyAdapter.get(), SIGNAL(sigBallChanged(int,int,int)), this, SLOT(ballSetup(int,int,int)));
+    // Read current device state, not cached events. A stationary stick is
+    // still a fresh sample; an unplugged device cannot refresh the deadman.
+    if (!joyAdapter || !joyAdapter->isConnected()) {
+        invalidate();
+        if (pollTimer) pollTimer->stop();
+        if (joyAdapter) joyAdapter->close();
+        return;
     }
-    joyState->joyId = -1;
-}
-
-void GetStateByJoystick::axisSetup(int id, int state)
-{
-    switch(id)
-    {
-    case 0:
-        joyState->joystickXaxis = (tr("%1").arg(state)).toInt();
-        break;
-    case 1:
-        joyState->joystickYaxis = (tr("%1").arg(-1*state)).toInt();
-        break;
-    case 2:
-        joyState->joystickZLTaxis = (tr("%1").arg(state)).toInt();
-        break;
-    case 3:
-        joyState->joystickXrotation = (tr("%1").arg(state)).toInt();
-        break;
-    case 4:
-        joyState->joystickYrotation = (tr("%1").arg(-1*state)).toInt();
-        break;
-    case 5:
-        joyState->joystickZRTaxis = (tr("%1").arg(state)).toInt();
-        break;
-    }
-}
-
-void GetStateByJoystick::hatSetup(int id, int state)
-{
-    Q_UNUSED(id);
-    joyState->joystickPOV0 = (tr("%1").arg(state)).toInt();
-}
-
-void GetStateByJoystick::buttonSetup(int id, bool state)
-{
-    joyState->buttonVector[id] = state;
-
-    QString buttonTest = "";
-    for(int i = 0; i < MAX_JOYSTICK_BUTTONS; ++i)
-    {
-        if(joyState->buttonVector[i] == true)
-        {
-            if(i < 10)
-                buttonTest += tr("0%1  ").arg(i);
-            else
-                buttonTest += tr("%1").arg(i);
-        }
-    }
-}
-
-void GetStateByJoystick::ballSetup(int id, int stateX, int stateY)
-{
-    Q_UNUSED(id);
-    Q_UNUSED(stateX);
-    Q_UNUSED(stateY);
+    const auto now = std::chrono::steady_clock::now();
+    const int n = std::clamp(joyAdapter->getJoystickNumButtons(), 0, int(MAX_JOYSTICK_BUTTONS));
+    QVector<bool> buttons(n);
+    for (int i = 0; i < n; ++i) buttons[i] = joyAdapter->button(i);
+    const int x = joyAdapter->axis(0), y = -joyAdapter->axis(1);
+    const int lt = joyAdapter->axis(2), rx = joyAdapter->axis(3);
+    const int ry = -joyAdapter->axis(4), rt = joyAdapter->axis(5);
+    if (!joyAdapter->isConnected()) { invalidate(); return; }
+    std::lock_guard<std::mutex> lock(*joyState->mutex);
+    if (joyState->generation != generation_) return;
+    joyState->buttonVector = buttons;
+    joyState->joystickXaxis = x;
+    joyState->joystickYaxis = y;
+    joyState->joystickZLTaxis = lt;
+    joyState->joystickXrotation = rx;
+    joyState->joystickYrotation = ry;
+    joyState->joystickZRTaxis = rt;
+    joyState->connected = true;
+    joyState->sample_time = now;
 }

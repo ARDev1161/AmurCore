@@ -50,8 +50,13 @@ void JoystickDialog::scanJoystickDevice()
 
 void JoystickDialog::setDialog()
 {
-    if( (joyAdapter->getJoystickId() < 0) && (joyState->joyId >= 0))
-        loadJoy(joyState->joyId);
+    int selected;
+    {
+        std::lock_guard<std::mutex> lock(*joyState->mutex);
+        selected = joyState->joyId;
+    }
+    if( (joyAdapter->getJoystickId() < 0) && (selected >= 0))
+        loadJoy(selected);
 
     if( joyAdapter->getJoystickId() < 0 )
     {
@@ -157,7 +162,13 @@ void JoystickDialog::disconnectFromJoystick()
 void JoystickDialog::on_JoystickDialog_accepted()
 {
     scanJoystickDevice();
-    joyState->joyId = this->joyId;
+    {
+        std::lock_guard<std::mutex> lock(*joyState->mutex);
+        joyState->joyId = this->joyId;
+        ++joyState->generation;
+        joyState->connected = false;
+        joyState->sample_time = {};
+    }
     disconnectFromJoystick();
 }
 
@@ -200,6 +211,7 @@ void JoystickDialog::hatSetup(int id, int state)
 
 void JoystickDialog::buttonSetup(int id, bool state)
 {
+    if (id < 0 || id >= buttonVector.size()) return;
     buttonVector[id] = state;
 
     QString buttonTest = "";

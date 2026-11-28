@@ -8,7 +8,8 @@ class JoystickStateWorker : public QObject
     Q_OBJECT
 
     std::shared_ptr<JoyState> joyState;
-    GetStateByJoystick *joyStateController;
+    GetStateByJoystick *joyStateController = nullptr;
+    std::uint64_t generation_;
 public:
     JoystickStateWorker(const std::shared_ptr<JoyState> state);
     ~JoystickStateWorker();

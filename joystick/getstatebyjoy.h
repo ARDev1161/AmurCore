@@ -8,10 +8,17 @@
 #include "v_joystick_adapter.h"
 #include "joystick_factory.h"
 #include <memory>
+#include <mutex>
+#include <chrono>
+#include <cstdint>
 #include "network/protobuf/robot.pb.h"
 
 struct JoyState{
     int joyId = -1;
+    std::shared_ptr<std::mutex> mutex = std::make_shared<std::mutex>();
+    std::uint64_t generation = 0;
+    bool connected = false;
+    std::chrono::steady_clock::time_point sample_time{};
 
     QVector<bool> buttonVector; // Buttons state
 
@@ -34,25 +41,19 @@ class GetStateByJoystick : public QObject
     enum { MAX_JOYSTICK_BUTTONS = 30 };
 
     int LoopTime=50;
-    bool loopFlag;
+    QTimer *pollTimer = nullptr;
+    std::uint64_t generation_;
 
     std::shared_ptr<JoyState> joyState;
 public:
-    GetStateByJoystick(const std::shared_ptr<JoyState> state, QObject *parent = nullptr);
+    GetStateByJoystick(const std::shared_ptr<JoyState> state, std::uint64_t generation, QObject *parent = nullptr);
     ~GetStateByJoystick();
     void stop();
 
-private:
-    void setAvaliableJoystick();
-
 private slots:
-    void connectToJoystick();
-    void disconnectFromJoystick();
-
-    void axisSetup(int id, int state);
-    void hatSetup(int id, int state);
-    void buttonSetup(int id, bool state);
-    void ballSetup(int id, int stateX, int stateY);
+    void poll();
+private:
+    void invalidate();
 };
 
 #endif // GETSTATEBYJOY_H

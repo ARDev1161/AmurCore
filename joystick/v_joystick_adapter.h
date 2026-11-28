@@ -82,6 +82,13 @@ public:
         return m_joystick ? SDL_JoystickNumButtons(m_joystick) : 0;
     }
 
+    int axis(int index) const {
+        return index >= 0 && index < getJoystickNumAxes() ? SDL_JoystickGetAxis(m_joystick, index) : 0;
+    }
+    bool button(int index) const {
+        return index >= 0 && index < getJoystickNumButtons() && SDL_JoystickGetButton(m_joystick, index);
+    }
+
     int test_haptic();
     static int getNumAvailableJoystick();
     static QStringList getAvailableJoystickName();
