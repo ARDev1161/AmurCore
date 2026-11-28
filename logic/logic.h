@@ -18,13 +18,15 @@ class Logic
     std::shared_ptr<Controls> controls;
     std::shared_ptr<Sensors> sensors;
     std::mutex &grpcMutex_;
+    TeleopIntent &intent_;
+    int deadmanButton_;
 
     void initLogic();
 public:
     Logic(std::shared_ptr<JoyState> joyState,
           std::shared_ptr<Controls> controls,
           std::shared_ptr<Sensors> sensors,
-          std::mutex &grpcMutex);
+          std::mutex &grpcMutex, TeleopIntent &intent, int deadmanButton);
 
     void process();
 

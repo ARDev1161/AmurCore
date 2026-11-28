@@ -46,9 +46,11 @@ int NetworkController::runClient(std::string &server_address) // TODO - send con
     return 0;
 }
 
-int NetworkController::runServer(std::string &address_mask) // TODO - send const &<vector> of robots id
+int NetworkController::runServer(std::string &address_mask,
+                                 std::shared_ptr<grpc::ServerCredentials> credentials)
 {
-    std::thread thr([&]()
+    if (!credentials) return -1;
+    std::thread thr([this, address_mask, credentials = std::move(credentials)]()
      {
       grpc::EnableDefaultHealthCheckService(true);
       grpc::reflection::InitProtoReflectionServerBuilderPlugin();
@@ -57,8 +59,7 @@ int NetworkController::runServer(std::string &address_mask) // TODO - send const
       serverPtr->setProtosPointers(controls, sensors, map);
       serverPtr->setSensorsUpdatedCallback([this]() { emit sensorsUpdated(); });
 
-      // Listen on the given address without any authentication mechanism.
-      builder.AddListeningPort(address_mask, grpc::InsecureServerCredentials());
+      builder.AddListeningPort(address_mask, credentials);
 
       // Register "service" as the instance through which we'll communicate with
       // clients. In this case it corresponds to an *synchronous* service.
@@ -66,6 +67,10 @@ int NetworkController::runServer(std::string &address_mask) // TODO - send const
 
       // Finally assemble the server.
       std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
+      if (!server) {
+          std::cerr << "Cannot start configured gRPC server" << std::endl;
+          return;
+      }
       std::cout << "Server listening on " << address_mask << std::endl;
 
       // Wait for the server to shutdown. Note that some other thread must be

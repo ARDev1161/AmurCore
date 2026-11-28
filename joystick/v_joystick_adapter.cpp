@@ -22,18 +22,16 @@ VJoystickAdapter::VJoystickAdapter(QObject *parent) :
     QObject(parent),
     m_joystick(0)
 {
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
+    SDL_InitSubSystem(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
     SDL_JoystickEventState(SDL_ENABLE);
     m_joystickThread = new VJoystickThread(this);
 }
 
 VJoystickAdapter::~VJoystickAdapter()
 {
-    if(isConnected())
-        close();
+    close();
     delete m_joystickThread;
-    SDL_JoystickEventState(SDL_DISABLE);
-    SDL_Quit();
+    SDL_QuitSubSystem(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
 }
 
 bool VJoystickAdapter::open(int id)
@@ -42,8 +40,7 @@ bool VJoystickAdapter::open(int id)
     {
         if(SDL_JoystickGetAttached(m_joystick))
             return false;
-        SDL_JoystickClose(m_joystick);
-        m_joystick = 0;
+        close();
     }
 
     if(id < 0 || id >= SDL_NumJoysticks())
@@ -58,8 +55,10 @@ bool VJoystickAdapter::open(int id)
             m_joystickThread->start();
         }
     }
-    else
-        m_joystick = 0;
+    else if (m_joystick) {
+        SDL_JoystickClose(m_joystick);
+        m_joystick = nullptr;
+    }
 
     return m_joystick;
 }

@@ -4,11 +4,11 @@
 Logic::Logic(std::shared_ptr<JoyState> joyState,
              std::shared_ptr<Controls> controls,
              std::shared_ptr<Sensors> sensors,
-             std::mutex &grpcMutex)
+             std::mutex &grpcMutex, TeleopIntent &intent, int deadmanButton)
     : joyState(joyState),
       controls(controls),
       sensors(sensors),
-      grpcMutex_(grpcMutex)
+      grpcMutex_(grpcMutex), intent_(intent), deadmanButton_(deadmanButton)
 {
     initLogic();
 }
@@ -18,7 +18,7 @@ void Logic::initLogic()
     srcMat = new Mat();
     outMat = new Mat();
 
-    move = new ManualControl(joyState, controls, grpcMutex_);
+    move = new ManualControl(joyState, controls, sensors, grpcMutex_, intent_, deadmanButton_);
 }
 
 void Logic::setSrcMat(Mat *const value)

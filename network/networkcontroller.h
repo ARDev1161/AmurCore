@@ -46,7 +46,8 @@ public:
     ~NetworkController();
 
     int runClient(std::string &server_address); // Server address & port for client
-    int runServer(std::string &address_mask); // Address mask & port for server
+    int runServer(std::string &address_mask,
+                  std::shared_ptr<grpc::ServerCredentials> credentials = grpc::InsecureServerCredentials()); // Address mask & port for server
 
     int runArpingService(int arpPort, int gRPCPort, QString &arpHeader);
     QList< std::shared_ptr<RobotEntry> > getRobots() const;

@@ -23,3 +23,19 @@ This is application for communicate with robot on RPi base with [AmurClient](htt
 
 
 [AmurCore]:https://github.com/ARDev1161/AmurCore
+
+
+## Experimental RC API v2 capability discovery (feature branch)
+
+This branch **preserves the legacy gRPC services and all existing map/Navigation/GStreamer messages**.
+`Sensors.robot_info = 9` is an optional additive field. When a v2-aware
+`rc_agent` sends it, open **Robot → Robot Info** to inspect the advertised
+robot ID, API version, capabilities and supported velocity axes. This is
+currently single-session inspection; multi-robot session isolation is P3 in
+[PLAN.md](PLAN.md). No dynamic UI factory or new motion command transport
+has been enabled.
+
+See [rc_agent/robot.cfg.in](https://github.com/ARDev1161/rc_agent/blob/feat/rc-api-v2/robot.cfg.in)
+for capability declaration. Empty `Amur.API.robot_id` leaves v2 advertisement
+disabled to preserve existing deployments. For a robot with a configured ID,
+legacy controls, Nav2 map and video continue to use the old wire fields.
